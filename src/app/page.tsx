@@ -9,6 +9,23 @@ import QuickStatCard from '@/components/QuickStatCard';
 import ForecastCard from '@/components/ForecastCard';
 import ScheduleCard from '@/components/ScheduleCard';
 
+
+export async function generateMetadata({ searchParams }: { searchParams: { loc?: string } }) {
+    const locationName = searchParams.loc || 'București';
+    const date = new Date();
+    const monthName = date.toLocaleDateString('ro-RO', { month: 'long' });
+    const year = date.getFullYear();
+    const capitalizedMonth = monthName.charAt(0).toUpperCase() + monthName.slice(1);
+
+    return {
+        title: `Solunar ${capitalizedMonth} ${year} ${locationName} - Pescuit pe Ore`,
+        description: `Vezi Solunar ${capitalizedMonth} ${year} pentru ${locationName}. Activitate majoră și minoră detaliată, prognoză pescuit 14 zile și fazele lunii actualizate.`,
+        alternates: {
+            canonical: 'https://calendarsolunar.ro',
+        }
+    };
+}
+
 export default async function HomePage({ searchParams }: { searchParams: { lat?: string; lng?: string; loc?: string } }) {
     const today = new Date();
     const lat = searchParams.lat ? parseFloat(searchParams.lat) : 44.4268;

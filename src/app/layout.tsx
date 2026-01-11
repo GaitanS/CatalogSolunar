@@ -9,8 +9,40 @@ const robotoSlab = Roboto_Slab({ subsets: ["latin"], variable: "--font-roboto-sl
 const openSans = Open_Sans({ subsets: ["latin"], variable: "--font-open-sans" });
 
 export const metadata: Metadata = {
-    title: "Calendar Solunar Pescuit | CalendarSolunar.ro",
-    description: "Calendar solunar detaliat pentru pescuit. Află cele mai bune perioade de pescuit, fazele lunii și orele de activitate maximă în localitatea ta.",
+    metadataBase: new URL('https://calendarsolunar.ro'),
+    title: {
+        default: 'Calendar Solunar Pescuit 2026 | Orele de Activitate Maximă',
+        template: '%s | CalendarSolunar.ro'
+    },
+    description: "Consultă cel mai precis Solunar 2026 pentru pescuit. Află perioadele lunare majore și minore, solunar pescuit pe ore și activitatea peștilor pentru o partidă reușită în România.",
+    keywords: [
+        "solunar 2026", "solunar pescuit", "solunar pescuit 2026", "calendar solunar",
+        "solunar pescuit pe ore", "calendarul solunar", "faze lunare pescuit", "activitate pesti",
+        "solunar ianuarie 2026", "solunar februarie 2026", "solunar azi", "cand trage pestele",
+        "solunar romania", "calendar pescuit 2026"
+    ],
+    openGraph: {
+        title: 'Calendar Solunar Pescuit 2026 | Orele de Activitate Maximă',
+        description: 'Află când trage peștele! Solunar detaliat pe ore, fazele lunii și prognoză de pescuit pentru 2026.',
+        url: 'https://calendarsolunar.ro',
+        siteName: 'Calendar Solunar',
+        locale: 'ro_RO',
+        type: 'website',
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+        },
+    },
+    verification: {
+        google: 'google-site-verification-token', // Add generic placeholder or ask user
+    }
 };
 
 export default function RootLayout({
