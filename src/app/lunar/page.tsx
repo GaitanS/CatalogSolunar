@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { getMoonPhase, getMoonIllumination, getMoonPhaseName, getSolunarData } from '@/lib/solunar';
 import RatingBars from '@/components/RatingBars';
 import MoonIcon from '@/components/MoonIcon';
+import AdUnit from '@/components/AdUnit';
 
 export const metadata: Metadata = {
     title: 'Calendar Lunar 2026 - Fazele Lunii | Calendar Solunar',
@@ -76,6 +77,9 @@ export default function LunarPage() {
                     </p>
                 </div>
 
+                {/* Top Ad */}
+                <AdUnit slotId="1234567890" format="horizontal" className="mb-8" />
+
                 {/* Today's Moon Info */}
                 <div className="card-panel p-6 md:p-8 mb-8 max-w-2xl mx-auto">
                     <div className="flex flex-col md:flex-row items-center gap-6">
@@ -119,6 +123,9 @@ export default function LunarPage() {
                         </div>
                     </div>
                 )}
+
+                {/* Middle Ad */}
+                <AdUnit slotId="1234567890" format="auto" className="mb-12 max-w-4xl mx-auto" />
 
                 {/* Calendar Grid */}
                 <div className="card-panel p-4 md:p-6 max-w-4xl mx-auto">
@@ -188,6 +195,9 @@ export default function LunarPage() {
                         </div>
                     </div>
                 </div>
+
+                {/* Bottom Ad */}
+                <AdUnit slotId="1234567890" format="auto" className="my-12" />
 
                 {/* CTA */}
                 <div className="text-center mt-12">
