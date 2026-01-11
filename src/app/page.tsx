@@ -264,78 +264,77 @@ export default async function HomePage({ searchParams }: { searchParams: { lat?:
                     </div>
                 </div>
 
-            </div>
-        </div>
 
-                {/* Middle Ad (Medium Rectangle) */ }
-    <AdUnit
-        slotId="1234567890" // REPLACE WITH ACTUAL SLOT ID
-        format="rectangle"
-        style={{ minHeight: '280px' }}
-        className="mb-8"
-        label="Reclamă"
-    />
 
-    {/* Forecast Stripes */ }
-    <div className="mb-8 md:mb-12">
-        <h2 className="text-sm md:text-base font-bold text-white mb-3 md:mb-4 px-1">Prognoza 14 zile</h2>
-        <ForecastCarousel>
-            {weekData.map((d, i) => (
-                <div key={i} className="snap-center shrink-0">
-                    <ForecastCard data={d} isToday={i === 0} />
-                </div>
-            ))}
-        </ForecastCarousel>
-    </div>
+                {/* Middle Ad (Medium Rectangle) */}
+                <AdUnit
+                    slotId="1234567890" // REPLACE WITH ACTUAL SLOT ID
+                    format="rectangle"
+                    style={{ minHeight: '280px' }}
+                    className="mb-8"
+                    label="Reclamă"
+                />
 
-    {/* Info Cards Bottom */ }
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 pb-8">
-        {/* Card 1 */}
-        <div className="card-glass p-4 min-h-[120px] flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 justify-between group hover:bg-white/10 transition-colors">
-            <div className="flex justify-between items-start w-full">
-                <h3 className="font-bold text-amber-400 text-sm md:text-base">Perioade Majore</h3>
-                <div className="text-amber-500 hidden md:block">
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" /></svg>
+                {/* Forecast Stripes */}
+                <div className="mb-8 md:mb-12">
+                    <h2 className="text-sm md:text-base font-bold text-white mb-3 md:mb-4 px-1">Prognoza 14 zile</h2>
+                    <ForecastCarousel>
+                        {weekData.map((d, i) => (
+                            <div key={i} className="snap-center shrink-0">
+                                <ForecastCard data={d} isToday={i === 0} />
+                            </div>
+                        ))}
+                    </ForecastCarousel>
                 </div>
-            </div>
-            <p className="text-[10px] md:text-xs text-night-300 leading-relaxed md:mt-2 text-right md:text-left max-w-[200px] md:max-w-none">
-                {majorDesc}
-            </p>
-        </div>
-        {/* Card 2 */}
-        <div className="card-glass p-4 min-h-[120px] flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 justify-between group hover:bg-white/10 transition-colors">
-            <div className="flex justify-between items-start w-full">
-                <h3 className="font-bold text-cyan-400 text-sm md:text-base">Perioade Minore</h3>
-                <div className="text-cyan-500 hidden md:block">
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" /></svg>
-                </div>
-            </div>
-            <p className="text-[10px] md:text-xs text-night-300 leading-relaxed md:mt-2 text-right md:text-left max-w-[200px] md:max-w-none">
-                {minorDesc}
-            </p>
-        </div>
-        {/* Card 3 */}
-        <div className="card-glass p-4 min-h-[120px] flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 justify-between group hover:bg-white/10 transition-colors">
-            <div className="flex justify-between items-start w-full">
-                <h3 className="font-bold text-white text-sm md:text-base">Sfatul Zilei</h3>
-                <div className="text-yellow-400 hidden md:block">
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z" /></svg>
-                </div>
-            </div>
-            <p className="text-[10px] md:text-xs text-night-300 leading-relaxed md:mt-2 text-right md:text-left max-w-[200px] md:max-w-none">
-                {advice}
-            </p>
-        </div>
-    </div>
 
-    {/* Bottom Ad (Responsive) */ }
-    <AdUnit
-        slotId="1234567890" // REPLACE WITH ACTUAL SLOT ID
-        format="auto"
-        layout="in-article"
-        className="min-h-[120px]"
-        label="Reclamă"
-    />
+                {/* Info Cards Bottom */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 pb-8">
+                    {/* Card 1 */}
+                    <div className="card-glass p-4 min-h-[120px] flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 justify-between group hover:bg-white/10 transition-colors">
+                        <div className="flex justify-between items-start w-full">
+                            <h3 className="font-bold text-amber-400 text-sm md:text-base">Perioade Majore</h3>
+                            <div className="text-amber-500 hidden md:block">
+                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" /></svg>
+                            </div>
+                        </div>
+                        <p className="text-[10px] md:text-xs text-night-300 leading-relaxed md:mt-2 text-right md:text-left max-w-[200px] md:max-w-none">
+                            {majorDesc}
+                        </p>
+                    </div>
+                    {/* Card 2 */}
+                    <div className="card-glass p-4 min-h-[120px] flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 justify-between group hover:bg-white/10 transition-colors">
+                        <div className="flex justify-between items-start w-full">
+                            <h3 className="font-bold text-cyan-400 text-sm md:text-base">Perioade Minore</h3>
+                            <div className="text-cyan-500 hidden md:block">
+                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" /></svg>
+                            </div>
+                        </div>
+                        <p className="text-[10px] md:text-xs text-night-300 leading-relaxed md:mt-2 text-right md:text-left max-w-[200px] md:max-w-none">
+                            {minorDesc}
+                        </p>
+                    </div>
+                    {/* Card 3 */}
+                    <div className="card-glass p-4 min-h-[120px] flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 justify-between group hover:bg-white/10 transition-colors">
+                        <div className="flex justify-between items-start w-full">
+                            <h3 className="font-bold text-white text-sm md:text-base">Sfatul Zilei</h3>
+                            <div className="text-yellow-400 hidden md:block">
+                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z" /></svg>
+                            </div>
+                        </div>
+                        <p className="text-[10px] md:text-xs text-night-300 leading-relaxed md:mt-2 text-right md:text-left max-w-[200px] md:max-w-none">
+                            {advice}
+                        </p>
+                    </div>
+                </div>
+
+                {/* Bottom Ad (Responsive) */}
+                <AdUnit
+                    slotId="1234567890" // REPLACE WITH ACTUAL SLOT ID
+                    format="auto"
+                    layout="in-article"
+                    className="min-h-[120px]"
+                    label="Reclamă"
+                />
 
             </div >
         </div >
