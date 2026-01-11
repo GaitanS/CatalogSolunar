@@ -42,10 +42,10 @@ export const metadata: Metadata = {
     },
     verification: {
         google: 'google-site-verification-token', // Add generic placeholder or ask user
-        other: {
-            "google-adsense-account": "ca-pub-4509784482094331",
-        },
-    }
+    },
+    other: {
+        "google-adsense-account": "ca-pub-4509784482094331",
+    },
 };
 
 export default function RootLayout({
