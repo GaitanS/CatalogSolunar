@@ -1,3 +1,6 @@
+'use client';
+import { useState, useEffect } from 'react';
+
 export default function ConstellationBackground() {
     return (
         <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
@@ -61,22 +64,44 @@ export default function ConstellationBackground() {
                     <line x1="90%" y1="18%" x2="95%" y2="25%" />
                 </g>
 
-                {/* Creates scattered background stars */}
-                {Array.from({ length: 50 }).map((_, i) => (
-                    <circle
-                        key={i}
-                        cx={`${Math.random() * 100}%`}
-                        cy={`${Math.random() * 100}%`}
-                        r={Math.random() * 1.5}
-                        fill="white"
-                        className="opacity-20 animate-pulse"
-                        style={{
-                            animationDelay: `${Math.random() * 5}s`,
-                            animationDuration: `${3 + Math.random() * 4}s`
-                        }}
-                    />
-                ))}
+                {/* Creates scattered background stars - Client side only to avoid hydration mismatch */}
+                <Stars />
             </svg>
         </div>
+    );
+}
+
+function Stars() {
+    // Generate stars only on client side to avoid hydration mismatch
+    const [stars, setStars] = useState<Array<{ cx: string; cy: string; r: number; delay: string; duration: string }>>([]);
+
+    useEffect(() => {
+        const newStars = Array.from({ length: 50 }).map(() => ({
+            cx: `${Math.random() * 100}%`,
+            cy: `${Math.random() * 100}%`,
+            r: Math.random() * 1.5,
+            delay: `${Math.random() * 5}s`,
+            duration: `${3 + Math.random() * 4}s`
+        }));
+        setStars(newStars);
+    }, []);
+
+    return (
+        <>
+            {stars.map((star, i) => (
+                <circle
+                    key={i}
+                    cx={star.cx}
+                    cy={star.cy}
+                    r={star.r}
+                    fill="white"
+                    className="opacity-20 animate-pulse"
+                    style={{
+                        animationDelay: star.delay,
+                        animationDuration: star.duration
+                    }}
+                />
+            ))}
+        </>
     );
 }
