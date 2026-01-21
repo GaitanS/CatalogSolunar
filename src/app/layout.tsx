@@ -69,7 +69,7 @@ export default function RootLayout({
                     <header className="fixed top-0 left-0 right-0 z-50 bg-night-950/90 backdrop-blur-md border-b border-night-800">
                         <div className="container-custom py-4 flex items-center justify-between">
                             <a href="/" className="flex items-center gap-3 group">
-                                <img src="/logo.png" alt="Solunar Logo" className="w-8 h-8 object-contain group-hover:scale-110 transition-transform" />
+                                <img src="/logo.webp" alt="Solunar Logo" className="w-8 h-8 object-contain group-hover:scale-110 transition-transform" />
                                 <span className="font-display text-xl font-bold text-white tracking-tight">Calendar Solunar</span>
                             </a>
                             <nav className="hidden md:flex items-center gap-8 font-medium text-sm">
@@ -87,7 +87,7 @@ export default function RootLayout({
                         <div className="container-custom grid md:grid-cols-4 gap-8">
                             <div className="md:col-span-2">
                                 <div className="flex items-center gap-2 mb-4">
-                                    <img src="/logo.png" alt="Solunar Logo" className="w-6 h-6 object-contain" />
+                                    <img src="/logo.webp" alt="Solunar Logo" className="w-6 h-6 object-contain" />
                                     <span className="font-display text-lg font-bold text-white">Calendar Solunar</span>
                                 </div>
                                 <p className="text-night-400 text-sm leading-relaxed max-w-sm">

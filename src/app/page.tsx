@@ -1,7 +1,7 @@
 import { getSolunarData, getWeekSolunarData, getMoonPhaseName, formatTime, formatDate, getActiveFish, getMoonage } from '@/lib/solunar';
 import { getWeatherData, getWindDirectionString } from '@/lib/weather';
 import { getFishingAdvice, getMajorPeriodsDescription, getMinorPeriodsDescription } from '@/lib/advice';
-import Moon3D from '@/components/Moon3D';
+import Moon3DWrapper from '@/components/Moon3DWrapper';
 import LocationPicker from '@/components/LocationPicker';
 import ActivityGraph from '@/components/ActivityGraph';
 import ForecastCarousel from '@/components/ForecastCarousel';
@@ -169,7 +169,7 @@ export default async function HomePage({ searchParams }: { searchParams: { lat?:
 
                         {/* Main Moon */}
                         <div className="w-[120px] h-[120px] md:w-[200px] md:h-[200px] relative z-10 my-1 md:my-2 lg:scale-125 transition-transform duration-700 group-hover:scale-110">
-                            <Moon3D phase={getMoonage(today) / 29.53} illumination={todayData.moonIllumination} size={200} />
+                            <Moon3DWrapper phase={getMoonage(today) / 29.53} illumination={todayData.moonIllumination} size={200} />
                         </div>
 
                         {/* Status Badge */}
