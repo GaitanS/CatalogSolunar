@@ -2,11 +2,22 @@ import type { Metadata } from "next";
 import { Roboto_Slab, Open_Sans } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
+import Image from "next/image";
 import ConstellationBackground from "@/components/ConstellationBackground";
 import ClientProviders from "@/components/ClientProviders";
 
-const robotoSlab = Roboto_Slab({ subsets: ["latin"], variable: "--font-roboto-slab" });
-const openSans = Open_Sans({ subsets: ["latin"], variable: "--font-open-sans" });
+const robotoSlab = Roboto_Slab({
+    subsets: ["latin"],
+    variable: "--font-roboto-slab",
+    display: "swap",
+    preload: true,
+});
+const openSans = Open_Sans({
+    subsets: ["latin"],
+    variable: "--font-open-sans",
+    display: "swap",
+    preload: true,
+});
 
 export const metadata: Metadata = {
     metadataBase: new URL('https://calendarsolunar.ro'),
@@ -56,11 +67,15 @@ export default function RootLayout({
     return (
         <html lang="ro">
             <head>
+                {/* Preconnect to critical third-party origins */}
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+                <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
                 <Script
                     async
                     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4509784482094331"
                     crossOrigin="anonymous"
-                    strategy="afterInteractive"
+                    strategy="lazyOnload"
                 />
             </head>
             <body className={`${openSans.variable} ${robotoSlab.variable} font-body bg-night-950 text-slate-100 min-h-screen antialiased selection:bg-moon selection:text-night-950`}>
@@ -69,7 +84,14 @@ export default function RootLayout({
                     <header className="fixed top-0 left-0 right-0 z-50 bg-night-950/90 backdrop-blur-md border-b border-night-800">
                         <div className="container-custom py-4 flex items-center justify-between">
                             <a href="/" className="flex items-center gap-3 group">
-                                <img src="/logo.webp" alt="Solunar Logo" className="w-8 h-8 object-contain group-hover:scale-110 transition-transform" />
+                                <Image
+                                    src="/logo.webp"
+                                    alt="Solunar Logo"
+                                    width={32}
+                                    height={32}
+                                    className="object-contain group-hover:scale-110 transition-transform"
+                                    priority
+                                />
                                 <span className="font-display text-xl font-bold text-white tracking-tight">Calendar Solunar</span>
                             </a>
                             <nav className="hidden md:flex items-center gap-8 font-medium text-sm">
@@ -87,7 +109,14 @@ export default function RootLayout({
                         <div className="container-custom grid md:grid-cols-4 gap-8">
                             <div className="md:col-span-2">
                                 <div className="flex items-center gap-2 mb-4">
-                                    <img src="/logo.webp" alt="Solunar Logo" className="w-6 h-6 object-contain" />
+                                    <Image
+                                        src="/logo.webp"
+                                        alt="Solunar Logo"
+                                        width={24}
+                                        height={24}
+                                        className="object-contain"
+                                        loading="lazy"
+                                    />
                                     <span className="font-display text-lg font-bold text-white">Calendar Solunar</span>
                                 </div>
                                 <p className="text-night-400 text-sm leading-relaxed max-w-sm">
