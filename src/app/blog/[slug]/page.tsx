@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { getArticleBySlug, getAllArticles } from '@/data/blogArticles';
 
 interface Props {
-    params: { slug: string };
+    params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -15,7 +15,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const article = getArticleBySlug(params.slug);
+    const { slug } = await params;
+    const article = getArticleBySlug(slug);
 
     if (!article) {
         return { title: 'Articol Negăsit' };
@@ -178,8 +179,9 @@ function parseContent(content: string) {
     return elements;
 }
 
-export default function ArticlePage({ params }: Props) {
-    const article = getArticleBySlug(params.slug);
+export default async function ArticlePage({ params }: Props) {
+    const { slug } = await params;
+    const article = getArticleBySlug(slug);
 
     if (!article) {
         notFound();

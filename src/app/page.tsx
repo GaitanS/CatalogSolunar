@@ -11,8 +11,9 @@ import ScheduleCard from '@/components/ScheduleCard';
 import AdUnit from '@/components/AdUnit';
 
 
-export async function generateMetadata({ searchParams }: { searchParams: { loc?: string } }) {
-    const locationName = searchParams.loc || 'București';
+export async function generateMetadata({ searchParams }: { searchParams: Promise<{ loc?: string }> }) {
+    const params = await searchParams;
+    const locationName = params.loc || 'București';
     const date = new Date();
     const monthName = date.toLocaleDateString('ro-RO', { month: 'long' });
     const year = date.getFullYear();
@@ -27,11 +28,12 @@ export async function generateMetadata({ searchParams }: { searchParams: { loc?:
     };
 }
 
-export default async function HomePage({ searchParams }: { searchParams: { lat?: string; lng?: string; loc?: string } }) {
+export default async function HomePage({ searchParams }: { searchParams: Promise<{ lat?: string; lng?: string; loc?: string }> }) {
+    const params = await searchParams;
     const today = new Date();
-    const lat = searchParams.lat ? parseFloat(searchParams.lat) : 44.4268;
-    const lng = searchParams.lng ? parseFloat(searchParams.lng) : 26.1025;
-    const locationName = searchParams.loc || 'București';
+    const lat = params.lat ? parseFloat(params.lat) : 44.4268;
+    const lng = params.lng ? parseFloat(params.lng) : 26.1025;
+    const locationName = params.loc || 'București';
 
     // Fetch data
     const todayData = getSolunarData(today, lat, lng);
