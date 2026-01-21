@@ -1,35 +1,39 @@
 module.exports = {
     apps: [
         {
-            name: 'solunar-app',
-            script: 'server.js', // Needs to be copied from .next/standalone/server.js in production workflow or handle locally
-            // Actually for standalone we run 'node server.js' inside the standalone folder.
-            // But typically we deploy the whole repo or the standalone folder.
-            // Let's assume standard Next.js deployment: 'npm start' or via 'node .next/standalone/server.js'
-
-            // Better approach for Hostinger VPS with standalone output:
-            // script: 'node',
-            // args: '.next/standalone/server.js',
-            // But the file path depends on where it is run.
-
-            // Let's use the standard "npm start" for ease if not using standalone strictly, 
-            // OR direct node command if using standalone.
-
-            // User asked for standalone in next.config.js.
-            // The standalone build produces a 'server.js' in '.next/standalone'.
-            // We should point PM2 there.
-
-            script: '.next/standalone/server.js',
-            cwd: './', // Run from project root
+            name: 'solunar',
+            script: 'npm',
+            args: 'start -- -p 3500',
+            cwd: '/var/www/solunar',
             instances: 1,
+            exec_mode: 'fork',
             autorestart: true,
             watch: false,
-            max_memory_restart: '1G',
+            max_memory_restart: '512M',
+
+            // Environment
             env: {
                 NODE_ENV: 'production',
-                PORT: 3500, // as requested
-                HOSTNAME: '0.0.0.0'
+                PORT: 3500,
+                HOSTNAME: '127.0.0.1',  // Security: Only localhost (nginx proxies public traffic)
             },
+
+            // Logging
+            error_file: '/var/log/pm2/solunar-error.log',
+            out_file: '/var/log/pm2/solunar-out.log',
+            log_file: '/var/log/pm2/solunar-combined.log',
+            time: true,
+
+            // Resource limits
+            node_args: [
+                '--max-old-space-size=512',
+            ],
+
+            // Restart settings
+            kill_timeout: 5000,
+            restart_delay: 1000,
+            max_restarts: 10,
+            min_uptime: '10s',
         },
     ],
 };
