@@ -22,7 +22,8 @@
       "WebFetch(domain:calendarsolunar.ro)",
       "Bash(npm install:*)",
       "Bash(scp:*)",
-      "Bash(ping:*)"
+      "Bash(ping:*)",
+      "WebFetch(domain:www.googleapis.com)"
     ]
   }
 }

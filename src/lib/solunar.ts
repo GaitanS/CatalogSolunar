@@ -389,16 +389,27 @@ export function getForecastData(startDate: Date, days: number = 14, lat: number 
 
 /**
  * Format time for display (24-hour format)
+ * Uses Europe/Bucharest timezone to ensure consistent rendering between server and client
  */
 export function formatTime(date: Date): string {
-    return date.toLocaleTimeString('ro-RO', { hour: '2-digit', minute: '2-digit' });
+    return date.toLocaleTimeString('ro-RO', {
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: 'Europe/Bucharest'
+    });
 }
 
 /**
  * Format date for display
+ * Uses Europe/Bucharest timezone to ensure consistent rendering between server and client
  */
 export function formatDate(date: Date): string {
-    return date.toLocaleDateString('ro-RO', { weekday: 'long', day: 'numeric', month: 'long' });
+    return date.toLocaleDateString('ro-RO', {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+        timeZone: 'Europe/Bucharest'
+    });
 }
 
 // Fish Species Data
