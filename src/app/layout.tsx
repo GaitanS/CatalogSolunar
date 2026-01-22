@@ -6,6 +6,7 @@ import Image from "next/image";
 import LazyBackground from "@/components/LazyBackground";
 import ClientProviders from "@/components/ClientProviders";
 import AdSenseScript from "@/components/AdSenseScript";
+import SchemaMarkup from "@/components/SchemaMarkup";
 
 const robotoSlab = Roboto_Slab({
     subsets: ["latin"],
@@ -23,23 +24,36 @@ const openSans = Open_Sans({
 export const metadata: Metadata = {
     metadataBase: new URL('https://calendarsolunar.ro'),
     title: {
-        default: 'Calendar Solunar Pescuit 2026 | Orele de Activitate Maximă',
-        template: '%s | CalendarSolunar.ro'
+        default: 'Solunar Pescuit 2026 - Calendar cu Ore Exacte',
+        template: '%s | Calendar Solunar'
     },
-    description: "Consultă cel mai precis Solunar 2026 pentru pescuit. Află perioadele lunare majore și minore, solunar pescuit pe ore și activitatea peștilor pentru o partidă reușită în România.",
+    description: "Calendar solunar precis 2026 cu orele de activitate maximă a peștilor. Faze lunare, solunar pe ore, prognoze pescuit pentru România. Află când trage peștele!",
     keywords: [
-        "solunar 2026", "solunar pescuit", "solunar pescuit 2026", "calendar solunar",
-        "solunar pescuit pe ore", "calendarul solunar", "faze lunare pescuit", "activitate pesti",
-        "solunar ianuarie 2026", "solunar februarie 2026", "solunar azi", "cand trage pestele",
-        "solunar romania", "calendar pescuit 2026"
+        "solunar pescuit", "calendar solunar", "solunar 2026", "calendar pescuit 2026",
+        "cand trage pestele", "solunar pescuit pe ore", "faze lunare pescuit", "activitate pesti",
+        "solunar azi", "solunar romania", "ore pescuit", "perioade majore solunar",
+        "luna plina pescuit", "calendar lunar pescuit"
     ],
     openGraph: {
-        title: 'Calendar Solunar Pescuit 2026 | Orele de Activitate Maximă',
-        description: 'Află când trage peștele! Solunar detaliat pe ore, fazele lunii și prognoză de pescuit pentru 2026.',
+        title: 'Solunar Pescuit 2026 - Calendar Lunar Complet',
+        description: 'Află când trage peștele! Calendar solunar precis cu faze lunare, perioade majore și minore, prognoze 14 zile pentru România.',
         url: 'https://calendarsolunar.ro',
         siteName: 'Calendar Solunar',
         locale: 'ro_RO',
         type: 'website',
+        images: [
+            {
+                url: 'https://calendarsolunar.ro/og-image.png',
+                width: 1200,
+                height: 630,
+                alt: 'Calendar Solunar Pescuit 2026',
+            }
+        ],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Solunar Pescuit 2026 - Ore Exacte de Activitate',
+        description: 'Calendar solunar precis pentru pescuit. Perioade majore, faze lunare, prognoze.',
     },
     robots: {
         index: true,
@@ -53,7 +67,7 @@ export const metadata: Metadata = {
         },
     },
     verification: {
-        google: 'google-site-verification-token', // Add generic placeholder or ask user
+        google: 'google-site-verification-token',
     },
     other: {
         "google-adsense-account": "ca-pub-4509784482094331",
@@ -72,7 +86,8 @@ export default function RootLayout({
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                 <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
-                {/* Note: logo.webp preload removed - Next.js Image with priority handles this */}
+                {/* Schema.org JSON-LD structured data for SEO */}
+                <SchemaMarkup />
             </head>
             <body className={`${openSans.variable} ${robotoSlab.variable} font-body bg-night-950 text-slate-100 min-h-screen antialiased selection:bg-moon selection:text-night-950`}>
                 <ClientProviders>

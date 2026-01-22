@@ -9,6 +9,7 @@ import QuickStatCard from '@/components/QuickStatCard';
 import ScheduleCard from '@/components/ScheduleCard';
 import AdUnit from '@/components/AdUnit';
 import LazyAdUnit from '@/components/LazyAdUnit';
+import FAQSection from '@/components/FAQSection';
 
 
 export async function generateMetadata({ searchParams }: { searchParams: Promise<{ loc?: string }> }) {
@@ -63,7 +64,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 <div className="flex flex-col items-center md:flex-row md:items-end md:justify-between mb-4 md:mb-8 gap-3 md:gap-4 text-center md:text-left relative z-50">
                     <div>
                         <h1 className="text-2xl md:text-5xl font-display font-bold text-white mb-1 drop-shadow-lg">
-                            Solunar <span className="text-amber-400">{locationName}</span>
+                            Calendar Solunar <span className="text-amber-400">{locationName}</span>
                         </h1>
                         <p className="text-night-400 text-xs md:text-base">
                             {today.toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' })}
@@ -281,6 +282,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 <LazyForecast weekData={weekData} />
 
                 {/* Info Cards Bottom */}
+                <h2 className="text-lg md:text-xl font-display font-bold text-white mb-4">Detalii Activitate Pescuit</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 pb-8">
                     {/* Card 1 */}
                     <div className="card-glass p-4 min-h-[120px] flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 justify-between group hover:bg-white/10 transition-colors">
@@ -319,6 +321,9 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                         </p>
                     </div>
                 </div>
+
+                {/* FAQ Section with Schema Markup */}
+                <FAQSection />
 
                 {/* Bottom Ad (Responsive) - Lazy loaded */}
                 <LazyAdUnit
