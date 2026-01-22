@@ -1,6 +1,8 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import SimpleMoon2D from './SimpleMoon2D';
 
 const Moon3D = dynamic(() => import('./Moon3D'), {
     ssr: false,
@@ -18,5 +20,23 @@ interface Moon3DWrapperProps {
 }
 
 export default function Moon3DWrapper(props: Moon3DWrapperProps) {
+    const [isMobile, setIsMobile] = useState(true); // Default to mobile for SSR
+
+    useEffect(() => {
+        // Check screen width on client
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    // Use simple 2D moon on mobile to avoid Three.js overhead
+    if (isMobile) {
+        return <SimpleMoon2D {...props} />;
+    }
+
     return <Moon3D {...props} />;
 }

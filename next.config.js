@@ -13,6 +13,7 @@ const nextConfig = {
     },
     experimental: {
         optimizeCss: true,
+        optimizePackageImports: ['three', 'suncalc'],
     },
     images: {
         remotePatterns: [

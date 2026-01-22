@@ -3,7 +3,7 @@ import { Roboto_Slab, Open_Sans } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import Image from "next/image";
-import ConstellationBackground from "@/components/ConstellationBackground";
+import LazyBackground from "@/components/LazyBackground";
 import ClientProviders from "@/components/ClientProviders";
 
 const robotoSlab = Roboto_Slab({
@@ -80,7 +80,7 @@ export default function RootLayout({
             </head>
             <body className={`${openSans.variable} ${robotoSlab.variable} font-body bg-night-950 text-slate-100 min-h-screen antialiased selection:bg-moon selection:text-night-950`}>
                 <ClientProviders>
-                    <ConstellationBackground />
+                    <LazyBackground />
                     <header className="fixed top-0 left-0 right-0 z-50 bg-night-950/90 backdrop-blur-md border-b border-night-800">
                         <div className="container-custom py-4 flex items-center justify-between">
                             <a href="/" className="flex items-center gap-3 group">

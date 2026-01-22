@@ -4,7 +4,23 @@
       "Bash(npm run lint)",
       "Bash(npm run build:*)",
       "Bash(Select-Object -First 50)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(git push:*)",
+      "Bash(ssh:*)",
+      "Bash(cat:*)",
+      "Bash(ls:*)",
+      "WebFetch(domain:pagespeed.web.dev)",
+      "Bash(where:*)",
+      "Bash(node -e:*)",
+      "Bash(npm audit:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npm install)",
+      "Bash(dir \"C:\\\\Users\\\\Silviu\\\\Downloads\\\\Solunar\" /b)",
+      "Bash(npm uninstall:*)",
+      "Bash(ssh-keygen:*)",
+      "WebFetch(domain:calendarsolunar.ro)",
+      "Bash(npm install:*)"
     ]
   }
 }
