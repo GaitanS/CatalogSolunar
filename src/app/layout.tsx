@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Roboto_Slab, Open_Sans } from "next/font/google";
 import "./critical.css";
 import "./globals.css";
-import Script from "next/script";
 import Image from "next/image";
 import LazyBackground from "@/components/LazyBackground";
 import ClientProviders from "@/components/ClientProviders";
+import AdSenseScript from "@/components/AdSenseScript";
 
 const robotoSlab = Roboto_Slab({
     subsets: ["latin"],
@@ -72,19 +72,11 @@ export default function RootLayout({
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                 <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
-
-                {/* Preload critical above-fold resources */}
-                <link rel="preload" href="/logo.webp" as="image" type="image/webp" fetchPriority="high" />
-
-                <Script
-                    async
-                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4509784482094331"
-                    crossOrigin="anonymous"
-                    strategy="lazyOnload"
-                />
+                {/* Note: logo.webp preload removed - Next.js Image with priority handles this */}
             </head>
             <body className={`${openSans.variable} ${robotoSlab.variable} font-body bg-night-950 text-slate-100 min-h-screen antialiased selection:bg-moon selection:text-night-950`}>
                 <ClientProviders>
+                    <AdSenseScript />
                     <LazyBackground />
                     <header className="fixed top-0 left-0 right-0 z-50 bg-night-950/90 backdrop-blur-md border-b border-night-800">
                         <div className="container-custom py-4 flex items-center justify-between">
