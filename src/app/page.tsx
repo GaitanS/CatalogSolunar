@@ -4,11 +4,11 @@ import { getFishingAdvice, getMajorPeriodsDescription, getMinorPeriodsDescriptio
 import Moon3DWrapper from '@/components/Moon3DWrapper';
 import LocationPicker from '@/components/LocationPicker';
 import ActivityGraph from '@/components/ActivityGraph';
-import ForecastCarousel from '@/components/ForecastCarousel';
+import LazyForecast from '@/components/LazyForecast';
 import QuickStatCard from '@/components/QuickStatCard';
-import ForecastCard from '@/components/ForecastCard';
 import ScheduleCard from '@/components/ScheduleCard';
 import AdUnit from '@/components/AdUnit';
+import LazyAdUnit from '@/components/LazyAdUnit';
 
 
 export async function generateMetadata({ searchParams }: { searchParams: Promise<{ loc?: string }> }) {
@@ -268,26 +268,17 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
 
 
 
-                {/* Middle Ad (Medium Rectangle) */}
-                <AdUnit
-                    slotId="1234567890" // REPLACE WITH ACTUAL SLOT ID
+                {/* Middle Ad (Medium Rectangle) - Lazy loaded */}
+                <LazyAdUnit
+                    slotId="1234567890"
                     format="rectangle"
                     style={{ minHeight: '280px' }}
                     className="mb-8"
                     label="Reclamă"
                 />
 
-                {/* Forecast Stripes */}
-                <div className="mb-8 md:mb-12">
-                    <h2 className="text-sm md:text-base font-bold text-white mb-3 md:mb-4 px-1">Prognoza 14 zile</h2>
-                    <ForecastCarousel>
-                        {weekData.map((d, i) => (
-                            <div key={i} className="snap-center shrink-0">
-                                <ForecastCard data={d} isToday={i === 0} />
-                            </div>
-                        ))}
-                    </ForecastCarousel>
-                </div>
+                {/* Forecast Stripes - Lazy loaded */}
+                <LazyForecast weekData={weekData} />
 
                 {/* Info Cards Bottom */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 pb-8">
@@ -329,9 +320,9 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                     </div>
                 </div>
 
-                {/* Bottom Ad (Responsive) */}
-                <AdUnit
-                    slotId="1234567890" // REPLACE WITH ACTUAL SLOT ID
+                {/* Bottom Ad (Responsive) - Lazy loaded */}
+                <LazyAdUnit
+                    slotId="1234567890"
                     format="auto"
                     layout="in-article"
                     className="min-h-[120px]"

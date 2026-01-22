@@ -1,0 +1,32 @@
+/* Critical CSS for above-the-fold content - inlined by Next.js */
+body {
+    background-color: #020617;
+    color: #f1f5f9;
+    margin: 0;
+}
+
+.fixed { position: fixed; }
+.inset-0 { inset: 0; }
+.z-50 { z-index: 50; }
+.bg-night-950 { background-color: #020617; }
+.text-white { color: #fff; }
+
+.container-custom {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-3 { gap: 0.75rem; }
+.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+.font-bold { font-weight: 700; }
+.text-xl { font-size: 1.25rem; }
+.pt-20 { padding-top: 5rem; }
+
+@media (min-width: 640px) {
+    .container-custom { padding: 0 1.5rem; }
+}

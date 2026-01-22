@@ -20,7 +20,9 @@
       "Bash(npm uninstall:*)",
       "Bash(ssh-keygen:*)",
       "WebFetch(domain:calendarsolunar.ro)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(scp:*)",
+      "Bash(ping:*)"
     ]
   }
 }

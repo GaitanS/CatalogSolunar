@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Roboto_Slab, Open_Sans } from "next/font/google";
+import "./critical.css";
 import "./globals.css";
 import Script from "next/script";
 import Image from "next/image";
@@ -71,6 +72,10 @@ export default function RootLayout({
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                 <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+
+                {/* Preload critical above-fold resources */}
+                <link rel="preload" href="/logo.webp" as="image" type="image/webp" fetchPriority="high" />
+
                 <Script
                     async
                     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4509784482094331"
