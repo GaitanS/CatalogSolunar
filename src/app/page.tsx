@@ -7,8 +7,7 @@ import ActivityGraph from '@/components/ActivityGraph';
 import LazyForecast from '@/components/LazyForecast';
 import QuickStatCard from '@/components/QuickStatCard';
 import ScheduleCard from '@/components/ScheduleCard';
-import AdUnit from '@/components/AdUnit';
-import LazyAdUnit from '@/components/LazyAdUnit';
+import EzoicAdUnit from '@/components/EzoicAdUnit';
 import FAQSection from '@/components/FAQSection';
 
 
@@ -75,10 +74,9 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                     </div>
                 </div>
 
-                {/* Top Ad (Mobile/Desktop Leaderboard) */}
-                <AdUnit
-                    slotId="1234567890" // REPLACE WITH ACTUAL SLOT ID
-                    format="horizontal"
+                {/* Top Ad (Mobile/Desktop Leaderboard) - Ezoic Placeholder 101 */}
+                <EzoicAdUnit
+                    placeholderId={101}
                     className="min-h-[90px]"
                     label="Reclamă"
                 />
@@ -269,12 +267,10 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
 
 
 
-                {/* Middle Ad (Medium Rectangle) - Lazy loaded */}
-                <LazyAdUnit
-                    slotId="1234567890"
-                    format="rectangle"
-                    style={{ minHeight: '280px' }}
-                    className="mb-8"
+                {/* Middle Ad (Medium Rectangle) - Ezoic Placeholder 102 */}
+                <EzoicAdUnit
+                    placeholderId={102}
+                    className="mb-8 min-h-[280px]"
                     label="Reclamă"
                 />
 
@@ -325,11 +321,9 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 {/* FAQ Section with Schema Markup */}
                 <FAQSection />
 
-                {/* Bottom Ad (Responsive) - Lazy loaded */}
-                <LazyAdUnit
-                    slotId="1234567890"
-                    format="auto"
-                    layout="in-article"
+                {/* Bottom Ad (Responsive) - Ezoic Placeholder 103 */}
+                <EzoicAdUnit
+                    placeholderId={103}
                     className="min-h-[120px]"
                     label="Reclamă"
                 />

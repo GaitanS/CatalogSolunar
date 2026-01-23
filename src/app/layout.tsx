@@ -69,9 +69,7 @@ export const metadata: Metadata = {
     verification: {
         google: 'google-site-verification-token',
     },
-    other: {
-        "google-adsense-account": "ca-pub-4509784482094331",
-    },
+    // Ezoic ads - no meta tag needed
 };
 
 export default function RootLayout({
