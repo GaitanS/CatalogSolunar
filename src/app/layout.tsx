@@ -80,6 +80,8 @@ export default function RootLayout({
     return (
         <html lang="ro">
             <head>
+                {/* Ezoic site verification */}
+                <meta name="ezoic-site-verification" content="Zu0pRPnoX6tRqEvBurxjBFYZznTT3G" />
                 {/* Preconnect to critical third-party origins */}
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
