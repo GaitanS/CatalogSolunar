@@ -1,6 +1,9 @@
-import { redirect } from 'next/navigation';
+import { NextResponse } from 'next/server';
 
 export async function GET() {
-    // Redirect to Ezoic's ads.txt manager
-    redirect('https://srv.adstxtmanager.com/19390/calendarsolunar.ro');
+    // 301 permanent redirect to Ezoic's ads.txt manager
+    return NextResponse.redirect(
+        'https://srv.adstxtmanager.com/19390/calendarsolunar.ro',
+        301
+    );
 }
