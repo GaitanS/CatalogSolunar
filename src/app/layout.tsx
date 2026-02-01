@@ -9,16 +9,19 @@ import AdSenseScript from "@/components/AdSenseScript";
 import SchemaMarkup from "@/components/SchemaMarkup";
 
 const robotoSlab = Roboto_Slab({
-    subsets: ["latin"],
+    subsets: ["latin", "latin-ext"],
     variable: "--font-roboto-slab",
     display: "swap",
     preload: true,
+    adjustFontFallback: true,
+    weight: ["400", "700"],
 });
 const openSans = Open_Sans({
-    subsets: ["latin"],
+    subsets: ["latin", "latin-ext"],
     variable: "--font-open-sans",
     display: "swap",
     preload: true,
+    adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {
@@ -81,9 +84,7 @@ export default function RootLayout({
             <head>
                 {/* Google AdSense verification */}
                 <meta name="google-adsense-account" content="ca-pub-4509784482094331" />
-                {/* Preconnect to critical third-party origins */}
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+                {/* DNS prefetch for AdSense */}
                 <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
                 {/* Schema.org JSON-LD structured data for SEO */}
                 <SchemaMarkup />

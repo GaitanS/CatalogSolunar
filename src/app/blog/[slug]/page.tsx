@@ -40,6 +40,31 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
 }
 
+// Extract headings for table of contents
+function extractHeadings(content: string): { text: string; id: string; level: number }[] {
+    const headings: { text: string; id: string; level: number }[] = [];
+    const lines = content.trim().split('\n');
+    for (const line of lines) {
+        const trimmed = line.trim();
+        if (trimmed.startsWith('## ')) {
+            const text = trimmed.slice(3);
+            const id = text.toLowerCase()
+                .replace(/[^\w\săâîșț-]/g, '')
+                .replace(/\s+/g, '-')
+                .slice(0, 60);
+            headings.push({ text, id, level: 2 });
+        } else if (trimmed.startsWith('### ')) {
+            const text = trimmed.slice(4);
+            const id = text.toLowerCase()
+                .replace(/[^\w\săâîșț-]/g, '')
+                .replace(/\s+/g, '-')
+                .slice(0, 60);
+            headings.push({ text, id, level: 3 });
+        }
+    }
+    return headings;
+}
+
 // Build internal link map from article keywords/titles
 function injectInternalLinks(content: string, currentSlug: string, articles: BlogArticle[]): string {
     const linkMap: { pattern: RegExp; url: string; label: string }[] = [];
@@ -158,9 +183,14 @@ function parseContent(content: string, currentSlug?: string, articles?: BlogArti
         // Heading 2
         if (trimmedLine.startsWith('## ')) {
             flushList();
+            const headingText = trimmedLine.slice(3);
+            const headingId = headingText.toLowerCase()
+                .replace(/[^\w\săâîșț-]/g, '')
+                .replace(/\s+/g, '-')
+                .slice(0, 60);
             elements.push(
-                <h2 key={`h2-${i}`} className="text-xl md:text-2xl font-display font-bold text-white mt-8 mb-4">
-                    {trimmedLine.slice(3)}
+                <h2 key={`h2-${i}`} id={headingId} className="text-xl md:text-2xl font-display font-bold text-white mt-8 mb-4 scroll-mt-24">
+                    {headingText}
                 </h2>
             );
             continue;
@@ -169,9 +199,14 @@ function parseContent(content: string, currentSlug?: string, articles?: BlogArti
         // Heading 3
         if (trimmedLine.startsWith('### ')) {
             flushList();
+            const headingText = trimmedLine.slice(4);
+            const headingId = headingText.toLowerCase()
+                .replace(/[^\w\săâîșț-]/g, '')
+                .replace(/\s+/g, '-')
+                .slice(0, 60);
             elements.push(
-                <h3 key={`h3-${i}`} className="text-lg font-bold text-white mt-6 mb-3">
-                    {trimmedLine.slice(4)}
+                <h3 key={`h3-${i}`} id={headingId} className="text-lg font-bold text-white mt-6 mb-3 scroll-mt-24">
+                    {headingText}
                 </h3>
             );
             continue;
@@ -357,6 +392,31 @@ export default async function ArticlePage({ params }: Props) {
                             </div>
                         </div>
                     </header>
+
+                    {/* Table of Contents */}
+                    {(() => {
+                        const headings = extractHeadings(article.content);
+                        const h2Only = headings.filter(h => h.level === 2);
+                        if (h2Only.length < 3) return null;
+                        return (
+                            <nav className="mb-10 p-5 card-panel">
+                                <h2 className="text-sm font-bold text-white mb-3 uppercase tracking-wider">Cuprins</h2>
+                                <ol className="space-y-2">
+                                    {h2Only.map((h, i) => (
+                                        <li key={h.id}>
+                                            <a
+                                                href={`#${h.id}`}
+                                                className="text-night-300 hover:text-moon transition-colors text-sm flex items-center gap-2"
+                                            >
+                                                <span className="text-moon/50 text-xs font-mono">{i + 1}.</span>
+                                                {h.text}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ol>
+                            </nav>
+                        );
+                    })()}
 
                     {/* Article Content */}
                     <article className="prose prose-invert max-w-none">
