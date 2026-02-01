@@ -7542,6 +7542,439 @@ Verifică [calendarul solunar](/) pentru Constanța, alege ziua perfectă, și d
         category: 'Destinații',
         readTime: 10,
         keywords: ['pescuit constanta', 'pescuit litoral', 'pescuit marea neagra constanta', 'digul constanta pescuit', 'lufar constanta', 'chefal litoral', 'pescuit mamaia', 'pescuit navodari', 'pescuit mangalia', 'calcan marea neagra']
+    },
+    {
+        slug: 'solunar-februarie-2026-ghid',
+        title: 'Calendar Solunar Februarie 2026 - Ghid Complet Pescuit',
+        excerpt: 'Februarie 2026: luna provocărilor. Pești leneși, ape reci, dar oportunități reale dacă știi când să mergi.',
+        date: '2026-02-01',
+        author: 'Echipa Calendar Solunar',
+        category: 'Calendar',
+        readTime: 6,
+        keywords: ['solunar februarie 2026', 'calendar pescuit februarie', 'pescuit februarie', 'luna plina februarie 2026', 'zile bune pescuit februarie', 'pescuit iarna 2026'],
+        content: `
+Februarie e luna în care mulți pescari stau acasă. Greșeală. Peștii nu dorm — doar sunt mai selectivi. Cine știe când și unde să meargă, prinde.
+
+## De Ce Februarie Merită Efort
+
+**1. Lacuri goale** — Ești singur pe apă. Fără presiune, fără zgomot. Peștii sunt mai puțin speriați.
+
+**2. Crapii mari sunt activi** — Nu toți, dar cei mari se hrănesc lent în zile stabile. Și un crap de iarnă e dublu satisfăcător.
+
+**3. Știuca e regină** — Sezonul rece e momentul ei. Metabolismul prădătorilor funcționează bine la ape reci.
+
+**4. Pregătire pentru primăvară** — Cunoști bălțile, testezi echipamentul, ajustezi tehnicile.
+
+## Fazele Lunii în Februarie 2026
+
+| Fază | Data | Rating Pescuit |
+|------|------|---------------|
+| Luna Plină | 2 Februarie (Luni) | ⭐⭐⭐⭐⭐ |
+| Ultimul Pătrar | 9 Februarie | ⭐⭐⭐ |
+| Luna Nouă | 18 Februarie (Miercuri) | ⭐⭐⭐⭐⭐ |
+| Primul Pătrar | 25 Februarie | ⭐⭐⭐ |
+
+## Zilele de Top în Februarie 2026
+
+### 🥇 1-3 FEBRUARIE (Weekend + Luni)
+
+**De ce:** Luna plină pe 2 februarie. Forță gravitațională maximă = pești activi.
+
+**Ce merge:**
+- Știucă — spinning cu momeli lente, jerkbait
+- Crap — boilies pe fund, arome picante (scorțișoară, chili)
+- Biban — jigging vertical
+
+**Sfat:** Pescuiește în adâncime. Peștii stau la fund unde apa e mai caldă (4°C).
+
+### 🥈 17-19 FEBRUARIE (Marți-Joi Luna Nouă)
+
+**De ce:** Luna nouă pe 18 — a doua fereastră importantă. Nopțile întunecate activează prădătorii.
+
+**Ce merge:**
+- Știucă — foarte activă în zilele din jurul lunii noi
+- Șalău nocturn — twistere fluorescente
+- Somn — lent dar posibil în zilele mai calde
+
+**Sfat:** Luna nouă = pescuit nocturn excelent pentru prădători.
+
+### 🥉 7-8 FEBRUARIE (Weekend)
+
+**De ce:** Weekend accesibil, lună în scădere, presiune de obicei stabilă.
+
+**Ce merge:**
+- Clean de iarnă — pe albie, momeli mici
+- Caras — lent dar posibil cu viermișor roșu
+- Știucă — spinning clasic
+
+## Orele Optime în Februarie
+
+**Dimineața:** 8:00 - 11:00 ⭐⭐⭐⭐
+- Soarele încălzește apa după răsărit
+- Pești se activează lent
+- Ora de aur: 9:00-10:30
+
+**Prânz:** 11:00 - 14:00 ⭐⭐⭐⭐⭐
+- Cel mai cald moment al zilei
+- Perioadele majore de prânz sunt cele mai valoroase iarna
+- Peștii mănâncă când apa e la maxim
+
+**Seara:** 14:00 - 17:00 ⭐⭐⭐
+- Se răcește, activitatea scade
+- Ultimele ore de lumină pot funcționa
+
+**Noaptea:** ⭐⭐ (doar prădători)
+- Doar lângă luna plină/nouă
+- Știucă, șalău, somn
+
+## Specii de Vizat în Februarie
+
+**Știucă** ⭐⭐⭐⭐⭐
+- REGINA iernii
+- Momeală: shad-uri 10-15 cm, jerkbait
+- Mișcări lente, pauze lungi
+
+**Biban** ⭐⭐⭐⭐
+- Activ tot anul
+- Twistere mici 3-5 cm
+- Caută-l în stol
+
+**Crap** ⭐⭐⭐
+- Selectiv dar prins-abil
+- Boilies mici (10-14mm), aromă picantă
+- Un singur crap de iarnă = trofeu
+
+**Clean** ⭐⭐⭐
+- Pe albie și canale
+- Momeli mici, fire subțiri
+
+**Caras** ⭐⭐
+- Foarte lent
+- Viermișor roșu, fund
+- Răbdare maximă
+
+## Sfaturi Esențiale pentru Februarie
+
+**Echipament:**
+- Îmbrăcăminte termică — nu subestima frigul de 8 ore
+- Nada în cantitate mică — metabolismul peștilor e lent
+- Fire mai subțiri — apa limpede, pești precauți
+
+**Tehnică:**
+- Totul e LENT în februarie
+- Pauze lungi între aruncări
+- Concentrează-te pe adâncime
+- Caută zonele cu soare direct (se încălzesc mai repede)
+
+**Presiunea atmosferică:**
+- Mai importantă ca niciodată iarna
+- Caută zile cu presiune stabilă sau în ușoară creștere
+- Evită schimbările bruște de front
+
+## Calendar Solunar Februarie 2026 - Verificare
+
+Pentru perioade majore și minore exacte, verifică zilnic pe [Calendar Solunar](/).
+
+Calendarul îți arată:
+- Orele exacte ale perioadelor
+- Rating-ul zilei (1-5 stele)
+- Fazele lunii
+- Răsărit/apus lună și soare
+
+## Sfatul Lunii Februarie
+
+**Nu rata 1-3 februarie.**
+
+Luna plină de la începutul lunii coincide cu un weekend. Dacă presiunea atmosferică e stabilă, e cel mai bun interval de pescuit din toată luna.
+
+Pregătește echipamentul acum și verifică [calendarul solunar](/) pentru orele exacte.
+        `
+    },
+    {
+        slug: 'solunar-martie-2026-ghid',
+        title: 'Calendar Solunar Martie 2026 - Ghid Complet Pescuit',
+        excerpt: 'Martie 2026: trezirea apelor. Temperatura crește, peștii se activează, iar oportunitățile explodează.',
+        date: '2026-02-01',
+        author: 'Echipa Calendar Solunar',
+        category: 'Calendar',
+        readTime: 6,
+        keywords: ['solunar martie 2026', 'calendar pescuit martie', 'pescuit martie', 'luna plina martie 2026', 'zile bune pescuit martie', 'pescuit primavara 2026'],
+        content: `
+Martie e luna tranziției. Iarna se retrage, apele se încălzesc, iar peștii simt primăvara înainte de noi. E momentul în care sezonul de pescuit explodează.
+
+## De Ce Martie E Decisiv
+
+**1. Apa se încălzește** — De la 4-6°C la 8-12°C. Metabolismul peștilor crește dramatic.
+
+**2. Pre-reproducere** — Peștii se hrănesc intens pentru energie.
+
+**3. Primele zile lungi** — Mai multă lumină = mai multe ore de pescuit.
+
+**4. Echipamentul prinde din urmă** — Tot ce ai testat iarna dă roade acum.
+
+## Fazele Lunii în Martie 2026
+
+| Fază | Data | Rating Pescuit |
+|------|------|---------------|
+| Luna Plină | 3 Martie (Marți) | ⭐⭐⭐⭐⭐ |
+| Ultimul Pătrar | 11 Martie | ⭐⭐⭐ |
+| Luna Nouă | 19 Martie (Joi) | ⭐⭐⭐⭐⭐ |
+| Primul Pătrar | 26 Martie | ⭐⭐⭐ |
+
+## Zilele de Top în Martie 2026
+
+### 🥇 2-4 MARTIE (Luni-Miercuri Luna Plină)
+
+**De ce:** Luna plină pe 3 martie. Efect gravitațional maxim, pești hiperactivi.
+
+**Ce merge:**
+- Știucă — agresivă pre-reproducere
+- Crap — începe să se miște serios
+- Biban — în stoluri, twistere mici
+
+**Sfat:** Dacă poți lua liber marți (3 martie), e ziua cu cel mai mare potențial din lună.
+
+### 🥈 18-20 MARTIE (Miercuri-Vineri Luna Nouă)
+
+**De ce:** Luna nouă pe 19 martie + echinocțiul de primăvară (20 martie). Combinație rară.
+
+**Ce merge:**
+- Toți prădătorii — activitate maximă nocturnă
+- Crap — feedere pe distanță medie
+- Caras — primele sesiuni consistente
+
+**Sfat:** Echinocțiul marchează o schimbare în comportamentul peștilor. Combină-l cu luna nouă și ai o fereastră excepțională.
+
+### 🥉 28-29 MARTIE (Weekend)
+
+**De ce:** Weekend, lună în creștere, temperaturi primăvăratice.
+
+**Ce merge:**
+- Crap la margine — se apropie de mal pe ape calde
+- Plătică — se trezește
+- Lin — primele semne de activitate
+
+## Orele Optime în Martie
+
+**Dimineața:** 6:30 - 10:00 ⭐⭐⭐⭐⭐
+- Răsăritul devreme aduce activitate
+- Ora de aur: 7:00-9:00
+- Apa se încălzește progresiv
+
+**Prânz:** 10:00 - 14:00 ⭐⭐⭐⭐
+- Încă productiv — nu e cald
+- Perioadele majore de prânz funcționează bine
+
+**Seara:** 15:00 - 18:30 ⭐⭐⭐⭐
+- A doua fereastră bună
+- Apa e la temperatura maximă zilnică
+
+**Noaptea:** 20:00 - 01:00 ⭐⭐⭐
+- Începe să merite
+- Mai ales în jurul lunii pline/noi
+
+## Specii de Vizat în Martie
+
+**Știucă** ⭐⭐⭐⭐⭐
+- Ultimele săptămâni înainte de prohibiție
+- Agresivă, se hrănește intens
+- Spinning clasic, momeli medii
+
+**Biban** ⭐⭐⭐⭐⭐
+- Foarte activ
+- Stoluri mari pe canale și lacuri
+- Twistere, spinnere mici
+
+**Crap** ⭐⭐⭐⭐
+- Se trezește puternic
+- Boilies fructate (căpșuni, prune)
+- Method feeder excelent
+
+**Caras** ⭐⭐⭐⭐
+- Începe sezonul
+- Viermișor, porumb
+- Pescuit cu pluta — clasic
+
+**Plătică** ⭐⭐⭐
+- Se activează pe canale
+- Feedere ușoare
+
+## Atenție: Prohibiția
+
+**Verifică prohibiția locală!**
+
+- Știuca intră în prohibiție de obicei de la 15 martie
+- Crapul — verifică regulamentul zonei
+- Unele lacuri au reguli proprii
+
+Nu risca amendă. Pescuiește responsabil și verifică regulamentele ANPA pentru zona ta.
+
+## Calendar Solunar Martie 2026 - Verificare
+
+Pentru perioade majore și minore exacte, verifică zilnic pe [Calendar Solunar](/).
+
+Calendarul îți arată:
+- Orele exacte ale perioadelor
+- Rating-ul zilei (1-5 stele)
+- Fazele lunii
+- Răsărit/apus lună și soare
+
+## Sfatul Lunii Martie
+
+**Profită de primele 2 săptămâni.**
+
+Perioada 1-15 martie e una din cele mai bune din an pentru știucă. Combină luna plină (3 martie) cu temperaturile în creștere și ai condiții excelente.
+
+După 15 martie, concentrează-te pe crap și caras — ei iau locul prădătorilor în focus.
+
+[Verifică calendarul solunar pentru martie 2026 →](/)
+        `
+    },
+    {
+        slug: 'solunar-aprilie-2026-ghid',
+        title: 'Calendar Solunar Aprilie 2026 - Ghid Complet Pescuit',
+        excerpt: 'Aprilie 2026: primăvara în forță. Peștii sunt flămânzi, apele calde, sezonul bate la ușă.',
+        date: '2026-02-01',
+        author: 'Echipa Calendar Solunar',
+        category: 'Calendar',
+        readTime: 6,
+        keywords: ['solunar aprilie 2026', 'calendar pescuit aprilie', 'pescuit aprilie', 'luna plina aprilie 2026', 'zile bune pescuit aprilie', 'pescuit primavara aprilie'],
+        content: `
+Aprilie e luna în care totul prinde viață. Apa trece de 10°C, crapii vin la margine, și fiecare ieșire la pescuit poate fi memorabilă.
+
+## De Ce Aprilie E Excepțional
+
+**1. Temperaturi optime** — Apa 10-16°C. Zona de confort pentru majoritatea speciilor.
+
+**2. Pre-depunere masivă** — Peștii se hrănesc agresiv pentru reproducere.
+
+**3. Zile lungi** — 13-14 ore de lumină. Mai mult timp pe apă.
+
+**4. Diversitate maximă** — Aproape toate speciile sunt active simultan.
+
+## Fazele Lunii în Aprilie 2026
+
+| Fază | Data | Rating Pescuit |
+|------|------|---------------|
+| Luna Plină | 2 Aprilie (Joi) | ⭐⭐⭐⭐⭐ |
+| Ultimul Pătrar | 10 Aprilie | ⭐⭐⭐ |
+| Luna Nouă | 18 Aprilie (Sâmbătă) | ⭐⭐⭐⭐⭐ |
+| Primul Pătrar | 24 Aprilie | ⭐⭐⭐ |
+
+## Zilele de Top în Aprilie 2026
+
+### 🥇 17-19 APRILIE (Vineri-Duminică Luna Nouă)
+
+**De ce:** Luna nouă pe 18 aprilie CAD ÎN WEEKEND. Cel mai bun interval posibil.
+
+**Ce merge:**
+- Crap — flămând, activ toată ziua
+- Caras — mușcă nebunește
+- Plătică, lin — tot ce mișcă
+
+**Sfat:** Weekend-ul 17-19 aprilie e de marcat cu roșu. Luna nouă + weekend + temperaturi de primăvară = perfecțiune.
+
+### 🥈 1-3 APRILIE (Miercuri-Vineri Luna Plină)
+
+**De ce:** Luna plină pe 2 aprilie. Efect gravitațional puternic la începutul lunii.
+
+**Ce merge:**
+- Crap — activ noaptea (luna luminează)
+- Somn — începe sezonul somnului
+- Biban — stoluri mari
+
+**Sfat:** Dacă poți lua vineri liber (3 aprilie), ai 3 zile consecutive de pescuit în luna plină.
+
+### 🥉 25-26 APRILIE (Weekend)
+
+**De ce:** Weekend clasic, temperaturi ridicate, luna în creștere.
+
+**Ce merge:**
+- Crap — sesiuni de 24-48h foarte productive
+- Caras și plătică — pe orice apă
+- Lin — devine foarte activ
+
+## Orele Optime în Aprilie
+
+**Dimineața:** 5:30 - 9:00 ⭐⭐⭐⭐⭐
+- Răsăritul devreme — zorii sunt magici
+- Cea mai productivă perioadă
+- Apa e calmă, peștii vin la margine
+
+**Prânz:** 10:00 - 14:00 ⭐⭐⭐
+- Activitate mai mică la soare puternic
+- Funcționează pe zile înnoarte
+
+**Seara:** 16:00 - 20:00 ⭐⭐⭐⭐⭐
+- A doua perioadă de aur
+- Crapi la margine
+- Amurgul e spectaculos
+
+**Noaptea:** 21:00 - 02:00 ⭐⭐⭐⭐
+- Somn, știucă, șalău
+- Crap nocturn excelent
+- Mai ales lângă luna plină
+
+## Specii de Vizat în Aprilie
+
+**Crap** ⭐⭐⭐⭐⭐
+- LUNA crapului tradițional
+- Boilies, porumb, method feeder
+- Mușcă agresiv pre-depunere
+
+**Caras** ⭐⭐⭐⭐⭐
+- Vârf de activitate
+- Viermișor, porumb, pâine
+- Perfect pentru toată familia
+
+**Lin** ⭐⭐⭐⭐
+- Se trezește complet
+- Zori, lângă vegetație
+- Momeli mici și fine
+
+**Plătică** ⭐⭐⭐⭐
+- Foarte activă pe canale și lacuri
+- Feedere cu viermi
+- Cantitate mare posibilă
+
+**Somn** ⭐⭐⭐
+- Începe sezonul
+- Noapte, zone adânci
+- Momeli mari, vii
+
+**Biban** ⭐⭐⭐⭐
+- Încă foarte activ
+- Spinning dimineața
+- Twistere și spinnere
+
+## Atenție: Prohibiții în Aprilie
+
+**Verifică înainte să pleci:**
+
+- Știuca rămâne în prohibiție (de obicei până în mai)
+- Crapul poate fi în prohibiție parțială pe unele ape
+- Verifică regulamentele ANPA și ale administratorului lacului
+
+Pescuiește responsabil. Sezonul e lung, nu risca pentru o sesiune.
+
+## Calendar Solunar Aprilie 2026 - Verificare
+
+Pentru perioade majore și minore exacte, verifică zilnic pe [Calendar Solunar](/).
+
+Calendarul îți arată:
+- Orele exacte ale perioadelor
+- Rating-ul zilei (1-5 stele)
+- Fazele lunii
+- Răsărit/apus lună și soare
+
+## Sfatul Lunii Aprilie
+
+**Weekend-ul 17-19 aprilie e cel mai bun din lună.**
+
+Luna nouă care cade exact pe sâmbătă e un cadou rar. Temperatura apei trece de 14°C, peștii sunt în frenesia pre-depunere, iar tu ai 3 zile la dispoziție.
+
+Planifică din timp, rezervă locul pe lac, și verifică [calendarul solunar](/) pentru orele exacte.
+        `
     }
 ];
 
