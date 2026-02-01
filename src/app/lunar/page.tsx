@@ -5,8 +5,14 @@ import MoonIcon from '@/components/MoonIcon';
 import AdUnit from '@/components/AdUnit';
 
 export const metadata: Metadata = {
-    title: 'Calendar Lunar 2026 - Fazele Lunii | Calendar Solunar',
-    description: 'Calendar lunar complet pentru 2026. Vezi fazele lunii, procentul de iluminare și impactul asupra pescuitului pentru fiecare zi.',
+    title: 'Calendar Lunar 2026 - Fazele Lunii și Pescuit',
+    description: 'Calendar lunar complet 2026: fazele lunii zi de zi, procent iluminare, lună plină și nouă. Cum influențează luna pescuitul și rating solunar zilnic.',
+    alternates: { canonical: 'https://calendarsolunar.ro/lunar' },
+    openGraph: {
+        title: 'Calendar Lunar 2026 - Fazele Lunii și Pescuit',
+        description: 'Calendar lunar complet 2026: fazele lunii zi de zi, procent iluminare, lună plină și nouă.',
+        url: 'https://calendarsolunar.ro/lunar',
+    },
 };
 
 function getMoonage(date: Date): number {

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getArticleBySlug, getAllArticles } from '@/data/blogArticles';
+import { getArticleBySlug, getAllArticles, BlogArticle } from '@/data/blogArticles';
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -23,21 +23,55 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
 
     return {
-        title: `${article.title} | Calendar Solunar`,
+        title: article.title,
         description: article.excerpt,
         keywords: article.keywords.join(', '),
+        alternates: {
+            canonical: `https://calendarsolunar.ro/blog/${slug}`,
+        },
         openGraph: {
             title: article.title,
             description: article.excerpt,
             type: 'article',
             publishedTime: article.date,
             authors: [article.author],
+            url: `https://calendarsolunar.ro/blog/${slug}`,
         },
     };
 }
 
+// Build internal link map from article keywords/titles
+function injectInternalLinks(content: string, currentSlug: string, articles: BlogArticle[]): string {
+    const linkMap: { pattern: RegExp; url: string; label: string }[] = [];
+    const linked = new Set<string>();
+
+    for (const a of articles) {
+        if (a.slug === currentSlug) continue;
+        // Use the first keyword as anchor text trigger
+        for (const kw of a.keywords.slice(0, 2)) {
+            if (kw.length < 6) continue; // skip very short keywords
+            if (linked.has(a.slug)) break;
+            // Only match if not already inside a markdown link
+            const escaped = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const re = new RegExp(`(?<!\\[.*?)\\b(${escaped})\\b(?![^\\[]*\\])`, 'i');
+            if (re.test(content)) {
+                content = content.replace(re, `[$1](/blog/${a.slug})`);
+                linked.add(a.slug);
+                break;
+            }
+        }
+        if (linked.size >= 5) break; // max 5 auto-links per article
+    }
+    return content;
+}
+
 // Simple markdown-like parser for the content
-function parseContent(content: string) {
+function parseContent(content: string, currentSlug?: string, articles?: BlogArticle[]) {
+    // Inject internal links if articles provided
+    if (currentSlug && articles) {
+        content = injectInternalLinks(content, currentSlug, articles);
+    }
+
     const lines = content.trim().split('\n');
     const elements: JSX.Element[] = [];
     let inTable = false;
@@ -188,12 +222,98 @@ export default async function ArticlePage({ params }: Props) {
     }
 
     const allArticles = getAllArticles();
-    const relatedArticles = allArticles
-        .filter(a => a.slug !== article.slug)
-        .slice(0, 3);
+    // Related articles: same category first, then others
+    const sameCategory = allArticles.filter(a => a.slug !== article.slug && a.category === article.category);
+    const otherArticles = allArticles.filter(a => a.slug !== article.slug && a.category !== article.category);
+    const relatedArticles = [...sameCategory, ...otherArticles].slice(0, 6);
+    const categoryArticles = sameCategory.slice(0, 5);
+
+    const articleSchema = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": article.title,
+        "description": article.excerpt,
+        "datePublished": article.date,
+        "dateModified": article.date,
+        "author": {
+            "@type": "Organization",
+            "name": article.author,
+            "url": "https://calendarsolunar.ro"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Calendar Solunar",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://calendarsolunar.ro/logo.webp"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": `https://calendarsolunar.ro/blog/${article.slug}`
+        },
+        "keywords": article.keywords.join(', '),
+        "articleSection": article.category,
+        "inLanguage": "ro",
+        "wordCount": article.content.split(/\s+/).length,
+    };
+
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://calendarsolunar.ro" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://calendarsolunar.ro/blog" },
+            { "@type": "ListItem", "position": 3, "name": article.title, "item": `https://calendarsolunar.ro/blog/${article.slug}` }
+        ]
+    };
+
+    // Generate FAQPage schema if article has Q&A structure
+    const faqItems: { question: string; answer: string }[] = [];
+    const contentLines = article.content.trim().split('\n');
+    let currentQuestion = '';
+    let currentAnswer = '';
+    for (const line of contentLines) {
+        const trimmed = line.trim();
+        // Match numbered heading patterns like "## 1. Question?" or "## Question?"
+        const qMatch = trimmed.match(/^##\s+(?:\d+\.\s+)?(.+\?)$/);
+        if (qMatch) {
+            if (currentQuestion && currentAnswer.trim()) {
+                faqItems.push({ question: currentQuestion, answer: currentAnswer.trim().replace(/\n+/g, ' ').replace(/[#*`\[\]()]/g, '').slice(0, 500) });
+            }
+            currentQuestion = qMatch[1];
+            currentAnswer = '';
+        } else if (currentQuestion && trimmed && !trimmed.startsWith('##')) {
+            currentAnswer += trimmed.replace(/\*\*/g, '').replace(/\[(.+?)\]\(.+?\)/g, '$1') + ' ';
+        }
+    }
+    if (currentQuestion && currentAnswer.trim()) {
+        faqItems.push({ question: currentQuestion, answer: currentAnswer.trim().replace(/\n+/g, ' ').replace(/[#*`\[\]()]/g, '').slice(0, 500) });
+    }
+
+    const faqSchema = faqItems.length >= 3 ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqItems.map(item => ({
+            "@type": "Question",
+            "name": item.question,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": item.answer
+            }
+        }))
+    } : null;
+
+    // JSON-LD uses static data from our own database, safe for dangerouslySetInnerHTML
+    const articleSchemaJson = JSON.stringify(articleSchema);
+    const breadcrumbSchemaJson = JSON.stringify(breadcrumbSchema);
+    const faqSchemaJson = faqSchema ? JSON.stringify(faqSchema) : null;
 
     return (
         <div className="min-h-screen py-12 md:py-20">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: articleSchemaJson }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchemaJson }} />
+            {faqSchemaJson && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqSchemaJson }} />}
             <div className="container-custom px-4">
                 <div className="max-w-3xl mx-auto">
                     {/* Breadcrumb */}
@@ -240,7 +360,7 @@ export default async function ArticlePage({ params }: Props) {
 
                     {/* Article Content */}
                     <article className="prose prose-invert max-w-none">
-                        {parseContent(article.content)}
+                        {parseContent(article.content, article.slug, allArticles)}
                     </article>
 
                     {/* Keywords */}
@@ -280,9 +400,9 @@ export default async function ArticlePage({ params }: Props) {
                     {relatedArticles.length > 0 && (
                         <div className="mt-16">
                             <h2 className="text-xl font-display font-bold text-white mb-6">
-                                Citește și
+                                Articole Recomandate
                             </h2>
-                            <div className="grid md:grid-cols-3 gap-4">
+                            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
                                 {relatedArticles.map((related) => (
                                     <Link
                                         key={related.slug}
@@ -290,7 +410,7 @@ export default async function ArticlePage({ params }: Props) {
                                         className="card-glass p-4 group hover:bg-white/10 transition-colors"
                                     >
                                         <span className="text-xs text-night-400 mb-2 block">
-                                            {related.category}
+                                            {related.category} · {related.readTime} min
                                         </span>
                                         <h3 className="text-sm font-bold text-white group-hover:text-moon transition-colors line-clamp-2">
                                             {related.title}
@@ -298,6 +418,36 @@ export default async function ArticlePage({ params }: Props) {
                                     </Link>
                                 ))}
                             </div>
+                        </div>
+                    )}
+
+                    {/* More from Category */}
+                    {categoryArticles.length > 0 && (
+                        <div className="mt-12 p-6 card-panel">
+                            <h2 className="text-lg font-display font-bold text-white mb-4">
+                                Mai multe din {article.category}
+                            </h2>
+                            <ul className="space-y-3">
+                                {categoryArticles.map((cat) => (
+                                    <li key={cat.slug}>
+                                        <Link
+                                            href={`/blog/${cat.slug}`}
+                                            className="flex items-center gap-3 text-night-300 hover:text-moon transition-colors group"
+                                        >
+                                            <svg className="w-4 h-4 text-moon/50 group-hover:text-moon shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                            </svg>
+                                            <span className="text-sm">{cat.title}</span>
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                            <Link
+                                href="/blog"
+                                className="inline-block mt-4 text-sm text-moon hover:underline"
+                            >
+                                Toate articolele →
+                            </Link>
                         </div>
                     )}
                 </div>

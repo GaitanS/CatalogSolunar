@@ -3,6 +3,12 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
     title: 'Contact | Calendar Solunar Pescuit',
     description: 'Contactează echipa Calendar Solunar pentru întrebări, sugestii sau parteneriate. Suntem aici să te ajutăm!',
+    alternates: { canonical: 'https://calendarsolunar.ro/contact' },
+    openGraph: {
+        title: 'Contactează Calendar Solunar',
+        description: 'Ai întrebări sau sugestii? Contactează echipa Calendar Solunar.',
+        url: 'https://calendarsolunar.ro/contact',
+    },
 };
 
 export default function ContactPage() {

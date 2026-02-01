@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
     title: 'Politica de Confidențialitate | Calendar Solunar',
     description: 'Politica de confidențialitate și protecția datelor personale pentru Calendar Solunar.',
+    alternates: { canonical: 'https://calendarsolunar.ro/confidentialitate' },
 };
 
 export default function ConfidentialitatePage() {

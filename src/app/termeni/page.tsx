@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
     title: 'Termeni și Condiții | Calendar Solunar',
     description: 'Termenii și condițiile de utilizare pentru Calendar Solunar - calendar de pescuit bazat pe teoria solunar.',
+    alternates: { canonical: 'https://calendarsolunar.ro/termeni' },
 };
 
 export default function TermeniPage() {

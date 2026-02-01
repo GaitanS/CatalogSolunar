@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
     title: 'Politica Cookies | Calendar Solunar',
     description: 'Informații despre utilizarea cookie-urilor pe Calendar Solunar.',
+    alternates: { canonical: 'https://calendarsolunar.ro/cookies' },
 };
 
 export default function CookiesPage() {

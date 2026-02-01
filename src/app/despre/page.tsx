@@ -1,8 +1,14 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Despre Noi | Calendar Solunar Pescuit',
+    title: 'Despre Noi - Calendar Solunar Pescuit România',
     description: 'Află povestea din spatele Calendar Solunar - resursa ta pentru pescuit planificat inteligent, bazat pe fazele lunii și teoria solunar.',
+    alternates: { canonical: 'https://calendarsolunar.ro/despre' },
+    openGraph: {
+        title: 'Despre Calendar Solunar - Pescuit Planificat Inteligent',
+        description: 'Resursa ta pentru pescuit planificat inteligent, bazat pe fazele lunii și teoria solunar.',
+        url: 'https://calendarsolunar.ro/despre',
+    },
 };
 
 export default function DesprePage() {

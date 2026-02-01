@@ -3,12 +3,25 @@ import Link from 'next/link';
 import { getAllArticles } from '@/data/blogArticles';
 
 export const metadata: Metadata = {
-    title: 'Ghiduri Pescuit și Articole | Calendar Solunar',
-    description: 'Ghiduri practice pentru pescuit, teoria solunar explicată simplu, și sfaturi de la pescari cu experiență.',
+    title: 'Ghiduri Pescuit 2026 - Sfaturi, Tehnici și Calendar Solunar',
+    description: 'Cele mai bune ghiduri de pescuit din România. Tehnici pentru crap, șalău, somn, știucă. Calendar solunar, ore optime, echipament și sfaturi practice.',
+    alternates: {
+        canonical: 'https://calendarsolunar.ro/blog',
+    },
+    openGraph: {
+        title: 'Ghiduri Pescuit 2026 - Sfaturi, Tehnici și Calendar Solunar',
+        description: 'Cele mai bune ghiduri de pescuit din România. Tehnici pentru crap, șalău, somn, știucă.',
+        url: 'https://calendarsolunar.ro/blog',
+    },
 };
 
 export default function BlogPage() {
     const articles = getAllArticles();
+    const categories = [...new Set(articles.map(a => a.category))];
+    const articlesByCategory = categories.reduce((acc, cat) => {
+        acc[cat] = articles.filter(a => a.category === cat);
+        return acc;
+    }, {} as Record<string, typeof articles>);
 
     return (
         <div className="min-h-screen py-12 md:py-20">
@@ -16,12 +29,25 @@ export default function BlogPage() {
                 {/* Hero */}
                 <div className="text-center mb-12 md:mb-16">
                     <h1 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">
-                        Ghiduri & Articole
+                        Ghiduri & Articole de Pescuit
                     </h1>
                     <p className="text-night-300 text-lg max-w-2xl mx-auto">
                         Sfaturi practice de pescuit. Fără teorie inutilă - doar ce funcționează.
                     </p>
                 </div>
+
+                {/* Category Navigation */}
+                <nav className="flex flex-wrap justify-center gap-2 mb-12">
+                    {categories.map(cat => (
+                        <a
+                            key={cat}
+                            href={`#${cat.toLowerCase()}`}
+                            className="px-4 py-2 bg-night-800 hover:bg-moon/10 text-night-300 hover:text-moon rounded-full text-sm font-medium transition-colors"
+                        >
+                            {cat} ({articlesByCategory[cat].length})
+                        </a>
+                    ))}
+                </nav>
 
                 {/* Featured Article */}
                 {articles[0] && (
@@ -83,6 +109,29 @@ export default function BlogPage() {
                         </Link>
                     ))}
                 </div>
+
+                {/* Articles by Category */}
+                {categories.map(cat => (
+                    <section key={cat} id={cat.toLowerCase()} className="mt-16 scroll-mt-24">
+                        <h2 className="text-2xl font-display font-bold text-white mb-6">
+                            {cat}
+                        </h2>
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {articlesByCategory[cat].map(article => (
+                                <Link
+                                    key={article.slug}
+                                    href={`/blog/${article.slug}`}
+                                    className="card-glass p-4 group hover:bg-white/10 transition-colors"
+                                >
+                                    <h3 className="text-sm font-bold text-white group-hover:text-moon transition-colors line-clamp-2 mb-1">
+                                        {article.title}
+                                    </h3>
+                                    <p className="text-night-500 text-xs">{article.readTime} min citire</p>
+                                </Link>
+                            ))}
+                        </div>
+                    </section>
+                ))}
 
                 {/* CTA */}
                 <div className="text-center mt-16">
