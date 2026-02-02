@@ -108,6 +108,7 @@ export default function RootLayout({
                             </a>
                             <nav className="hidden md:flex items-center gap-8 font-medium text-sm">
                                 <a href="/" className="text-white hover:text-moon transition-colors">Acasă</a>
+                                <a href="/azi" className="text-night-300 hover:text-moon transition-colors">Solunar Azi</a>
                                 <a href="/lunar" className="text-night-300 hover:text-moon transition-colors">Faze Lunare</a>
                                 <a href="/blog" className="text-night-300 hover:text-moon transition-colors">Ghiduri</a>
                                 <a href="/despre" className="text-night-300 hover:text-moon transition-colors">Despre</a>
@@ -153,6 +154,12 @@ export default function RootLayout({
                                     <li><a href="/iasi" className="hover:text-moon transition-colors">Iași</a></li>
                                     <li><a href="/constanta" className="hover:text-moon transition-colors">Constanța</a></li>
                                     <li><a href="/brasov" className="hover:text-moon transition-colors">Brașov</a></li>
+                                    <li><a href="/galati" className="hover:text-moon transition-colors">Galați</a></li>
+                                    <li><a href="/craiova" className="hover:text-moon transition-colors">Craiova</a></li>
+                                    <li><a href="/oradea" className="hover:text-moon transition-colors">Oradea</a></li>
+                                    <li><a href="/sibiu" className="hover:text-moon transition-colors">Sibiu</a></li>
+                                    <li><a href="/targu-mures" className="hover:text-moon transition-colors">Târgu Mureș</a></li>
+                                    <li><a href="/bacau" className="hover:text-moon transition-colors">Bacău</a></li>
                                 </ul>
                             </div>
 
