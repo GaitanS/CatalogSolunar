@@ -7975,6 +7975,553 @@ Luna nouă care cade exact pe sâmbătă e un cadou rar. Temperatura apei trece 
 
 Planifică din timp, rezervă locul pe lac, și verifică [calendarul solunar](/) pentru orele exacte.
         `
+    },
+    {
+        slug: 'solunar-iulie-2026-ghid',
+        title: 'Calendar Solunar Iulie 2026 - Ghid Complet Pescuit',
+        excerpt: 'Iulie 2026: caniculă și pești capricioși. Cum să prinzi și la 35°C dacă știi orele corecte.',
+        date: '2026-02-01',
+        author: 'Echipa Calendar Solunar',
+        category: 'Calendar',
+        readTime: 6,
+        keywords: ['solunar iulie 2026', 'calendar pescuit iulie', 'pescuit iulie', 'luna plina iulie 2026', 'zile bune pescuit iulie', 'pescuit vara 2026'],
+        content: `
+Iulie e luna cea mai fierbinte și cea mai frustrată pentru pescari. Apa caldă, pești leneși la orele de zi, soare necruțător. Dar noaptea? Noaptea e magie.
+
+## De Ce Iulie E Diferit
+
+**1. Apa trece de 25°C** — Majoritatea speciilor devin inactive ziua.
+
+**2. Nopțile scurte dar intense** — 5 ore de întuneric = 5 ore de acțiune concentrată.
+
+**3. Somn la vârf** — Luna somnului. Prădătorul nocturn e în sezonul lui de glorie.
+
+**4. Crap nocturn** — Sesiunile de noapte sunt obligatorii.
+
+## Fazele Lunii în Iulie 2026
+
+| Fază | Data | Rating Pescuit |
+|------|------|---------------|
+| Luna Plină | 1 Iulie (Miercuri) | ⭐⭐⭐⭐⭐ |
+| Ultimul Pătrar | 8 Iulie | ⭐⭐⭐ |
+| Luna Nouă | 15 Iulie (Miercuri) | ⭐⭐⭐⭐⭐ |
+| Primul Pătrar | 22 Iulie | ⭐⭐⭐ |
+| Luna Plină | 30 Iulie (Joi) | ⭐⭐⭐⭐⭐ |
+
+**Bonus:** Iulie 2026 are DOUĂ luni pline (1 și 30 iulie). Rar și valoros.
+
+## Zilele de Top în Iulie 2026
+
+### 🥇 29-30 IULIE (Miercuri-Joi Luna Plină)
+
+**De ce:** A doua lună plină a lunii. Forță gravitațională mare + nopți calde = condiții de vis.
+
+**Ce merge:**
+- Somn — momeală vie pe fund, sesiune nocturnă
+- Crap — boilies fructate noaptea
+- Știucă nocturnă — luna luminează apa
+
+**Sfat:** Sesiune de noapte obligatorie. Pleacă la 20:00, pescuiește până la 06:00.
+
+### 🥈 14-16 IULIE (Marți-Joi Luna Nouă)
+
+**De ce:** Luna nouă = nopți complet întunecate. Somnul și crapul sunt hipercactivi.
+
+**Ce merge:**
+- Somn — cea mai bună fereastră din lună
+- Crap — mișcare continuă noaptea
+- Șalău nocturn
+
+**Sfat:** Întunericul total e avantajul tău. Folosește avertizoare electronice.
+
+### 🥉 4-5 IULIE (Weekend)
+
+**De ce:** Weekend imediat după luna plină, inerție de activitate.
+
+**Ce merge:**
+- Crap de noapte
+- Caras în zori (5:00-7:00)
+- Biban dimineața devreme
+
+## Orele Optime în Iulie
+
+**Dimineața:** 4:30 - 7:30 ⭐⭐⭐⭐⭐
+- CEA MAI importantă fereastră
+- Răsăritul devreme = activitate maximă
+- După 8:00 căldura oprește totul
+
+**Prânz:** 10:00 - 16:00 ⭐
+- Evită complet
+- Pești inactivi, soare periculos
+- Stai la umbră, odihnește-te
+
+**Seara:** 19:00 - 22:00 ⭐⭐⭐⭐⭐
+- A doua fereastră de aur
+- Apusul tardiv, răcorire lentă
+- Crapul vine la margine
+
+**Noaptea:** 22:00 - 04:00 ⭐⭐⭐⭐⭐
+- LUNA somnului
+- Crap nocturn excepțional
+- Cea mai productivă perioadă în iulie
+
+## Specii de Vizat în Iulie
+
+**Somn** ⭐⭐⭐⭐⭐
+- LUNA somnului
+- Noapte, momeală vie (peștișor, rac)
+- Zone adânci lângă mal
+
+**Crap** ⭐⭐⭐⭐ (doar noaptea)
+- Sesiuni nocturne obligatorii
+- Boilies fructate (căpșuni, ananas)
+- Evită ziua complet
+
+**Caras** ⭐⭐⭐ (doar zori)
+- Primele 2 ore de dimineață
+- Viermișor, porumb
+- După 8:00 dispare
+
+**Șalău** ⭐⭐⭐⭐ (nocturn)
+- Twistere fluorescente
+- Zone de curent
+- Noapte exclusiv
+
+## Sfaturi pentru Caniculă
+
+**Hidratare:**
+- Minimum 3 litri apă
+- Evită alcoolul pe apă
+- Pălărie obligatorie
+
+**Protecție:**
+- Cremă solară SPF 50
+- Îmbrăcăminte cu UV protection
+- Cort/umbrelă obligatorie
+
+**Peștii:**
+- Dacă prinzi, eliberează rapid (catch & release)
+- Apa caldă = oxigen puțin = pești stresați
+- Minimizează timpul de manipulare
+
+## Calendar Solunar Iulie 2026 - Verificare
+
+Pentru perioade majore și minore exacte, verifică zilnic pe [Calendar Solunar](/).
+
+## Sfatul Lunii Iulie
+
+**Iulie 2026 e luna nopții.**
+
+Nu încerca să pescuiești ziua la caniculă. Transformă-te în pescar nocturn. Sesiunile 20:00-06:00 sunt cele mai productive din tot anul.
+
+Două luni pline în iulie (1 și 30) = două weekenduri de aur. Nu le rata.
+
+[Verifică calendarul solunar pentru iulie 2026 →](/)
+        `
+    },
+    {
+        slug: 'solunar-august-2026-ghid',
+        title: 'Calendar Solunar August 2026 - Ghid Complet Pescuit',
+        excerpt: 'August 2026: ultimele nopți calde, primele semne de toamnă. Cum să profiți de tranziție.',
+        date: '2026-02-01',
+        author: 'Echipa Calendar Solunar',
+        category: 'Calendar',
+        readTime: 6,
+        keywords: ['solunar august 2026', 'calendar pescuit august', 'pescuit august', 'luna plina august 2026', 'zile bune pescuit august', 'pescuit vara august'],
+        content: `
+August e luna tranziției inverse. Căldura încă domină dar nopțile se lungesc, apa începe să se răcorească spre final, iar peștii simt toamna.
+
+## De Ce August Oferă Oportunități
+
+**1. Nopțile se lungesc** — Mai multe ore de pescuit nocturn productiv.
+
+**2. Sfârșitul lunii = răcorire** — Apa coboară sub 24°C, peștii se reactivează.
+
+**3. Concedii** — Timp liber pentru sesiuni lungi de 48h.
+
+**4. Pre-toamnă** — Peștii încep să se hrănească pentru iarnă.
+
+## Fazele Lunii în August 2026
+
+| Fază | Data | Rating Pescuit |
+|------|------|---------------|
+| Ultimul Pătrar | 6 August | ⭐⭐⭐ |
+| Luna Nouă | 13 August (Joi) | ⭐⭐⭐⭐⭐ |
+| Primul Pătrar | 20 August | ⭐⭐⭐ |
+| Luna Plină | 28 August (Vineri) | ⭐⭐⭐⭐⭐ |
+
+## Zilele de Top în August 2026
+
+### 🥇 28-30 AUGUST (Vineri-Duminică Luna Plină)
+
+**De ce:** Luna plină pe vineri = weekend complet de pescuit. Plus temperaturi care încep să scadă.
+
+**Ce merge:**
+- Crap — redevine activ și ziua
+- Somn — ultimele nopți mari
+- Știucă — se trezește spre final de august
+
+**Sfat:** CEL MAI BUN weekend din august. Luna plină + răcorire + weekend = combinație perfectă.
+
+### 🥈 12-14 AUGUST (Miercuri-Vineri Luna Nouă)
+
+**De ce:** Luna nouă pe 13 august. Nopți întunecate, prădători activi.
+
+**Ce merge:**
+- Somn — agresiv în nopți fără lună
+- Crap nocturn — boilies pe distanță
+- Șalău — twistere pe canale
+
+**Sfat:** Combină cu o zi de concediu pentru sesiune prelungită.
+
+### 🥉 22-23 AUGUST (Weekend)
+
+**De ce:** Weekend, temperatura scade ușor, activitate în creștere.
+
+**Ce merge:**
+- Crap — sesiuni de 24h
+- Caras — revine la activitate
+- Plătică pe canale
+
+## Orele Optime în August
+
+**Dimineața:** 5:00 - 8:00 ⭐⭐⭐⭐⭐
+- Cea mai productivă fereastră
+- Răcoarea dimineții activează peștii
+- Ora de aur: 5:30-7:00
+
+**Prânz:** 10:00 - 16:00 ⭐⭐ (prima jumătate), ⭐⭐⭐ (a doua)
+- Prima jumătate a lunii: evită
+- A doua jumătate: merge pe zile răcoroase
+
+**Seara:** 18:00 - 21:00 ⭐⭐⭐⭐⭐
+- Excelent tot august
+- Crapi la margine
+- Apusul mai devreme = activitate mai devreme
+
+**Noaptea:** 21:00 - 04:00 ⭐⭐⭐⭐
+- Somn, crap, șalău
+- Mai ales în jurul lunii pline/noi
+
+## Specii de Vizat în August
+
+**Crap** ⭐⭐⭐⭐
+- Redevine consistent spre final de lună
+- Noapte + zori
+- Boilies, porumb, method feeder
+
+**Somn** ⭐⭐⭐⭐⭐
+- Încă în sezon
+- Ultimele sesiuni mari înainte de răcire
+- Noapte, momeală vie
+
+**Caras** ⭐⭐⭐
+- Revine în a doua jumătate
+- Zori și seara
+- Viermișor, porumb
+
+**Știucă** ⭐⭐⭐
+- Se trezește spre final
+- Spinning dimineața devreme
+- Momeli medii, mișcare lentă
+
+**Biban** ⭐⭐⭐⭐
+- Activ tot luna
+- Spinning clasic
+- Dimineață și seara
+
+## Sfaturi August
+
+**Prima jumătate (1-15):**
+- Tratează ca pe iulie — pescuit nocturn, evită căldura
+- Somn și crap de noapte
+
+**A doua jumătate (16-31):**
+- Tranziția începe — poți pescui și dimineața târziu
+- Diversifică speciile
+- Pregătește echipamentul de toamnă
+
+## Calendar Solunar August 2026 - Verificare
+
+Pentru perioade majore și minore exacte, verifică zilnic pe [Calendar Solunar](/).
+
+## Sfatul Lunii August
+
+**Weekend-ul 28-30 august e momentul.**
+
+Luna plină pe vineri, temperaturi în scădere, pești care simt toamna. E cea mai bună combinație din august.
+
+Planifică o sesiune de 48h și pregătește echipament pentru crap + somn.
+
+[Verifică calendarul solunar pentru august 2026 →](/)
+        `
+    },
+    {
+        slug: 'solunar-noiembrie-2026-ghid',
+        title: 'Calendar Solunar Noiembrie 2026 - Ghid Complet Pescuit',
+        excerpt: 'Noiembrie 2026: ultimele șanse înainte de iarnă. Peștii se hrănesc agresiv — profită.',
+        date: '2026-02-01',
+        author: 'Echipa Calendar Solunar',
+        category: 'Calendar',
+        readTime: 6,
+        keywords: ['solunar noiembrie 2026', 'calendar pescuit noiembrie', 'pescuit noiembrie', 'luna plina noiembrie 2026', 'zile bune pescuit noiembrie', 'pescuit toamna tarziu'],
+        content: `
+Noiembrie e ultima mare fereastră de pescuit înainte de iarnă. Peștii știu asta și se hrănesc agresiv. Cine merge acum, prinde bine.
+
+## De Ce Noiembrie E Subestimat
+
+**1. Pești în modul de stocare** — Se hrănesc intens pentru iarnă. Mușcă tot.
+
+**2. Lacuri goale** — Majoritatea pescarilor au renunțat. Tu ai apa pentru tine.
+
+**3. Crapi mari** — Crapii de toamnă târzie sunt cei mai mari din an.
+
+**4. Știuca revine** — Post-prohibiție, agresivă, foame de iarnă.
+
+## Fazele Lunii în Noiembrie 2026
+
+| Fază | Data | Rating Pescuit |
+|------|------|---------------|
+| Ultimul Pătrar | 2 Noiembrie | ⭐⭐⭐ |
+| Luna Nouă | 9 Noiembrie (Luni) | ⭐⭐⭐⭐⭐ |
+| Primul Pătrar | 17 Noiembrie | ⭐⭐⭐ |
+| Luna Plină | 25 Noiembrie (Miercuri) | ⭐⭐⭐⭐⭐ |
+
+## Zilele de Top în Noiembrie 2026
+
+### 🥇 8-10 NOIEMBRIE (Duminică-Marți Luna Nouă)
+
+**De ce:** Luna nouă pe 9 noiembrie. Apa se răcește la 8-10°C — zona perfectă pentru crap mare.
+
+**Ce merge:**
+- Crap — boilies picante, sesiuni lungi
+- Știucă — spinning agresiv
+- Biban — stoluri mari pe canal
+
+**Sfat:** Duminică-luni (8-9) e combinația ideală. Luna nouă + temperaturi stabile.
+
+### 🥈 24-26 NOIEMBRIE (Marți-Joi Luna Plină)
+
+**De ce:** Luna plină pe 25 — ultima lună plină bună pentru pescuit în 2026.
+
+**Ce merge:**
+- Crap — ultimele sesiuni mari din an
+- Știucă — luna luminează, prădătorul vânează
+- Biban — jigging vertical
+
+**Sfat:** Dacă poți lua o zi liberă, 25 noiembrie e ziua. Ultimul mare pescuit al anului.
+
+### 🥉 14-15 NOIEMBRIE (Weekend)
+
+**De ce:** Weekend accesibil, lună în creștere, condiții stabile de obicei.
+
+**Ce merge:**
+- Crap de fund
+- Știucă pe canale
+- Clean de iarnă
+
+## Orele Optime în Noiembrie
+
+**Dimineața:** 8:00 - 11:00 ⭐⭐⭐⭐
+- Soarele încălzește lent apa
+- Activitate după ce se luminează bine
+
+**Prânz:** 11:00 - 14:00 ⭐⭐⭐⭐⭐
+- CEA MAI BUNĂ perioadă
+- Maxim de temperatură zilnică
+- Perioadele majore de prânz = aur
+
+**Seara:** 14:00 - 16:30 ⭐⭐⭐
+- Se răcește rapid
+- Ultimele șanse înainte de întuneric
+- Apus devreme
+
+**Noaptea:** ⭐⭐
+- Doar pentru dedicați
+- Știucă și somn ocazional
+- Echipament de frig obligatoriu
+
+## Specii de Vizat în Noiembrie
+
+**Crap** ⭐⭐⭐⭐⭐
+- ULTIMELE sesiuni mari
+- Boilies picante (scorțișoară, piper)
+- Mânâncă agresiv pentru iarnă
+
+**Știucă** ⭐⭐⭐⭐⭐
+- Post-prohibiție, foame
+- Spinning cu shad-uri mari
+- Jerkbait în mișcări lente
+
+**Biban** ⭐⭐⭐⭐
+- Foarte activ în stoluri
+- Twistere, spinnere
+- Canale și lacuri
+
+**Clean** ⭐⭐⭐
+- Pe albie
+- Momeli mici
+- Fire subțiri
+
+## Echipament Esențial Noiembrie
+
+- Îmbrăcăminte termică (mai multe straturi)
+- Cort/shelter pentru sesiuni lungi
+- Termos cu ceai/cafea
+- Mănuși fără degete
+- Nadă în cantitate redusă (metabolism lent)
+- Boilies mici (10-14mm)
+
+## Calendar Solunar Noiembrie 2026 - Verificare
+
+Pentru perioade majore și minore exacte, verifică zilnic pe [Calendar Solunar](/).
+
+## Sfatul Lunii Noiembrie
+
+**Nu rata luna nouă de pe 9 noiembrie.**
+
+E ultima fereastră mare de pescuit din 2026 unde poți prinde crap mare consistent. Temperaturile sunt perfecte, peștii mănâncă tot, și ai lacul doar pentru tine.
+
+[Verifică calendarul solunar pentru noiembrie 2026 →](/)
+        `
+    },
+    {
+        slug: 'solunar-decembrie-2026-ghid',
+        title: 'Calendar Solunar Decembrie 2026 - Ghid Complet Pescuit',
+        excerpt: 'Decembrie 2026: pescuitul de iarnă nu e pentru toți. Dar pentru cei care merg, recompensele sunt mari.',
+        date: '2026-02-01',
+        author: 'Echipa Calendar Solunar',
+        category: 'Calendar',
+        readTime: 6,
+        keywords: ['solunar decembrie 2026', 'calendar pescuit decembrie', 'pescuit decembrie', 'luna plina decembrie 2026', 'zile bune pescuit decembrie', 'pescuit iarna decembrie'],
+        content: `
+Decembrie e luna extremelor. Frig, zile scurte, lacuri pustii. Dar peștii sunt acolo. Și cei care îndrăznesc, prind trofee pe care vara nu le-ai visa.
+
+## De Ce Decembrie Merită
+
+**1. Trofeele hibernează lent** — Crapii mari se mișcă rar dar când mușcă, mușcă bine.
+
+**2. Zero competiție** — Ești singurul nebun pe lac. Și asta e avantajul tău.
+
+**3. Știuca e la maxim** — Apa rece e mediul ei natural. Agresivă și puternică.
+
+**4. Aer curat, liniște totală** — Pescuitul de iarnă e meditație.
+
+## Fazele Lunii în Decembrie 2026
+
+| Fază | Data | Rating Pescuit |
+|------|------|---------------|
+| Ultimul Pătrar | 2 Decembrie | ⭐⭐⭐ |
+| Luna Nouă | 9 Decembrie (Miercuri) | ⭐⭐⭐⭐⭐ |
+| Primul Pătrar | 17 Decembrie | ⭐⭐⭐ |
+| Luna Plină | 24 Decembrie (Joi) | ⭐⭐⭐⭐⭐ |
+| Ultimul Pătrar | 31 Decembrie | ⭐⭐⭐ |
+
+## Zilele de Top în Decembrie 2026
+
+### 🥇 8-10 DECEMBRIE (Marți-Joi Luna Nouă)
+
+**De ce:** Luna nouă pe 9 decembrie. Zile scurte dar perioadele majore de prânz sunt intense.
+
+**Ce merge:**
+- Știucă — regina iernii, spinning cu shad-uri
+- Biban — jigging vertical, twistere mici
+- Crap — ocazional, pe boilies picante
+
+**Sfat:** Concentrează totul în intervalul 10:00-14:00. Sunt cele 4 ore care contează.
+
+### 🥈 23-24 DECEMBRIE (Miercuri-Joi Luna Plină)
+
+**De ce:** Luna plină de Crăciun. Dacă vremea permite, e o sesiune memorabilă.
+
+**Ce merge:**
+- Știucă — luna luminează, vânează activ
+- Crap de iarnă — trofeu garantat dacă ai răbdare
+- Biban în stol
+
+**Sfat:** Sesiune scurtă de dimineață (8:00-13:00), apoi acasă la familie. Sau pescuit nocturn de Ajun pentru aventurieri.
+
+### 🥉 12-13 DECEMBRIE (Weekend)
+
+**De ce:** Weekend post-lună nouă, inerție de activitate.
+
+**Ce merge:**
+- Știucă pe canale
+- Biban — productiv
+- Clean pe albie
+
+## Orele Optime în Decembrie
+
+**Dimineața:** 9:00 - 11:00 ⭐⭐⭐⭐
+- Soarele trebuie să apară bine
+- Apa se încălzește minimal
+- Pregătire pentru fereastra de prânz
+
+**Prânz:** 11:00 - 14:00 ⭐⭐⭐⭐⭐
+- SINGURA fereastră cu adevărat productivă
+- Maxim de temperatură zilnică
+- Concentrează TOTUL aici
+
+**Seara:** 14:00 - 16:00 ⭐⭐⭐
+- Se închide rapid
+- Ultimele șanse
+- Apus devreme (16:30)
+
+**Noaptea:** ⭐ (doar dedicați)
+- Frig extrem
+- Doar dacă ai echipament profesionist
+
+## Specii de Vizat în Decembrie
+
+**Știucă** ⭐⭐⭐⭐⭐
+- REGINA absolută
+- Shad-uri 12-18 cm, mișcare lentă
+- Pauze lungi de 5-10 secunde
+
+**Biban** ⭐⭐⭐⭐
+- Activ tot anul
+- Twistere mici 3-5 cm
+- Jigging vertical pe canale
+
+**Crap** ⭐⭐⭐
+- Mișcări rare dar mușcături decisive
+- Boilies mici, aromă picantă
+- Un singur crap = trofeu de Crăciun
+
+**Clean** ⭐⭐⭐
+- Pe albie, zone cu curent lent
+- Momeli mici
+- Răbdare extremă
+
+## Echipament Decembrie
+
+**Obligatoriu:**
+- Îmbrăcăminte termică 3 straturi
+- Cizme de cauciuc căptușite
+- Mănuși impermeabile
+- Termos mare (ceai cald, supă)
+- Încălzitoare de mâini chimice
+
+**Pescuit:**
+- Fire mai subțiri (apa limpede)
+- Plumbi mai grei (curent lent dar constant)
+- Nadă minimă (lingurițe)
+- Momeli mici (10mm boilies, viermișor)
+
+## Calendar Solunar Decembrie 2026 - Verificare
+
+Pentru perioade majore și minore exacte, verifică zilnic pe [Calendar Solunar](/).
+
+## Sfatul Lunii Decembrie
+
+**Dacă mergi o singură dată în decembrie, alege 9 decembrie.**
+
+Luna nouă, zi de mijloc de săptămână (liniște pe lac), perioadele majore de prânz la maxim. 4 ore focusate (10:00-14:00) pot produce pescuitul anului.
+
+Și dacă prinzi un crap de iarnă — e cel mai frumos cadou de Crăciun pe care ți-l poți face.
+
+[Verifică calendarul solunar pentru decembrie 2026 →](/)
+        `
     }
 ];
 

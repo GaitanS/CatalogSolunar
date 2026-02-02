@@ -42,7 +42,24 @@ const IMPORTANT_URLS = [
   'https://calendarsolunar.ro/termeni',
   'https://calendarsolunar.ro/cookies',
 
-  // Articole noi (cele 12 adăugate recent)
+  // Pagini noi - Solunar Azi
+  'https://calendarsolunar.ro/azi',
+
+  // Pagini orașe
+  'https://calendarsolunar.ro/bucuresti',
+  'https://calendarsolunar.ro/cluj-napoca',
+  'https://calendarsolunar.ro/timisoara',
+  'https://calendarsolunar.ro/iasi',
+  'https://calendarsolunar.ro/constanta',
+  'https://calendarsolunar.ro/brasov',
+  'https://calendarsolunar.ro/galati',
+  'https://calendarsolunar.ro/craiova',
+  'https://calendarsolunar.ro/oradea',
+  'https://calendarsolunar.ro/sibiu',
+  'https://calendarsolunar.ro/targu-mures',
+  'https://calendarsolunar.ro/bacau',
+
+  // Articole blog
   'https://calendarsolunar.ro/blog/ghid-pescuit-pastrav',
   'https://calendarsolunar.ro/blog/pescuit-marea-neagra-ghid',
   'https://calendarsolunar.ro/blog/permise-pescuit-romania-2026',
@@ -56,6 +73,15 @@ const IMPORTANT_URLS = [
   'https://calendarsolunar.ro/blog/siguranta-la-pescuit-ghid',
   'https://calendarsolunar.ro/blog/fotografie-pescuit-ghid',
   'https://calendarsolunar.ro/blog/pescuit-constanta-litoral-ghid',
+
+  // Articole lunare noi
+  'https://calendarsolunar.ro/blog/solunar-februarie-2026-ghid',
+  'https://calendarsolunar.ro/blog/solunar-martie-2026-ghid',
+  'https://calendarsolunar.ro/blog/solunar-aprilie-2026-ghid',
+  'https://calendarsolunar.ro/blog/solunar-iulie-2026-ghid',
+  'https://calendarsolunar.ro/blog/solunar-august-2026-ghid',
+  'https://calendarsolunar.ro/blog/solunar-noiembrie-2026-ghid',
+  'https://calendarsolunar.ro/blog/solunar-decembrie-2026-ghid',
 ];
 
 // ============ SCRIPT ============

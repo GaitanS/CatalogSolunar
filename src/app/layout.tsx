@@ -140,9 +140,19 @@ export default function RootLayout({
                             <div>
                                 <h3 className="font-display font-bold text-white mb-4">Link-uri Utile</h3>
                                 <ul className="space-y-2 text-sm text-night-400">
+                                    <li><a href="/azi" className="hover:text-moon transition-colors">Solunar Azi</a></li>
                                     <li><a href="/lunar" className="hover:text-moon transition-colors">Calendar Lunar</a></li>
                                     <li><a href="/blog" className="hover:text-moon transition-colors">Articole și Ghiduri</a></li>
                                     <li><a href="/contact" className="hover:text-moon transition-colors">Contact</a></li>
+                                </ul>
+                                <h3 className="font-display font-bold text-white mb-3 mt-6">Orașe</h3>
+                                <ul className="grid grid-cols-2 gap-x-4 gap-y-1 text-sm text-night-400">
+                                    <li><a href="/bucuresti" className="hover:text-moon transition-colors">București</a></li>
+                                    <li><a href="/cluj-napoca" className="hover:text-moon transition-colors">Cluj-Napoca</a></li>
+                                    <li><a href="/timisoara" className="hover:text-moon transition-colors">Timișoara</a></li>
+                                    <li><a href="/iasi" className="hover:text-moon transition-colors">Iași</a></li>
+                                    <li><a href="/constanta" className="hover:text-moon transition-colors">Constanța</a></li>
+                                    <li><a href="/brasov" className="hover:text-moon transition-colors">Brașov</a></li>
                                 </ul>
                             </div>
 
