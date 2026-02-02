@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { getAllArticles } from '@/data/blogArticles';
 
 export const metadata: Metadata = {
@@ -25,6 +26,10 @@ export default function BlogPage() {
 
     return (
         <div className="min-h-screen py-12 md:py-20">
+            <Breadcrumbs items={[
+                { label: 'Acasă', href: '/' },
+                { label: 'Ghiduri Pescuit' },
+            ]} />
             <div className="container-custom px-4">
                 {/* Hero */}
                 <div className="text-center mb-12 md:mb-16">

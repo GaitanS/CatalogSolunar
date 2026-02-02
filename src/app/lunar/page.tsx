@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { getMoonPhase, getMoonIllumination, getMoonPhaseName, getSolunarData } from '@/lib/solunar';
 import RatingBars from '@/components/RatingBars';
 import MoonIcon from '@/components/MoonIcon';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import AdUnit from '@/components/AdUnit';
 
 export const metadata: Metadata = {
@@ -72,6 +73,10 @@ export default function LunarPage() {
 
     return (
         <div className="min-h-screen py-12 md:py-20">
+            <Breadcrumbs items={[
+                { label: 'Acasă', href: '/' },
+                { label: 'Calendar Lunar' },
+            ]} />
             <div className="container-custom px-4">
                 {/* Hero */}
                 <div className="text-center mb-12">

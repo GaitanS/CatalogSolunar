@@ -6,6 +6,7 @@ import ActivityGraph from '@/components/ActivityGraph';
 import AdUnit from '@/components/AdUnit';
 import LazyAdUnit from '@/components/LazyAdUnit';
 import Link from 'next/link';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -52,6 +53,10 @@ export default async function AziPage() {
 
     return (
         <div className="pb-20 pt-4 md:pt-8 relative">
+            <Breadcrumbs items={[
+                { label: 'Acasă', href: '/' },
+                { label: 'Solunar Azi' },
+            ]} />
             <div className="container-custom px-4 relative z-10">
                 {/* Hero */}
                 <div className="text-center mb-8 md:mb-12">

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Roboto_Slab, Open_Sans } from "next/font/google";
-import "./critical.css";
 import "./globals.css";
 import Image from "next/image";
 import LazyBackground from "@/components/LazyBackground";
@@ -86,6 +85,8 @@ export default function RootLayout({
                 <meta name="google-adsense-account" content="ca-pub-4509784482094331" />
                 {/* DNS prefetch for AdSense */}
                 <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+                {/* Critical CSS inlined to eliminate render-blocking request - static string, no user input */}
+                <style dangerouslySetInnerHTML={{ __html: 'body{background-color:#020617;color:#f1f5f9;margin:0;-webkit-font-smoothing:antialiased}.container-custom{width:100%;max-width:1400px;margin:0 auto;padding:0 1rem}@media(min-width:640px){.container-custom{padding:0 1.5rem}}.fixed{position:fixed}.top-0{top:0}.left-0{left:0}.right-0{right:0}.z-50{z-index:50}.flex{display:flex}.hidden{display:none}.items-center{align-items:center}.justify-between{justify-content:space-between}.gap-3{gap:.75rem}.gap-8{gap:2rem}.py-4{padding-top:1rem;padding-bottom:1rem}.pt-20{padding-top:5rem}.text-white{color:#fff}.text-xl{font-size:1.25rem}.font-bold{font-weight:700}.text-sm{font-size:.875rem}.text-2xl{font-size:1.5rem}.text-3xl{font-size:1.875rem}.text-5xl{font-size:3rem}.mb-1{margin-bottom:.25rem}.mb-3{margin-bottom:.75rem}.text-center{text-align:center}.card-panel{background:#0B1221;border:1px solid rgba(255,255,255,.05);border-radius:1.5rem}.bg-night-950\\/90{background-color:rgba(2,6,23,.9)}.backdrop-blur-md{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}.border-b{border-bottom-width:1px}.border-night-800{border-color:#1e293b}@media(min-width:768px){.md\\:flex{display:flex}.md\\:text-5xl{font-size:3rem}}' }} />
                 {/* Schema.org JSON-LD structured data for SEO */}
                 <SchemaMarkup />
             </head>

@@ -7,6 +7,7 @@ import ActivityGraph from '@/components/ActivityGraph';
 import AdUnit from '@/components/AdUnit';
 import LazyAdUnit from '@/components/LazyAdUnit';
 import Link from 'next/link';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { getCityBySlug, getAllCities } from '@/data/cities';
 import type { Metadata } from 'next';
 
@@ -116,14 +117,11 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
     return (
         <div className="pb-20 pt-4 md:pt-8 relative">
             <CityJsonLd city={city} />
+            <Breadcrumbs items={[
+                { label: 'Acasă', href: '/' },
+                { label: `Solunar ${city.name}` },
+            ]} />
             <div className="container-custom px-4 relative z-10">
-                {/* Breadcrumb */}
-                <nav className="mb-4 text-sm text-night-400">
-                    <Link href="/" className="hover:text-moon transition-colors">Acasa</Link>
-                    <span className="mx-2">/</span>
-                    <span className="text-white">{city.name}</span>
-                </nav>
-
                 {/* Hero */}
                 <div className="text-center mb-8 md:mb-12">
                     <h1 className="text-3xl md:text-5xl font-display font-bold text-white mb-3">
