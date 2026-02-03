@@ -45,6 +45,14 @@ const IMPORTANT_URLS = [
   // Pagini noi - Solunar Azi
   'https://calendarsolunar.ro/azi',
 
+  // Pagini specii
+  'https://calendarsolunar.ro/pescuit-crap',
+  'https://calendarsolunar.ro/pescuit-salau',
+  'https://calendarsolunar.ro/pescuit-pastrav',
+  'https://calendarsolunar.ro/pescuit-somn',
+  'https://calendarsolunar.ro/pescuit-stiuca',
+  'https://calendarsolunar.ro/pescuit-caras',
+
   // Pagini orașe
   'https://calendarsolunar.ro/bucuresti',
   'https://calendarsolunar.ro/cluj-napoca',
