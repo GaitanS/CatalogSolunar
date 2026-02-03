@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getArticleBySlug, getAllArticles, BlogArticle } from '@/data/blogArticles';
+import { getArticleBySlug, getAllArticles, BlogArticle, getAdjacentMonthlyArticles } from '@/data/blogArticles';
+import { getAllCities } from '@/data/cities';
+import { getAllSpecies } from '@/data/species';
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -65,18 +67,46 @@ function extractHeadings(content: string): { text: string; id: string; level: nu
     return headings;
 }
 
-// Build internal link map from article keywords/titles
+// Build internal link map from article keywords/titles, cities, and species
 function injectInternalLinks(content: string, currentSlug: string, articles: BlogArticle[]): string {
-    const linkMap: { pattern: RegExp; url: string; label: string }[] = [];
     const linked = new Set<string>();
 
+    // Link to city pages first (high priority)
+    const cities = getAllCities();
+    for (const city of cities) {
+        if (linked.size >= 8) break; // max 8 total auto-links
+        const cityKey = `city-${city.slug}`;
+        if (linked.has(cityKey)) continue;
+        const escaped = city.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const re = new RegExp(`(?<!\\[.*?)\\b(${escaped})\\b(?![^\\[]*\\])`, 'i');
+        if (re.test(content)) {
+            content = content.replace(re, `[$1](/${city.slug})`);
+            linked.add(cityKey);
+        }
+    }
+
+    // Link to species pages
+    const species = getAllSpecies();
+    for (const s of species) {
+        if (linked.size >= 8) break;
+        const speciesKey = `species-${s.slug}`;
+        if (linked.has(speciesKey)) continue;
+        // Match species name (e.g., "crap", "salau")
+        const escaped = s.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const re = new RegExp(`(?<!\\[.*?)\\b(${escaped})\\b(?![^\\[]*\\])`, 'i');
+        if (re.test(content)) {
+            content = content.replace(re, `[$1](/${s.slug})`);
+            linked.add(speciesKey);
+        }
+    }
+
+    // Link to other articles
     for (const a of articles) {
         if (a.slug === currentSlug) continue;
-        // Use the first keyword as anchor text trigger
+        if (linked.size >= 8) break;
         for (const kw of a.keywords.slice(0, 2)) {
-            if (kw.length < 6) continue; // skip very short keywords
+            if (kw.length < 6) continue;
             if (linked.has(a.slug)) break;
-            // Only match if not already inside a markdown link
             const escaped = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
             const re = new RegExp(`(?<!\\[.*?)\\b(${escaped})\\b(?![^\\[]*\\])`, 'i');
             if (re.test(content)) {
@@ -85,7 +115,6 @@ function injectInternalLinks(content: string, currentSlug: string, articles: Blo
                 break;
             }
         }
-        if (linked.size >= 5) break; // max 5 auto-links per article
     }
     return content;
 }
@@ -436,6 +465,48 @@ export default async function ArticlePage({ params }: Props) {
                             ))}
                         </div>
                     </div>
+
+                    {/* Monthly Article Navigation */}
+                    {(() => {
+                        const { prev, next } = getAdjacentMonthlyArticles(article.slug);
+                        if (!prev && !next) return null;
+                        return (
+                            <nav className="mt-10 grid grid-cols-2 gap-4" aria-label="Navigare articole lunare">
+                                {prev ? (
+                                    <Link
+                                        href={`/blog/${prev.slug}`}
+                                        className="p-4 card-glass group hover:bg-white/10 transition-colors"
+                                    >
+                                        <span className="text-xs text-night-400 flex items-center gap-1 mb-2">
+                                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                            </svg>
+                                            Luna anterioară
+                                        </span>
+                                        <span className="text-sm font-bold text-white group-hover:text-moon transition-colors line-clamp-2">
+                                            {prev.title}
+                                        </span>
+                                    </Link>
+                                ) : <div />}
+                                {next ? (
+                                    <Link
+                                        href={`/blog/${next.slug}`}
+                                        className="p-4 card-glass group hover:bg-white/10 transition-colors text-right"
+                                    >
+                                        <span className="text-xs text-night-400 flex items-center justify-end gap-1 mb-2">
+                                            Luna următoare
+                                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </span>
+                                        <span className="text-sm font-bold text-white group-hover:text-moon transition-colors line-clamp-2">
+                                            {next.title}
+                                        </span>
+                                    </Link>
+                                ) : <div />}
+                            </nav>
+                        );
+                    })()}
 
                     {/* CTA */}
                     <div className="mt-12 p-6 card-panel text-center">

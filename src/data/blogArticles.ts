@@ -8536,3 +8536,28 @@ export function getAllArticles(): BlogArticle[] {
 export function getArticlesByCategory(category: string): BlogArticle[] {
     return blogArticles.filter(article => article.category === category);
 }
+
+// Monthly articles in order (Jan-Dec)
+const monthOrder = ['ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie', 'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie'];
+
+export function getMonthlyArticles(): BlogArticle[] {
+    return blogArticles
+        .filter(a => a.slug.match(/^solunar-[a-z]+-2026-ghid$/))
+        .sort((a, b) => {
+            const monthA = a.slug.replace('solunar-', '').replace('-2026-ghid', '');
+            const monthB = b.slug.replace('solunar-', '').replace('-2026-ghid', '');
+            return monthOrder.indexOf(monthA) - monthOrder.indexOf(monthB);
+        });
+}
+
+export function getAdjacentMonthlyArticles(currentSlug: string): { prev: BlogArticle | null; next: BlogArticle | null } {
+    const monthlyArticles = getMonthlyArticles();
+    const currentIndex = monthlyArticles.findIndex(a => a.slug === currentSlug);
+
+    if (currentIndex === -1) return { prev: null, next: null };
+
+    return {
+        prev: currentIndex > 0 ? monthlyArticles[currentIndex - 1] : null,
+        next: currentIndex < monthlyArticles.length - 1 ? monthlyArticles[currentIndex + 1] : null,
+    };
+}

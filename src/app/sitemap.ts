@@ -1,11 +1,13 @@
 import { MetadataRoute } from 'next';
 import { getAllArticles } from '@/data/blogArticles';
 import { getAllCities } from '@/data/cities';
+import { getAllSpecies } from '@/data/species';
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://calendarsolunar.ro';
     const articles = getAllArticles();
     const cities = getAllCities();
+    const species = getAllSpecies();
 
     // Static pages
     const staticPages: MetadataRoute.Sitemap = [
@@ -67,6 +69,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.9,
     }));
 
+    // Species pages
+    const speciesPages: MetadataRoute.Sitemap = species.map((s) => ({
+        url: `${baseUrl}/${s.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.85,
+    }));
+
     // Blog articles
     const articlePages: MetadataRoute.Sitemap = articles.map((article) => ({
         url: `${baseUrl}/blog/${article.slug}`,
@@ -75,5 +85,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
     }));
 
-    return [...staticPages, ...cityPages, ...articlePages];
+    return [...staticPages, ...cityPages, ...speciesPages, ...articlePages];
 }

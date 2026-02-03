@@ -53,6 +53,41 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
     };
 }
 
+// FAQ Schema for city pages - data is from our static city database
+function CityFAQSchema({ city, nearbyWaters }: { city: { name: string; county: string }; nearbyWaters: string[] }) {
+    const faqs = [
+        {
+            question: `Cand trage pestele in ${city.name}?`,
+            answer: `Pestele este cel mai activ in ${city.name} in perioadele solunar majore, care dureaza aproximativ 2 ore. Verifica calendarul solunar zilnic pentru orele exacte calculate pentru zona ${city.county}.`,
+        },
+        {
+            question: `Care sunt cele mai bune locuri de pescuit in ${city.name}?`,
+            answer: `Cele mai populare locuri de pescuit in zona ${city.name}, judetul ${city.county} sunt: ${nearbyWaters.slice(0, 4).join(', ')}. Fiecare locatie are conditii specifice si specii diferite.`,
+        },
+        {
+            question: `Cum functioneaza calendarul solunar pentru ${city.name}?`,
+            answer: `Calendarul solunar pentru ${city.name} calculeaza perioadele de activitate a pestilor pe baza pozitiei lunii fata de coordonatele exacte ale orasului. Perioadele majore coincid cu tranzitul lunar, iar cele minore cu rasaritul si apusul lunii.`,
+        },
+    ];
+
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map(faq => ({
+            '@type': 'Question',
+            name: faq.question,
+            acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+        })),
+    };
+
+    return (
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+    );
+}
+
 function CityJsonLd({ city }: { city: { name: string; slug: string; county: string; lat: number; lng: number } }) {
     const jsonLd = {
         '@context': 'https://schema.org',
@@ -117,6 +152,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
     return (
         <div className="pb-20 pt-4 md:pt-8 relative">
             <CityJsonLd city={city} />
+            <CityFAQSchema city={city} nearbyWaters={city.nearbyWaters} />
             <Breadcrumbs items={[
                 { label: 'Acasă', href: '/' },
                 { label: `Solunar ${city.name}` },
@@ -309,6 +345,25 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                             Pentru rezultate optime, combina datele solunar cu conditiile meteo locale din {city.county}:
                             presiune atmosferica stabila, vant slab si temperaturi moderate cresc semnificativ activitatea pestilor.
                         </p>
+                    </div>
+                </div>
+
+                {/* FAQ Section */}
+                <div className="card-panel p-6 md:p-8 mb-8">
+                    <h2 className="text-2xl font-display font-bold text-white mb-6">Intrebari Frecvente - {city.name}</h2>
+                    <div className="space-y-4">
+                        <div className="border-b border-night-800 pb-4">
+                            <h3 className="text-lg font-bold text-amber-400 mb-2">Cand trage pestele in {city.name}?</h3>
+                            <p className="text-night-300 text-sm">Pestele este cel mai activ in {city.name} in perioadele solunar majore, care dureaza aproximativ 2 ore. Verifica calendarul solunar zilnic pentru orele exacte calculate pentru zona {city.county}.</p>
+                        </div>
+                        <div className="border-b border-night-800 pb-4">
+                            <h3 className="text-lg font-bold text-amber-400 mb-2">Care sunt cele mai bune locuri de pescuit in {city.name}?</h3>
+                            <p className="text-night-300 text-sm">Cele mai populare locuri de pescuit in zona {city.name}, judetul {city.county} sunt: {city.nearbyWaters.slice(0, 4).join(', ')}.</p>
+                        </div>
+                        <div>
+                            <h3 className="text-lg font-bold text-amber-400 mb-2">Cum functioneaza calendarul solunar pentru {city.name}?</h3>
+                            <p className="text-night-300 text-sm">Calendarul solunar pentru {city.name} calculeaza perioadele de activitate a pestilor pe baza pozitiei lunii fata de coordonatele exacte ale orasului. Perioadele majore coincid cu tranzitul lunar.</p>
+                        </div>
                     </div>
                 </div>
 
