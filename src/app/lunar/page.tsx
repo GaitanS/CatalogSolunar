@@ -89,7 +89,7 @@ export default function LunarPage() {
                 </div>
 
                 {/* Top Ad */}
-                <AdUnit slotId="1234567890" format="horizontal" className="mb-8" />
+                <AdUnit slotId="2812628769" format="horizontal" className="mb-8" />
 
                 {/* Today's Moon Info */}
                 <div className="card-panel p-6 md:p-8 mb-8 max-w-2xl mx-auto">
@@ -136,7 +136,7 @@ export default function LunarPage() {
                 )}
 
                 {/* Middle Ad */}
-                <AdUnit slotId="1234567890" format="auto" className="mb-12 max-w-4xl mx-auto" />
+                <AdUnit slotId="2812628769" format="auto" className="mb-12 max-w-4xl mx-auto" />
 
                 {/* Calendar Grid */}
                 <div className="card-panel p-4 md:p-6 max-w-4xl mx-auto">
@@ -208,7 +208,7 @@ export default function LunarPage() {
                 </div>
 
                 {/* Bottom Ad */}
-                <AdUnit slotId="1234567890" format="auto" className="my-12" />
+                <AdUnit slotId="2812628769" format="auto" className="my-12" />
 
                 {/* CTA */}
                 <div className="text-center mt-12">

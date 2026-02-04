@@ -192,7 +192,7 @@ export default async function SpeciesPage({ params }: { params: Promise<{ specie
                     </div>
                 </div>
 
-                <AdUnit slotId="1234567890" format="horizontal" className="min-h-[90px] mb-8" label="Reclama" />
+                <AdUnit slotId="2812628769" format="horizontal" className="min-h-[90px] mb-8" label="Reclama" />
 
                 {/* Species Info Grid */}
                 <div className="grid md:grid-cols-2 gap-6 mb-8">
@@ -253,7 +253,7 @@ export default async function SpeciesPage({ params }: { params: Promise<{ specie
                     </div>
                 </div>
 
-                <LazyAdUnit slotId="1234567890" format="rectangle" style={{ minHeight: '280px' }} className="mb-8" label="Reclama" />
+                <LazyAdUnit slotId="6301173988" format="rectangle" style={{ minHeight: '280px' }} className="mb-8" label="Reclama" />
 
                 {/* Solunar Tip */}
                 <div className="card-panel p-6 md:p-8 mb-8">
@@ -334,7 +334,7 @@ export default async function SpeciesPage({ params }: { params: Promise<{ specie
                     </div>
                 </div>
 
-                <LazyAdUnit slotId="1234567890" format="auto" layout="in-article" className="min-h-[120px] mt-8" label="Reclama" />
+                <LazyAdUnit slotId="1044977874" format="auto" layout="in-article" className="min-h-[120px] mt-8" label="Reclama" />
             </div>
         </div>
     );

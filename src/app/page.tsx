@@ -77,7 +77,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
 
                 {/* Top Ad (Mobile/Desktop Leaderboard) */}
                 <AdUnit
-                    slotId="1234567890"
+                    slotId="2812628769"
                     format="horizontal"
                     className="min-h-[90px]"
                     label="Reclamă"
@@ -271,7 +271,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
 
                 {/* Middle Ad (Medium Rectangle) */}
                 <LazyAdUnit
-                    slotId="1234567890"
+                    slotId="6301173988"
                     format="rectangle"
                     style={{ minHeight: '280px' }}
                     className="mb-8"
@@ -327,7 +327,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
 
                 {/* Bottom Ad (Responsive) */}
                 <LazyAdUnit
-                    slotId="1234567890"
+                    slotId="2812628769"
                     format="auto"
                     layout="in-article"
                     className="min-h-[120px]"
