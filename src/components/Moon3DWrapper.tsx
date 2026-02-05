@@ -19,22 +19,38 @@ interface Moon3DWrapperProps {
     size?: number;
 }
 
+// Check if WebGL is available
+function isWebGLAvailable(): boolean {
+    try {
+        const canvas = document.createElement('canvas');
+        return !!(
+            window.WebGLRenderingContext &&
+            (canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
+        );
+    } catch {
+        return false;
+    }
+}
+
 export default function Moon3DWrapper(props: Moon3DWrapperProps) {
-    const [isMobile, setIsMobile] = useState(true); // Default to mobile for SSR
+    const [use2D, setUse2D] = useState(true); // Default to 2D for SSR safety
 
     useEffect(() => {
-        // Check screen width on client
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768);
+        // Check if we should use 3D (desktop + WebGL available)
+        const shouldUse3D = window.innerWidth >= 768 && isWebGLAvailable();
+        setUse2D(!shouldUse3D);
+
+        const handleResize = () => {
+            const shouldUse3D = window.innerWidth >= 768 && isWebGLAvailable();
+            setUse2D(!shouldUse3D);
         };
 
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // Use simple 2D moon on mobile to avoid Three.js overhead
-    if (isMobile) {
+    // Use simple 2D moon on mobile or when WebGL is not available
+    if (use2D) {
         return <SimpleMoon2D {...props} />;
     }
 
