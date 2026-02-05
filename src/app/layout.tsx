@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Roboto_Slab, Open_Sans } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
-import Script from "next/script";
 import LazyBackground from "@/components/LazyBackground";
 import ClientProviders from "@/components/ClientProviders";
 import SchemaMarkup from "@/components/SchemaMarkup";
@@ -81,7 +80,12 @@ export default function RootLayout({
     return (
         <html lang="ro">
             <head>
-                {/* Google AdSense verification */}
+                {/* Google AdSense */}
+                <script
+                    async
+                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4509784482094331"
+                    crossOrigin="anonymous"
+                />
                 <meta name="google-adsense-account" content="ca-pub-4509784482094331" />
                 {/* DNS prefetch for AdSense */}
                 <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
@@ -91,12 +95,6 @@ export default function RootLayout({
                 <SchemaMarkup />
             </head>
             <body className={`${openSans.variable} ${robotoSlab.variable} font-body bg-night-950 text-slate-100 min-h-screen antialiased selection:bg-moon selection:text-night-950`}>
-                <Script
-                    async
-                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4509784482094331"
-                    crossOrigin="anonymous"
-                    strategy="afterInteractive"
-                />
                 <ClientProviders>
                     <LazyBackground />
                     <header className="fixed top-0 left-0 right-0 z-50 bg-night-950/90 backdrop-blur-md border-b border-night-800">
