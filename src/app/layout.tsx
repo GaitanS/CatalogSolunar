@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Roboto_Slab, Open_Sans } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
+import Script from "next/script";
 import LazyBackground from "@/components/LazyBackground";
 import ClientProviders from "@/components/ClientProviders";
-import AdSenseScript from "@/components/AdSenseScript";
 import SchemaMarkup from "@/components/SchemaMarkup";
 
 const robotoSlab = Roboto_Slab({
@@ -91,8 +91,13 @@ export default function RootLayout({
                 <SchemaMarkup />
             </head>
             <body className={`${openSans.variable} ${robotoSlab.variable} font-body bg-night-950 text-slate-100 min-h-screen antialiased selection:bg-moon selection:text-night-950`}>
+                <Script
+                    async
+                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4509784482094331"
+                    crossOrigin="anonymous"
+                    strategy="afterInteractive"
+                />
                 <ClientProviders>
-                    <AdSenseScript />
                     <LazyBackground />
                     <header className="fixed top-0 left-0 right-0 z-50 bg-night-950/90 backdrop-blur-md border-b border-night-800">
                         <div className="container-custom py-4 flex items-center justify-between">
