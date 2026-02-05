@@ -32,27 +32,35 @@ function isWebGLAvailable(): boolean {
     }
 }
 
-export default function Moon3DWrapper(props: Moon3DWrapperProps) {
+export default function Moon3DWrapper({ phase, illumination, size = 200 }: Moon3DWrapperProps) {
     const [use2D, setUse2D] = useState(true); // Default to 2D for SSR safety
+    const [actualSize, setActualSize] = useState(120); // Default to mobile size for SSR
 
     useEffect(() => {
         // Check if we should use 3D (desktop + WebGL available)
-        const shouldUse3D = window.innerWidth >= 768 && isWebGLAvailable();
+        const isMobile = window.innerWidth < 768;
+        const shouldUse3D = !isMobile && isWebGLAvailable();
         setUse2D(!shouldUse3D);
+        // Use smaller size on mobile
+        setActualSize(isMobile ? Math.min(size, 120) : size);
 
         const handleResize = () => {
-            const shouldUse3D = window.innerWidth >= 768 && isWebGLAvailable();
+            const isMobile = window.innerWidth < 768;
+            const shouldUse3D = !isMobile && isWebGLAvailable();
             setUse2D(!shouldUse3D);
+            setActualSize(isMobile ? Math.min(size, 120) : size);
         };
 
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    }, [size]);
+
+    const moonProps = { phase, illumination, size: actualSize };
 
     // Use simple 2D moon on mobile or when WebGL is not available
     if (use2D) {
-        return <SimpleMoon2D {...props} />;
+        return <SimpleMoon2D {...moonProps} />;
     }
 
-    return <Moon3D {...props} />;
+    return <Moon3D {...moonProps} />;
 }
