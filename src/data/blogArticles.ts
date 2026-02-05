@@ -5508,8 +5508,8 @@ Un pescar cu 4 ore bine folosite bate un pescar cu 12 ore risipite.
     },
     {
         slug: 'ghid-pescuit-pastrav',
-        title: 'Pescuit la Păstrăv în România: Tehnici, Râuri și Sezon 2026',
-        excerpt: 'Ghid complet pentru pescuitul de păstrăv: cele mai bune râuri din România, tehnici de spinning și muscă, sezon legal, echipament recomandat și sfaturi de la experți.',
+        title: 'Pescuit Păstrăv 2026: Top 10 Râuri din România + Tehnici Pro',
+        excerpt: 'Unde prinzi păstrăv în 2026? Descoperă cele mai bune 10 râuri din România, tehnici de spinning și muscă artificial, sezonul legal și secretele pescarilor experimentați.',
         content: `
 # Pescuit la Păstrăv în România: Ghid Complet 2026
 

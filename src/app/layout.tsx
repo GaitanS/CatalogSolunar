@@ -25,19 +25,20 @@ const openSans = Open_Sans({
 export const metadata: Metadata = {
     metadataBase: new URL('https://calendarsolunar.ro'),
     title: {
-        default: 'Solunar Pescuit 2026 - Calendar cu Ore Exacte',
+        default: 'Calendar Pescuit 2026 - Solunar pe Ore | Când Trage Peștele',
         template: '%s | Calendar Solunar'
     },
-    description: "Calendar solunar precis 2026 cu orele de activitate maximă a peștilor. Faze lunare, solunar pe ore, prognoze pescuit pentru România. Află când trage peștele!",
+    description: "Calendar de pescuit 2026 cu solunar pe ore exacte. Vezi când trage peștele: perioade majore, faze lunare și prognoză 14 zile. Gratuit pentru România!",
     keywords: [
-        "solunar pescuit", "calendar solunar", "solunar 2026", "calendar pescuit 2026",
-        "cand trage pestele", "solunar pescuit pe ore", "faze lunare pescuit", "activitate pesti",
+        "calendar pescuit 2026", "calendar de pescuit", "solunar pescuit pe ore",
+        "solunar pescuit", "calendar solunar", "solunar 2026",
+        "cand trage pestele", "faze lunare pescuit", "activitate pesti",
         "solunar azi", "solunar romania", "ore pescuit", "perioade majore solunar",
         "luna plina pescuit", "calendar lunar pescuit"
     ],
     openGraph: {
-        title: 'Solunar Pescuit 2026 - Calendar Lunar Complet',
-        description: 'Află când trage peștele! Calendar solunar precis cu faze lunare, perioade majore și minore, prognoze 14 zile pentru România.',
+        title: 'Calendar Pescuit 2026 - Solunar pe Ore Exacte',
+        description: 'Când trage peștele? Calendar de pescuit 2026 cu solunar pe ore, faze lunare și prognoză 14 zile. 100% Gratuit!',
         url: 'https://calendarsolunar.ro',
         siteName: 'Calendar Solunar',
         locale: 'ro_RO',
@@ -53,8 +54,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Solunar Pescuit 2026 - Ore Exacte de Activitate',
-        description: 'Calendar solunar precis pentru pescuit. Perioade majore, faze lunare, prognoze.',
+        title: 'Calendar Pescuit 2026 - Solunar pe Ore',
+        description: 'Când trage peștele? Calendar de pescuit cu solunar pe ore exacte, faze lunare și prognoză 14 zile.',
     },
     robots: {
         index: true,
