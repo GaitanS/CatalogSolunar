@@ -15,14 +15,26 @@ export default function AdUnit({ slotId, format = 'auto', layout, style, classNa
     const adRef = useRef<HTMLModElement>(null);
 
     useEffect(() => {
-        try {
-            // @ts-ignore
-            if (window.adsbygoogle && process.env.NODE_ENV === 'production') {
+        const pushAd = () => {
+            try {
                 // @ts-ignore
                 (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch (err) {
+                console.error('AdSense error:', err);
             }
-        } catch (err) {
-            console.error('AdSense error:', err);
+        };
+
+        // If script already loaded, push immediately
+        // @ts-ignore
+        if (window.adsbygoogle) {
+            pushAd();
+        } else {
+            // Wait for the script to load, then push
+            const script = document.querySelector('script[src*="adsbygoogle"]');
+            if (script) {
+                script.addEventListener('load', pushAd);
+                return () => script.removeEventListener('load', pushAd);
+            }
         }
     }, []);
 
