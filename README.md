@@ -1,121 +1,136 @@
-# 🌑 Calendar Solunar - Pescuit & Activitate Lunară
+# Calendar Solunar - calendarsolunar.ro
 
-O aplicație web modernă, autonomă, dedicată pasionaților de pescuit. Aplicația calculează științific perioadele solunare optime, fazele lunii și oferă o prognoză detaliată de pescuit bazată pe algoritmi astronomici de precizie.
+Calendar de pescuit solunar pentru Romania cu ore exacte, faze lunare si prognoza meteo pe 14 zile. 100% gratuit.
 
-**Live Demo:** [calendarsolunar.ro](https://calendarsolunar.ro)
+**Live:** [calendarsolunar.ro](https://calendarsolunar.ro)
 
-## ✨ Caracteristici Principale
+## Features
 
-*   **Algoritm Solunar Avansat:** Identifică automat perioadele **Majore** (tranzit lunar zenit/nadir) și **Minore** (răsărit/apus de lună) pentru orice locație și dată.
-*   **Model Astronomic Real-Time:** Folosește librăria `suncalc` pentru a calcula poziția exactă a astrelor fără a depinde de baze de date externe.
-*   **Vizualizare 3D:** Randare interactivă a lunii pentru a ilustra iluminarea curentă.
-*   **Bazat pe Specii:** Recomandări specifice pentru speciile de pești din România (Știucă, Șalău, Crap, etc.) în funcție de sezon și faza lunii.
-*   **Vreme Integrată:** Prognoză meteo locală și condiții de vânt via API extern.
-*   **Autonomie Totală:** Sistem "Set & Forget". Nu necesită curățare cache sau actualizare manuală a datelor calendaristice.
-*   **Monetizare:** Integrare completă și verificată cu Google AdSense.
+- **Calendar Solunar** — perioade majore si minore de activitate calculate pe baza pozitiei Lunii si Soarelui (SunCalc)
+- **Prognoza 14 zile** — activitate solunara combinata cu date meteo (temperatura, vant, presiune)
+- **Vizualizare 3D Luna** — randare interactiva cu Three.js
+- **12 orase** — date personalizate pentru Bucuresti, Cluj-Napoca, Timisoara, Iasi, Constanta, Brasov, Galati, Craiova, Oradea, Sibiu, Targu-Mures, Bacau
+- **6 specii de pesti** — ghiduri dedicate pentru crap, salau, pastrav, somn, stiuca, caras
+- **49+ articole blog** — ghiduri de pescuit, tehnici, echipament, locatii
+- **SEO complet** — Schema.org (FAQ, Article, Organization, BreadcrumbList), Open Graph, sitemap dinamic, canonical URLs
+- **Mobile-first** — design responsive cu Tailwind CSS
+- **Google AdSense** — integrare reclame cu unitati manuale si auto ads
 
-## 🛠️ Arhitectură Tehnică
+## Tech Stack
 
-Proiectul este construit pe stack-ul **Next.js** (App Router), optimizat pentru viteză (Lighthouse score 90+) și indexare SEO.
+| Componenta | Tehnologie |
+|:---|:---|
+| Framework | Next.js 15.1.6 (App Router, SSG/SSR) |
+| Limbaj | TypeScript |
+| UI | React 18, Tailwind CSS |
+| 3D | Three.js |
+| Calcule astronomice | SunCalc |
+| Deployment | Standalone → PM2 → Nginx |
 
-### Stack Tehnologic
+## Quick Start
 
-| Componentă | Tehnologie | Rol |
-| :--- | :--- | :--- |
-| **Framework** | Next.js 14 | Randare Server-Side (SSR) și Statică (SSG) |
-| **Limbaj** | TypeScript | Siguranță a datelor și tipizare strictă |
-| **CSS** | Tailwind CSS | Design responsive și modern (Glassmorphism) |
-| **Calcul** | SunCalc | Matematică astronomică |
-| **Server** | Node.js (Standalone) | Rulare eficientă pe VPS |
-| **Process Mgr** | PM2 | Mentenanță proces și auto-restart |
-| **Reverse Proxy** | Nginx | Securitate, SSL și compresie gzip |
+```bash
+git clone https://github.com/GaitanS/CatalogSolunar.git
+cd CatalogSolunar
+npm install
+npm run dev
+```
 
-### Structura Proiectului
+Aplicatia ruleaza pe [http://localhost:3500](http://localhost:3500).
+
+## Production Build
+
+```bash
+npm run build
+npm start
+```
+
+## Project Structure
 
 ```
 src/
-├── app/                 # Next.js App Router
-│   ├── page.tsx         # Dashboard Principal (Azi)
-│   ├── lunar/           # Calendar detaliat (Lunar/Săptămânal)
-│   ├── blog/            # Sistem de blog optimizat SEO
-│   └── layout.tsx       # Metaetichete globale & setup AdSense
-├── components/          # Componente UI Modulare
-│   ├── Moon3D.tsx       # Canvas 3D pentru randare Lună
-│   ├── Constellation... # Fundal animat (Client-side optimizat)
-│   ├── SolunarChart.tsx # Grafice de activitate
-│   ├── AdUnit.tsx       # Componentă izolată pentru reclame
+├── app/                  # Next.js App Router pages
+│   ├── page.tsx          # Homepage (calendar solunar)
+│   ├── azi/              # Solunar azi
+│   ├── lunar/            # Calendar faze lunare
+│   ├── blog/             # Articole blog
+│   │   └── [slug]/       # Articol individual
+│   ├── [slug]/           # Pagini dinamice (orase & specii)
+│   ├── contact/          # Pagina contact
+│   ├── despre/           # Pagina despre
+│   ├── robots.ts         # Robots.txt (dinamic)
+│   ├── sitemap.ts        # Sitemap XML (dinamic)
+│   └── layout.tsx        # Root layout, metadata, AdSense
+├── components/           # Componente React
+│   ├── Moon3D.tsx        # Vizualizare 3D Luna (Three.js)
+│   ├── SolunarChart.tsx  # Grafic activitate solunara
+│   ├── WeatherForecast.tsx
+│   ├── AdUnit.tsx        # Google AdSense component
+│   ├── SchemaMarkup.tsx  # JSON-LD structured data
 │   └── ...
-├── lib/                 # Logica de Business (Core)
-│   ├── solunar.ts       # ALGORITMUL PRINCIPAL (Vezi mai jos)
-│   ├── weather.ts       # Integrator API Vreme
-│   └── advice.ts        # Generatorul de sfaturi de pescuit
-└── public/              # Asset-uri statice (robots.txt, ads.txt)
+├── data/                 # Date statice
+│   ├── blogArticles.ts   # Continut blog (49+ articole)
+│   ├── cities.ts         # Coordonate orase
+│   └── species.ts        # Informatii specii pesti
+├── lib/                  # Logica de business
+│   ├── solunar.ts        # Algoritm solunar principal
+│   ├── weather.ts        # Weather API integration
+│   └── advice.ts         # Generator sfaturi pescuit
+└── middleware.ts          # Redirecturi www→non-www, http→https
+
+nginx/                     # Configurare Nginx reverse proxy
+scripts/                   # Google Indexing API script
+ecosystem.config.js        # PM2 process manager config
 ```
 
-## 🧠 Inima Aplicației: `solunar.ts`
+## Deployment (Hostinger VPS)
 
-Fișierul `src/lib/solunar.ts` conține inteligenta aplicației. Funcționarea este pur matematică:
+### 1. Clone & Build
 
-1.  **Astronomical Calculation:**
-    *   Preia coordonatele (Lat/Lon) și data curentă.
-    *   Calculează unghiul orar al lunii folosind `suncalc`.
-2.  **Transit Detection:**
-    *   Iterează ziua pentru a găsi punctele de maximă altitudine (Upper Transit) și minimă (Lower Transit).
-    *   Aceste puncte devin centrele **Perioadelor Majore** (+/- 1 oră).
-3.  **Efficiency Scoring:**
-    *   Calculează un "Rating General" (1-5 Pești).
-    *   Aplică bonusuri pentru Lună Nouă/Plină (gravitație maximă) și suprapuneri cu Răsărit/Apus Soare.
+```bash
+cd /var/www/solunar
+git pull
+npm install
+npm run build
+```
 
-## 🚀 Instalare și Dezvoltare
+### 2. Nginx
 
-1.  **Clonează proiectul:**
-    ```bash
-    git clone https://github.com/GaitanS/CatalogSolunar.git
-    ```
+```bash
+sudo cp nginx/calendarsolunar.ro.conf /etc/nginx/sites-available/calendarsolunar.ro
+sudo ln -sf /etc/nginx/sites-available/calendarsolunar.ro /etc/nginx/sites-enabled/
+sudo nginx -t && sudo systemctl reload nginx
+```
 
-2.  **Instalează dependențele:**
-    ```bash
-    npm install
-    ```
+### 3. PM2
 
-3.  **Configurează variabila de mediu (opțional pentru vreme):**
-    Crează un fișier `.env.local`:
-    ```env
-    NEXT_PUBLIC_WEATHER_API_KEY=your_api_key_here
-    ```
+```bash
+pm2 start ecosystem.config.js
+pm2 save
+```
 
-4.  **Pornește serverul local:**
-    ```bash
-    npm run dev
-    ```
-    Accesează `http://localhost:3000`.
+### SSL
 
-## 🌐 Deployment pe VPS
+Certificate Let's Encrypt (Certbot) la `/etc/letsencrypt/live/calendarsolunar.ro/`.
 
-Aplicația este configurată pentru **Standalone Output** (build mic, doar fișierele necesare).
+## Google Indexing API
 
-1.  **Build:**
-    ```bash
-    npm run build
-    ```
-    *Aceasta va crea folderul `.next/standalone`.*
+Trimite cereri de indexare pentru toate paginile:
 
-2.  **Pregătire Asset-uri (Critic):**
-    Next.js Standalone nu include default fișierele publice sau statice. Trebuie copiate manual pe server:
-    ```bash
-    cp -r public .next/standalone/public
-    cp -r .next/static .next/standalone/.next/static
-    ```
+```bash
+node scripts/request-indexing.js --all-blog
+```
 
-3.  **Rulare cu PM2:**
-    ```bash
-    pm2 start ecosystem.config.js
-    ```
+Necesita `scripts/service-account.json` (nu e in repo). Vezi comentariile din script pentru setup.
 
-## 💰 Configurare AdSense
+## Algoritm Solunar
 
-*   **Identificare:** Site-ul folosește `google-adsense-account` meta tag și `ads.txt` pentru verificare.
-*   **Plasare:** Reclamele "Auto Ads" sunt injectate în `layout.tsx`. Unitățile manuale pot fi plasate folosind `<AdUnit slotId="..." />`.
+Fisierul `src/lib/solunar.ts` contine logica principala:
 
----
-© 2026 Calendar Solunar. Toate drepturile rezervate.
+1. **Calcul astronomic** — pozitia exacta a Lunii si Soarelui pe baza coordonatelor GPS
+2. **Detectie tranzit** — identifica Upper Transit (zenit) si Lower Transit (nadir) ca centre ale perioadelor majore
+3. **Rating activitate** — scor 1-5 bazat pe faza lunara, suprapuneri cu rasarit/apus soare si conditii meteo
+
+## License
+
+All rights reserved. © 2026 Calendar Solunar.
