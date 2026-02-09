@@ -41,8 +41,6 @@ const IMPORTANT_URLS = [
   'https://calendarsolunar.ro/confidentialitate',
   'https://calendarsolunar.ro/termeni',
   'https://calendarsolunar.ro/cookies',
-
-  // Pagini noi - Solunar Azi
   'https://calendarsolunar.ro/azi',
 
   // Pagini specii
@@ -67,27 +65,70 @@ const IMPORTANT_URLS = [
   'https://calendarsolunar.ro/targu-mures',
   'https://calendarsolunar.ro/bacau',
 
-  // Articole blog
+  // Articole blog - ghiduri specii
+  'https://calendarsolunar.ro/blog/ghid-pescuit-crap',
+  'https://calendarsolunar.ro/blog/ghid-pescuit-salau',
+  'https://calendarsolunar.ro/blog/ghid-pescuit-somn',
+  'https://calendarsolunar.ro/blog/ghid-pescuit-stiuca',
+  'https://calendarsolunar.ro/blog/ghid-pescuit-caras',
+  'https://calendarsolunar.ro/blog/ghid-pescuit-lin',
   'https://calendarsolunar.ro/blog/ghid-pescuit-pastrav',
-  'https://calendarsolunar.ro/blog/pescuit-marea-neagra-ghid',
-  'https://calendarsolunar.ro/blog/permise-pescuit-romania-2026',
-  'https://calendarsolunar.ro/blog/pescuit-crap-pe-sesiuni-48h',
-  'https://calendarsolunar.ro/blog/pescuit-cu-viermi-ghid',
+
+  // Articole blog - tehnici și echipament
+  'https://calendarsolunar.ro/blog/ce-este-calendarul-solunar',
+  'https://calendarsolunar.ro/blog/cele-mai-bune-ore-pescuit-2026',
+  'https://calendarsolunar.ro/blog/cum-alegi-lanseta-pescuit',
+  'https://calendarsolunar.ro/blog/cum-alegi-mulineta-pescuit',
+  'https://calendarsolunar.ro/blog/cum-sa-prinzi-primul-peste',
+  'https://calendarsolunar.ro/blog/de-ce-nu-musca-pestii',
+  'https://calendarsolunar.ro/blog/echipament-pescuit-incepatori',
+  'https://calendarsolunar.ro/blog/ghid-complet-boilies',
+  'https://calendarsolunar.ro/blog/ghid-nadire-crap',
+  'https://calendarsolunar.ro/blog/greseli-incepatori-pescuit',
+  'https://calendarsolunar.ro/blog/noduri-pescuit-esentiale',
+  'https://calendarsolunar.ro/blog/pescuit-cu-pluta-ghid-complet',
   'https://calendarsolunar.ro/blog/pescuit-cu-porumb-ghid',
+  'https://calendarsolunar.ro/blog/pescuit-cu-viermi-ghid',
+  'https://calendarsolunar.ro/blog/pescuit-din-barca-ghid',
+  'https://calendarsolunar.ro/blog/pescuit-in-curent-tehnici',
+
+  // Articole blog - locații
+  'https://calendarsolunar.ro/blog/pescuit-constanta-litoral-ghid',
+  'https://calendarsolunar.ro/blog/pescuit-delta-dunarii-ghid',
+  'https://calendarsolunar.ro/blog/pescuit-dunare-ghid-complet',
+  'https://calendarsolunar.ro/blog/pescuit-langa-bucuresti',
+  'https://calendarsolunar.ro/blog/pescuit-marea-neagra-ghid',
+  'https://calendarsolunar.ro/blog/top-10-lacuri-pescuit-romania',
+
+  // Articole blog - sezoane
+  'https://calendarsolunar.ro/blog/pescuit-iarna-sfaturi',
+  'https://calendarsolunar.ro/blog/pescuit-primavara-ghid-complet',
+  'https://calendarsolunar.ro/blog/pescuit-vara-ghid-complet',
+  'https://calendarsolunar.ro/blog/pescuit-toamna-ghid-complet',
+  'https://calendarsolunar.ro/blog/pescuit-nocturn-ghid-complet',
+  'https://calendarsolunar.ro/blog/pescuit-weekend-ghid-rapid',
+
+  // Articole blog - diverse
+  'https://calendarsolunar.ro/blog/influenta-lunii-asupra-pescuitului',
+  'https://calendarsolunar.ro/blog/intrebari-frecvente-calendar-solunar',
+  'https://calendarsolunar.ro/blog/permise-pescuit-romania-2026',
   'https://calendarsolunar.ro/blog/pescuit-competitiv-romania',
+  'https://calendarsolunar.ro/blog/pescuit-crap-pe-sesiuni-48h',
   'https://calendarsolunar.ro/blog/pescuit-cu-copiii-ghid-familie',
-  'https://calendarsolunar.ro/blog/solunar-iunie-2026-ghid',
-  'https://calendarsolunar.ro/blog/solunar-octombrie-2026-ghid',
+  'https://calendarsolunar.ro/blog/presiunea-atmosferica-pescuit',
   'https://calendarsolunar.ro/blog/siguranta-la-pescuit-ghid',
   'https://calendarsolunar.ro/blog/fotografie-pescuit-ghid',
-  'https://calendarsolunar.ro/blog/pescuit-constanta-litoral-ghid',
+  'https://calendarsolunar.ro/blog/vremea-si-pescuitul-ghid-complet',
 
-  // Articole lunare noi
+  // Articole blog - calendar solunar lunar
   'https://calendarsolunar.ro/blog/solunar-februarie-2026-ghid',
   'https://calendarsolunar.ro/blog/solunar-martie-2026-ghid',
   'https://calendarsolunar.ro/blog/solunar-aprilie-2026-ghid',
+  'https://calendarsolunar.ro/blog/solunar-mai-2026-ghid',
+  'https://calendarsolunar.ro/blog/solunar-iunie-2026-ghid',
   'https://calendarsolunar.ro/blog/solunar-iulie-2026-ghid',
   'https://calendarsolunar.ro/blog/solunar-august-2026-ghid',
+  'https://calendarsolunar.ro/blog/solunar-octombrie-2026-ghid',
   'https://calendarsolunar.ro/blog/solunar-noiembrie-2026-ghid',
   'https://calendarsolunar.ro/blog/solunar-decembrie-2026-ghid',
 ];
