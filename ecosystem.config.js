@@ -2,8 +2,7 @@ module.exports = {
     apps: [
         {
             name: 'solunar',
-            script: 'npm',
-            args: 'start -- -p 3500',
+            script: '.next/standalone/server.js',
             cwd: '/var/www/solunar',
             instances: 1,
             exec_mode: 'fork',
