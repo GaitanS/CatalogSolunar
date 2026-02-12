@@ -1,24 +1,22 @@
 /**
  * Google Indexing API - Request Indexing Script
  *
- * Trimite notificări către Google pentru a solicita indexarea/re-crawlarea URL-urilor.
+ * ⚠️  ATENȚIE: Google Indexing API funcționează DOAR pentru pagini cu structured data
+ *    de tip JobPosting sau BroadcastEvent (embedded în VideoObject).
+ *    Pentru site-uri generale (ca acest calendar de pescuit), API-ul acceptă cererile
+ *    dar le IGNORĂ complet. NU va duce la indexare!
  *
- * SETUP (o singură dată):
- * 1. Mergi la https://console.cloud.google.com/
- * 2. Creează un proiect nou (sau folosește unul existent)
- * 3. Activează "Web Search Indexing API" (Indexing API):
- *    https://console.cloud.google.com/apis/library/indexing.googleapis.com
- * 4. Mergi la "IAM & Admin" → "Service Accounts" → "Create Service Account"
- *    - Nume: "indexing-bot" (sau ce vrei tu)
- *    - Click "Create and Continue" → "Done"
- * 5. Click pe service account-ul creat → "Keys" → "Add Key" → "Create new key" → JSON
- *    - Salvează fișierul JSON descărcat ca: scripts/service-account.json
- * 6. Copiază email-ul service account-ului (ex: indexing-bot@proiect.iam.gserviceaccount.com)
- * 7. În Google Search Console → Setări → Utilizatori și permisiuni → Adaugă utilizator
- *    - Lipește email-ul service account-ului
- *    - Setează permisiunea: "Proprietar"
+ *    Sursa oficială: https://developers.google.com/search/apis/indexing-api/v3/quickstart
  *
- * UTILIZARE:
+ * CE SĂ FACI ÎN SCHIMB pentru a obține indexare:
+ *    1. Google Search Console → URL Inspection → introdu URL-ul → "Request Indexing"
+ *       (limită: ~10 URL-uri/zi, manual)
+ *    2. Asigură-te că sitemap.xml e submis în GSC
+ *    3. Obține backlink-uri de pe alte site-uri (cel mai important factor!)
+ *    4. Creează profile pe forumuri/directoare de pescuit cu link către site
+ *    5. Distribuie articolele pe social media (Facebook, Reddit, forumuri pescuit)
+ *
+ * UTILIZARE (pentru referință - va trimite cereri dar Google le va ignora):
  *   node scripts/request-indexing.js
  *   node scripts/request-indexing.js --url https://calendarsolunar.ro/blog/un-articol
  */
@@ -193,7 +191,10 @@ async function main() {
     }
   }
 
-  console.log(`\n🚀 Solicit indexarea pentru ${urls.length} URL-uri...\n`);
+  console.log('\n⚠️  ATENȚIE: Google Indexing API funcționează DOAR pentru JobPosting/BroadcastEvent.');
+  console.log('   Pentru site-uri generale, aceste cereri vor fi IGNORATE de Google.');
+  console.log('   Folosește GSC URL Inspection Tool manual pentru a solicita indexare.\n');
+  console.log(`🚀 Trimit ${urls.length} cereri (dar Google le va ignora pentru site-uri non-job)...\n`);
 
   let success = 0;
   let failed = 0;

@@ -35,8 +35,8 @@ const nextConfig = {
                 ],
             },
             {
-                // Cache static pages (blog, lunar, etc) for 1 hour, stale-while-revalidate for 1 day
-                source: '/blog/:path*',
+                // Cache all HTML pages - public so CDN/Googlebot can cache
+                source: '/:path*',
                 headers: [
                     { key: 'Cache-Control', value: 'public, s-maxage=3600, stale-while-revalidate=86400' },
                 ],
