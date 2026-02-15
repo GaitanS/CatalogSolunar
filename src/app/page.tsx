@@ -24,7 +24,7 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
         title: `Solunar ${capitalizedMonth} ${year} ${locationName} - Pescuit pe Ore`,
         description: `Vezi Solunar ${capitalizedMonth} ${year} pentru ${locationName}. Activitate majoră și minoră detaliată, prognoză pescuit 14 zile și fazele lunii actualizate.`,
         alternates: {
-            canonical: 'https://calendarsolunar.ro',
+            canonical: 'https://calendarsolunar.ro/',
         }
     };
 }
