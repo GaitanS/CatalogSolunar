@@ -7,3 +7,12 @@ next-env.d.ts
 
 # Service account key (sensitive)
 scripts/service-account.json
+
+# Playwright MCP artifacts
+.playwright-mcp/
+
+# GSC exports, screenshots, misc
+coverage-export/
+*.zip
+gsc-*.png
+nul
