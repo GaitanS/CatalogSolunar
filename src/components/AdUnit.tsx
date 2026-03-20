@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface AdUnitProps {
     slotId: string;
@@ -8,11 +8,12 @@ interface AdUnitProps {
     layout?: string;
     style?: React.CSSProperties;
     className?: string;
-    label?: string; // e.g., "Advertisement" label
+    label?: string;
 }
 
 export default function AdUnit({ slotId, format = 'auto', layout, style, className, label }: AdUnitProps) {
-    const adRef = useRef<HTMLModElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [adLoaded, setAdLoaded] = useState(false);
 
     useEffect(() => {
         const pushAd = () => {
@@ -20,22 +21,32 @@ export default function AdUnit({ slotId, format = 'auto', layout, style, classNa
                 // @ts-ignore
                 (window.adsbygoogle = window.adsbygoogle || []).push({});
             } catch (err) {
-                console.error('AdSense error:', err);
+                // silent
             }
         };
 
-        // If script already loaded, push immediately
         // @ts-ignore
         if (window.adsbygoogle) {
             pushAd();
         } else {
-            // Wait for the script to load, then push
             const script = document.querySelector('script[src*="adsbygoogle"]');
             if (script) {
                 script.addEventListener('load', pushAd);
                 return () => script.removeEventListener('load', pushAd);
             }
         }
+
+        // Check if ad filled after a delay
+        const timer = setTimeout(() => {
+            if (containerRef.current) {
+                const ins = containerRef.current.querySelector('ins');
+                if (ins && ins.getAttribute('data-ad-status') === 'filled') {
+                    setAdLoaded(true);
+                }
+            }
+        }, 3000);
+
+        return () => clearTimeout(timer);
     }, []);
 
     // Development placeholder
@@ -50,8 +61,12 @@ export default function AdUnit({ slotId, format = 'auto', layout, style, classNa
     }
 
     return (
-        <div className={`ad-container flex flex-col items-center justify-center my-6 overflow-hidden ${className}`}>
-            {label && <span className="text-[10px] text-night-500 uppercase tracking-widest mb-1">Publicitate</span>}
+        <div
+            ref={containerRef}
+            className={`ad-container flex flex-col items-center justify-center overflow-hidden transition-all duration-300 ${adLoaded ? 'my-6' : 'my-0'} ${className}`}
+            style={adLoaded ? undefined : { minHeight: 0, maxHeight: 0 }}
+        >
+            {adLoaded && label && <span className="text-[10px] text-night-500 uppercase tracking-widest mb-1">Publicitate</span>}
             <ins
                 className="adsbygoogle"
                 style={{ display: 'block', textAlign: 'center', ...style }}
