@@ -24,8 +24,8 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
     const capitalizedMonth = monthName.charAt(0).toUpperCase() + monthName.slice(1);
 
     return {
-        title: `Solunar ${capitalizedMonth} ${year} - Calendar Solunar Pescuit pe Ore`,
-        description: `Calendar solunar ${capitalizedMonth.toLowerCase()} ${year}: vezi cele mai bune ore de pescuit, perioade majore și minore, faze lunare. Solunar ${year} actualizat zilnic pentru ${locationName} și toată România.`,
+        title: `Solunar ${capitalizedMonth} ${year} - Cel Mai Bun Calendar Solunar Pescuit ${year}`,
+        description: `Solunar ${year} pescuit pe ore exacte. Calendar solunar ${capitalizedMonth.toLowerCase()} ${year} cu perioade majore, minore și faze lunare. Calendarul pescarului ${year} actualizat zilnic. Gratuit!`,
         alternates: {
             canonical: 'https://calendarsolunar.ro/',
         }

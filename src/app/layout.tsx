@@ -25,16 +25,16 @@ const openSans = Open_Sans({
 export const metadata: Metadata = {
     metadataBase: new URL('https://calendarsolunar.ro'),
     title: {
-        default: 'Calendar Pescuit 2026 - Solunar pe Ore | Când Trage Peștele',
-        template: '%s | Calendar Solunar'
+        default: 'Solunar 2026 Pescuit pe Ore - Calendar Solunar | Când Trage Peștele',
+        template: '%s | Calendar Solunar Pescuit'
     },
     description: "Calendar solunar 2026 cu ore exacte de pescuit. Solunar pe luni, perioade majore și minore, faze lunare și prognoză 14 zile. Gratuit pentru toată România!",
     keywords: [
-        "solunar 2026", "calendar solunar", "solunar pescuit",
+        "solunar 2026", "solunar pescuit 2026", "calendar solunar",
         "calendar solunar 2026", "solunar pescuit pe ore", "calendar pescuit 2026",
-        "cel mai bun solunar 2026", "solunar azi", "cand trage pestele",
-        "solunar martie 2026", "solunar aprilie 2026",
-        "faze lunare pescuit", "perioade majore solunar",
+        "cel mai bun solunar 2026", "calendarul pescarului 2026", "solunar azi",
+        "cand trage pestele", "solunar martie 2026", "solunar aprilie 2026",
+        "solunar pescuit", "faze lunare pescuit", "perioade majore solunar",
         "solunar romania", "calendar lunar pescuit"
     ],
     openGraph: {

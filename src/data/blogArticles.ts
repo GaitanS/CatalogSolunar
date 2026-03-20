@@ -7832,17 +7832,17 @@ După 15 martie, concentrează-te pe crap și caras — ei iau locul prădători
     },
     {
         slug: 'solunar-aprilie-2026-ghid',
-        title: 'Calendar Solunar Aprilie 2026 - Ghid Complet Pescuit',
-        excerpt: 'Aprilie 2026: primăvara în forță. Peștii sunt flămânzi, apele calde, sezonul bate la ușă.',
+        title: 'Solunar Aprilie 2026 - Cele Mai Bune Zile de Pescuit în Aprilie',
+        excerpt: 'Solunar aprilie 2026: vezi zilele cu activitate maximă, fazele lunii, perioade majore și minore. Calendar solunar pescuit aprilie 2026 actualizat.',
         date: '2026-02-01',
         author: 'Echipa Calendar Solunar',
         category: 'Calendar',
         readTime: 6,
-        keywords: ['solunar aprilie 2026', 'calendar pescuit aprilie', 'pescuit aprilie', 'luna plina aprilie 2026', 'zile bune pescuit aprilie', 'pescuit primavara aprilie'],
+        keywords: ['solunar aprilie 2026', 'solunar pescuit aprilie 2026', 'calendar solunar aprilie 2026', 'pescuit aprilie 2026', 'luna plina aprilie 2026', 'zile bune pescuit aprilie', 'cel mai bun solunar aprilie'],
         content: `
-Aprilie e luna în care totul prinde viață. Apa trece de 10°C, crapii vin la margine, și fiecare ieșire la pescuit poate fi memorabilă.
+Solunar aprilie 2026 complet: calendarul pescarului pentru aprilie cu toate perioadele majore, minore și fazele lunii. Aprilie e luna în care totul prinde viață — apa trece de 10°C, crapii vin la margine, și fiecare ieșire la pescuit poate fi memorabilă.
 
-## De Ce Aprilie E Excepțional
+## De Ce Aprilie 2026 E Excepțional pentru Pescuit
 
 **1. Temperaturi optime** — Apa 10-16°C. Zona de confort pentru majoritatea speciilor.
 
