@@ -13,6 +13,7 @@ import FAQSection from '@/components/FAQSection';
 import Link from 'next/link';
 import { getAllCities } from '@/data/cities';
 import { getAllArticles } from '@/data/blogArticles';
+import { getAllLocations } from '@/data/fishingLocations';
 
 
 export async function generateMetadata({ searchParams }: { searchParams: Promise<{ loc?: string }> }) {
@@ -365,6 +366,30 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                     </div>
                 </section>
 
+                {/* Locuri de Pescuit - internal links */}
+                <section className="mb-8 md:mb-12">
+                    <h2 className="text-lg md:text-xl font-display font-bold text-white mb-4">Locuri de Pescuit Populare</h2>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+                        {getAllLocations().slice(0, 8).map((loc) => (
+                            <Link
+                                key={loc.slug}
+                                href={`/locuri-pescuit/${loc.slug}`}
+                                className="card-glass p-3 group hover:bg-white/10 transition-colors"
+                            >
+                                <h3 className="text-sm font-bold text-white group-hover:text-moon transition-colors line-clamp-1">
+                                    {loc.name}
+                                </h3>
+                                <p className="text-night-500 text-xs">{loc.county} &bull; {loc.fish.slice(0, 2).join(', ')}</p>
+                            </Link>
+                        ))}
+                    </div>
+                    <div className="text-center mt-4">
+                        <Link href="/locuri-pescuit" className="text-moon text-sm hover:underline">
+                            Vezi toate cele {getAllLocations().length} locuri de pescuit &rarr;
+                        </Link>
+                    </div>
+                </section>
+
                 {/* Articole Populare - internal links for blog */}
                 <section className="mb-8 md:mb-12">
                     <h2 className="text-lg md:text-xl font-display font-bold text-white mb-4">Ghiduri de Pescuit</h2>
@@ -406,6 +431,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                             Calendarul nostru solunar {today.getFullYear()} este actualizat zilnic și calculat pentru coordonatele exacte ale orașului tău din România.
                             Verifică solunar-ul pentru <Link href="/azi" className="text-moon hover:underline">azi</Link>,
                             consultă <Link href="/lunar" className="text-moon hover:underline">fazele lunii</Link>,
+                            explorează <Link href="/locuri-pescuit" className="text-moon hover:underline">locuri de pescuit din România</Link>,
                             sau citește <Link href="/blog/ce-este-calendarul-solunar" className="text-moon hover:underline">ghidul complet despre calendarul solunar</Link>.
                         </p>
                     </div>

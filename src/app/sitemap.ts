@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next';
 import { getAllArticles } from '@/data/blogArticles';
 import { getAllCities } from '@/data/cities';
 import { getAllSpecies } from '@/data/species';
+import { getAllLocations } from '@/data/fishingLocations';
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://calendarsolunar.ro';
@@ -91,5 +92,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
     }));
 
-    return [...staticPages, ...cityPages, ...speciesPages, ...articlePages];
+    // Fishing locations
+    const locations = getAllLocations();
+    const locationIndexPage: MetadataRoute.Sitemap = [
+        {
+            url: `${baseUrl}/locuri-pescuit`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.9,
+        },
+    ];
+    const locationPages: MetadataRoute.Sitemap = locations.map((loc) => ({
+        url: `${baseUrl}/locuri-pescuit/${loc.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'daily' as const,
+        priority: 0.85,
+    }));
+
+    return [...staticPages, ...cityPages, ...speciesPages, ...articlePages, ...locationIndexPage, ...locationPages];
 }

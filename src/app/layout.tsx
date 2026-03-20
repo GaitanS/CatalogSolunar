@@ -113,6 +113,7 @@ export default function RootLayout({
                                 <a href="/" className="text-white hover:text-moon transition-colors">Acasă</a>
                                 <a href="/azi" className="text-night-300 hover:text-moon transition-colors">Solunar Azi</a>
                                 <a href="/lunar" className="text-night-300 hover:text-moon transition-colors">Faze Lunare</a>
+                                <a href="/locuri-pescuit" className="text-night-300 hover:text-moon transition-colors">Locuri Pescuit</a>
                                 <a href="/blog" className="text-night-300 hover:text-moon transition-colors">Ghiduri</a>
                                 <a href="/despre" className="text-night-300 hover:text-moon transition-colors">Despre</a>
                             </nav>
@@ -146,6 +147,7 @@ export default function RootLayout({
                                 <ul className="space-y-2 text-sm text-night-400">
                                     <li><a href="/azi" className="hover:text-moon transition-colors">Solunar Azi</a></li>
                                     <li><a href="/lunar" className="hover:text-moon transition-colors">Calendar Lunar</a></li>
+                                    <li><a href="/locuri-pescuit" className="hover:text-moon transition-colors">Locuri de Pescuit</a></li>
                                     <li><a href="/blog" className="hover:text-moon transition-colors">Articole și Ghiduri</a></li>
                                     <li><a href="/contact" className="hover:text-moon transition-colors">Contact</a></li>
                                 </ul>
