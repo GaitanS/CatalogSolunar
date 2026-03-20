@@ -10,6 +10,9 @@ import ScheduleCard from '@/components/ScheduleCard';
 import AdUnit from '@/components/AdUnit';
 import LazyAdUnit from '@/components/LazyAdUnit';
 import FAQSection from '@/components/FAQSection';
+import Link from 'next/link';
+import { getAllCities } from '@/data/cities';
+import { getAllArticles } from '@/data/blogArticles';
 
 
 export async function generateMetadata({ searchParams }: { searchParams: Promise<{ loc?: string }> }) {
@@ -21,8 +24,8 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
     const capitalizedMonth = monthName.charAt(0).toUpperCase() + monthName.slice(1);
 
     return {
-        title: `Solunar ${capitalizedMonth} ${year} ${locationName} - Pescuit pe Ore`,
-        description: `Vezi Solunar ${capitalizedMonth} ${year} pentru ${locationName}. Activitate majoră și minoră detaliată, prognoză pescuit 14 zile și fazele lunii actualizate.`,
+        title: `Solunar ${capitalizedMonth} ${year} - Calendar Solunar Pescuit pe Ore`,
+        description: `Calendar solunar ${capitalizedMonth.toLowerCase()} ${year}: vezi cele mai bune ore de pescuit, perioade majore și minore, faze lunare. Solunar ${year} actualizat zilnic pentru ${locationName} și toată România.`,
         alternates: {
             canonical: 'https://calendarsolunar.ro/',
         }
@@ -64,10 +67,10 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 <div className="flex flex-col items-center md:flex-row md:items-end md:justify-between mb-4 md:mb-8 gap-3 md:gap-4 text-center md:text-left relative z-50">
                     <div>
                         <h1 className="text-2xl md:text-5xl font-display font-bold text-white mb-1 drop-shadow-lg">
-                            Calendar Solunar <span className="text-amber-400">{locationName}</span>
+                            Solunar <span className="text-amber-400">{today.toLocaleDateString('ro-RO', { month: 'long' }).charAt(0).toUpperCase() + today.toLocaleDateString('ro-RO', { month: 'long' }).slice(1)} {today.getFullYear()}</span> {locationName}
                         </h1>
                         <p className="text-night-400 text-xs md:text-base">
-                            {today.toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' })}
+                            Calendar solunar pescuit &bull; {today.toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' })}
                         </p>
                     </div>
                     <div className="scale-90 md:scale-100 origin-center md:origin-right">
@@ -321,6 +324,92 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                         </p>
                     </div>
                 </div>
+
+                {/* Solunar pe Luni - target monthly search queries */}
+                <section className="mb-8 md:mb-12">
+                    <h2 className="text-lg md:text-xl font-display font-bold text-white mb-4">Solunar {today.getFullYear()} pe Luni</h2>
+                    <div className="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-3">
+                        {['februarie', 'martie', 'aprilie', 'mai', 'iunie', 'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie'].map((luna) => {
+                            const monthIndex = ['ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie', 'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie'].indexOf(luna);
+                            const isCurrent = monthIndex === today.getMonth();
+                            return (
+                                <Link
+                                    key={luna}
+                                    href={`/blog/solunar-${luna}-${today.getFullYear()}-ghid`}
+                                    className={`p-2 md:p-3 rounded-xl text-center text-xs md:text-sm font-medium transition-colors ${isCurrent
+                                        ? 'bg-moon/20 border border-moon/50 text-moon'
+                                        : 'bg-white/5 hover:bg-white/10 text-night-300 hover:text-white'
+                                    }`}
+                                >
+                                    {luna.charAt(0).toUpperCase() + luna.slice(1)}
+                                </Link>
+                            );
+                        })}
+                    </div>
+                </section>
+
+                {/* Orașe Populare - internal links for city pages */}
+                <section className="mb-8 md:mb-12">
+                    <h2 className="text-lg md:text-xl font-display font-bold text-white mb-4">Calendar Solunar pe Orașe</h2>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
+                        {getAllCities().slice(0, 12).map((city) => (
+                            <Link
+                                key={city.slug}
+                                href={`/${city.slug}`}
+                                className="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition-colors"
+                            >
+                                <p className="text-white font-bold text-sm">{city.name}</p>
+                                <p className="text-night-400 text-xs">{city.county}</p>
+                            </Link>
+                        ))}
+                    </div>
+                </section>
+
+                {/* Articole Populare - internal links for blog */}
+                <section className="mb-8 md:mb-12">
+                    <h2 className="text-lg md:text-xl font-display font-bold text-white mb-4">Ghiduri de Pescuit</h2>
+                    <div className="grid md:grid-cols-3 gap-3 md:gap-4">
+                        {getAllArticles().slice(0, 6).map((article) => (
+                            <Link
+                                key={article.slug}
+                                href={`/blog/${article.slug}`}
+                                className="card-glass p-4 group hover:bg-white/10 transition-colors"
+                            >
+                                <h3 className="text-sm font-bold text-white group-hover:text-moon transition-colors line-clamp-2 mb-1">
+                                    {article.title}
+                                </h3>
+                                <p className="text-night-500 text-xs">{article.readTime} min citire</p>
+                            </Link>
+                        ))}
+                    </div>
+                    <div className="text-center mt-4">
+                        <Link href="/blog" className="text-moon text-sm hover:underline">
+                            Vezi toate ghidurile &rarr;
+                        </Link>
+                    </div>
+                </section>
+
+                {/* SEO Text Content */}
+                <section className="mb-8 md:mb-12 card-panel p-6 md:p-8">
+                    <h2 className="text-lg md:text-xl font-display font-bold text-white mb-3">Ce este Calendarul Solunar?</h2>
+                    <div className="text-night-300 text-sm leading-relaxed space-y-3">
+                        <p>
+                            Calendarul solunar este un instrument esențial pentru pescari, bazat pe teoria dezvoltată de John Alden Knight în 1926.
+                            Acesta calculează perioadele de activitate maximă a peștilor în funcție de pozițiile Soarelui și Lunii.
+                        </p>
+                        <p>
+                            <strong className="text-white">Perioadele majore</strong> durează aproximativ 2 ore și coincid cu tranzitul lunar și cu luna opusă.
+                            <strong className="text-white"> Perioadele minore</strong> durează circa 1 oră și apar la răsăritul și apusul lunii.
+                            În aceste intervale, peștii sunt semnificativ mai activi și mai predispuși să muște.
+                        </p>
+                        <p>
+                            Calendarul nostru solunar {today.getFullYear()} este actualizat zilnic și calculat pentru coordonatele exacte ale orașului tău din România.
+                            Verifică solunar-ul pentru <Link href="/azi" className="text-moon hover:underline">azi</Link>,
+                            consultă <Link href="/lunar" className="text-moon hover:underline">fazele lunii</Link>,
+                            sau citește <Link href="/blog/ce-este-calendarul-solunar" className="text-moon hover:underline">ghidul complet despre calendarul solunar</Link>.
+                        </p>
+                    </div>
+                </section>
 
                 {/* FAQ Section with Schema Markup */}
                 <FAQSection />
