@@ -16,13 +16,7 @@ const nextConfig = {
         optimizePackageImports: ['three', 'suncalc'],
     },
     images: {
-        remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: '**',
-            },
-        ],
-        formats: ['image/avif', 'image/webp'],
+        unoptimized: true,
     },
     async headers() {
         return [
