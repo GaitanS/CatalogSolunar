@@ -19,6 +19,7 @@ interface LazyAdUnitProps {
 
 export default function LazyAdUnit(props: LazyAdUnitProps) {
     const [isVisible, setIsVisible] = useState(false);
+    const [adFilled, setAdFilled] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -37,8 +38,22 @@ export default function LazyAdUnit(props: LazyAdUnitProps) {
         return () => observer.disconnect();
     }, []);
 
+    // Check if the ad inside actually filled
+    useEffect(() => {
+        if (!isVisible) return;
+        const timer = setTimeout(() => {
+            if (ref.current) {
+                const ins = ref.current.querySelector('ins');
+                if (ins && ins.getAttribute('data-ad-status') === 'filled') {
+                    setAdFilled(true);
+                }
+            }
+        }, 3500);
+        return () => clearTimeout(timer);
+    }, [isVisible]);
+
     return (
-        <div ref={ref} className={props.className} style={props.style}>
+        <div ref={ref} className={props.className} style={adFilled ? props.style : { minHeight: 0, maxHeight: 0, overflow: 'hidden' }}>
             {isVisible && <AdUnit {...props} />}
         </div>
     );
