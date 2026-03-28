@@ -4,14 +4,21 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import { getAllArticles } from '@/data/blogArticles';
 
 export const metadata: Metadata = {
-    title: 'Ghiduri Pescuit 2026 - Sfaturi, Tehnici și Calendar Solunar',
-    description: 'Cele mai bune ghiduri de pescuit din România. Tehnici pentru crap, șalău, somn, știucă. Calendar solunar, ore optime, echipament și sfaturi practice.',
+    title: 'Ghiduri Pescuit 2026 ✓ Sfaturi, Tehnici și Calendar Solunar',
+    description: '✅ Cele mai bune ghiduri de pescuit din România 2026. Tehnici pentru crap, șalău, somn, știucă, plătică. Ore optime, sezon pescuit, echipament și sfaturi de la experți.',
+    keywords: [
+        'ghid pescuit 2026', 'sfaturi pescuit', 'tehnici pescuit',
+        'pescuit crap', 'pescuit salau', 'pescuit pastrav',
+        'cele mai bune ore pescuit', 'sezon pescuit 2026',
+        'cand se deschide sezonul de pescuit', 'pescuit method feeder',
+        'presiune atmosferica pescuit', 'de ce nu musca pestii',
+    ],
     alternates: {
         canonical: 'https://calendarsolunar.ro/blog',
     },
     openGraph: {
-        title: 'Ghiduri Pescuit 2026 - Sfaturi, Tehnici și Calendar Solunar',
-        description: 'Cele mai bune ghiduri de pescuit din România. Tehnici pentru crap, șalău, somn, știucă.',
+        title: 'Ghiduri Pescuit 2026 — Sfaturi și Tehnici de la Experți',
+        description: 'Cele mai bune ghiduri de pescuit din România: tehnici, ore optime, echipament și calendar solunar.',
         url: 'https://calendarsolunar.ro/blog',
     },
 };

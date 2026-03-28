@@ -27,6 +27,26 @@ const faqData: FAQItem[] = [
     {
         question: "Care este legătura dintre fazele lunii și pescuit?",
         answer: "Fazele lunii influențează direct activitatea peștilor. Luna nouă și luna plină sunt considerate cele mai bune perioade pentru pescuit, când peștii sunt cei mai activi. Primul și ultimul pătrar oferă activitate moderată."
+    },
+    {
+        question: "Cât de precis este calendarul solunar?",
+        answer: "Pe baza studiilor și a experienței pescarilor, solunarul este corect în aproximativ 60-70% din cazuri. Precizia crește atunci când o perioadă majoră solunar coincide cu răsăritul sau apusul soarelui. Alți factori precum presiunea atmosferică, temperatura apei, vântul și nivelul apei pot influența rezultatele."
+    },
+    {
+        question: "Există un solunar pe specii de pești?",
+        answer: "Solunarul este universal pentru toate speciile — se bazează pe influența lunii asupra tuturor organismelor acvatice. Totuși, când temperatura apei scade sub 14-15°C (toamna-iarna), solunarul este mai precis pentru peștii răpitori (șalău, știucă, somn), iar când temperatura depășește 16-17°C (primăvara-vara), acuratețea crește pentru speciile pașnice (crap, caras, plătică)."
+    },
+    {
+        question: "Cum se citește tabelul solunar?",
+        answer: "Tabelul solunar afișează pentru fiecare zi: perioadele majore (2 ore, cele mai intense) și minore (1 oră, activitate bună), rating-ul general de la 1 la 5 stele, faza lunii cu procentul de iluminare, și orele de răsărit/apus pentru soare și lună. Alege zilele cu rating de 4-5 stele și pescuiește în perioadele majore pentru cele mai bune rezultate."
+    },
+    {
+        question: "Ce efect are presiunea atmosferică asupra pescuitului?",
+        answer: "Presiunea atmosferică stabilă sau în ușoară creștere (1013-1025 hPa) oferă cele mai bune condiții de pescuit. Scăderile bruște de presiune fac peștii inactivi, iar creșterile brusce îi activează temporar. Combinând presiunea favorabilă cu perioadele majore solunar, șansele de captură cresc semnificativ."
+    },
+    {
+        question: "Când este cel mai bun moment pentru pescuit în 2026?",
+        answer: "Cele mai bune momente de pescuit în 2026 sunt zilele cu rating solunar de 4-5 stele, când o perioadă majoră solunar coincide cu răsăritul sau apusul soarelui, în condiții de presiune atmosferică stabilă. Verifică calendarul solunar lunar pentru a vedea exact care sunt zilele optime în fiecare lună."
     }
 ];
 

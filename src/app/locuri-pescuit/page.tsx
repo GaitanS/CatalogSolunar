@@ -14,6 +14,9 @@ export const metadata: Metadata = {
         'locuri de pescuit', 'locuri pescuit romania', 'balti de pescuit',
         'lacuri pescuit', 'pescuit romania', 'unde sa pescuiesti',
         'locuri pescuit gratis', 'balti pescuit langa bucuresti',
+        'lac de pescuit', 'balta de pescuit in apropiere',
+        'locuri de pescuit fara taxa', 'iazuri de pescuit',
+        'lacuri de pescuit', 'loc de pescuit',
     ],
     alternates: { canonical: 'https://calendarsolunar.ro/locuri-pescuit' },
     openGraph: {

@@ -9,26 +9,34 @@ import Link from 'next/link';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-    title: 'Solunar Azi - Activitate Pești și Perioade Majore Azi',
-    description: 'Solunar azi: vezi perioadele majore și minore de activitate a peștilor pentru ziua de azi. Faza lunii, răsărit/apus soare și lună, rating pescuit actualizat zilnic.',
-    keywords: [
-        'solunar azi', 'calendar solunar azi', 'activitate pesti azi',
-        'cand trage pestele azi', 'pescuit azi', 'faza lunii azi',
-        'perioade majore azi', 'solunar pescuit azi', 'luna azi pescuit',
-    ],
-    alternates: {
-        canonical: 'https://calendarsolunar.ro/azi',
-    },
-    openGraph: {
-        title: 'Solunar Azi - Ce Pești Sunt Activi?',
-        description: 'Verifică activitatea peștilor pentru ziua de azi. Perioade majore, faza lunii, vremea și recomandări de pescuit.',
-        url: 'https://calendarsolunar.ro/azi',
-        siteName: 'Calendar Solunar',
-        locale: 'ro_RO',
-        type: 'website',
-    },
-};
+export async function generateMetadata(): Promise<Metadata> {
+    const today = new Date();
+    const dayNum = today.getDate();
+    const monthName = today.toLocaleDateString('ro-RO', { month: 'long' });
+    const year = today.getFullYear();
+
+    return {
+        title: `Solunar Azi ${dayNum} ${monthName.charAt(0).toUpperCase() + monthName.slice(1)} ${year} ✓ Ore Exacte Pescuit`,
+        description: `✅ Solunar azi ${dayNum} ${monthName} ${year}: perioade majore și minore, faza lunii, specii active și ore optime de pescuit. Actualizat zilnic, verifică acum!`,
+        keywords: [
+            'solunar azi', 'calendar solunar azi', 'activitate pesti azi',
+            'cand trage pestele azi', 'pescuit azi', 'faza lunii azi',
+            'perioade majore azi', 'solunar pescuit azi', 'luna azi pescuit',
+            'cand musca pestele azi', 'ore pescuit azi',
+        ],
+        alternates: {
+            canonical: 'https://calendarsolunar.ro/azi',
+        },
+        openGraph: {
+            title: `Solunar Azi ${dayNum} ${monthName.charAt(0).toUpperCase() + monthName.slice(1)} — Ce Pești Sunt Activi?`,
+            description: `Verifică solunar-ul pentru azi ${dayNum} ${monthName}: perioade majore, faza lunii, vremea și specii active.`,
+            url: 'https://calendarsolunar.ro/azi',
+            siteName: 'Calendar Solunar',
+            locale: 'ro_RO',
+            type: 'website',
+        },
+    };
+}
 
 export default async function AziPage() {
     const today = new Date();

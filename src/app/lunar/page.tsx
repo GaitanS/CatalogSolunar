@@ -6,12 +6,18 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import AdUnit from '@/components/AdUnit';
 
 export const metadata: Metadata = {
-    title: 'Calendar Lunar 2026 - Fazele Lunii și Pescuit',
-    description: 'Calendar lunar complet 2026: fazele lunii zi de zi, procent iluminare, lună plină și nouă. Cum influențează luna pescuitul și rating solunar zilnic.',
+    title: 'Calendar Lunar 2026 ✓ Fazele Lunii și Influența asupra Pescuitului',
+    description: '✅ Calendar lunar 2026 complet: fazele lunii zi de zi, procent iluminare, lună plină și nouă. Vezi cum influențează luna pescuitul și rating-ul solunar zilnic!',
+    keywords: [
+        'calendar lunar 2026', 'fazele lunii', 'calendar lunar',
+        'calendar lunar azi', 'luna plina', 'luna noua',
+        'calendar fazele lunii', 'faze lunare pescuit',
+        'calendar lunar fazele lunii', 'luna azi',
+    ],
     alternates: { canonical: 'https://calendarsolunar.ro/lunar' },
     openGraph: {
-        title: 'Calendar Lunar 2026 - Fazele Lunii și Pescuit',
-        description: 'Calendar lunar complet 2026: fazele lunii zi de zi, procent iluminare, lună plină și nouă.',
+        title: 'Calendar Lunar 2026 — Fazele Lunii și Pescuit',
+        description: 'Fazele lunii 2026 zi de zi: procent iluminare, lună plină și nouă. Cum influențează luna pescuitul.',
         url: 'https://calendarsolunar.ro/lunar',
     },
 };

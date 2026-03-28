@@ -25,11 +25,16 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
     const capitalizedMonth = monthName.charAt(0).toUpperCase() + monthName.slice(1);
 
     return {
-        title: `Solunar ${capitalizedMonth} ${year} - Cel Mai Bun Calendar Solunar Pescuit ${year}`,
-        description: `Solunar ${year} pescuit pe ore exacte. Calendar solunar ${capitalizedMonth.toLowerCase()} ${year} cu perioade majore, minore și faze lunare. Calendarul pescarului ${year} actualizat zilnic. Gratuit!`,
+        title: `Solunar ${capitalizedMonth} ${year} ✓ Cel Mai Bun Calendar Solunar Pescuit ${year}`,
+        description: `✅ Solunar ${capitalizedMonth.toLowerCase()} ${year} cu ore exacte de pescuit. Perioade majore și minore, faze lunare, tabel solunar și prognoză 14 zile. Calendarul pescarului ${year} actualizat zilnic — 100% gratuit!`,
         alternates: {
             canonical: 'https://calendarsolunar.ro/',
-        }
+        },
+        openGraph: {
+            title: `Solunar ${capitalizedMonth} ${year} — Calendar Pescuit pe Ore Exacte`,
+            description: `Cel mai bun solunar ${year}: perioade majore, faze lunare, specii active. Actualizat zilnic, gratuit!`,
+            url: 'https://calendarsolunar.ro/',
+        },
     };
 }
 
@@ -433,6 +438,44 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                             consultă <Link href="/lunar" className="text-moon hover:underline">fazele lunii</Link>,
                             explorează <Link href="/locuri-pescuit" className="text-moon hover:underline">locuri de pescuit din România</Link>,
                             sau citește <Link href="/blog/ce-este-calendarul-solunar" className="text-moon hover:underline">ghidul complet despre calendarul solunar</Link>.
+                        </p>
+                    </div>
+                </section>
+
+                {/* Cum se citeste solunarul - educational content for SEO depth */}
+                <section className="mb-8 md:mb-12 card-panel p-6 md:p-8">
+                    <h2 className="text-lg md:text-xl font-display font-bold text-white mb-3">Cum se Citește Tabelul Solunar?</h2>
+                    <div className="text-night-300 text-sm leading-relaxed space-y-3">
+                        <p>
+                            Pentru a folosi eficient calendarul solunar, trebuie să înțelegi cele 3 elemente cheie:
+                        </p>
+                        <ul className="list-disc list-inside space-y-2 pl-2">
+                            <li><strong className="text-amber-400">Perioadele majore</strong> — durează ~2 ore, sunt cele mai intense momente de activitate. Coincid cu tranzitul lunar (luna direct deasupra sau sub orizont). Prioritizează aceste ferestre!</li>
+                            <li><strong className="text-cyan-400">Perioadele minore</strong> — durează ~1 oră, activitate bună dar mai puțin intensă. Apar la răsăritul și apusul lunii.</li>
+                            <li><strong className="text-white">Rating-ul zilnic</strong> (1-5 stele) — combină faza lunii, durata perioadelor și alinierea cu răsăritul/apusul soarelui. Zilele cu 4-5 stele sunt optime.</li>
+                        </ul>
+                        <p>
+                            <strong className="text-white">Sfat pro:</strong> Cel mai bun moment de pescuit este când o <em>perioadă majoră solunar</em> coincide cu răsăritul sau apusul soarelui.
+                            În aceste momente, activitatea peștilor poate fi de 3-4 ori mai mare decât în mod normal. Solunarul este corect în aproximativ 60-70% din cazuri,
+                            dar combinat cu presiune atmosferică stabilă (1013-1025 hPa) și vânt slab, rata de succes crește considerabil.
+                        </p>
+                    </div>
+                </section>
+
+                {/* Sezon Pescuit - target seasonal queries */}
+                <section className="mb-8 md:mb-12 card-panel p-6 md:p-8">
+                    <h2 className="text-lg md:text-xl font-display font-bold text-white mb-3">Sezon Pescuit {today.getFullYear()} — Când se Deschide?</h2>
+                    <div className="text-night-300 text-sm leading-relaxed space-y-3">
+                        <p>
+                            <strong className="text-white">Sezonul de pescuit {today.getFullYear()}</strong> este deschis tot anul pentru speciile comune (crap, caras, plătică, babușcă).
+                            Prohibiția generală pentru răpitori (șalău, știucă, somn) se aplică de obicei între 15 aprilie - 15 iunie,
+                            iar pentru păstrăv între 1 octombrie - 30 aprilie.
+                        </p>
+                        <p>
+                            Pentru cele mai bune rezultate, combină informațiile despre <strong className="text-white">sezonul de pescuit</strong> cu
+                            calendarul solunar. Perioadele majore și minore din tabelul solunar îți arată orele exacte când peștii sunt cei mai activi,
+                            indiferent de sezon. Consultă <Link href="/blog/cele-mai-bune-ore-pescuit-2026" className="text-moon hover:underline">ghidul orelor optime de pescuit {today.getFullYear()}</Link> pentru
+                            detalii complete pe luni și specii.
                         </p>
                     </div>
                 </section>
