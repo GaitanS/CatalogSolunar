@@ -129,11 +129,13 @@ function SpeciesJsonLd({ species }: { species: { name: string; slug: string; sci
 }
 
 // Species FAQ Schema
-function SpeciesFAQSchema({ species }: { species: { name: string; season: string; bestMoonPhase: string; bestTime: string; bait: string[] } }) {
+function SpeciesFAQSchema({ species }: { species: { name: string; season: string; bestMoonPhase: string; bestTime: string; bait: string[]; techniques: string[]; habitat: string } }) {
     const faqs = [
         { question: `Cand trage ${species.name.toLowerCase()}ul cel mai bine?`, answer: `${species.name} este cel mai activ in perioadele solunar majore, in special ${species.bestTime}. Sezonul optim este ${species.season}.` },
         { question: `Care este cea mai buna faza lunara pentru ${species.name.toLowerCase()}?`, answer: `Pentru ${species.name.toLowerCase()}, cele mai bune faze lunare sunt: ${species.bestMoonPhase}.` },
         { question: `Ce momeli folosesc pentru ${species.name.toLowerCase()}?`, answer: `Cele mai eficiente momeli pentru ${species.name.toLowerCase()} sunt: ${species.bait.slice(0, 4).join(', ')}.` },
+        { question: `Ce tehnici de pescuit sunt recomandate pentru ${species.name.toLowerCase()}?`, answer: `Tehnicile recomandate pentru ${species.name.toLowerCase()} sunt: ${species.techniques.slice(0, 4).join(', ')}. Alegerea tehnicii depinde de sezon, tipul apei si conditiile meteo.` },
+        { question: `Unde gasesc ${species.name.toLowerCase()} in Romania?`, answer: `${species.habitat} Verifica calendarul solunar pentru orele optime de pescuit calculate pe coordonatele exacte ale locatiei tale.` },
     ];
     const jsonLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(faq => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } })) };
     return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />;
@@ -402,15 +404,27 @@ function SpeciesPageContent({ species }: { species: ReturnType<typeof getSpecies
                 </div>
 
                 <div className="card-panel p-6 md:p-8 mb-8">
-                    <h2 className="text-2xl font-display font-bold text-white mb-6">Intrebari Frecvente</h2>
+                    <h2 className="text-2xl font-display font-bold text-white mb-6">Intrebari Frecvente — Pescuit {species.name}</h2>
                     <div className="space-y-4">
                         <div className="border-b border-night-800 pb-4">
                             <h3 className="text-lg font-bold text-amber-400 mb-2">Cand trage {species.name.toLowerCase()}ul cel mai bine?</h3>
                             <p className="text-night-300 text-sm">{species.name} este cel mai activ in perioadele solunar majore, in special {species.bestTime}. Sezonul optim este {species.season}.</p>
                         </div>
                         <div className="border-b border-night-800 pb-4">
-                            <h3 className="text-lg font-bold text-amber-400 mb-2">Ce momeli folosesc?</h3>
-                            <p className="text-night-300 text-sm">Cele mai eficiente momeli: {species.bait.slice(0, 4).join(', ')}.</p>
+                            <h3 className="text-lg font-bold text-amber-400 mb-2">Ce momeli folosesc pentru {species.name.toLowerCase()}?</h3>
+                            <p className="text-night-300 text-sm">Cele mai eficiente momeli pentru {species.name.toLowerCase()}: {species.bait.join(', ')}. Alegerea momelii depinde de sezon si temperatura apei.</p>
+                        </div>
+                        <div className="border-b border-night-800 pb-4">
+                            <h3 className="text-lg font-bold text-amber-400 mb-2">Care este cea mai buna faza lunara?</h3>
+                            <p className="text-night-300 text-sm">Cele mai bune faze lunare pentru {species.name.toLowerCase()} sunt: {species.bestMoonPhase}. Consulta <Link href="/lunar" className="text-moon hover:underline">calendarul lunar</Link> pentru a vedea faza curenta.</p>
+                        </div>
+                        <div className="border-b border-night-800 pb-4">
+                            <h3 className="text-lg font-bold text-amber-400 mb-2">Ce tehnici de pescuit functioneaza?</h3>
+                            <p className="text-night-300 text-sm">Tehnicile recomandate: {species.techniques.join(', ')}. Adapteaza tehnica in functie de tipul apei si sezon.</p>
+                        </div>
+                        <div className="pb-2">
+                            <h3 className="text-lg font-bold text-amber-400 mb-2">Unde gasesc {species.name.toLowerCase()} in Romania?</h3>
+                            <p className="text-night-300 text-sm">{species.habitat} Exploreaza <Link href="/locuri-pescuit" className="text-moon hover:underline">locurile de pescuit din Romania</Link> cu calendar solunar calculat pe GPS.</p>
                         </div>
                     </div>
                 </div>

@@ -213,6 +213,91 @@ export default function LunarPage() {
                     </div>
                 </div>
 
+                {/* SEO Content - Fazele Lunii */}
+                <section className="mt-12 mb-8 card-panel p-6 md:p-8 max-w-4xl mx-auto">
+                    <h2 className="text-lg md:text-xl font-display font-bold text-white mb-3">Cum Influențează Fazele Lunii Pescuitul?</h2>
+                    <div className="text-night-300 text-sm leading-relaxed space-y-3">
+                        <p>
+                            <strong className="text-white">Fazele lunii</strong> au un impact direct asupra comportamentului peștilor, demonstrat atât de teoria solunar
+                            a lui John Alden Knight cât și de experiența pescarilor de-a lungul secolelor. Luna influențează mareele, presiunea
+                            atmosferică subtilă și nivelul de lumină nocturnă — toți factori care afectează hrănirea peștilor.
+                        </p>
+                        <p>
+                            <strong className="text-amber-400">Luna Nouă și Luna Plină</strong> sunt considerate cele mai bune perioade pentru pescuit,
+                            cu rating solunar de 4-5 stele. În aceste faze, forțele gravitaționale combinate ale Soarelui și Lunii sunt maxime,
+                            stimulând activitatea peștilor. <strong className="text-cyan-400">Primul și Ultimul Pătrar</strong> oferă activitate moderată (3 stele).
+                        </p>
+                        <p>
+                            Calendarul lunar de mai sus afișează pentru fiecare zi: faza lunii exactă, procentul de iluminare și rating-ul solunar
+                            calculat pe baza algoritmilor astronomici. Folosește-l împreună cu <a href="/" className="text-moon hover:underline">calendarul solunar complet</a> pentru
+                            a planifica sesiunile de pescuit în cele mai productive zile ale lunii.
+                        </p>
+                    </div>
+                </section>
+
+                {/* SEO Content - Detalii Faze Lunare */}
+                <section className="mb-8 card-panel p-6 md:p-8 max-w-4xl mx-auto">
+                    <h2 className="text-lg md:text-xl font-display font-bold text-white mb-3">Ghid Complet: Cele 4 Faze Lunare și Pescuitul</h2>
+                    <div className="text-night-300 text-sm leading-relaxed space-y-4">
+                        <div>
+                            <h3 className="text-base font-bold text-amber-400 mb-1">Luna Nouă — Rating 5/5</h3>
+                            <p>
+                                În faza de <strong className="text-white">lună nouă</strong>, discul lunar nu este vizibil pe cer. Întunericul nocturn stimulează
+                                prădătorii nocturn — somnul, șalăul și bibanul devin extrem de activi. Forța gravitațională combinată a Lunii și Soarelui
+                                (care se află pe aceeași parte a Pământului) creează cele mai puternice efecte de maree, activând instinctul de hrănire
+                                al peștilor. Este perioada ideală pentru pescuitul de noapte al răpitorilor.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 className="text-base font-bold text-white mb-1">Primul Pătrar — Rating 3/5</h3>
+                            <p>
+                                <strong className="text-white">Primul pătrar</strong> marchează jumătatea drumului între luna nouă și luna plină. Luna este
+                                iluminată 50% și apune în jurul miezului nopții. Activitatea peștilor este moderată, dar consistentă. Specii ca păstrăvul,
+                                cleanul și bibanul răspund bine în această fază. Orele de dimineață devreme și amurg rămân cele mai productive.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 className="text-base font-bold text-amber-400 mb-1">Luna Plină — Rating 5/5</h3>
+                            <p>
+                                <strong className="text-white">Luna plină</strong> este una dintre cele mai bune perioade pentru pescuit. Lumina puternică
+                                nocturnă permite peștilor să se hrănească activ toată noaptea, iar forțele gravitaționale sunt din nou la maxim.
+                                Crapul, linul și fitofagul sunt deosebit de activi. Peștii care s-au hrănit noaptea pot fi mai puțin activi dimineața,
+                                dar perioadele solunar majore rămân productive. Este excelentă pentru sesiunile de noapte cu boilies sau method feeder.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 className="text-base font-bold text-white mb-1">Ultimul Pătrar — Rating 3/5</h3>
+                            <p>
+                                <strong className="text-white">Ultimul pătrar</strong> oferă activitate moderată, similară primului pătrar. Luna răsare
+                                la miezul nopții și este vizibilă dimineața. Carasul și babușca rămân activi, iar șalăul poate fi prins eficient
+                                la zorii zilei. Presiunea atmosferică joacă un rol mai important în această fază — zilele cu presiune stabilă
+                                (1013-1025 hPa) compensează efectul lunar mai slab.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Specii și Fazele Lunare */}
+                <section className="mb-8 card-panel p-6 md:p-8 max-w-4xl mx-auto">
+                    <h2 className="text-lg md:text-xl font-display font-bold text-white mb-3">Ce Pești Trag în Funcție de Faza Lunii?</h2>
+                    <div className="text-night-300 text-sm leading-relaxed space-y-3">
+                        <p>
+                            Fiecare specie de pește reacționează diferit la fazele lunare. Iată un ghid rapid bazat pe teoria solunar și experiența
+                            pescarilor din România:
+                        </p>
+                        <ul className="list-disc list-inside space-y-2 pl-2">
+                            <li><strong className="text-white">Luna Nouă:</strong> <a href="/pescuit-somn" className="text-moon hover:underline">somn</a>, <a href="/pescuit-salau" className="text-moon hover:underline">șalău</a>, <a href="/pescuit-stiuca" className="text-moon hover:underline">știucă</a> — prădătorii nocturn profită de întunericul total</li>
+                            <li><strong className="text-white">Luna Plină:</strong> <a href="/pescuit-crap" className="text-moon hover:underline">crap</a>, <a href="/pescuit-lin" className="text-moon hover:underline">lin</a>, <a href="/pescuit-fitofag" className="text-moon hover:underline">fitofag</a> — se hrănesc activ noaptea sub lumina lunii</li>
+                            <li><strong className="text-white">Primul Pătrar:</strong> <a href="/pescuit-pastrav" className="text-moon hover:underline">păstrăv</a>, <a href="/pescuit-clean" className="text-moon hover:underline">clean</a>, <a href="/pescuit-biban" className="text-moon hover:underline">biban</a> — activitate moderată, ideale pentru spinning ultralight</li>
+                            <li><strong className="text-white">Ultimul Pătrar:</strong> <a href="/pescuit-caras" className="text-moon hover:underline">caras</a>, <a href="/pescuit-babusca" className="text-moon hover:underline">babușcă</a>, <a href="/pescuit-platica" className="text-moon hover:underline">plătică</a> — specii care se hrănesc constant, bune pentru feeder</li>
+                        </ul>
+                        <p>
+                            Pentru prognoză completă cu perioade majore și minore calculate pe ore, consultă <a href="/" className="text-moon hover:underline">calendarul solunar</a> sau
+                            verifică <a href="/azi" className="text-moon hover:underline">solunar-ul de azi</a>.
+                        </p>
+                    </div>
+                </section>
+
                 {/* Bottom Ad */}
                 <AdUnit slotId="2812628769" format="auto" className="my-12" />
 

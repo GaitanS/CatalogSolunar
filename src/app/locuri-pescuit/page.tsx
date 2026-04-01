@@ -133,7 +133,7 @@ export default function LocuriPescuitPage() {
                 <LazyAdUnit slotId="1044977874" format="auto" layout="in-article" className="min-h-[120px] mt-8" label="Reclama" />
 
                 <div className="card-panel p-6 md:p-8 mt-8">
-                    <h2 className="text-xl font-display font-bold text-white mb-4">Despre Locurile de Pescuit</h2>
+                    <h2 className="text-xl font-display font-bold text-white mb-4">Despre Locurile de Pescuit din Romania</h2>
                     <div className="text-night-300 text-sm leading-relaxed space-y-3">
                         <p>
                             Romania dispune de o retea extraordinara de ape interioare, de la raurile montane populate cu pastrav si lipan,
@@ -145,6 +145,63 @@ export default function LocuriPescuitPage() {
                             oferindu-ti cele mai precise ore de activitate a pestilor. Foloseste <Link href="/" className="text-amber-400 hover:underline">calendarul solunar</Link> pentru
                             a planifica urmatoarea sesiune de pescuit.
                         </p>
+                    </div>
+                </div>
+
+                {/* Tipuri de ape */}
+                <div className="card-panel p-6 md:p-8 mt-6">
+                    <h2 className="text-xl font-display font-bold text-white mb-4">Ghid pe Tipuri de Ape</h2>
+                    <div className="text-night-300 text-sm leading-relaxed space-y-4">
+                        <div>
+                            <h3 className="text-base font-bold text-blue-400 mb-1">Lacuri si Acumulari</h3>
+                            <p>
+                                Lacurile de acumulare (Izvorul Muntelui, Vidraru, Siriu) sunt excelente pentru <Link href="/pescuit-salau" className="text-amber-400 hover:underline">salau</Link>,
+                                {' '}<Link href="/pescuit-stiuca" className="text-amber-400 hover:underline">stiuca</Link> si <Link href="/pescuit-crap" className="text-amber-400 hover:underline">crap</Link>.
+                                Adancimea variata si structura fundului ofera habitate diverse. Perioadele solunar majore sunt deosebit de eficiente
+                                in aceste ape, deoarece pestii migreaza vertical in functie de tranzitul lunar.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 className="text-base font-bold text-emerald-400 mb-1">Balti si Iazuri</h3>
+                            <p>
+                                Baltile amenajate si iazurile sunt ideale pentru <Link href="/pescuit-crap" className="text-amber-400 hover:underline">crap</Link>,
+                                {' '}<Link href="/pescuit-caras" className="text-amber-400 hover:underline">caras</Link>,
+                                {' '}<Link href="/pescuit-lin" className="text-amber-400 hover:underline">lin</Link> si
+                                {' '}<Link href="/pescuit-fitofag" className="text-amber-400 hover:underline">fitofag</Link>.
+                                Apa relativ mica face ca perioadele minore solunar sa fie la fel de productive ca cele majore.
+                                Majoritatea baltilor din Romania ofera conditii bune pentru pescuitul la feeder si method feeder.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 className="text-base font-bold text-indigo-400 mb-1">Rauri si Dunarea</h3>
+                            <p>
+                                Dunarea si raurile mari (Olt, Mures, Siret, Prut) adapostesc <Link href="/pescuit-somn" className="text-amber-400 hover:underline">somn</Link>,
+                                {' '}<Link href="/pescuit-salau" className="text-amber-400 hover:underline">salau</Link> si
+                                {' '}<Link href="/pescuit-platica" className="text-amber-400 hover:underline">platica</Link> de dimensiuni impresionante.
+                                Raurile montane sunt domeniul <Link href="/pescuit-pastrav" className="text-amber-400 hover:underline">pastravului</Link> si al
+                                {' '}<Link href="/pescuit-clean" className="text-amber-400 hover:underline">cleanului</Link>.
+                                Curentul influenteaza modul in care pestii raspund la perioadele solunar — cauta zonele cu curent mai slab in perioadele majore.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* FAQ Locuri Pescuit */}
+                <div className="card-panel p-6 md:p-8 mt-6">
+                    <h2 className="text-xl font-display font-bold text-white mb-4">Intrebari Frecvente</h2>
+                    <div className="space-y-4">
+                        <div className="border-b border-night-800 pb-4">
+                            <h3 className="text-base font-bold text-amber-400 mb-2">Unde pot pescui gratuit in Romania?</h3>
+                            <p className="text-night-300 text-sm">Majoritatea raurilor si lacurilor naturale din Romania permit pescuitul gratuit cu permis AJVPS. Dunarea, raurile montane si multe lacuri de acumulare sunt accesibile cu permisul anual. Baltile private necesita taxa separata.</p>
+                        </div>
+                        <div className="border-b border-night-800 pb-4">
+                            <h3 className="text-base font-bold text-amber-400 mb-2">Cum aleg cel mai bun loc de pescuit?</h3>
+                            <p className="text-night-300 text-sm">Alege locul in functie de specia tinta: lacuri si balti pentru crap si caras, rauri montane pentru pastrav, acumulari pentru salau, Dunarea pentru somn. Verifica <Link href="/" className="text-amber-400 hover:underline">calendarul solunar</Link> pentru orele optime la fiecare locatie.</p>
+                        </div>
+                        <div className="pb-2">
+                            <h3 className="text-base font-bold text-amber-400 mb-2">De ce difera datele solunar de la un loc la altul?</h3>
+                            <p className="text-night-300 text-sm">Calendarul solunar este calculat pe baza coordonatelor GPS ale fiecarei locatii. Tranzitul lunar (momentul cand luna se afla direct deasupra) difera in functie de longitudine, iar rasaritul/apusul lunii variaza cu latitudinea. De aceea oferim date specifice pentru fiecare loc de pescuit.</p>
+                        </div>
                     </div>
                 </div>
             </div>

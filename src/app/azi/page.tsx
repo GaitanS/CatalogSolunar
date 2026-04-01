@@ -244,6 +244,52 @@ export default async function AziPage() {
                     </div>
                 </div>
 
+                {/* Specii Populare */}
+                <div className="card-panel p-6 md:p-8 mb-8">
+                    <h2 className="text-xl font-display font-bold text-white mb-4">Ghiduri pe Specii de Pești</h2>
+                    <p className="text-night-400 text-sm mb-4">Află când trage fiecare specie, ce momeli să folosești și care sunt perioadele solunar optime:</p>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                        {[
+                            { name: 'Crap', slug: 'pescuit-crap', icon: '🐟' },
+                            { name: 'Șalău', slug: 'pescuit-salau', icon: '🐠' },
+                            { name: 'Somn', slug: 'pescuit-somn', icon: '🐋' },
+                            { name: 'Știucă', slug: 'pescuit-stiuca', icon: '🐊' },
+                            { name: 'Păstrăv', slug: 'pescuit-pastrav', icon: '🐟' },
+                            { name: 'Caras', slug: 'pescuit-caras', icon: '🐟' },
+                            { name: 'Biban', slug: 'pescuit-biban', icon: '🐠' },
+                            { name: 'Plătică', slug: 'pescuit-platica', icon: '🐟' },
+                        ].map(fish => (
+                            <Link key={fish.slug} href={`/${fish.slug}`} className="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition-colors text-center">
+                                <span className="text-lg">{fish.icon}</span>
+                                <p className="text-white font-bold text-sm mt-1">{fish.name}</p>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+
+                {/* FAQ Solunar Azi */}
+                <div className="card-panel p-6 md:p-8 mb-8">
+                    <h2 className="text-xl font-display font-bold text-white mb-4">Întrebări Frecvente — Solunar Azi</h2>
+                    <div className="space-y-4">
+                        <div className="border-b border-night-800 pb-4">
+                            <h3 className="text-base font-bold text-amber-400 mb-2">Când mușcă peștele cel mai bine azi?</h3>
+                            <p className="text-night-300 text-sm">Peștele mușcă cel mai bine în perioadele majore solunar (durată ~2 ore) afișate mai sus. Acestea coincid cu tranzitul lunar și oferă cea mai intensă activitate. Perioadele minore (~1 oră) sunt de asemenea productive.</p>
+                        </div>
+                        <div className="border-b border-night-800 pb-4">
+                            <h3 className="text-base font-bold text-amber-400 mb-2">Cât de precis este calendarul solunar?</h3>
+                            <p className="text-night-300 text-sm">Teoria solunar are o rată de succes de aproximativ 60-70% conform studiilor. Precizia crește semnificativ când perioadele solunar coincid cu condiții meteo favorabile: presiune atmosferică stabilă (1013-1025 hPa), vânt slab și temperatură optimă a apei.</p>
+                        </div>
+                        <div className="border-b border-night-800 pb-4">
+                            <h3 className="text-base font-bold text-amber-400 mb-2">Ce fază a lunii este azi și cum afectează pescuitul?</h3>
+                            <p className="text-night-300 text-sm">Faza lunii de azi este afișată în secțiunea de rating de mai sus. Luna plină și luna nouă oferă activitate maximă (rating 4-5), în timp ce pătrarii oferă activitate moderată (rating 3). Consultă <Link href="/lunar" className="text-moon hover:underline">calendarul lunar complet</Link> pentru prognoză pe toată luna.</p>
+                        </div>
+                        <div className="pb-2">
+                            <h3 className="text-base font-bold text-amber-400 mb-2">Cum aleg locul de pescuit în funcție de solunar?</h3>
+                            <p className="text-night-300 text-sm">Datele solunar variază în funcție de locație deoarece tranzitul lunar diferă. Folosește <Link href="/" className="text-moon hover:underline">calendarul solunar</Link> cu selectare de locație pentru date calculate pe coordonatele exacte ale zonei tale, sau explorează <Link href="/locuri-pescuit" className="text-moon hover:underline">locuri de pescuit din România</Link>.</p>
+                        </div>
+                    </div>
+                </div>
+
                 {/* Internal Links */}
                 <div className="card-panel p-6 md:p-8">
                     <h2 className="text-xl font-display font-bold text-white mb-4">Explorează Mai Multe</h2>
