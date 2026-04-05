@@ -6,8 +6,8 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import AdUnit from '@/components/AdUnit';
 
 export const metadata: Metadata = {
-    title: 'Calendar Lunar 2026 ✓ Fazele Lunii și Influența asupra Pescuitului',
-    description: '✅ Calendar lunar 2026 complet: fazele lunii zi de zi, procent iluminare, lună plină și nouă. Vezi cum influențează luna pescuitul și rating-ul solunar zilnic!',
+    title: 'Calendar Lunar 2026 ✓ Fazele Lunii și Pescuit',
+    description: '✅ Fazele lunii 2026 zi de zi: lună plină, nouă, iluminare % și rating solunar. Află cum influențează luna activitatea peștilor. Actualizat zilnic, gratuit!',
     keywords: [
         'calendar lunar 2026', 'fazele lunii', 'calendar lunar',
         'calendar lunar azi', 'luna plina', 'luna noua',

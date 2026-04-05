@@ -8,8 +8,8 @@ import type { Metadata } from 'next';
 const year = new Date().getFullYear();
 
 export const metadata: Metadata = {
-    title: `Locuri de Pescuit Romania ${year} - Lacuri, Balti si Rauri`,
-    description: `Ghid complet locuri de pescuit in Romania ${year}. Peste 60 de lacuri, balti, rauri si acumulari cu coordonate GPS, specii de pesti si calendar solunar. Gratuit!`,
+    title: `Unde Pescuiesc? 60+ Lacuri și Bălți cu GPS ✓`,
+    description: `✅ Cele mai bune locuri de pescuit din România ${year}. 60+ lacuri, bălți și râuri cu coordonate GPS, specii de pești și calendar solunar pe locație. Gratuit!`,
     keywords: [
         'locuri de pescuit', 'locuri pescuit romania', 'balti de pescuit',
         'lacuri pescuit', 'pescuit romania', 'unde sa pescuiesti',

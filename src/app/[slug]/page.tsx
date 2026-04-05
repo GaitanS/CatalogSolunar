@@ -59,8 +59,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     if (species) {
         const year = new Date().getFullYear();
         return {
-            title: `${species.name} - Ghid Complet ${year} | Cand Trage ${species.name}`,
-            description: `Ghid pescuit ${species.name.toLowerCase()} ${year}. Afla cand trage ${species.name.toLowerCase()}: perioade solunar optime, tehnici, momeli, sezon si sfaturi practice.`,
+            title: `Pescuit ${species.name} ${year} ✓ Când Trage și Ore Optime`,
+            description: `✅ Când trage ${species.name.toLowerCase()}ul? Perioade solunar optime, faze lunare, tehnici de pescuit, momeli recomandate și sezon ${year}. Ghid complet, gratuit!`,
             keywords: [
                 `pescuit ${species.name.toLowerCase()}`,
                 `cand trage ${species.name.toLowerCase()}`,
