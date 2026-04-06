@@ -11,6 +11,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import { getCityBySlug, getAllCities } from '@/data/cities';
 import { getSpeciesBySlug, getAllSpecies } from '@/data/species';
 import { getAllArticles } from '@/data/blogArticles';
+import { getAllLocations } from '@/data/fishingLocations';
 import type { Metadata } from 'next';
 
 export const dynamicParams = false;
@@ -442,6 +443,34 @@ function SpeciesPageContent({ species }: { species: ReturnType<typeof getSpecies
                         </div>
                     </div>
                 )}
+
+                {/* Locuri de Pescuit pentru această specie — internal links to location pages */}
+                {(() => {
+                    const speciesName = species.name.toLowerCase();
+                    const locationsWithSpecies = getAllLocations().filter(loc =>
+                        loc.fish.some(f => f.toLowerCase() === speciesName)
+                    );
+                    if (locationsWithSpecies.length === 0) return null;
+                    return (
+                        <div className="card-panel p-6 md:p-8 mb-8">
+                            <h2 className="text-xl font-display font-bold text-white mb-2">Locuri de Pescuit {species.name} în România</h2>
+                            <p className="text-night-400 text-sm mb-4">{locationsWithSpecies.length} locuri verificate cu {species.name.toLowerCase()} — fiecare cu solunar pe GPS</p>
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                {locationsWithSpecies.slice(0, 6).map((loc) => (
+                                    <Link key={loc.slug} href={`/locuri-pescuit/${loc.slug}`} className="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition-colors group">
+                                        <p className="text-white font-bold text-sm group-hover:text-amber-400 transition-colors">{loc.name}</p>
+                                        <p className="text-night-500 text-xs">{loc.county} · {loc.paid ? 'Cu taxă' : 'Gratuit'}</p>
+                                    </Link>
+                                ))}
+                            </div>
+                            {locationsWithSpecies.length > 6 && (
+                                <Link href="/locuri-pescuit" className="inline-block mt-3 text-sm text-moon hover:underline">
+                                    Vezi toate {locationsWithSpecies.length} locuri cu {species.name.toLowerCase()} →
+                                </Link>
+                            )}
+                        </div>
+                    );
+                })()}
 
                 <div className="card-panel p-6 md:p-8 mb-8">
                     <h2 className="text-xl font-display font-bold text-white mb-4">Alte Specii</h2>

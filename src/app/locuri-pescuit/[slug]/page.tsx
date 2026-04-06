@@ -25,8 +25,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const fishStr = loc.fish.slice(0, 3).join(', ');
 
     return {
-        title: `${loc.name} - Pescuit ${year} | Solunar si Specii`,
-        description: `Pescuit la ${loc.name}, ${loc.county} ${year}. Specii: ${fishStr}. Calendar solunar cu ore exacte calculat pentru coordonatele GPS ale locatiei. ${loc.paid ? 'Pescuit cu taxa.' : 'Acces gratuit.'}`,
+        title: `Pescuit ${loc.name} ${year} ✓ Solunar GPS și ${loc.fish.length} Specii`,
+        description: `✅ Pescuit la ${loc.name} (${loc.county}): ${fishStr} + alte ${loc.fish.length - 3} specii. Ore exacte solunar pe GPS, ${loc.paid ? 'cu taxă' : 'acces gratuit'}. Verifică când trage peștele!`,
         keywords: [
             `pescuit ${loc.name.toLowerCase()}`,
             `${loc.name.toLowerCase()} pescuit`,

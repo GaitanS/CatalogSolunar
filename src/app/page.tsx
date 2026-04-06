@@ -84,14 +84,6 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                     </div>
                 </div>
 
-                {/* Top Ad (Mobile/Desktop Leaderboard) */}
-                <AdUnit
-                    slotId="2812628769"
-                    format="horizontal"
-                    className="min-h-[90px]"
-                    label="Reclamă"
-                />
-
                 {/* Mobile Quick Stats Slider (Visible only on mobile/tablet) */}
                 <div className="lg:hidden mb-6">
                     <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x -mx-4 px-4">
@@ -144,7 +136,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                     </div>
                 </div>
 
-                {/* Active Fish Banner (Mobile + Desktop) */}
+                {/* Active Fish Banner (Mobile + Desktop) — species names link to guides */}
                 <div className="mb-6 bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-3 flex items-center gap-3 overflow-hidden relative">
                     <div className="shrink-0 text-emerald-400 font-bold text-xs md:text-sm uppercase tracking-wider whitespace-nowrap px-2 border-r border-emerald-500/30">
                         Specii Active
@@ -153,13 +145,27 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                         <div className="animate-marquee absolute whitespace-nowrap text-emerald-200 text-sm font-mono flex gap-8 items-center h-full">
                             {(() => {
                                 const activeFish = getActiveFish(today, todayData.moonPhase);
+                                const fishSlugMap: Record<string, string> = {
+                                    'Crap': '/pescuit-crap', 'Șalău': '/pescuit-salau', 'Somn': '/pescuit-somn',
+                                    'Știucă': '/pescuit-stiuca', 'Păstrăv': '/pescuit-pastrav', 'Caras': '/pescuit-caras',
+                                    'Plătică': '/pescuit-platica', 'Biban': '/pescuit-biban', 'Lin': '/pescuit-lin',
+                                    'Babușcă': '/pescuit-babusca', 'Clean': '/pescuit-clean', 'Fitofag': '/pescuit-fitofag',
+                                };
                                 return activeFish.length > 0
-                                    ? [...activeFish, ...activeFish, ...activeFish].map((fish, i) => (
-                                        <span key={i} className="flex items-center gap-2">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                                            {fish}
-                                        </span>
-                                    ))
+                                    ? [...activeFish, ...activeFish, ...activeFish].map((fish, i) => {
+                                        const href = fishSlugMap[fish];
+                                        return href ? (
+                                            <Link key={i} href={href} className="flex items-center gap-2 hover:text-emerald-100 transition-colors">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                                                {fish}
+                                            </Link>
+                                        ) : (
+                                            <span key={i} className="flex items-center gap-2">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                                                {fish}
+                                            </span>
+                                        );
+                                    })
                                     : <span className="opacity-70">Activitate generală redusă</span>;
                             })()}
                         </div>
@@ -276,7 +282,24 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                     </div>
                 </div>
 
+                {/* Top Ad — moved below dashboard so users see data first */}
+                <AdUnit
+                    slotId="2812628769"
+                    format="horizontal"
+                    className="min-h-[90px] mb-6"
+                    label="Reclamă"
+                />
 
+                {/* CTA Strip: Solunar Azi */}
+                <Link href="/azi" className="mb-6 bg-gradient-to-r from-indigo-900/40 to-blue-900/30 border border-indigo-500/30 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 group hover:border-indigo-400/50 transition-colors block">
+                    <div>
+                        <p className="text-white font-bold text-sm md:text-base">Solunar Azi — Ore Exacte pentru {today.toLocaleDateString('ro-RO', { day: 'numeric', month: 'long' })}</p>
+                        <p className="text-indigo-300 text-xs md:text-sm">Pagina dedicată cu scor detaliat, perioade pe ore și sfaturi meteo.</p>
+                    </div>
+                    <span className="shrink-0 px-5 py-2 bg-indigo-600 group-hover:bg-indigo-500 text-white font-bold rounded-xl transition-colors text-sm whitespace-nowrap">
+                        Vezi Solunar Azi &rarr;
+                    </span>
+                </Link>
 
                 {/* Middle Ad (Medium Rectangle) */}
                 <LazyAdUnit
