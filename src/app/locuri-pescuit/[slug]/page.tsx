@@ -225,12 +225,23 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
                 {/* Fish Species & Advice */}
                 <div className="grid md:grid-cols-2 gap-6 mb-8">
                     <div className="card-panel p-6">
-                        <h2 className="text-xl font-display font-bold text-emerald-400 mb-4">Specii de Pesti</h2>
+                        <h2 className="text-xl font-display font-bold text-emerald-400 mb-4">Specii de Pești</h2>
                         {loc.fish.length > 0 ? (
                             <div className="flex flex-wrap gap-2">
-                                {loc.fish.map((fish, i) => (
-                                    <span key={i} className="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-300 text-sm">{fish}</span>
-                                ))}
+                                {loc.fish.map((fish, i) => {
+                                    const fishSlugMap: Record<string, string> = {
+                                        'Crap': '/pescuit-crap', 'Șalău': '/pescuit-salau', 'Somn': '/pescuit-somn',
+                                        'Știucă': '/pescuit-stiuca', 'Păstrăv': '/pescuit-pastrav', 'Caras': '/pescuit-caras',
+                                        'Plătică': '/pescuit-platica', 'Biban': '/pescuit-biban', 'Lin': '/pescuit-lin',
+                                        'Babușcă': '/pescuit-babusca', 'Clean': '/pescuit-clean', 'Fitofag': '/pescuit-fitofag',
+                                    };
+                                    const href = fishSlugMap[fish];
+                                    return href ? (
+                                        <Link key={i} href={href} className="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-300 text-sm hover:bg-emerald-500/20 transition-colors">{fish}</Link>
+                                    ) : (
+                                        <span key={i} className="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-300 text-sm">{fish}</span>
+                                    );
+                                })}
                             </div>
                         ) : <p className="text-night-400 text-sm">Informatii indisponibile.</p>}
                     </div>
@@ -287,6 +298,40 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
                                     : 'Da, accesul este gratuit. Este necesara autorizatia ANPA valabila.'}
                             </p>
                         </div>
+                    </div>
+                </div>
+
+                {/* SEO Content — species links + fishing tips for this location */}
+                <div className="card-panel p-6 md:p-8 mb-8">
+                    <h2 className="text-xl font-display font-bold text-white mb-4">Ghid Pescuit {loc.name}</h2>
+                    <div className="text-night-300 text-sm leading-relaxed space-y-3">
+                        <p>
+                            <strong className="text-white">{loc.name}</strong> ({typeLabels[loc.type] || loc.type}) este situat în {loc.locality}, județul {loc.county}.
+                            {loc.paid
+                                ? ' Accesul este cu taxă — contactează administratorul pentru condiții și prețuri.'
+                                : ' Accesul este gratuit cu autorizație ANPA valabilă.'}
+                        </p>
+                        <p>
+                            Speciile principale sunt: {loc.fish.slice(0, 5).map((fish, i) => {
+                                const fishSlugMap: Record<string, string> = {
+                                    'Crap': '/pescuit-crap', 'Șalău': '/pescuit-salau', 'Somn': '/pescuit-somn',
+                                    'Știucă': '/pescuit-stiuca', 'Păstrăv': '/pescuit-pastrav', 'Caras': '/pescuit-caras',
+                                    'Plătică': '/pescuit-platica', 'Biban': '/pescuit-biban', 'Lin': '/pescuit-lin',
+                                    'Babușcă': '/pescuit-babusca', 'Clean': '/pescuit-clean', 'Fitofag': '/pescuit-fitofag',
+                                };
+                                const href = fishSlugMap[fish];
+                                const separator = i < Math.min(loc.fish.length, 5) - 1 ? ', ' : '.';
+                                return href
+                                    ? <span key={i}><Link href={href} className="text-moon hover:underline">{fish}</Link>{separator}</span>
+                                    : <span key={i}>{fish}{separator}</span>;
+                            })}
+                            {loc.fish.length > 5 && ` Plus alte ${loc.fish.length - 5} specii.`}
+                        </p>
+                        <p>
+                            Calendarul solunar de pe această pagină este calculat pentru coordonatele GPS exacte ale {loc.name} ({loc.lat.toFixed(4)}°N, {loc.lng.toFixed(4)}°E).
+                            Perioadele majore (durata ~2 ore) și minore (~1 oră) îți arată când peștii sunt cei mai activi la această locație.
+                            Consultă și <Link href="/lunar" className="text-moon hover:underline">fazele lunii</Link> sau <Link href="/azi" className="text-moon hover:underline">solunar azi</Link> pentru date actualizate.
+                        </p>
                     </div>
                 </div>
 

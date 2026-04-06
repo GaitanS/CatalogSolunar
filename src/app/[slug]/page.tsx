@@ -254,19 +254,42 @@ function CityPageContent({ city }: { city: ReturnType<typeof getCityBySlug> & {}
 
                 <LazyAdUnit slotId="6301173988" format="rectangle" style={{ minHeight: '280px' }} className="mb-8" label="Reclama" />
 
-                <div className="card-panel p-6 md:p-8 mb-8">
-                    <h2 className="text-2xl font-display font-bold text-white mb-4">Locuri de Pescuit langa {city.name}</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        {city.nearbyWaters.map((water, i) => (
-                            <div key={i} className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg flex items-center gap-2">
-                                <svg className="w-4 h-4 text-blue-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                </svg>
-                                <span className="text-white text-sm font-medium">{water}</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                {/* Locuri de Pescuit — linkuri la paginile de locații din același județ */}
+                {(() => {
+                    const countyLocations = getAllLocations().filter(loc => loc.county === city.county);
+                    return (
+                        <div className="card-panel p-6 md:p-8 mb-8">
+                            <h2 className="text-2xl font-display font-bold text-white mb-2">Locuri de Pescuit lângă {city.name}</h2>
+                            <p className="text-night-400 text-sm mb-4">{countyLocations.length > 0 ? `${countyLocations.length} locuri verificate în ${city.county} cu solunar GPS` : `Ape populare din zona ${city.name}`}</p>
+                            {countyLocations.length > 0 ? (
+                                <>
+                                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                        {countyLocations.slice(0, 6).map((loc) => (
+                                            <Link key={loc.slug} href={`/locuri-pescuit/${loc.slug}`} className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg hover:bg-blue-500/20 transition-colors group">
+                                                <p className="text-white text-sm font-bold group-hover:text-amber-400 transition-colors">{loc.name}</p>
+                                                <p className="text-night-500 text-xs">{loc.fish.slice(0, 3).join(', ')} · {loc.paid ? 'Cu taxă' : 'Gratuit'}</p>
+                                            </Link>
+                                        ))}
+                                    </div>
+                                    <Link href="/locuri-pescuit" className="inline-block mt-3 text-sm text-moon hover:underline">
+                                        Vezi toate locurile de pescuit →
+                                    </Link>
+                                </>
+                            ) : (
+                                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                    {city.nearbyWaters.map((water, i) => (
+                                        <div key={i} className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg flex items-center gap-2">
+                                            <svg className="w-4 h-4 text-blue-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                            </svg>
+                                            <span className="text-white text-sm font-medium">{water}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    );
+                })()}
 
                 <div className="card-panel p-6 md:p-8 mb-8">
                     <h2 className="text-2xl font-display font-bold text-white mb-6">Intrebari Frecvente - {city.name}</h2>
