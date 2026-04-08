@@ -30,10 +30,14 @@ export const metadata: Metadata = {
     },
     description: "✅ Cel mai bun calendar solunar 2026 cu ore exacte de pescuit. Perioade majore și minore, faze lunare și prognoză 14 zile. Actualizat zilnic, gratuit pentru toată România!",
     keywords: [
-        "solunar 2026", "solunar pescuit 2026", "calendar solunar 2026",
-        "cel mai bun solunar 2026", "solunar azi", "cand trage pestele",
-        "calendar pescuit 2026", "solunar pescuit pe ore",
-        "calendarul pescarului 2026", "faze lunare pescuit",
+        "solunar 2026", "solunar pescuit 2026", "calendar solunar",
+        "calendar solunar 2026", "solunar pescuit pe ore", "calendar pescuit 2026",
+        "cel mai bun solunar 2026", "calendarul pescarului 2026", "solunar azi",
+        "cand trage pestele", "solunar aprilie 2026", "solunar mai 2026",
+        "solunar pescuit", "faze lunare pescuit", "perioade majore solunar",
+        "solunar romania", "calendar lunar pescuit", "calendarul pescarului",
+        "tabel solunar", "cel mai bun solunar", "calendar de pescuit",
+        "calendar pescuit", "solunar calendar 2026",
     ],
     openGraph: {
         title: 'Calendar Pescuit 2026 - Solunar pe Ore Exacte',
