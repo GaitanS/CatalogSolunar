@@ -7,7 +7,7 @@ import AdUnit from '@/components/AdUnit';
 import LazyAdUnit from '@/components/LazyAdUnit';
 import Link from 'next/link';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import { getLocationBySlug, getAllLocations, getLocationsByCounty } from '@/data/fishingLocations';
+import { getLocationBySlug, getAllLocations, getLocationsByCounty, countyToSlug } from '@/data/fishingLocations';
 import type { Metadata } from 'next';
 
 export const dynamicParams = false;
@@ -138,6 +138,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
             <Breadcrumbs items={[
                 { label: 'Acasa', href: '/' },
                 { label: 'Locuri de Pescuit', href: '/locuri-pescuit' },
+                { label: `Județ ${loc.county}`, href: `/locuri-pescuit/judet/${countyToSlug(loc.county)}` },
                 { label: loc.name },
             ]} />
             <div className="container-custom px-4 relative z-10">
@@ -338,7 +339,15 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
                 {/* Nearby Locations */}
                 {nearbyLocations.length > 0 && (
                     <div className="card-panel p-6 md:p-8 mb-8">
-                        <h2 className="text-xl font-display font-bold text-white mb-4">Alte Locuri in {loc.county}</h2>
+                        <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
+                            <h2 className="text-xl font-display font-bold text-white">Alte Locuri în {loc.county}</h2>
+                            <Link
+                                href={`/locuri-pescuit/judet/${countyToSlug(loc.county)}`}
+                                className="text-amber-400 hover:underline text-sm"
+                            >
+                                Vezi toate locurile din {loc.county} &rarr;
+                            </Link>
+                        </div>
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                             {nearbyLocations.map((l) => (
                                 <Link key={l.slug} href={`/locuri-pescuit/${l.slug}`} className="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition-colors">

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getAllLocations, getAllCounties, getLocationsByCounty } from '@/data/fishingLocations';
+import { getAllLocations, getAllCounties, getLocationsByCounty, countyToSlug } from '@/data/fishingLocations';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import AdUnit from '@/components/AdUnit';
 import LazyAdUnit from '@/components/LazyAdUnit';
@@ -88,16 +88,45 @@ export default function LocuriPescuitPage() {
 
                 <AdUnit slotId="2812628769" format="horizontal" className="min-h-[90px] mb-8" label="Reclama" />
 
+                {/* Quick navigation by county — targets "balti pescuit [judet]" queries */}
+                <div className="card-panel p-4 md:p-6 mb-8">
+                    <h2 className="text-base md:text-lg font-display font-bold text-white mb-3">
+                        Salt rapid pe județe
+                    </h2>
+                    <div className="flex flex-wrap gap-2">
+                        {counties.map((county) => (
+                            <Link
+                                key={county}
+                                href={`/locuri-pescuit/judet/${countyToSlug(county)}`}
+                                className="px-3 py-1.5 bg-amber-500/10 border border-amber-500/20 rounded-full text-amber-300 text-xs hover:bg-amber-500/20 transition-colors"
+                            >
+                                {county} ({getLocationsByCounty(county).length})
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+
                 {counties.map((county, idx) => {
                     const locations = getLocationsByCounty(county);
                     return (
                         <div key={county} className="mb-8">
-                            <h2 className="text-xl md:text-2xl font-display font-bold text-white mb-4 flex items-center gap-2">
+                            <h2 className="text-xl md:text-2xl font-display font-bold text-white mb-4 flex items-center gap-2 flex-wrap">
                                 <svg className="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                 </svg>
-                                Judetul {county}
+                                <Link
+                                    href={`/locuri-pescuit/judet/${countyToSlug(county)}`}
+                                    className="hover:text-amber-400 transition-colors"
+                                >
+                                    Județul {county}
+                                </Link>
                                 <span className="text-night-500 text-sm font-normal">({locations.length} locuri)</span>
+                                <Link
+                                    href={`/locuri-pescuit/judet/${countyToSlug(county)}`}
+                                    className="text-amber-400 hover:underline text-xs font-normal ml-auto"
+                                >
+                                    Vezi toate &rarr;
+                                </Link>
                             </h2>
                             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                                 {locations.map((loc) => (

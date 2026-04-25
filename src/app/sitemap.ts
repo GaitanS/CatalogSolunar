@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { getAllArticles } from '@/data/blogArticles';
 import { getAllCities } from '@/data/cities';
 import { getAllSpecies } from '@/data/species';
-import { getAllLocations } from '@/data/fishingLocations';
+import { getAllLocations, getAllCountySlugs } from '@/data/fishingLocations';
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://calendarsolunar.ro';
@@ -109,5 +109,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.85,
     }));
 
-    return [...staticPages, ...cityPages, ...speciesPages, ...articlePages, ...locationIndexPage, ...locationPages];
+    // County index pages — target "balti pescuit [judet]" queries
+    const countyPages: MetadataRoute.Sitemap = getAllCountySlugs().map((c) => ({
+        url: `${baseUrl}/locuri-pescuit/judet/${c.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.8,
+    }));
+
+    return [
+        ...staticPages,
+        ...cityPages,
+        ...speciesPages,
+        ...articlePages,
+        ...locationIndexPage,
+        ...locationPages,
+        ...countyPages,
+    ];
 }
