@@ -35,8 +35,7 @@ export default async function Image() {
                     }}
                 />
 
-                {/* Fish icon */}
-                <div style={{ fontSize: 80, marginBottom: 20 }}>🐟</div>
+                <div style={{ fontSize: 80, marginBottom: 20, color: '#fbbf24', fontWeight: 800 }}>CS</div>
 
                 {/* Title */}
                 <h1

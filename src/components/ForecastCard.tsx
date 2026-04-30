@@ -11,21 +11,21 @@ export default function ForecastCard({ data, isToday }: ForecastCardProps) {
     const monthName = data.date.toLocaleDateString('ro-RO', { month: 'short' });
 
     return (
-        <div className={`min-w-[170px] sm:min-w-[190px] p-4 rounded-xl border flex flex-col gap-3 transition-all ${isToday
-                ? 'bg-gradient-to-b from-moon/10 to-transparent border-moon/50 shadow-lg shadow-moon/10'
-                : 'bg-[#111827] border-white/5 hover:border-white/20'
+        <div className={`min-w-[170px] sm:min-w-[190px] p-4 rounded-2xl border flex flex-col gap-3 transition-all taste-surface ${isToday
+                ? 'bg-amber-300/10 border-amber-200/35'
+                : 'bg-white/[0.045] border-white/10 hover:border-amber-200/25'
             }`}>
             {/* Header: Date & Moon */}
             <div className="flex items-center justify-between">
                 <div>
-                    <p className="text-night-400 text-[9px] uppercase font-bold tracking-wider">{dayName}</p>
+                    <p className="text-amber-200/75 text-[9px] uppercase font-bold tracking-wider">{dayName}</p>
                     <p className="text-lg font-bold text-white leading-tight">
-                        {dayNum} <span className="text-night-500 text-xs font-normal">{monthName}</span>
+                        {dayNum} <span className="text-slate-400 text-xs font-normal">{monthName}</span>
                     </p>
                 </div>
                 <div className="w-10 h-10 relative">
-                    <div className="w-full h-full rounded-full bg-gradient-to-tr from-gray-700 to-gray-300 shadow-inner" />
-                    <div className="absolute inset-0 flex items-center justify-center text-[9px] text-black font-bold">
+                    <div className="w-full h-full rounded-full border border-amber-200/25 bg-amber-200/15 shadow-inner" />
+                    <div className="absolute inset-0 flex items-center justify-center text-[9px] text-amber-100 font-bold">
                         {Math.round(data.moonIllumination)}%
                     </div>
                 </div>
@@ -37,8 +37,8 @@ export default function ForecastCard({ data, isToday }: ForecastCardProps) {
                     <div
                         key={level}
                         className={`w-1.5 rounded-sm transition-all duration-500 ${level <= data.overallRating
-                                ? 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.5)]'
-                                : 'bg-night-800'
+                                ? 'bg-amber-300'
+                                : 'bg-slate-700'
                             }`}
                         style={{ height: `${level * 20}%` }}
                     />
@@ -47,7 +47,7 @@ export default function ForecastCard({ data, isToday }: ForecastCardProps) {
 
             {/* Fishing Schedule - List all Major Periods */}
             <div className="mt-1 flex flex-col gap-1.5">
-                <div className="flex items-center gap-1.5 text-emerald-400">
+                <div className="flex items-center gap-1.5 text-amber-200">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
                         <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
@@ -57,28 +57,28 @@ export default function ForecastCard({ data, isToday }: ForecastCardProps) {
 
                 {data.majorPeriods.length > 0 ? (
                     data.majorPeriods.map((period, i) => (
-                        <div key={i} className="flex items-center justify-between p-1.5 bg-night-950/50 rounded-lg border border-emerald-500/20">
-                            <div className="bg-night-800 px-1.5 py-0.5 rounded text-white font-mono font-bold text-xs">
+                        <div key={i} className="flex items-center justify-between p-1.5 bg-[#111827]/60 rounded-lg border border-white/10">
+                            <div className="bg-white/[0.055] px-1.5 py-0.5 rounded text-white font-mono font-bold text-xs">
                                 {formatTime(period.start)}
                             </div>
-                            <div className="text-xs text-emerald-500">→</div>
-                            <div className="bg-night-800 px-1.5 py-0.5 rounded text-white font-mono font-bold text-xs">
+                            <div className="text-xs text-amber-200">→</div>
+                            <div className="bg-white/[0.055] px-1.5 py-0.5 rounded text-white font-mono font-bold text-xs">
                                 {formatTime(period.end)}
                             </div>
                         </div>
                     ))
                 ) : (
-                    <div className="text-[10px] text-night-500 text-center italic">Fără activitate majoră</div>
+                    <div className="text-[10px] text-slate-500 text-center italic">Fără activitate majoră</div>
                 )}
             </div>
 
             {/* Minor Period - Just listing the first one if space permits, or maybe list count */}
             {data.minorPeriods.length > 0 && (
                 <div className="flex items-center justify-between text-[10px] px-1 pt-1 border-t border-white/5 mt-1">
-                    <span className="text-cyan-400 font-medium">Minoră:</span>
+                    <span className="text-slate-400 font-medium">Minoră:</span>
                     <div className="flex gap-1">
                         {data.minorPeriods.slice(0, 2).map((p, i) => (
-                            <span key={i} className="font-mono text-night-300">{formatTime(p.start)}</span>
+                            <span key={i} className="font-mono text-slate-300">{formatTime(p.start)}</span>
                         ))}
                     </div>
                 </div>

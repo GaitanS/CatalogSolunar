@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import { getAllLocations, getAllCounties, getLocationsByCounty, countyToSlug } from '@/data/fishingLocations';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import AdUnit from '@/components/AdUnit';
-import LazyAdUnit from '@/components/LazyAdUnit';
 import type { Metadata } from 'next';
 
 const year = new Date().getFullYear();
@@ -40,12 +38,12 @@ const typeLabels: Record<string, string> = {
 };
 
 const typeColors: Record<string, string> = {
-    lac: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
-    balta: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
-    acumulare: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30',
-    iaz: 'bg-teal-500/20 text-teal-300 border-teal-500/30',
-    rau: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30',
-    canal: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
+    lac: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+    balta: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+    acumulare: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+    iaz: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+    rau: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+    canal: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
     delta: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
 };
 
@@ -73,22 +71,19 @@ export default function LocuriPescuitPage() {
                         <div className="text-night-400 text-xs">Locuri</div>
                     </div>
                     <div className="card-panel p-4 text-center">
-                        <div className="text-2xl md:text-3xl font-display font-bold text-blue-400">{counties.length}</div>
+                        <div className="text-2xl md:text-3xl font-display font-bold text-amber-400">{counties.length}</div>
                         <div className="text-night-400 text-xs">Judete</div>
                     </div>
                     <div className="card-panel p-4 text-center">
-                        <div className="text-2xl md:text-3xl font-display font-bold text-emerald-400">{allLocations.filter(l => !l.paid).length}</div>
+                        <div className="text-2xl md:text-3xl font-display font-bold text-amber-400">{allLocations.filter(l => !l.paid).length}</div>
                         <div className="text-night-400 text-xs">Gratuite</div>
                     </div>
                     <div className="card-panel p-4 text-center">
-                        <div className="text-2xl md:text-3xl font-display font-bold text-cyan-400">{allLocations.filter(l => l.paid).length}</div>
+                        <div className="text-2xl md:text-3xl font-display font-bold text-amber-400">{allLocations.filter(l => l.paid).length}</div>
                         <div className="text-night-400 text-xs">Cu Taxa</div>
                     </div>
                 </div>
-
-                <AdUnit slotId="2812628769" format="horizontal" className="min-h-[90px] mb-8" label="Reclama" />
-
-                {/* Quick navigation by county — targets "balti pescuit [judet]" queries */}
+{/* Quick navigation by county — targets "balti pescuit [judet]" queries */}
                 <div className="card-panel p-4 md:p-6 mb-8">
                     <h2 className="text-base md:text-lg font-display font-bold text-white mb-3">
                         Salt rapid pe județe
@@ -154,14 +149,11 @@ export default function LocuriPescuitPage() {
                                     </Link>
                                 ))}
                             </div>
-                            {idx === 2 && <LazyAdUnit slotId="6301173988" format="rectangle" style={{ minHeight: '280px' }} className="mt-6" label="Reclama" />}
+                            
                         </div>
                     );
                 })}
-
-                <LazyAdUnit slotId="1044977874" format="auto" layout="in-article" className="min-h-[120px] mt-8" label="Reclama" />
-
-                <div className="card-panel p-6 md:p-8 mt-8">
+<div className="card-panel p-6 md:p-8 mt-8">
                     <h2 className="text-xl font-display font-bold text-white mb-4">Despre Locurile de Pescuit din Romania</h2>
                     <div className="text-night-300 text-sm leading-relaxed space-y-3">
                         <p>
@@ -182,7 +174,7 @@ export default function LocuriPescuitPage() {
                     <h2 className="text-xl font-display font-bold text-white mb-4">Ghid pe Tipuri de Ape</h2>
                     <div className="text-night-300 text-sm leading-relaxed space-y-4">
                         <div>
-                            <h3 className="text-base font-bold text-blue-400 mb-1">Lacuri si Acumulari</h3>
+                            <h3 className="text-base font-bold text-amber-400 mb-1">Lacuri si Acumulari</h3>
                             <p>
                                 Lacurile de acumulare (Izvorul Muntelui, Vidraru, Siriu) sunt excelente pentru <Link href="/pescuit-salau" className="text-amber-400 hover:underline">salau</Link>,
                                 {' '}<Link href="/pescuit-stiuca" className="text-amber-400 hover:underline">stiuca</Link> si <Link href="/pescuit-crap" className="text-amber-400 hover:underline">crap</Link>.
@@ -191,7 +183,7 @@ export default function LocuriPescuitPage() {
                             </p>
                         </div>
                         <div>
-                            <h3 className="text-base font-bold text-emerald-400 mb-1">Balti si Iazuri</h3>
+                            <h3 className="text-base font-bold text-amber-400 mb-1">Balti si Iazuri</h3>
                             <p>
                                 Baltile amenajate si iazurile sunt ideale pentru <Link href="/pescuit-crap" className="text-amber-400 hover:underline">crap</Link>,
                                 {' '}<Link href="/pescuit-caras" className="text-amber-400 hover:underline">caras</Link>,
@@ -202,7 +194,7 @@ export default function LocuriPescuitPage() {
                             </p>
                         </div>
                         <div>
-                            <h3 className="text-base font-bold text-indigo-400 mb-1">Rauri si Dunarea</h3>
+                            <h3 className="text-base font-bold text-amber-400 mb-1">Rauri si Dunarea</h3>
                             <p>
                                 Dunarea si raurile mari (Olt, Mures, Siret, Prut) adapostesc <Link href="/pescuit-somn" className="text-amber-400 hover:underline">somn</Link>,
                                 {' '}<Link href="/pescuit-salau" className="text-amber-400 hover:underline">salau</Link> si

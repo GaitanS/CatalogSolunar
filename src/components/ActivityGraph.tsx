@@ -1,13 +1,13 @@
-'use client';
-
 import { SolunarPeriod, formatTime } from '@/lib/solunar';
 
 interface ActivityGraphProps {
     majorPeriods: SolunarPeriod[];
     minorPeriods: SolunarPeriod[];
+    showHeader?: boolean;
+    showFooter?: boolean;
 }
 
-export default function ActivityGraph({ majorPeriods, minorPeriods }: ActivityGraphProps) {
+export default function ActivityGraph({ majorPeriods, minorPeriods, showHeader = true, showFooter = true }: ActivityGraphProps) {
     // 1. Convert time to X (0-100)
     const timeToX = (date: Date): number => {
         const hours = date.getHours() + date.getMinutes() / 60;
@@ -81,27 +81,28 @@ export default function ActivityGraph({ majorPeriods, minorPeriods }: ActivityGr
     const curvePath = generatePath();
 
     return (
-        <div className="w-full bg-[#0B1221] rounded-2xl border border-white/5 shadow-inner flex flex-col overflow-hidden">
-            {/* Header: Centered Major Periods Only */}
-            <div className="flex flex-col items-center justify-center px-4 py-3 border-b border-white/5 bg-white/[0.02] gap-1 relative">
-                <div className="absolute left-4 top-3 flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest hidden sm:inline">Activitate</span>
-                </div>
+        <div className="w-full bg-[#151b25]/92 rounded-2xl border border-white/10 shadow-inner flex flex-col overflow-hidden">
+            {showHeader && (
+                <div className="flex flex-col items-center justify-center px-4 py-3 border-b border-white/5 bg-white/[0.02] gap-1 relative">
+                    <div className="absolute left-4 top-3 flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-amber-300 animate-pulse" />
+                        <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest hidden sm:inline">Activitate</span>
+                    </div>
 
-                <span className="text-[10px] text-amber-500/80 uppercase font-bold tracking-widest mb-0.5">Intervale Majore</span>
-                <div className="flex gap-3 font-mono text-sm font-bold text-amber-400">
-                    {majorPeriods.length > 0 ? majorPeriods.map((p, i) => (
-                        <div key={i} className="flex items-center gap-1">
-                            <span>{formatTime(p.start)}</span>
-                            <span className="text-amber-500/40">-</span>
-                            <span>{formatTime(p.end)}</span>
-                        </div>
-                    )) : (
-                        <span className="text-slate-500 text-xs italic">Fără activitate majoră azi</span>
-                    )}
+                    <span className="text-[10px] text-amber-200/80 uppercase font-bold tracking-widest mb-0.5">Intervale Majore</span>
+                    <div className="flex gap-3 font-mono text-sm font-bold text-amber-400">
+                        {majorPeriods.length > 0 ? majorPeriods.map((p, i) => (
+                            <div key={i} className="flex items-center gap-1">
+                                <span>{formatTime(p.start)}</span>
+                                <span className="text-amber-200/40">-</span>
+                                <span>{formatTime(p.end)}</span>
+                            </div>
+                        )) : (
+                            <span className="text-slate-500 text-xs italic">Fără activitate majoră azi</span>
+                        )}
+                    </div>
                 </div>
-            </div>
+            )}
 
             {/* Graph Area */}
             <div className="relative h-32 w-full mt-2">
@@ -141,13 +142,15 @@ export default function ActivityGraph({ majorPeriods, minorPeriods }: ActivityGr
             </div>
 
             {/* X-Axis Footer */}
-            <div className="flex justify-between px-4 pb-2 text-[9px] text-slate-600 font-mono">
-                <span>00:00</span>
-                <span>06:00</span>
-                <span>12:00</span>
-                <span>18:00</span>
-                <span>23:59</span>
-            </div>
+            {showFooter && (
+                <div className="flex justify-between px-4 pb-2 text-[9px] text-slate-600 font-mono">
+                    <span>00:00</span>
+                    <span>06:00</span>
+                    <span>12:00</span>
+                    <span>18:00</span>
+                    <span>23:59</span>
+                </div>
+            )}
         </div>
     );
 }

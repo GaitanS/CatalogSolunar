@@ -7,8 +7,6 @@ import {
     getLocationsByCounty,
 } from '@/data/fishingLocations';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import AdUnit from '@/components/AdUnit';
-import LazyAdUnit from '@/components/LazyAdUnit';
 import CountyJsonLd from './CountyJsonLd';
 
 export const dynamicParams = false;
@@ -28,12 +26,12 @@ const typeLabels: Record<string, string> = {
 };
 
 const typeColors: Record<string, string> = {
-    lac: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
-    balta: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
-    acumulare: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30',
-    iaz: 'bg-teal-500/20 text-teal-300 border-teal-500/30',
-    rau: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30',
-    canal: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
+    lac: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+    balta: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+    acumulare: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+    iaz: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+    rau: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+    canal: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
     delta: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
 };
 
@@ -133,7 +131,7 @@ export default async function CountyPage({
                         <div className="text-night-400 text-xs">Locuri totale</div>
                     </div>
                     <div className="card-panel p-4 text-center">
-                        <div className="text-2xl md:text-3xl font-display font-bold text-emerald-400">
+                        <div className="text-2xl md:text-3xl font-display font-bold text-amber-400">
                             {freeCount}
                         </div>
                         <div className="text-night-400 text-xs">Gratuite</div>
@@ -145,21 +143,13 @@ export default async function CountyPage({
                         <div className="text-night-400 text-xs">Cu taxă</div>
                     </div>
                     <div className="card-panel p-4 text-center">
-                        <div className="text-2xl md:text-3xl font-display font-bold text-cyan-400">
+                        <div className="text-2xl md:text-3xl font-display font-bold text-amber-400">
                             {allSpecies.length}
                         </div>
                         <div className="text-night-400 text-xs">Specii</div>
                     </div>
                 </div>
-
-                <AdUnit
-                    slotId="2812628769"
-                    format="horizontal"
-                    className="min-h-[90px] mb-8"
-                    label="Reclama"
-                />
-
-                {allSpecies.length > 0 && (
+{allSpecies.length > 0 && (
                     <div className="card-panel p-6 mb-8">
                         <h2 className="text-lg md:text-xl font-display font-bold text-white mb-3">
                             Specii întâlnite în {county}
@@ -168,7 +158,7 @@ export default async function CountyPage({
                             {allSpecies.map((fish, i) => (
                                 <span
                                     key={i}
-                                    className="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-300 text-sm"
+                                    className="px-3 py-1.5 bg-amber-500/10 border border-amber-500/20 rounded-full text-amber-300 text-sm"
                                 >
                                     {fish}
                                 </span>
@@ -229,19 +219,10 @@ export default async function CountyPage({
                         </div>
                     </div>
                 )}
-
-                <LazyAdUnit
-                    slotId="6301173988"
-                    format="rectangle"
-                    style={{ minHeight: '280px' }}
-                    className="mb-8"
-                    label="Reclama"
-                />
-
-                {freeLocations.length > 0 && (
+{freeLocations.length > 0 && (
                     <div className="mb-8">
                         <h2 className="text-xl md:text-2xl font-display font-bold text-white mb-4 flex items-center gap-2">
-                            <span className="w-2 h-8 bg-emerald-400 rounded-full" />
+                            <span className="w-2 h-8 bg-amber-400 rounded-full" />
                             Lacuri și râuri gratuite din {county}
                             <span className="text-night-500 text-sm font-normal">
                                 ({freeLocations.length})
@@ -383,15 +364,7 @@ export default async function CountyPage({
                         </Link>
                     </div>
                 </div>
-
-                <LazyAdUnit
-                    slotId="1044977874"
-                    format="auto"
-                    layout="in-article"
-                    className="min-h-[120px] mt-8"
-                    label="Reclama"
-                />
-            </div>
+</div>
         </div>
     );
 }

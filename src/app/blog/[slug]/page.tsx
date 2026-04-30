@@ -48,7 +48,14 @@ function extractHeadings(content: string): { text: string; id: string; level: nu
     const lines = content.trim().split('\n');
     for (const line of lines) {
         const trimmed = line.trim();
-        if (trimmed.startsWith('## ')) {
+        if (trimmed.startsWith('# ')) {
+            const text = trimmed.slice(2);
+            const id = text.toLowerCase()
+                .replace(/[^\w\săâîșț-]/g, '')
+                .replace(/\s+/g, '-')
+                .slice(0, 60);
+            headings.push({ text, id, level: 2 });
+        } else if (trimmed.startsWith('## ')) {
             const text = trimmed.slice(3);
             const id = text.toLowerCase()
                 .replace(/[^\w\săâîșț-]/g, '')
@@ -207,6 +214,22 @@ function parseContent(content: string, currentSlug?: string, articles?: BlogArti
             continue;
         } else if (inTable) {
             flushTable();
+        }
+
+        // Top-level headings inside article content are rendered as H2 to avoid duplicate H1s.
+        if (trimmedLine.startsWith('# ')) {
+            flushList();
+            const headingText = trimmedLine.slice(2);
+            const headingId = headingText.toLowerCase()
+                .replace(/[^\w\săâîșț-]/g, '')
+                .replace(/\s+/g, '-')
+                .slice(0, 60);
+            elements.push(
+                <h2 key={i} id={headingId} className="text-2xl font-display font-bold text-white mt-10 mb-4 scroll-mt-24">
+                    {headingText}
+                </h2>
+            );
+            continue;
         }
 
         // Heading 2

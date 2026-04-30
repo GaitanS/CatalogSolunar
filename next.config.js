@@ -15,10 +15,32 @@ const nextConfig = {
         optimizeCss: true,
         optimizePackageImports: ['three', 'suncalc'],
     },
+    allowedDevOrigins: ['127.0.0.1:3500', 'localhost:3500'],
     images: {
         unoptimized: true,
     },
     async headers() {
+        const isProduction = process.env.NODE_ENV === 'production';
+
+        if (!isProduction) {
+            return [
+                {
+                    source: '/(.*)',
+                    headers: [
+                        { key: 'X-Frame-Options', value: 'DENY' },
+                        { key: 'X-Content-Type-Options', value: 'nosniff' },
+                        { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+                    ],
+                },
+                {
+                    source: '/_next/:path*',
+                    headers: [
+                        { key: 'Cache-Control', value: 'no-store' },
+                    ],
+                },
+            ];
+        }
+
         return [
             {
                 source: '/(.*)',

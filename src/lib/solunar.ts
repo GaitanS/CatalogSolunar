@@ -68,20 +68,20 @@ export function getMoonIllumination(date: Date): number {
 }
 
 /**
- * Get moon phase emoji
+ * Get compact moon phase marker.
  */
 export function getMoonEmoji(phase: MoonPhase): string {
-    const emojis: Record<MoonPhase, string> = {
-        'new': '🌑',
-        'waxing-crescent': '🌒',
-        'first-quarter': '🌓',
-        'waxing-gibbous': '🌔',
-        'full': '🌕',
-        'waning-gibbous': '🌖',
-        'last-quarter': '🌗',
-        'waning-crescent': '🌘',
+    const markers: Record<MoonPhase, string> = {
+        'new': 'NOU',
+        'waxing-crescent': 'CR+',
+        'first-quarter': 'P1',
+        'waxing-gibbous': 'GI+',
+        'full': 'PLIN',
+        'waning-gibbous': 'GI-',
+        'last-quarter': 'P4',
+        'waning-crescent': 'CR-',
     };
-    return emojis[phase];
+    return markers[phase];
 }
 
 /**

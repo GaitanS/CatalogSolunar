@@ -107,11 +107,11 @@ Marchează-ți astea în calendarul de la muncă:
 - 12 februarie
 - 14 martie
 - 13 aprilie (Paște-ul e aproape, atenție la prohibiție)
-- **12 mai** ⭐ (zi de top)
+- **12 mai** (zi de top)
 - 11 iunie
 - 10 iulie
 - 9 august
-- **7 septembrie** ⭐ (zi de top)
+- **7 septembrie** (zi de top)
 - 7 octombrie
 - 5 noiembrie
 - 4 decembrie (deja frig, dar merge pentru șalău)
@@ -124,11 +124,11 @@ La fel de bune, nopți mai întunecate:
 - 27 februarie
 - 29 martie
 - 27 aprilie
-- **26 mai** ⭐
+- **26 mai** (zi de top)
 - 25 iunie
 - 24 iulie
 - 23 august
-- **21 septembrie** ⭐
+- **21 septembrie** (zi de top)
 - 21 octombrie
 - 20 noiembrie
 - 19 decembrie
@@ -1522,8 +1522,8 @@ Cea mai bună lună din an. Punct.
 - **Somn** - Ultimele festinuri înainte de hibernare
 
 **Zile de top septembrie 2026:**
-- Luna plină: 7 septembrie ⭐
-- Luna nouă: 21 septembrie ⭐
+- Luna plină: 7 septembrie (zi de top)
+- Luna nouă: 21 septembrie (zi de top)
 
 [Verifică calendarul pentru septembrie →](/)
 
@@ -1578,10 +1578,10 @@ Aici e frumusețea: aproape orice oră funcționează!
 
 | Perioadă | Rating |
 |----------|--------|
-| Dimineața (7:00-10:00) | ⭐⭐⭐⭐⭐ |
-| Prânz (11:00-14:00) | ⭐⭐⭐⭐ |
-| După-amiază (15:00-17:00) | ⭐⭐⭐⭐ |
-| Seara (18:00-20:00) | ⭐⭐⭐⭐⭐ |
+| Dimineața (7:00-10:00) | 5/5 |
+| Prânz (11:00-14:00) | 4/5 |
+| După-amiază (15:00-17:00) | 4/5 |
+| Seara (18:00-20:00) | 5/5 |
 
 Toamna poți pescui toată ziua. Luxul absolut.
 
@@ -1762,11 +1762,11 @@ Dacă nu ai fost, nu ai pescuit cu adevărat în România.
 
 | Lună | Rating | Note |
 |------|--------|------|
-| Mai | ⭐⭐⭐⭐⭐ | Post-prohibiție, pești flămânzi |
-| Iunie | ⭐⭐⭐⭐⭐ | Condiții perfecte, știucă excelentă |
-| Iulie-August | ⭐⭐⭐ | Căldură, țânțari, dar somn nocturn |
-| Septembrie | ⭐⭐⭐⭐⭐ | Cel mai bun pentru crap și somn |
-| Octombrie | ⭐⭐⭐⭐ | Ultimele zile bune |
+| Mai | 5/5 | Post-prohibiție, pești flămânzi |
+| Iunie | 5/5 | Condiții perfecte, știucă excelentă |
+| Iulie-August | 3/5 | Căldură, țânțari, dar somn nocturn |
+| Septembrie | 5/5 | Cel mai bun pentru crap și somn |
+| Octombrie | 4/5 | Ultimele zile bune |
 
 **De evitat:** Aprilie (prohibiție), Noiembrie-Martie (frig, acces dificil), Iulie-August la prânz (țânțari, căldură)
 
@@ -2742,7 +2742,7 @@ Nu trebuie să ajungi la Dunăre pentru pește bun.
 - Dimineața devreme, evită weekendul (aglomerat)
 - Spinning pentru știucă în canalele laterale
 
-**Rating:** ⭐⭐⭐⭐⭐
+**Rating:** 5/5
 
 ## 2. Balta Comana (50 km, ~50 min)
 
@@ -2755,7 +2755,7 @@ Nu trebuie să ajungi la Dunăre pentru pește bun.
 - Stufărișul de vest pentru crap
 - Necesită răbdare - nu e baltă de "pescuit garantat"
 
-**Rating:** ⭐⭐⭐⭐⭐
+**Rating:** 5/5
 
 ## 3. Lacul Cernica (15 km, ~25 min)
 
@@ -2768,7 +2768,7 @@ Nu trebuie să ajungi la Dunăre pentru pește bun.
 - Bun pentru începători
 - Evită zonele foarte populate
 
-**Rating:** ⭐⭐⭐⭐
+**Rating:** 4/5
 
 ## 4. Lacul Buftea (25 km, ~30 min)
 
@@ -2781,7 +2781,7 @@ Nu trebuie să ajungi la Dunăre pentru pește bun.
 - Evită partea cu plaja vara
 - Malul estic mai liniștit
 
-**Rating:** ⭐⭐⭐⭐
+**Rating:** 4/5
 
 ## 5. Balta Ciorogârla (30 km, ~40 min)
 
@@ -2794,7 +2794,7 @@ Nu trebuie să ajungi la Dunăre pentru pește bun.
 - Crapi frumoși, medie 3-5kg
 - Liniște mai mare decât Snagov
 
-**Rating:** ⭐⭐⭐⭐
+**Rating:** 4/5
 
 ## 6. Lacul Mogoșoaia (15 km, ~20 min)
 
@@ -2807,7 +2807,7 @@ Nu trebuie să ajungi la Dunăre pentru pește bun.
 - Ideal pentru o ieșire scurtă de dimineață
 - Nu te aștepta la trofee
 
-**Rating:** ⭐⭐⭐
+**Rating:** 3/5
 
 ## 7. Balta Moara Vlăsiei (40 km, ~45 min)
 
@@ -2820,7 +2820,7 @@ Nu trebuie să ajungi la Dunăre pentru pește bun.
 - Pești sănătoși
 - Recomandat pentru carp fishing serios
 
-**Rating:** ⭐⭐⭐⭐
+**Rating:** 4/5
 
 ## 8. Lacul Băneasa (10 km, ~15 min)
 
@@ -2833,7 +2833,7 @@ Nu trebuie să ajungi la Dunăre pentru pește bun.
 - Funcționează dimineața foarte devreme
 - Ideal pentru o oră liberă
 
-**Rating:** ⭐⭐⭐
+**Rating:** 3/5
 
 ## 9. Bălțile de pe Dâmbovița (15-30 km)
 
@@ -2846,7 +2846,7 @@ Nu trebuie să ajungi la Dunăre pentru pește bun.
 - Zonele liniștite sunt productive
 - Ideal pentru pescuit simplu cu plută
 
-**Rating:** ⭐⭐⭐
+**Rating:** 3/5
 
 ## 10. Lacul Fundeni (10 km, ~15 min)
 
@@ -2859,7 +2859,7 @@ Nu trebuie să ajungi la Dunăre pentru pește bun.
 - Perfect pentru începători
 - Ieșire de 2-3 ore
 
-**Rating:** ⭐⭐⭐
+**Rating:** 3/5
 
 ## Când Să Mergi
 
@@ -4651,11 +4651,11 @@ Merită articol separat - vezi [ghidul pentru Delta Dunării](/blog/pescuit-delt
 
 | Lună | Ce merge | Rating |
 |------|----------|--------|
-| Mai | Crap post-prohibiție, șalău | ⭐⭐⭐⭐⭐ |
-| Iunie | Tot | ⭐⭐⭐⭐⭐ |
-| Iulie-August | Somn (noapte!), șalău | ⭐⭐⭐⭐ |
-| Septembrie | Crap, somn | ⭐⭐⭐⭐⭐ |
-| Octombrie | Ultimele zile bune | ⭐⭐⭐⭐ |
+| Mai | Crap post-prohibiție, șalău | 5/5 |
+| Iunie | Tot | 5/5 |
+| Iulie-August | Somn (noapte!), șalău | 4/5 |
+| Septembrie | Crap, somn | 5/5 |
+| Octombrie | Ultimele zile bune | 4/5 |
 
 **Calendarul solunar pe Dunăre:**
 Efectul e puternic. Curentul amplifică activitatea în perioadele majore.
@@ -4869,112 +4869,114 @@ Peștii nu stau în curent puternic. Caută slack water.
     },
     {
         slug: 'solunar-mai-2026-ghid',
-        title: 'Solunar Mai 2026 ✓ Zile de Top și Ore Exacte Pescuit',
-        excerpt: 'Mai 2026: luna de aur pentru pescari. Iată zilele cu rating maxim și cum să le folosești.',
-        date: '2026-01-27',
+        title: 'Solunar Mai 2026 - Zile Bune, Ore Exacte și Calendar Pescuit',
+        excerpt: 'Solunar mai 2026: vezi cele mai bune zile de pescuit, fazele lunii, perioadele solunar și speciile active în luna mai.',
+        date: '2026-04-30',
         author: 'Echipa Calendar Solunar',
         category: 'Calendar',
-        readTime: 6,
-        keywords: ['solunar mai 2026', 'calendar pescuit mai', 'cand pescuiesc mai', 'luna plina mai 2026', 'zile bune pescuit mai'],
+        readTime: 7,
+        keywords: ['solunar mai 2026', 'solunar pescuit mai 2026', 'calendar solunar mai 2026', 'calendar pescuit mai 2026', 'cand pescuiesc mai', 'luna plina mai 2026', 'zile bune pescuit mai'],
         content: `
-Mai e luna pe care o așteptăm tot anul. Prohibiția se ridică, peștii sunt flămânzi, vremea e perfectă.
+Solunar mai 2026 complet: calendar de pescuit pentru luna mai, cu fazele lunii, cele mai bune zile, ore recomandate și speciile care devin active când apa se încălzește.
+
+Mai este luna în care pescuitul intră în ritm de sezon. Apa se stabilizează, zilele sunt lungi, iar perioadele solunar majore pot face diferența între o ieșire obișnuită și una memorabilă.
 
 ## De Ce Mai E Luna de Aur
 
-**1. Post-prohibiție** - Crapul e din nou legal (după 15 mai în general).
+**1. Apă în încălzire** - Majoritatea lacurilor intră în intervalul 16-22°C.
 
-**2. Temperaturi ideale** - Apa 16-22°C, zona perfectă.
+**2. Pești activi** - Crapul, carasul, linul și plătica caută hrană mai agresiv.
 
-**3. Pești flămânzi** - Au stat de reproducere, acum mănâncă.
+**3. Zile lungi** - Ai ferestre bune dimineața devreme și seara târziu.
 
-**4. Zile lungi** - Mai multe ore de pescuit productiv.
+**4. Solunar puternic** - Luna plină de la începutul lunii și luna nouă de la mijloc creează două intervale excelente.
 
 ## Fazele Lunii în Mai 2026
 
 | Fază | Data | Rating Pescuit |
 |------|------|---------------|
-| Luna Plină | 12 Mai (Luni) | ⭐⭐⭐⭐⭐ |
-| Ultimul Pătrar | 20 Mai | ⭐⭐⭐ |
-| Luna Nouă | 26 Mai (Luni) | ⭐⭐⭐⭐⭐ |
-| Primul Pătrar | 4 Mai | ⭐⭐⭐ |
+| Luna Plină | 3 Mai (Duminică) | 5/5 |
+| Ultimul Pătrar | 10 Mai | 3/5 |
+| Luna Nouă | 17 Mai (Duminică) | 5/5 |
+| Primul Pătrar | 25 Mai | 3/5 |
 
 ## Zilele de Top în Mai 2026
 
-### 🥇 11-13 MAI (Weekend + Luni)
+### Top 1: 2-4 MAI (Weekend cu Lună Plină)
 
-**De ce:** Luna plină + weekend = condiții perfecte pentru sesiune lungă.
+**De ce:** Luna plină cade duminică, iar efectul se simte pe tot weekendul.
 
 **Ce merge:**
-- Crap (post-prohibiție!) - mușcă tot
-- Știucă nocturnă - luna luminează
-- Șalău - activ noaptea
+- Crap și caras dimineața
+- Șalău și somn noaptea
+- Plătică pe zone cu adâncime medie
 
-**Sfat:** Planifică-ți liber luni (12 mai). Weekend prelungit de pescuit.
+**Sfat:** Dacă alegi o sesiune lungă, începe sâmbătă seara și prinde răsăritul de duminică.
 
-### 🥈 25-27 MAI (Luni Luna Nouă)
+### Top 2: 16-18 MAI (Lună Nouă)
 
-**De ce:** Luna nouă + căldură = a doua fereastră de aur.
+**De ce:** Luna nouă aduce nopți întunecate și activitate bună pe ape liniștite.
 
 **Ce merge:**
 - Crap - noaptea excelent
 - Somn - întuneric = activitate
-- Toate speciile ziua
+- Caras și lin dimineața devreme
 
 **Sfat:** Luna nouă = pescuit nocturn de top.
 
-### 🥉 17-18 MAI (Weekend)
+### Top 3: 23-25 MAI (Weekend + Primul Pătrar)
 
-**De ce:** Post-prohibiție garantat, temperaturi crescute.
+**De ce:** Apă caldă, zile lungi și activitate bună la răsărit și apus.
 
 **Ce merge:**
-- Crap (2-3 zile după ridicarea prohibiției = foame!)
-- Caras - vârf de activitate
-- Clean, plătică
+- Crap la method feeder
+- Caras și plătică pe vad nădit
+- Clean pe râuri curate
 
 ## Orele Optime în Mai
 
-**Dimineața:** 5:00 - 9:00 ⭐⭐⭐⭐⭐
+**Dimineața:** 5:00 - 9:00 (5/5)
 - Răsăritul devreme
 - Temperaturi plăcute
 - Pești foarte activi
 
-**Prânz:** 10:00 - 15:00 ⭐⭐⭐
+**Prânz:** 10:00 - 15:00 (3/5)
 - Încă merge în mai (nu e caniculă)
 - Evită orele 12-14 pe soare direct
 
-**Seara:** 17:00 - 21:00 ⭐⭐⭐⭐⭐
+**Seara:** 17:00 - 21:00 (5/5)
 - A doua perioadă de aur
 - Crapi activi
 - Lumină lungă
 
-**Noaptea:** 22:00 - 03:00 ⭐⭐⭐⭐
+**Noaptea:** 22:00 - 03:00 (4/5)
 - Somn, știucă
 - Mai ales în jurul lunii pline/noi
 
 ## Specii de Vizat în Mai
 
-**Crap** ⭐⭐⭐⭐⭐
+**Crap** (5/5)
 - LUNA crapului
-- Flămând după prohibiție
+- Activ pe ape cu temperatură stabilă
 - Momeală: porumb, boilies fructate
-- Orice oră funcționează
+- Prioritizează dimineața și seara
 
-**Știucă** ⭐⭐⭐⭐
-- Post-prohibiție și ea
+**Știucă** (4/5)
 - Agresivă în mai
 - Spinning dimineața și seara
+- Verifică regulile locale înainte de pescuit
 
-**Șalău** ⭐⭐⭐⭐
+**Șalău** (4/5)
 - Foarte activ
 - Zori și amurg + noapte
 - Jigging, twistere
 
-**Caras** ⭐⭐⭐⭐⭐
+**Caras** (5/5)
 - Vârf de sezon
 - Mușcă excelent
 - Perfect pentru începători
 
-**Lin** ⭐⭐⭐⭐
+**Lin** (4/5)
 - Începe sezonul linului
 - Zori, lângă vegetație
 
@@ -4994,10 +4996,11 @@ Mai e luna pe care o așteptăm tot anul. Prohibiția se ridică, peștii sunt f
 - Pleacă devreme (4:00-5:00)
 - Fii la apă înainte de răsărit
 - Profită de perioadele majore
+- Verifică regulamentele locale și perioadele de prohibiție înainte să pleci
 
 ## Calendar Solunar Mai 2026 - Verificare
 
-Pentru perioade majore și minore exacte, verifică zilnic pe [Calendar Solunar](/).
+Pentru perioade majore și minore exacte, verifică zilnic pe [Calendar Solunar](/) sau consultă pagina [Solunar Azi](/azi).
 
 Calendarul îți arată:
 - Orele exacte ale perioadelor
@@ -5007,11 +5010,11 @@ Calendarul îți arată:
 
 ## Sfatul Lunii Mai
 
-**Nu rata 11-13 mai.**
+**Nu rata weekendurile 2-4 mai și 16-18 mai.**
 
-Este, probabil, cel mai bun interval din tot anul 2026 pentru pescuit. Luna plină, post-prohibiție, temperaturi perfecte.
+Primul vine cu lună plină, al doilea cu lună nouă. Sunt cele mai bune două ferestre solunar ale lunii.
 
-Dacă ai de ales o singură sesiune lungă pe an - aceasta e.
+Dacă ai de ales o singură sesiune lungă în mai, alege una dintre aceste ferestre și verifică orele exacte în ziua plecării.
 
 [Verifică calendarul solunar pentru mai 2026 →](/)
         `
@@ -5042,15 +5045,15 @@ Dacă ai de ales o singură sesiune lungă pe an - aceasta e.
 
 | Fază | Data | Rating Pescuit |
 |------|------|---------------|
-| Primul Pătrar | 2 Septembrie | ⭐⭐⭐ |
-| Luna Plină | 7 Septembrie (Duminică) | ⭐⭐⭐⭐⭐ |
-| Ultimul Pătrar | 14 Septembrie | ⭐⭐⭐ |
-| Luna Nouă | 21 Septembrie (Duminică) | ⭐⭐⭐⭐⭐ |
-| Primul Pătrar | 29 Septembrie | ⭐⭐⭐ |
+| Primul Pătrar | 2 Septembrie | 3/5 |
+| Luna Plină | 7 Septembrie (Duminică) | 5/5 |
+| Ultimul Pătrar | 14 Septembrie | 3/5 |
+| Luna Nouă | 21 Septembrie (Duminică) | 5/5 |
+| Primul Pătrar | 29 Septembrie | 3/5 |
 
 ## Zilele de Top în Septembrie 2026
 
-### 🥇 5-7 SEPTEMBRIE (Weekend Luna Plină)
+### Top 1: 5-7 SEPTEMBRIE (Weekend Luna Plină)
 
 **De ce:** Weekend cu luna plină = cel mai bun interval din an.
 
@@ -5062,7 +5065,7 @@ Dacă ai de ales o singură sesiune lungă pe an - aceasta e.
 
 **Sfat:** Vineri seara până duminică seara. Sesiune de 48h dacă poți.
 
-### 🥈 19-21 SEPTEMBRIE (Weekend Luna Nouă)
+### Top 2: 19-21 SEPTEMBRIE (Weekend Luna Nouă)
 
 **De ce:** A doua fereastră de aur. Luna nouă = excelent pentru crap nocturn.
 
@@ -5073,7 +5076,7 @@ Dacă ai de ales o singură sesiune lungă pe an - aceasta e.
 
 **Sfat:** Perfect pentru pescuit nocturn serios.
 
-### 🥉 12-14 SEPTEMBRIE (Weekend)
+### Top 3: 12-14 SEPTEMBRIE (Weekend)
 
 **De ce:** Mijlocul lunii, temperaturi ideale.
 
@@ -5086,38 +5089,38 @@ Dacă ai de ales o singură sesiune lungă pe an - aceasta e.
 
 **Miracolul lui Septembrie:** Aproape orice oră funcționează!
 
-**Dimineața:** 6:00 - 10:00 ⭐⭐⭐⭐⭐
-**Prânz:** 10:00 - 15:00 ⭐⭐⭐⭐ (Da, merge!)
-**Seara:** 16:00 - 20:00 ⭐⭐⭐⭐⭐
-**Noaptea:** 21:00 - 02:00 ⭐⭐⭐⭐
+**Dimineața:** 6:00 - 10:00 5/5
+**Prânz:** 10:00 - 15:00 4/5 (Da, merge!)
+**Seara:** 16:00 - 20:00 5/5
+**Noaptea:** 21:00 - 02:00 4/5
 
 Prânzul redevine productiv (nu mai e cald ca vara).
 
 ## Specii de Vizat în Septembrie
 
-**Crap** ⭐⭐⭐⭐⭐
+**Crap** 5/5
 - CEL MAI BUN SEZON
 - Se îngrașă pentru iarnă
 - Mușcă tot, oricând
 - Momeală: boilies mari, nadă multă
 
-**Știucă** ⭐⭐⭐⭐⭐
+**Știucă** 5/5
 - Vârf de sezon pentru trofee
 - Atacuri brutale
 - Spinning agresiv
 - Momeli mari (18-25cm)
 
-**Șalău** ⭐⭐⭐⭐⭐
+**Șalău** 5/5
 - Bancuri mari în vânătoare
 - Dimineața și seara
 - Jigging, twistere medii
 
-**Somn** ⭐⭐⭐⭐
+**Somn** 4/5
 - Ultimele festinuri
 - Nopți productive
 - Pește viu, calmar
 
-**Caras** ⭐⭐⭐⭐
+**Caras** 4/5
 - Încă excelent
 - Nadă fină, viermi
 
@@ -5464,8 +5467,8 @@ Da, se poate prinde pește în 2 ore.
 [Calendarul](/) îți arată rating pentru fiecare zi.
 
 **Cum îl folosești:**
-- Sâmbătă 4⭐, Duminică 2⭐ → Efort maxim sâmbătă
-- Sâmbătă 3⭐, Duminică 5⭐ → Focus pe duminică
+- Sâmbătă 4/5, Duminică 2/5 → Efort maxim sâmbătă
+- Sâmbătă 3/5, Duminică 5/5 → Focus pe duminică
 - Ambele zile bune → Sesiuni în ambele
 
 Nu pierde zile proaste când ai alternative.
@@ -7569,14 +7572,14 @@ Februarie e luna în care mulți pescari stau acasă. Greșeală. Peștii nu dor
 
 | Fază | Data | Rating Pescuit |
 |------|------|---------------|
-| Luna Plină | 2 Februarie (Luni) | ⭐⭐⭐⭐⭐ |
-| Ultimul Pătrar | 9 Februarie | ⭐⭐⭐ |
-| Luna Nouă | 18 Februarie (Miercuri) | ⭐⭐⭐⭐⭐ |
-| Primul Pătrar | 25 Februarie | ⭐⭐⭐ |
+| Luna Plină | 2 Februarie (Luni) | 5/5 |
+| Ultimul Pătrar | 9 Februarie | 3/5 |
+| Luna Nouă | 18 Februarie (Miercuri) | 5/5 |
+| Primul Pătrar | 25 Februarie | 3/5 |
 
 ## Zilele de Top în Februarie 2026
 
-### 🥇 1-3 FEBRUARIE (Weekend + Luni)
+### Top 1: 1-3 FEBRUARIE (Weekend + Luni)
 
 **De ce:** Luna plină pe 2 februarie. Forță gravitațională maximă = pești activi.
 
@@ -7587,7 +7590,7 @@ Februarie e luna în care mulți pescari stau acasă. Greșeală. Peștii nu dor
 
 **Sfat:** Pescuiește în adâncime. Peștii stau la fund unde apa e mai caldă (4°C).
 
-### 🥈 17-19 FEBRUARIE (Marți-Joi Luna Nouă)
+### Top 2: 17-19 FEBRUARIE (Marți-Joi Luna Nouă)
 
 **De ce:** Luna nouă pe 18 — a doua fereastră importantă. Nopțile întunecate activează prădătorii.
 
@@ -7598,7 +7601,7 @@ Februarie e luna în care mulți pescari stau acasă. Greșeală. Peștii nu dor
 
 **Sfat:** Luna nouă = pescuit nocturn excelent pentru prădători.
 
-### 🥉 7-8 FEBRUARIE (Weekend)
+### Top 3: 7-8 FEBRUARIE (Weekend)
 
 **De ce:** Weekend accesibil, lună în scădere, presiune de obicei stabilă.
 
@@ -7609,46 +7612,46 @@ Februarie e luna în care mulți pescari stau acasă. Greșeală. Peștii nu dor
 
 ## Orele Optime în Februarie
 
-**Dimineața:** 8:00 - 11:00 ⭐⭐⭐⭐
+**Dimineața:** 8:00 - 11:00 4/5
 - Soarele încălzește apa după răsărit
 - Pești se activează lent
 - Ora de aur: 9:00-10:30
 
-**Prânz:** 11:00 - 14:00 ⭐⭐⭐⭐⭐
+**Prânz:** 11:00 - 14:00 5/5
 - Cel mai cald moment al zilei
 - Perioadele majore de prânz sunt cele mai valoroase iarna
 - Peștii mănâncă când apa e la maxim
 
-**Seara:** 14:00 - 17:00 ⭐⭐⭐
+**Seara:** 14:00 - 17:00 3/5
 - Se răcește, activitatea scade
 - Ultimele ore de lumină pot funcționa
 
-**Noaptea:** ⭐⭐ (doar prădători)
+**Noaptea:** 2/5 (doar prădători)
 - Doar lângă luna plină/nouă
 - Știucă, șalău, somn
 
 ## Specii de Vizat în Februarie
 
-**Știucă** ⭐⭐⭐⭐⭐
+**Știucă** 5/5
 - REGINA iernii
 - Momeală: shad-uri 10-15 cm, jerkbait
 - Mișcări lente, pauze lungi
 
-**Biban** ⭐⭐⭐⭐
+**Biban** 4/5
 - Activ tot anul
 - Twistere mici 3-5 cm
 - Caută-l în stol
 
-**Crap** ⭐⭐⭐
+**Crap** 3/5
 - Selectiv dar prins-abil
 - Boilies mici (10-14mm), aromă picantă
 - Un singur crap de iarnă = trofeu
 
-**Clean** ⭐⭐⭐
+**Clean** 3/5
 - Pe albie și canale
 - Momeli mici, fire subțiri
 
-**Caras** ⭐⭐
+**Caras** 2/5
 - Foarte lent
 - Viermișor roșu, fund
 - Răbdare maximă
@@ -7716,14 +7719,14 @@ Martie e luna tranziției. Iarna se retrage, apele se încălzesc, iar peștii s
 
 | Fază | Data | Rating Pescuit |
 |------|------|---------------|
-| Luna Plină | 3 Martie (Marți) | ⭐⭐⭐⭐⭐ |
-| Ultimul Pătrar | 11 Martie | ⭐⭐⭐ |
-| Luna Nouă | 19 Martie (Joi) | ⭐⭐⭐⭐⭐ |
-| Primul Pătrar | 26 Martie | ⭐⭐⭐ |
+| Luna Plină | 3 Martie (Marți) | 5/5 |
+| Ultimul Pătrar | 11 Martie | 3/5 |
+| Luna Nouă | 19 Martie (Joi) | 5/5 |
+| Primul Pătrar | 26 Martie | 3/5 |
 
 ## Zilele de Top în Martie 2026
 
-### 🥇 2-4 MARTIE (Luni-Miercuri Luna Plină)
+### Top 1: 2-4 MARTIE (Luni-Miercuri Luna Plină)
 
 **De ce:** Luna plină pe 3 martie. Efect gravitațional maxim, pești hiperactivi.
 
@@ -7734,7 +7737,7 @@ Martie e luna tranziției. Iarna se retrage, apele se încălzesc, iar peștii s
 
 **Sfat:** Dacă poți lua liber marți (3 martie), e ziua cu cel mai mare potențial din lună.
 
-### 🥈 18-20 MARTIE (Miercuri-Vineri Luna Nouă)
+### Top 2: 18-20 MARTIE (Miercuri-Vineri Luna Nouă)
 
 **De ce:** Luna nouă pe 19 martie + echinocțiul de primăvară (20 martie). Combinație rară.
 
@@ -7745,7 +7748,7 @@ Martie e luna tranziției. Iarna se retrage, apele se încălzesc, iar peștii s
 
 **Sfat:** Echinocțiul marchează o schimbare în comportamentul peștilor. Combină-l cu luna nouă și ai o fereastră excepțională.
 
-### 🥉 28-29 MARTIE (Weekend)
+### Top 3: 28-29 MARTIE (Weekend)
 
 **De ce:** Weekend, lună în creștere, temperaturi primăvăratice.
 
@@ -7756,46 +7759,46 @@ Martie e luna tranziției. Iarna se retrage, apele se încălzesc, iar peștii s
 
 ## Orele Optime în Martie
 
-**Dimineața:** 6:30 - 10:00 ⭐⭐⭐⭐⭐
+**Dimineața:** 6:30 - 10:00 5/5
 - Răsăritul devreme aduce activitate
 - Ora de aur: 7:00-9:00
 - Apa se încălzește progresiv
 
-**Prânz:** 10:00 - 14:00 ⭐⭐⭐⭐
+**Prânz:** 10:00 - 14:00 4/5
 - Încă productiv — nu e cald
 - Perioadele majore de prânz funcționează bine
 
-**Seara:** 15:00 - 18:30 ⭐⭐⭐⭐
+**Seara:** 15:00 - 18:30 4/5
 - A doua fereastră bună
 - Apa e la temperatura maximă zilnică
 
-**Noaptea:** 20:00 - 01:00 ⭐⭐⭐
+**Noaptea:** 20:00 - 01:00 3/5
 - Începe să merite
 - Mai ales în jurul lunii pline/noi
 
 ## Specii de Vizat în Martie
 
-**Știucă** ⭐⭐⭐⭐⭐
+**Știucă** 5/5
 - Ultimele săptămâni înainte de prohibiție
 - Agresivă, se hrănește intens
 - Spinning clasic, momeli medii
 
-**Biban** ⭐⭐⭐⭐⭐
+**Biban** 5/5
 - Foarte activ
 - Stoluri mari pe canale și lacuri
 - Twistere, spinnere mici
 
-**Crap** ⭐⭐⭐⭐
+**Crap** 4/5
 - Se trezește puternic
 - Boilies fructate (căpșuni, prune)
 - Method feeder excelent
 
-**Caras** ⭐⭐⭐⭐
+**Caras** 4/5
 - Începe sezonul
 - Viermișor, porumb
 - Pescuit cu pluta — clasic
 
-**Plătică** ⭐⭐⭐
+**Plătică** 3/5
 - Se activează pe canale
 - Feedere ușoare
 
@@ -7856,14 +7859,14 @@ Solunar aprilie 2026 complet: calendarul pescarului pentru aprilie cu toate peri
 
 | Fază | Data | Rating Pescuit |
 |------|------|---------------|
-| Luna Plină | 2 Aprilie (Joi) | ⭐⭐⭐⭐⭐ |
-| Ultimul Pătrar | 10 Aprilie | ⭐⭐⭐ |
-| Luna Nouă | 18 Aprilie (Sâmbătă) | ⭐⭐⭐⭐⭐ |
-| Primul Pătrar | 24 Aprilie | ⭐⭐⭐ |
+| Luna Plină | 2 Aprilie (Joi) | 5/5 |
+| Ultimul Pătrar | 10 Aprilie | 3/5 |
+| Luna Nouă | 18 Aprilie (Sâmbătă) | 5/5 |
+| Primul Pătrar | 24 Aprilie | 3/5 |
 
 ## Zilele de Top în Aprilie 2026
 
-### 🥇 17-19 APRILIE (Vineri-Duminică Luna Nouă)
+### Top 1: 17-19 APRILIE (Vineri-Duminică Luna Nouă)
 
 **De ce:** Luna nouă pe 18 aprilie CAD ÎN WEEKEND. Cel mai bun interval posibil.
 
@@ -7874,7 +7877,7 @@ Solunar aprilie 2026 complet: calendarul pescarului pentru aprilie cu toate peri
 
 **Sfat:** Weekend-ul 17-19 aprilie e de marcat cu roșu. Luna nouă + weekend + temperaturi de primăvară = perfecțiune.
 
-### 🥈 1-3 APRILIE (Miercuri-Vineri Luna Plină)
+### Top 2: 1-3 APRILIE (Miercuri-Vineri Luna Plină)
 
 **De ce:** Luna plină pe 2 aprilie. Efect gravitațional puternic la începutul lunii.
 
@@ -7885,7 +7888,7 @@ Solunar aprilie 2026 complet: calendarul pescarului pentru aprilie cu toate peri
 
 **Sfat:** Dacă poți lua vineri liber (3 aprilie), ai 3 zile consecutive de pescuit în luna plină.
 
-### 🥉 25-26 APRILIE (Weekend)
+### Top 3: 25-26 APRILIE (Weekend)
 
 **De ce:** Weekend clasic, temperaturi ridicate, luna în creștere.
 
@@ -7896,53 +7899,53 @@ Solunar aprilie 2026 complet: calendarul pescarului pentru aprilie cu toate peri
 
 ## Orele Optime în Aprilie
 
-**Dimineața:** 5:30 - 9:00 ⭐⭐⭐⭐⭐
+**Dimineața:** 5:30 - 9:00 5/5
 - Răsăritul devreme — zorii sunt magici
 - Cea mai productivă perioadă
 - Apa e calmă, peștii vin la margine
 
-**Prânz:** 10:00 - 14:00 ⭐⭐⭐
+**Prânz:** 10:00 - 14:00 3/5
 - Activitate mai mică la soare puternic
 - Funcționează pe zile înnoarte
 
-**Seara:** 16:00 - 20:00 ⭐⭐⭐⭐⭐
+**Seara:** 16:00 - 20:00 5/5
 - A doua perioadă de aur
 - Crapi la margine
 - Amurgul e spectaculos
 
-**Noaptea:** 21:00 - 02:00 ⭐⭐⭐⭐
+**Noaptea:** 21:00 - 02:00 4/5
 - Somn, știucă, șalău
 - Crap nocturn excelent
 - Mai ales lângă luna plină
 
 ## Specii de Vizat în Aprilie
 
-**Crap** ⭐⭐⭐⭐⭐
+**Crap** 5/5
 - LUNA crapului tradițional
 - Boilies, porumb, method feeder
 - Mușcă agresiv pre-depunere
 
-**Caras** ⭐⭐⭐⭐⭐
+**Caras** 5/5
 - Vârf de activitate
 - Viermișor, porumb, pâine
 - Perfect pentru toată familia
 
-**Lin** ⭐⭐⭐⭐
+**Lin** 4/5
 - Se trezește complet
 - Zori, lângă vegetație
 - Momeli mici și fine
 
-**Plătică** ⭐⭐⭐⭐
+**Plătică** 4/5
 - Foarte activă pe canale și lacuri
 - Feedere cu viermi
 - Cantitate mare posibilă
 
-**Somn** ⭐⭐⭐
+**Somn** 3/5
 - Începe sezonul
 - Noapte, zone adânci
 - Momeli mari, vii
 
-**Biban** ⭐⭐⭐⭐
+**Biban** 4/5
 - Încă foarte activ
 - Spinning dimineața
 - Twistere și spinnere
@@ -8002,17 +8005,17 @@ Iulie e luna cea mai fierbinte și cea mai frustrată pentru pescari. Apa caldă
 
 | Fază | Data | Rating Pescuit |
 |------|------|---------------|
-| Luna Plină | 1 Iulie (Miercuri) | ⭐⭐⭐⭐⭐ |
-| Ultimul Pătrar | 8 Iulie | ⭐⭐⭐ |
-| Luna Nouă | 15 Iulie (Miercuri) | ⭐⭐⭐⭐⭐ |
-| Primul Pătrar | 22 Iulie | ⭐⭐⭐ |
-| Luna Plină | 30 Iulie (Joi) | ⭐⭐⭐⭐⭐ |
+| Luna Plină | 1 Iulie (Miercuri) | 5/5 |
+| Ultimul Pătrar | 8 Iulie | 3/5 |
+| Luna Nouă | 15 Iulie (Miercuri) | 5/5 |
+| Primul Pătrar | 22 Iulie | 3/5 |
+| Luna Plină | 30 Iulie (Joi) | 5/5 |
 
 **Bonus:** Iulie 2026 are DOUĂ luni pline (1 și 30 iulie). Rar și valoros.
 
 ## Zilele de Top în Iulie 2026
 
-### 🥇 29-30 IULIE (Miercuri-Joi Luna Plină)
+### Top 1: 29-30 IULIE (Miercuri-Joi Luna Plină)
 
 **De ce:** A doua lună plină a lunii. Forță gravitațională mare + nopți calde = condiții de vis.
 
@@ -8023,7 +8026,7 @@ Iulie e luna cea mai fierbinte și cea mai frustrată pentru pescari. Apa caldă
 
 **Sfat:** Sesiune de noapte obligatorie. Pleacă la 20:00, pescuiește până la 06:00.
 
-### 🥈 14-16 IULIE (Marți-Joi Luna Nouă)
+### Top 2: 14-16 IULIE (Marți-Joi Luna Nouă)
 
 **De ce:** Luna nouă = nopți complet întunecate. Somnul și crapul sunt hipercactivi.
 
@@ -8034,7 +8037,7 @@ Iulie e luna cea mai fierbinte și cea mai frustrată pentru pescari. Apa caldă
 
 **Sfat:** Întunericul total e avantajul tău. Folosește avertizoare electronice.
 
-### 🥉 4-5 IULIE (Weekend)
+### Top 3: 4-5 IULIE (Weekend)
 
 **De ce:** Weekend imediat după luna plină, inerție de activitate.
 
@@ -8045,44 +8048,44 @@ Iulie e luna cea mai fierbinte și cea mai frustrată pentru pescari. Apa caldă
 
 ## Orele Optime în Iulie
 
-**Dimineața:** 4:30 - 7:30 ⭐⭐⭐⭐⭐
+**Dimineața:** 4:30 - 7:30 5/5
 - CEA MAI importantă fereastră
 - Răsăritul devreme = activitate maximă
 - După 8:00 căldura oprește totul
 
-**Prânz:** 10:00 - 16:00 ⭐
+**Prânz:** 10:00 - 16:00 1/5
 - Evită complet
 - Pești inactivi, soare periculos
 - Stai la umbră, odihnește-te
 
-**Seara:** 19:00 - 22:00 ⭐⭐⭐⭐⭐
+**Seara:** 19:00 - 22:00 5/5
 - A doua fereastră de aur
 - Apusul tardiv, răcorire lentă
 - Crapul vine la margine
 
-**Noaptea:** 22:00 - 04:00 ⭐⭐⭐⭐⭐
+**Noaptea:** 22:00 - 04:00 5/5
 - LUNA somnului
 - Crap nocturn excepțional
 - Cea mai productivă perioadă în iulie
 
 ## Specii de Vizat în Iulie
 
-**Somn** ⭐⭐⭐⭐⭐
+**Somn** 5/5
 - LUNA somnului
 - Noapte, momeală vie (peștișor, rac)
 - Zone adânci lângă mal
 
-**Crap** ⭐⭐⭐⭐ (doar noaptea)
+**Crap** 4/5 (doar noaptea)
 - Sesiuni nocturne obligatorii
 - Boilies fructate (căpșuni, ananas)
 - Evită ziua complet
 
-**Caras** ⭐⭐⭐ (doar zori)
+**Caras** 3/5 (doar zori)
 - Primele 2 ore de dimineață
 - Viermișor, porumb
 - După 8:00 dispare
 
-**Șalău** ⭐⭐⭐⭐ (nocturn)
+**Șalău** 4/5 (nocturn)
 - Twistere fluorescente
 - Zone de curent
 - Noapte exclusiv
@@ -8145,14 +8148,14 @@ August e luna tranziției inverse. Căldura încă domină dar nopțile se lunge
 
 | Fază | Data | Rating Pescuit |
 |------|------|---------------|
-| Ultimul Pătrar | 6 August | ⭐⭐⭐ |
-| Luna Nouă | 13 August (Joi) | ⭐⭐⭐⭐⭐ |
-| Primul Pătrar | 20 August | ⭐⭐⭐ |
-| Luna Plină | 28 August (Vineri) | ⭐⭐⭐⭐⭐ |
+| Ultimul Pătrar | 6 August | 3/5 |
+| Luna Nouă | 13 August (Joi) | 5/5 |
+| Primul Pătrar | 20 August | 3/5 |
+| Luna Plină | 28 August (Vineri) | 5/5 |
 
 ## Zilele de Top în August 2026
 
-### 🥇 28-30 AUGUST (Vineri-Duminică Luna Plină)
+### Top 1: 28-30 AUGUST (Vineri-Duminică Luna Plină)
 
 **De ce:** Luna plină pe vineri = weekend complet de pescuit. Plus temperaturi care încep să scadă.
 
@@ -8163,7 +8166,7 @@ August e luna tranziției inverse. Căldura încă domină dar nopțile se lunge
 
 **Sfat:** CEL MAI BUN weekend din august. Luna plină + răcorire + weekend = combinație perfectă.
 
-### 🥈 12-14 AUGUST (Miercuri-Vineri Luna Nouă)
+### Top 2: 12-14 AUGUST (Miercuri-Vineri Luna Nouă)
 
 **De ce:** Luna nouă pe 13 august. Nopți întunecate, prădători activi.
 
@@ -8174,7 +8177,7 @@ August e luna tranziției inverse. Căldura încă domină dar nopțile se lunge
 
 **Sfat:** Combină cu o zi de concediu pentru sesiune prelungită.
 
-### 🥉 22-23 AUGUST (Weekend)
+### Top 3: 22-23 AUGUST (Weekend)
 
 **De ce:** Weekend, temperatura scade ușor, activitate în creștere.
 
@@ -8185,47 +8188,47 @@ August e luna tranziției inverse. Căldura încă domină dar nopțile se lunge
 
 ## Orele Optime în August
 
-**Dimineața:** 5:00 - 8:00 ⭐⭐⭐⭐⭐
+**Dimineața:** 5:00 - 8:00 5/5
 - Cea mai productivă fereastră
 - Răcoarea dimineții activează peștii
 - Ora de aur: 5:30-7:00
 
-**Prânz:** 10:00 - 16:00 ⭐⭐ (prima jumătate), ⭐⭐⭐ (a doua)
+**Prânz:** 10:00 - 16:00 2/5 (prima jumătate), 3/5 (a doua)
 - Prima jumătate a lunii: evită
 - A doua jumătate: merge pe zile răcoroase
 
-**Seara:** 18:00 - 21:00 ⭐⭐⭐⭐⭐
+**Seara:** 18:00 - 21:00 5/5
 - Excelent tot august
 - Crapi la margine
 - Apusul mai devreme = activitate mai devreme
 
-**Noaptea:** 21:00 - 04:00 ⭐⭐⭐⭐
+**Noaptea:** 21:00 - 04:00 4/5
 - Somn, crap, șalău
 - Mai ales în jurul lunii pline/noi
 
 ## Specii de Vizat în August
 
-**Crap** ⭐⭐⭐⭐
+**Crap** 4/5
 - Redevine consistent spre final de lună
 - Noapte + zori
 - Boilies, porumb, method feeder
 
-**Somn** ⭐⭐⭐⭐⭐
+**Somn** 5/5
 - Încă în sezon
 - Ultimele sesiuni mari înainte de răcire
 - Noapte, momeală vie
 
-**Caras** ⭐⭐⭐
+**Caras** 3/5
 - Revine în a doua jumătate
 - Zori și seara
 - Viermișor, porumb
 
-**Știucă** ⭐⭐⭐
+**Știucă** 3/5
 - Se trezește spre final
 - Spinning dimineața devreme
 - Momeli medii, mișcare lentă
 
-**Biban** ⭐⭐⭐⭐
+**Biban** 4/5
 - Activ tot luna
 - Spinning clasic
 - Dimineață și seara
@@ -8282,14 +8285,14 @@ Noiembrie e ultima mare fereastră de pescuit înainte de iarnă. Peștii știu 
 
 | Fază | Data | Rating Pescuit |
 |------|------|---------------|
-| Ultimul Pătrar | 2 Noiembrie | ⭐⭐⭐ |
-| Luna Nouă | 9 Noiembrie (Luni) | ⭐⭐⭐⭐⭐ |
-| Primul Pătrar | 17 Noiembrie | ⭐⭐⭐ |
-| Luna Plină | 25 Noiembrie (Miercuri) | ⭐⭐⭐⭐⭐ |
+| Ultimul Pătrar | 2 Noiembrie | 3/5 |
+| Luna Nouă | 9 Noiembrie (Luni) | 5/5 |
+| Primul Pătrar | 17 Noiembrie | 3/5 |
+| Luna Plină | 25 Noiembrie (Miercuri) | 5/5 |
 
 ## Zilele de Top în Noiembrie 2026
 
-### 🥇 8-10 NOIEMBRIE (Duminică-Marți Luna Nouă)
+### Top 1: 8-10 NOIEMBRIE (Duminică-Marți Luna Nouă)
 
 **De ce:** Luna nouă pe 9 noiembrie. Apa se răcește la 8-10°C — zona perfectă pentru crap mare.
 
@@ -8300,7 +8303,7 @@ Noiembrie e ultima mare fereastră de pescuit înainte de iarnă. Peștii știu 
 
 **Sfat:** Duminică-luni (8-9) e combinația ideală. Luna nouă + temperaturi stabile.
 
-### 🥈 24-26 NOIEMBRIE (Marți-Joi Luna Plină)
+### Top 2: 24-26 NOIEMBRIE (Marți-Joi Luna Plină)
 
 **De ce:** Luna plină pe 25 — ultima lună plină bună pentru pescuit în 2026.
 
@@ -8311,7 +8314,7 @@ Noiembrie e ultima mare fereastră de pescuit înainte de iarnă. Peștii știu 
 
 **Sfat:** Dacă poți lua o zi liberă, 25 noiembrie e ziua. Ultimul mare pescuit al anului.
 
-### 🥉 14-15 NOIEMBRIE (Weekend)
+### Top 3: 14-15 NOIEMBRIE (Weekend)
 
 **De ce:** Weekend accesibil, lună în creștere, condiții stabile de obicei.
 
@@ -8322,43 +8325,43 @@ Noiembrie e ultima mare fereastră de pescuit înainte de iarnă. Peștii știu 
 
 ## Orele Optime în Noiembrie
 
-**Dimineața:** 8:00 - 11:00 ⭐⭐⭐⭐
+**Dimineața:** 8:00 - 11:00 4/5
 - Soarele încălzește lent apa
 - Activitate după ce se luminează bine
 
-**Prânz:** 11:00 - 14:00 ⭐⭐⭐⭐⭐
+**Prânz:** 11:00 - 14:00 5/5
 - CEA MAI BUNĂ perioadă
 - Maxim de temperatură zilnică
 - Perioadele majore de prânz = aur
 
-**Seara:** 14:00 - 16:30 ⭐⭐⭐
+**Seara:** 14:00 - 16:30 3/5
 - Se răcește rapid
 - Ultimele șanse înainte de întuneric
 - Apus devreme
 
-**Noaptea:** ⭐⭐
+**Noaptea:** 2/5
 - Doar pentru dedicați
 - Știucă și somn ocazional
 - Echipament de frig obligatoriu
 
 ## Specii de Vizat în Noiembrie
 
-**Crap** ⭐⭐⭐⭐⭐
+**Crap** 5/5
 - ULTIMELE sesiuni mari
 - Boilies picante (scorțișoară, piper)
 - Mânâncă agresiv pentru iarnă
 
-**Știucă** ⭐⭐⭐⭐⭐
+**Știucă** 5/5
 - Post-prohibiție, foame
 - Spinning cu shad-uri mari
 - Jerkbait în mișcări lente
 
-**Biban** ⭐⭐⭐⭐
+**Biban** 4/5
 - Foarte activ în stoluri
 - Twistere, spinnere
 - Canale și lacuri
 
-**Clean** ⭐⭐⭐
+**Clean** 3/5
 - Pe albie
 - Momeli mici
 - Fire subțiri
@@ -8411,15 +8414,15 @@ Decembrie e luna extremelor. Frig, zile scurte, lacuri pustii. Dar peștii sunt 
 
 | Fază | Data | Rating Pescuit |
 |------|------|---------------|
-| Ultimul Pătrar | 2 Decembrie | ⭐⭐⭐ |
-| Luna Nouă | 9 Decembrie (Miercuri) | ⭐⭐⭐⭐⭐ |
-| Primul Pătrar | 17 Decembrie | ⭐⭐⭐ |
-| Luna Plină | 24 Decembrie (Joi) | ⭐⭐⭐⭐⭐ |
-| Ultimul Pătrar | 31 Decembrie | ⭐⭐⭐ |
+| Ultimul Pătrar | 2 Decembrie | 3/5 |
+| Luna Nouă | 9 Decembrie (Miercuri) | 5/5 |
+| Primul Pătrar | 17 Decembrie | 3/5 |
+| Luna Plină | 24 Decembrie (Joi) | 5/5 |
+| Ultimul Pătrar | 31 Decembrie | 3/5 |
 
 ## Zilele de Top în Decembrie 2026
 
-### 🥇 8-10 DECEMBRIE (Marți-Joi Luna Nouă)
+### Top 1: 8-10 DECEMBRIE (Marți-Joi Luna Nouă)
 
 **De ce:** Luna nouă pe 9 decembrie. Zile scurte dar perioadele majore de prânz sunt intense.
 
@@ -8430,7 +8433,7 @@ Decembrie e luna extremelor. Frig, zile scurte, lacuri pustii. Dar peștii sunt 
 
 **Sfat:** Concentrează totul în intervalul 10:00-14:00. Sunt cele 4 ore care contează.
 
-### 🥈 23-24 DECEMBRIE (Miercuri-Joi Luna Plină)
+### Top 2: 23-24 DECEMBRIE (Miercuri-Joi Luna Plină)
 
 **De ce:** Luna plină de Crăciun. Dacă vremea permite, e o sesiune memorabilă.
 
@@ -8441,7 +8444,7 @@ Decembrie e luna extremelor. Frig, zile scurte, lacuri pustii. Dar peștii sunt 
 
 **Sfat:** Sesiune scurtă de dimineață (8:00-13:00), apoi acasă la familie. Sau pescuit nocturn de Ajun pentru aventurieri.
 
-### 🥉 12-13 DECEMBRIE (Weekend)
+### Top 3: 12-13 DECEMBRIE (Weekend)
 
 **De ce:** Weekend post-lună nouă, inerție de activitate.
 
@@ -8452,43 +8455,43 @@ Decembrie e luna extremelor. Frig, zile scurte, lacuri pustii. Dar peștii sunt 
 
 ## Orele Optime în Decembrie
 
-**Dimineața:** 9:00 - 11:00 ⭐⭐⭐⭐
+**Dimineața:** 9:00 - 11:00 4/5
 - Soarele trebuie să apară bine
 - Apa se încălzește minimal
 - Pregătire pentru fereastra de prânz
 
-**Prânz:** 11:00 - 14:00 ⭐⭐⭐⭐⭐
+**Prânz:** 11:00 - 14:00 5/5
 - SINGURA fereastră cu adevărat productivă
 - Maxim de temperatură zilnică
 - Concentrează TOTUL aici
 
-**Seara:** 14:00 - 16:00 ⭐⭐⭐
+**Seara:** 14:00 - 16:00 3/5
 - Se închide rapid
 - Ultimele șanse
 - Apus devreme (16:30)
 
-**Noaptea:** ⭐ (doar dedicați)
+**Noaptea:** 1/5 (doar dedicați)
 - Frig extrem
 - Doar dacă ai echipament profesionist
 
 ## Specii de Vizat în Decembrie
 
-**Știucă** ⭐⭐⭐⭐⭐
+**Știucă** 5/5
 - REGINA absolută
 - Shad-uri 12-18 cm, mișcare lentă
 - Pauze lungi de 5-10 secunde
 
-**Biban** ⭐⭐⭐⭐
+**Biban** 4/5
 - Activ tot anul
 - Twistere mici 3-5 cm
 - Jigging vertical pe canale
 
-**Crap** ⭐⭐⭐
+**Crap** 3/5
 - Mișcări rare dar mușcături decisive
 - Boilies mici, aromă picantă
 - Un singur crap = trofeu de Crăciun
 
-**Clean** ⭐⭐⭐
+**Clean** 3/5
 - Pe albie, zone cu curent lent
 - Momeli mici
 - Răbdare extremă
@@ -8561,3 +8564,4 @@ export function getAdjacentMonthlyArticles(currentSlug: string): { prev: BlogArt
         next: currentIndex < monthlyArticles.length - 1 ? monthlyArticles[currentIndex + 1] : null,
     };
 }
+

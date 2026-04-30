@@ -4,8 +4,6 @@ import { getWeatherData } from '@/lib/weather';
 import { getFishingAdvice } from '@/lib/advice';
 import Moon3DWrapper from '@/components/Moon3DWrapper';
 import ActivityGraph from '@/components/ActivityGraph';
-import AdUnit from '@/components/AdUnit';
-import LazyAdUnit from '@/components/LazyAdUnit';
 import Link from 'next/link';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { getCityBySlug, getAllCities } from '@/data/cities';
@@ -153,7 +151,7 @@ function CityPageContent({ city }: { city: ReturnType<typeof getCityBySlug> & {}
     const dateStr = today.toLocaleDateString('ro-RO', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
     const capitalizedDate = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
     const ratingLabels = ['', 'Slaba', 'Moderata', 'Buna', 'Foarte Buna', 'Excelenta'];
-    const ratingColors = ['', 'text-red-400', 'text-orange-400', 'text-yellow-400', 'text-emerald-400', 'text-green-400'];
+    const ratingColors = ['', 'text-red-400', 'text-amber-400', 'text-yellow-400', 'text-amber-400', 'text-green-400'];
     const otherCities = getAllCities().filter(c => c.slug !== city.slug).slice(0, 6);
 
     return (
@@ -196,10 +194,7 @@ function CityPageContent({ city }: { city: ReturnType<typeof getCityBySlug> & {}
                         </div>
                     </div>
                 </div>
-
-                <AdUnit slotId="2812628769" format="horizontal" className="min-h-[90px] mb-8" label="Reclama" />
-
-                <div className="grid md:grid-cols-2 gap-6 mb-8">
+<div className="grid md:grid-cols-2 gap-6 mb-8">
                     <div className="card-panel p-6">
                         <h2 className="text-xl font-display font-bold text-amber-400 mb-4">Perioade Majore {city.name}</h2>
                         <p className="text-night-400 text-sm mb-4">Durata ~2 ore. Activitate maxima a pestilor.</p>
@@ -215,13 +210,13 @@ function CityPageContent({ city }: { city: ReturnType<typeof getCityBySlug> & {}
                         </div>
                     </div>
                     <div className="card-panel p-6">
-                        <h2 className="text-xl font-display font-bold text-cyan-400 mb-4">Perioade Minore {city.name}</h2>
+                        <h2 className="text-xl font-display font-bold text-amber-400 mb-4">Perioade Minore {city.name}</h2>
                         <p className="text-night-400 text-sm mb-4">Durata ~1 ora. Activitate moderata.</p>
                         <div className="space-y-3">
                             {data.minorPeriods.map((p, i) => (
-                                <div key={i} className="flex items-center justify-between p-3 bg-cyan-500/10 border border-cyan-500/20 rounded-lg">
+                                <div key={i} className="flex items-center justify-between p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg">
                                     <div className="flex items-center gap-3">
-                                        <div className="w-2 h-2 rounded-full bg-cyan-400" />
+                                        <div className="w-2 h-2 rounded-full bg-amber-400" />
                                         <span className="text-white font-mono font-bold">{formatTime(p.start)} - {formatTime(p.end)}</span>
                                     </div>
                                 </div>
@@ -237,11 +232,11 @@ function CityPageContent({ city }: { city: ReturnType<typeof getCityBySlug> & {}
 
                 <div className="grid md:grid-cols-2 gap-6 mb-8">
                     <div className="card-panel p-6">
-                        <h2 className="text-xl font-display font-bold text-emerald-400 mb-4">Specii Active in {city.name}</h2>
+                        <h2 className="text-xl font-display font-bold text-amber-400 mb-4">Specii Active in {city.name}</h2>
                         {activeFish.length > 0 ? (
                             <div className="flex flex-wrap gap-2">
                                 {activeFish.map((fish, i) => (
-                                    <span key={i} className="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-300 text-sm">{fish}</span>
+                                    <span key={i} className="px-3 py-1.5 bg-amber-500/10 border border-amber-500/20 rounded-full text-amber-300 text-sm">{fish}</span>
                                 ))}
                             </div>
                         ) : <p className="text-night-400">Activitate generala redusa astazi.</p>}
@@ -251,10 +246,7 @@ function CityPageContent({ city }: { city: ReturnType<typeof getCityBySlug> & {}
                         <p className="text-night-300 text-sm leading-relaxed">{advice}</p>
                     </div>
                 </div>
-
-                <LazyAdUnit slotId="6301173988" format="rectangle" style={{ minHeight: '280px' }} className="mb-8" label="Reclama" />
-
-                {/* Locuri de Pescuit — linkuri la paginile de locații din același județ */}
+{/* Locuri de Pescuit — linkuri la paginile de locații din același județ */}
                 {(() => {
                     const countyLocations = getAllLocations().filter(loc => loc.county === city.county);
                     return (
@@ -265,7 +257,7 @@ function CityPageContent({ city }: { city: ReturnType<typeof getCityBySlug> & {}
                                 <>
                                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                                         {countyLocations.slice(0, 6).map((loc) => (
-                                            <Link key={loc.slug} href={`/locuri-pescuit/${loc.slug}`} className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg hover:bg-blue-500/20 transition-colors group">
+                                            <Link key={loc.slug} href={`/locuri-pescuit/${loc.slug}`} className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg hover:bg-amber-500/20 transition-colors group">
                                                 <p className="text-white text-sm font-bold group-hover:text-amber-400 transition-colors">{loc.name}</p>
                                                 <p className="text-night-500 text-xs">{loc.fish.slice(0, 3).join(', ')} · {loc.paid ? 'Cu taxă' : 'Gratuit'}</p>
                                             </Link>
@@ -278,8 +270,8 @@ function CityPageContent({ city }: { city: ReturnType<typeof getCityBySlug> & {}
                             ) : (
                                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                                     {city.nearbyWaters.map((water, i) => (
-                                        <div key={i} className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg flex items-center gap-2">
-                                            <svg className="w-4 h-4 text-blue-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <div key={i} className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg flex items-center gap-2">
+                                            <svg className="w-4 h-4 text-amber-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                             </svg>
                                             <span className="text-white text-sm font-medium">{water}</span>
@@ -316,9 +308,7 @@ function CityPageContent({ city }: { city: ReturnType<typeof getCityBySlug> & {}
                         ))}
                     </div>
                 </div>
-
-                <LazyAdUnit slotId="1044977874" format="auto" layout="in-article" className="min-h-[120px] mt-8" label="Reclama" />
-            </div>
+</div>
         </div>
     );
 }
@@ -331,7 +321,7 @@ function SpeciesPageContent({ species }: { species: ReturnType<typeof getSpecies
     const dateStr = today.toLocaleDateString('ro-RO', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
     const capitalizedDate = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
     const ratingLabels = ['', 'Slaba', 'Moderata', 'Buna', 'Foarte Buna', 'Excelenta'];
-    const ratingColors = ['', 'text-red-400', 'text-orange-400', 'text-yellow-400', 'text-emerald-400', 'text-green-400'];
+    const ratingColors = ['', 'text-red-400', 'text-amber-400', 'text-yellow-400', 'text-amber-400', 'text-green-400'];
     const otherSpecies = getAllSpecies().filter(s => s.slug !== species.slug);
 
     const allArticles = getAllArticles();
@@ -378,12 +368,9 @@ function SpeciesPageContent({ species }: { species: ReturnType<typeof getSpecies
                         </div>
                     </div>
                 </div>
-
-                <AdUnit slotId="2812628769" format="horizontal" className="min-h-[90px] mb-8" label="Reclama" />
-
-                <div className="grid md:grid-cols-2 gap-6 mb-8">
+<div className="grid md:grid-cols-2 gap-6 mb-8">
                     <div className="card-panel p-6">
-                        <h2 className="text-xl font-display font-bold text-emerald-400 mb-4">Sezon si Ora Optima</h2>
+                        <h2 className="text-xl font-display font-bold text-amber-400 mb-4">Sezon si Ora Optima</h2>
                         <div className="space-y-3 text-sm">
                             <div className="flex justify-between"><span className="text-night-400">Sezon:</span><span className="text-white font-medium">{species.season}</span></div>
                             <div className="flex justify-between"><span className="text-night-400">Faza lunara optima:</span><span className="text-white font-medium">{species.bestMoonPhase}</span></div>
@@ -391,7 +378,7 @@ function SpeciesPageContent({ species }: { species: ReturnType<typeof getSpecies
                         </div>
                     </div>
                     <div className="card-panel p-6">
-                        <h2 className="text-xl font-display font-bold text-blue-400 mb-4">Habitat</h2>
+                        <h2 className="text-xl font-display font-bold text-amber-400 mb-4">Habitat</h2>
                         <p className="text-night-300 text-sm leading-relaxed">{species.habitat}</p>
                     </div>
                 </div>
@@ -406,10 +393,10 @@ function SpeciesPageContent({ species }: { species: ReturnType<typeof getSpecies
                         </div>
                     </div>
                     <div className="card-panel p-6">
-                        <h2 className="text-xl font-display font-bold text-cyan-400 mb-4">Momeli Recomandate</h2>
+                        <h2 className="text-xl font-display font-bold text-amber-400 mb-4">Momeli Recomandate</h2>
                         <div className="flex flex-wrap gap-2">
                             {species.bait.map((b, i) => (
-                                <span key={i} className="px-3 py-1.5 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-300 text-sm">{b}</span>
+                                <span key={i} className="px-3 py-1.5 bg-amber-500/10 border border-amber-500/20 rounded-full text-amber-300 text-sm">{b}</span>
                             ))}
                         </div>
                     </div>
@@ -419,10 +406,7 @@ function SpeciesPageContent({ species }: { species: ReturnType<typeof getSpecies
                     <h2 className="text-xl font-display font-bold text-white mb-4">Grafic Activitate {species.name} Azi</h2>
                     <ActivityGraph majorPeriods={data.majorPeriods} minorPeriods={data.minorPeriods} />
                 </div>
-
-                <LazyAdUnit slotId="6301173988" format="rectangle" style={{ minHeight: '280px' }} className="mb-8" label="Reclama" />
-
-                <div className="card-panel p-6 md:p-8 mb-8">
+<div className="card-panel p-6 md:p-8 mb-8">
                     <h2 className="text-2xl font-display font-bold text-white mb-4">Sfat Solunar pentru {species.name}</h2>
                     <p className="text-night-300 leading-relaxed">{species.solunarTip}</p>
                 </div>
@@ -506,9 +490,7 @@ function SpeciesPageContent({ species }: { species: ReturnType<typeof getSpecies
                         ))}
                     </div>
                 </div>
-
-                <LazyAdUnit slotId="1044977874" format="auto" layout="in-article" className="min-h-[120px] mt-8" label="Reclama" />
-            </div>
+</div>
         </div>
     );
 }

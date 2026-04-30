@@ -1,11 +1,11 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import { getAllArticles } from '@/data/blogArticles';
+import { getAllArticles, getMonthlyArticles } from '@/data/blogArticles';
 
 export const metadata: Metadata = {
-    title: 'Ghiduri Pescuit 2026 ✓ Sfaturi, Tehnici și Calendar Solunar',
-    description: '✅ Cele mai bune ghiduri de pescuit din România 2026. Tehnici pentru crap, șalău, somn, știucă, plătică. Ore optime, sezon pescuit, echipament și sfaturi de la experți.',
+    title: 'Calendar Pescuit 2026 - Solunar pe Luni, Ghiduri și Ore Bune',
+    description: 'Calendar pescuit 2026 cu solunar pe luni, zile bune, ore optime, faze lunare și ghiduri pentru crap, șalău, somn, știucă și păstrăv.',
     keywords: [
         'ghid pescuit 2026', 'sfaturi pescuit', 'tehnici pescuit',
         'pescuit crap', 'pescuit salau', 'pescuit pastrav',
@@ -17,14 +17,15 @@ export const metadata: Metadata = {
         canonical: 'https://calendarsolunar.ro/blog',
     },
     openGraph: {
-        title: 'Ghiduri Pescuit 2026 — Sfaturi și Tehnici de la Experți',
-        description: 'Cele mai bune ghiduri de pescuit din România: tehnici, ore optime, echipament și calendar solunar.',
+        title: 'Calendar Pescuit 2026 — Solunar pe Luni și Ghiduri',
+        description: 'Solunar 2026 pe luni, ore bune de pescuit, faze lunare și ghiduri practice pentru pescari.',
         url: 'https://calendarsolunar.ro/blog',
     },
 };
 
 export default function BlogPage() {
     const articles = getAllArticles();
+    const monthlyArticles = getMonthlyArticles();
     const categories = [...new Set(articles.map(a => a.category))];
     const articlesByCategory = categories.reduce((acc, cat) => {
         acc[cat] = articles.filter(a => a.category === cat);
@@ -32,21 +33,53 @@ export default function BlogPage() {
     }, {} as Record<string, typeof articles>);
 
     return (
-        <div className="min-h-screen py-12 md:py-20">
+        <div className="min-h-[100dvh] py-12 md:py-20">
             <Breadcrumbs items={[
                 { label: 'Acasă', href: '/' },
                 { label: 'Ghiduri Pescuit' },
             ]} />
             <div className="container-custom px-4">
                 {/* Hero */}
-                <div className="text-center mb-12 md:mb-16">
-                    <h1 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">
-                        Ghiduri & Articole de Pescuit
+                <div className="mb-12 md:mb-16 max-w-3xl">
+                    <h1 className="text-4xl md:text-6xl font-display font-bold tracking-tight leading-none text-white mb-5">
+                        Calendar Pescuit 2026
                     </h1>
-                    <p className="text-night-300 text-lg max-w-2xl mx-auto">
-                        Sfaturi practice de pescuit. Fără teorie inutilă - doar ce funcționează.
+                    <p className="text-night-300 text-base md:text-lg leading-relaxed max-w-[65ch]">
+                        Solunar pe luni, zile bune, ore optime și ghiduri practice pentru fiecare specie importantă.
                     </p>
                 </div>
+
+                <section className="mb-10 md:mb-12">
+                    <div className="flex items-end justify-between gap-4 mb-4">
+                        <div>
+                            <h2 className="text-xl md:text-2xl font-display font-bold text-white">
+                                Solunar 2026 pe Luni
+                            </h2>
+                            <p className="text-night-400 text-sm mt-1">
+                                Alege luna și vezi fazele lunii, zilele de top și orele recomandate.
+                            </p>
+                        </div>
+                        <Link href="/" className="hidden sm:inline-flex text-sm font-bold text-moon hover:text-white transition-colors">
+                            Calendar azi &rarr;
+                        </Link>
+                    </div>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                        {monthlyArticles.map((article) => (
+                            <Link
+                                key={article.slug}
+                                href={`/blog/${article.slug}`}
+                                className="interactive-lift taste-surface rounded-2xl border border-amber-400/15 bg-amber-400/10 p-4 group hover:border-amber-400/40 transition-colors"
+                            >
+                                <h3 className="text-sm md:text-base font-bold text-white group-hover:text-amber-200 transition-colors line-clamp-2">
+                                    {article.title.replace(' ✓ ', ' - ')}
+                                </h3>
+                                <p className="text-night-300 text-xs mt-2 line-clamp-2">
+                                    {article.excerpt}
+                                </p>
+                            </Link>
+                        ))}
+                    </div>
+                </section>
 
                 {/* Category Navigation */}
                 <nav className="flex flex-wrap justify-center gap-2 mb-12">

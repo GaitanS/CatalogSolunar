@@ -3,11 +3,11 @@ import { getMoonPhase, getMoonIllumination, getMoonPhaseName, getSolunarData } f
 import RatingBars from '@/components/RatingBars';
 import MoonIcon from '@/components/MoonIcon';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import AdUnit from '@/components/AdUnit';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
-    title: 'Calendar Lunar 2026 ✓ Fazele Lunii și Pescuit',
-    description: '✅ Fazele lunii 2026 zi de zi: lună plină, nouă, iluminare % și rating solunar. Află cum influențează luna activitatea peștilor. Actualizat zilnic, gratuit!',
+    title: 'Faza Lunii Azi și Calendar Lunar 2026 - Fazele Lunii pentru Pescuit',
+    description: 'Faza lunii azi, calendar lunar 2026, lună plină, lună nouă, procent de iluminare și rating solunar pentru pescuit. Actualizat zilnic.',
     keywords: [
         'calendar lunar 2026', 'fazele lunii', 'calendar lunar',
         'calendar lunar azi', 'luna plina', 'luna noua',
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
     ],
     alternates: { canonical: 'https://calendarsolunar.ro/lunar' },
     openGraph: {
-        title: 'Calendar Lunar 2026 — Fazele Lunii și Pescuit',
-        description: 'Fazele lunii 2026 zi de zi: procent iluminare, lună plină și nouă. Cum influențează luna pescuitul.',
+        title: 'Faza Lunii Azi — Calendar Lunar 2026',
+        description: 'Vezi faza lunii de azi, iluminarea, calendarul lunar și impactul asupra pescuitului.',
         url: 'https://calendarsolunar.ro/lunar',
     },
 };
@@ -78,26 +78,24 @@ export default function LunarPage() {
     const monthName = today.toLocaleDateString('ro-RO', { month: 'long', year: 'numeric' });
 
     return (
-        <div className="min-h-screen py-12 md:py-20">
+        <div className="min-h-[100dvh] py-12 md:py-20">
             <Breadcrumbs items={[
                 { label: 'Acasă', href: '/' },
                 { label: 'Calendar Lunar' },
             ]} />
             <div className="container-custom px-4">
                 {/* Hero */}
-                <div className="text-center mb-12">
-                    <h1 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">
-                        Calendar Lunar <span className="text-moon capitalize">{monthName}</span>
+                <div className="mb-12 max-w-3xl">
+                    <h1 className="text-4xl md:text-6xl font-display font-bold tracking-tight leading-none text-white mb-5">
+                        Faza Lunii Azi <span className="text-moon capitalize">{monthName}</span>
                     </h1>
-                    <p className="text-night-300 text-lg max-w-2xl mx-auto">
-                        Fazele lunii și impactul lor asupra pescuitului.
+                    <p className="text-night-300 text-base md:text-lg leading-relaxed max-w-[65ch]">
+                        Calendar lunar cu iluminare, faze importante și rating solunar pentru pescuit.
                     </p>
                 </div>
 
                 {/* Top Ad */}
-                <AdUnit slotId="2812628769" format="horizontal" className="mb-8" />
-
-                {/* Today's Moon Info */}
+{/* Today's Moon Info */}
                 <div className="card-panel p-6 md:p-8 mb-8 max-w-2xl mx-auto">
                     <div className="flex flex-col md:flex-row items-center gap-6">
                         <div className="text-moon">
@@ -117,6 +115,24 @@ export default function LunarPage() {
                             </p>
                         </div>
                     </div>
+                </div>
+
+                <div className="grid md:grid-cols-3 gap-3 max-w-4xl mx-auto mb-10">
+                    <Link href="/azi" className="interactive-lift taste-surface rounded-2xl border border-amber-400/20 bg-amber-400/10 p-4 hover:border-amber-400/40 transition-colors">
+                        <p className="text-xs uppercase tracking-[0.14em] text-amber-200/80 font-bold mb-1">Azi</p>
+                        <h2 className="text-lg font-display font-bold text-white">Solunar pe ore</h2>
+                        <p className="text-night-300 text-xs mt-2">Perioade majore, minore și scorul zilei.</p>
+                    </Link>
+                    <Link href="/blog/cele-mai-bune-ore-pescuit-2026" className="interactive-lift taste-surface rounded-2xl border border-amber-400/20 bg-amber-400/10 p-4 hover:border-amber-400/40 transition-colors">
+                        <p className="text-xs uppercase tracking-[0.14em] text-amber-200/80 font-bold mb-1">2026</p>
+                        <h2 className="text-lg font-display font-bold text-white">Cele mai bune ore</h2>
+                        <p className="text-night-300 text-xs mt-2">Ghid rapid pentru zile și intervale productive.</p>
+                    </Link>
+                    <Link href="/" className="interactive-lift taste-surface rounded-2xl border border-white/10 bg-white/[0.04] p-4 hover:bg-white/[0.07] transition-colors">
+                        <p className="text-xs uppercase tracking-[0.14em] text-night-300 font-bold mb-1">Calendar</p>
+                        <h2 className="text-lg font-display font-bold text-white">Solunar 2026</h2>
+                        <p className="text-night-300 text-xs mt-2">Tabel zilnic, vreme și specii active.</p>
+                    </Link>
                 </div>
 
                 {/* Key Phases This Month */}
@@ -142,9 +158,7 @@ export default function LunarPage() {
                 )}
 
                 {/* Middle Ad */}
-                <AdUnit slotId="2812628769" format="auto" className="mb-12 max-w-4xl mx-auto" />
-
-                {/* Calendar Grid */}
+{/* Calendar Grid */}
                 <div className="card-panel p-4 md:p-6 max-w-4xl mx-auto">
                     <div className="grid grid-cols-7 gap-1 mb-4">
                         {['Lu', 'Ma', 'Mi', 'Jo', 'Vi', 'Sâ', 'Du'].map(day => (
@@ -225,7 +239,7 @@ export default function LunarPage() {
                         <p>
                             <strong className="text-amber-400">Luna Nouă și Luna Plină</strong> sunt considerate cele mai bune perioade pentru pescuit,
                             cu rating solunar de 4-5 stele. În aceste faze, forțele gravitaționale combinate ale Soarelui și Lunii sunt maxime,
-                            stimulând activitatea peștilor. <strong className="text-cyan-400">Primul și Ultimul Pătrar</strong> oferă activitate moderată (3 stele).
+                            stimulând activitatea peștilor. <strong className="text-amber-400">Primul și Ultimul Pătrar</strong> oferă activitate moderată (3 stele).
                         </p>
                         <p>
                             Calendarul lunar de mai sus afișează pentru fiecare zi: faza lunii exactă, procentul de iluminare și rating-ul solunar
@@ -299,9 +313,7 @@ export default function LunarPage() {
                 </section>
 
                 {/* Bottom Ad */}
-                <AdUnit slotId="2812628769" format="auto" className="my-12" />
-
-                {/* CTA */}
+{/* CTA */}
                 <div className="text-center mt-12">
                     <a
                         href="/"

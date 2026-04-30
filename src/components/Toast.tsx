@@ -21,7 +21,7 @@ export default function Toast({ message, type, onClose, duration = 3000 }: Toast
         success: 'bg-emerald-500',
         error: 'bg-red-500',
         warning: 'bg-amber-500',
-        info: 'bg-blue-500',
+        info: 'bg-amber-500',
     }[type];
 
     const icon = {

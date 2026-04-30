@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react';
 export default function ConstellationBackground() {
     return (
         <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
-            {/* Deep Space Gradient Base */}
-            <div className="absolute inset-0 bg-[#020617]" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900/50 via-[#020617] to-[#020617]" />
+            {/* Night water gradient base */}
+            <div className="absolute inset-0 bg-[#111827]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_0%,rgba(245,208,111,0.09),transparent_34%),radial-gradient(circle_at_90%_8%,rgba(52,211,153,0.08),transparent_34%),linear-gradient(180deg,#111827_0%,#0f172a_58%,#111827_100%)]" />
 
             {/* Topographic/Wave lines (Subtle texture) */}
             <svg className="absolute inset-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">

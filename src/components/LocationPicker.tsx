@@ -1,12 +1,13 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { locations, type Location } from '@/data/locations';
 import { useToast } from '@/contexts/ToastContext';
 
 export default function LocationPicker() {
     const router = useRouter();
+    const pathname = usePathname();
     const searchParams = useSearchParams();
     const [isOpen, setIsOpen] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -22,7 +23,7 @@ export default function LocationPicker() {
         params.set('lng', loc.lng.toString());
         params.set('loc', loc.name);
 
-        router.push(`/?${params.toString()}`);
+        router.push(`${pathname}?${params.toString()}`);
         setIsOpen(false);
     };
 
@@ -37,7 +38,7 @@ export default function LocationPicker() {
                     params.set('lng', longitude.toString());
                     params.set('loc', 'Locația Mea');
 
-                    router.push(`/?${params.toString()}`);
+                    router.push(`${pathname}?${params.toString()}`);
                     setLoading(false);
                     setIsOpen(false);
                 },
@@ -54,10 +55,10 @@ export default function LocationPicker() {
     };
 
     return (
-        <div className="relative z-40">
+        <div className="relative z-40 w-full sm:w-auto">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 px-4 py-2 bg-night-800/80 backdrop-blur border border-night-600 rounded-xl hover:bg-night-700/80 transition-colors text-white min-w-[160px] justify-between"
+                className="interactive-lift flex w-full sm:w-auto items-center gap-2 px-4 py-2.5 bg-[#151b25]/86 backdrop-blur border border-white/10 rounded-2xl hover:bg-[#1f2937]/88 transition-colors text-white min-w-[180px] justify-between taste-surface"
             >
                 <div className="flex items-center gap-2">
                     <svg className="w-5 h-5 text-moon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -78,11 +79,11 @@ export default function LocationPicker() {
                         onClick={() => setIsOpen(false)}
                     />
                     <div className="absolute top-full mt-2 left-0 w-64 max-h-96 overflow-y-auto bg-night-950 border border-night-700/50 rounded-xl shadow-2xl shadow-black/80 z-[70] scrollbar-thin backdrop-blur-xl">
-                        <div className="p-2 border-b border-night-700 sticky top-0 bg-night-900 z-30">
-                            <button
-                                onClick={handleUseMyLocation}
-                                disabled={loading}
-                                className="w-full flex items-center gap-2 px-3 py-2 rounded-lg bg-indigo-500/10 text-indigo-300 hover:bg-indigo-500/20 transition-colors text-sm font-semibold"
+                    <div className="p-2 border-b border-white/10 sticky top-0 bg-[#151b25] z-30">
+                        <button
+                            onClick={handleUseMyLocation}
+                            disabled={loading}
+                            className="w-full flex items-center gap-2 px-3 py-2 rounded-xl bg-amber-300/10 text-amber-100 hover:bg-amber-300/15 transition-colors text-sm font-semibold"
                             >
                                 {loading ? (
                                     <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">

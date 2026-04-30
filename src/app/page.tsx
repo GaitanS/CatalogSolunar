@@ -5,34 +5,50 @@ import Moon3DWrapper from '@/components/Moon3DWrapper';
 import LocationPicker from '@/components/LocationPicker';
 import ActivityGraph from '@/components/ActivityGraph';
 import LazyForecast from '@/components/LazyForecast';
-import QuickStatCard from '@/components/QuickStatCard';
-import ScheduleCard from '@/components/ScheduleCard';
-import AdUnit from '@/components/AdUnit';
-import LazyAdUnit from '@/components/LazyAdUnit';
 import FAQSection from '@/components/FAQSection';
 import Link from 'next/link';
+import type { CSSProperties } from 'react';
 import { getAllCities } from '@/data/cities';
 import { getAllArticles } from '@/data/blogArticles';
 import { getAllLocations } from '@/data/fishingLocations';
 
+const monthSlugs = [
+    'ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie',
+    'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie',
+];
 
-export async function generateMetadata({ searchParams }: { searchParams: Promise<{ loc?: string }> }) {
-    const params = await searchParams;
-    const locationName = params.loc || 'București';
+function capitalize(value: string) {
+    return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+function getMonthTarget(date: Date, offset = 0) {
+    const target = new Date(date.getFullYear(), date.getMonth() + offset, 1);
+    const slug = monthSlugs[target.getMonth()];
+    const name = capitalize(slug);
+    return {
+        slug,
+        name,
+        year: target.getFullYear(),
+        href: `/blog/solunar-${slug}-${target.getFullYear()}-ghid`,
+    };
+}
+
+
+export async function generateMetadata() {
     const date = new Date();
-    const monthName = date.toLocaleDateString('ro-RO', { month: 'long' });
-    const year = date.getFullYear();
-    const capitalizedMonth = monthName.charAt(0).toUpperCase() + monthName.slice(1);
+    const currentMonth = getMonthTarget(date);
+    const nextMonth = getMonthTarget(date, 1);
+    const year = currentMonth.year;
 
     return {
-        title: `Solunar ${capitalizedMonth} ${year} ✓ Cel Mai Bun Calendar Solunar Pescuit ${year}`,
-        description: `✅ Solunar ${capitalizedMonth.toLowerCase()} ${year} cu ore exacte de pescuit. Perioade majore și minore, faze lunare, tabel solunar și prognoză 14 zile. Calendarul pescarului ${year} actualizat zilnic — 100% gratuit!`,
+        title: `Calendar Solunar ${year} Pescuit - Ore Exacte, ${currentMonth.name} și ${nextMonth.name}`,
+        description: `Calendar solunar ${year} pentru pescuit, cu ore exacte, perioade majore și minore, faze lunare, tabel solunar pe luni și prognoză 14 zile. Vezi solunar ${currentMonth.slug} ${year} și ${nextMonth.slug} ${nextMonth.year}.`,
         alternates: {
             canonical: 'https://calendarsolunar.ro/',
         },
         openGraph: {
-            title: `Solunar ${capitalizedMonth} ${year} — Calendar Pescuit pe Ore Exacte`,
-            description: `Cel mai bun solunar ${year}: perioade majore, faze lunare, specii active. Actualizat zilnic, gratuit!`,
+            title: `Calendar Solunar ${year} — Pescuit pe Ore Exacte`,
+            description: `Solunar ${year} pe luni, perioade majore, faze lunare, specii active și prognoză pentru pescuit.`,
             url: 'https://calendarsolunar.ro/',
         },
     };
@@ -44,6 +60,20 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
     const lat = params.lat ? parseFloat(params.lat) : 44.4268;
     const lng = params.lng ? parseFloat(params.lng) : 26.1025;
     const locationName = params.loc || 'București';
+    const currentMonth = getMonthTarget(today);
+    const nextMonth = getMonthTarget(today, 1);
+    const monthLinks = monthSlugs.map((luna, index) => {
+        const isCurrent = index === today.getMonth();
+        const isNext = index === ((today.getMonth() + 1) % 12);
+        const targetYear = index < today.getMonth() ? today.getFullYear() + 1 : today.getFullYear();
+        return {
+            slug: luna,
+            name: capitalize(luna),
+            href: `/blog/solunar-${luna}-${targetYear}-ghid`,
+            isCurrent,
+            isNext,
+        };
+    });
 
     // Fetch data
     const todayData = getSolunarData(today, lat, lng);
@@ -64,85 +94,92 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
     badEnd.setHours(badEnd.getHours() + 2);
 
     return (
-        <div className="pb-20 pt-4 md:pt-8 relative">
-            {/* Background is now handled by layout.tsx */}
+        <div className="relative overflow-hidden pb-20 pt-3 md:pt-8">
+            <div className="absolute inset-x-0 top-0 h-[520px] pointer-events-none bg-[radial-gradient(circle_at_18%_12%,rgba(245,208,111,0.16),transparent_28%),radial-gradient(circle_at_86%_6%,rgba(52,211,153,0.12),transparent_30%)]" />
 
             <div className="container-custom px-4 relative z-10">
 
-                {/* Header / Location */}
-                <div className="flex flex-col items-center md:flex-row md:items-end md:justify-between mb-4 md:mb-8 gap-3 md:gap-4 text-center md:text-left relative z-50">
-                    <div>
-                        <h1 className="text-2xl md:text-5xl font-display font-bold text-white mb-1 drop-shadow-lg">
-                            Solunar <span className="text-amber-400">{today.toLocaleDateString('ro-RO', { month: 'long' }).charAt(0).toUpperCase() + today.toLocaleDateString('ro-RO', { month: 'long' }).slice(1)} {today.getFullYear()}</span> {locationName}
-                        </h1>
-                        <p className="text-night-400 text-xs md:text-base">
-                            Calendar solunar pescuit &bull; {today.toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' })}
-                        </p>
-                    </div>
-                    <div className="scale-90 md:scale-100 origin-center md:origin-right">
-                        <LocationPicker />
-                    </div>
-                </div>
+                <section className="mb-6 md:mb-8">
+                    <div className="animate-soft-rise card-panel taste-surface relative overflow-hidden p-5 sm:p-6 md:p-8 lg:p-10 flex flex-col justify-between border-amber-200/10">
+                        <div className="absolute -right-20 -top-24 h-56 w-56 rounded-full bg-amber-300/10 blur-3xl pointer-events-none" />
+                        <div className="relative text-center sm:text-left">
+                            <div className="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between gap-3 mb-8">
+                                <div className="inline-flex w-fit items-center justify-center gap-2 rounded-full border border-amber-200/20 bg-amber-200/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.22em] text-amber-100">
+                                    <span className="h-1.5 w-1.5 rounded-full bg-amber-300 animate-pulse" />
+                                    Solunar live
+                                </div>
+                                <div className="mx-auto w-full max-w-[340px] sm:mx-0 sm:w-auto">
+                                    <LocationPicker />
+                                </div>
+                            </div>
 
-                {/* Mobile Quick Stats Slider (Visible only on mobile/tablet) */}
-                <div className="lg:hidden mb-6">
-                    <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x -mx-4 px-4">
-                        {/* Presiune */}
-                        <QuickStatCard
-                            icon={<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
-                            label="Presiune"
-                            value={`${weather.pressure} hPa`}
-                            subtext="Stabilă"
-                            colorClass="text-amber-400"
-                        />
-                        {/* Temp Aer */}
-                        <QuickStatCard
-                            icon={<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" /></svg>}
-                            label="Temp. Aer"
-                            value={`${weather.temperature}°C`}
-                            colorClass="text-orange-400"
-                        />
-                        {/* Temp Apa */}
-                        <QuickStatCard
-                            icon={<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>}
-                            label="Temp. Apă"
-                            value={`${weather.waterTemp}°C`}
-                            colorClass="text-cyan-400"
-                        />
-                        {/* Vant */}
-                        <QuickStatCard
-                            icon={<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
-                            label="Vânt"
-                            value={`${weather.windSpeed} km/h`}
-                            subtext={getWindDirectionString(weather.windDirection)}
-                            colorClass="text-blue-400"
-                        />
-                        {/* Faza Lunii */}
-                        <QuickStatCard
-                            icon={<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>}
-                            label="Faza Lunii"
-                            value={`${todayData.moonIllumination}%`}
-                            subtext={getMoonPhaseName(todayData.moonPhase)}
-                            colorClass="text-indigo-300"
-                        />
-                        {/* Rating */}
-                        <QuickStatCard
-                            icon={<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /></svg>}
-                            label="Rating"
-                            value={`${todayData.overallRating}/5`}
-                            subtext="Activitate Bună"
-                            colorClass="text-amber-300"
-                        />
+                            <h1 className="mx-auto max-w-[12ch] text-4xl md:text-6xl lg:text-7xl font-display font-extrabold leading-none tracking-tight text-white sm:mx-0">
+                                Calendar Solunar <span className="text-amber-300">{today.getFullYear()}</span>
+                            </h1>
+                            <p className="mx-auto mt-4 max-w-[62ch] text-sm md:text-base leading-relaxed text-slate-300 sm:mx-0">
+                                Solunar {currentMonth.name} {today.getFullYear()} pentru {locationName}. Ore exacte, perioade majore și minore, vreme, faza lunii și activitate pe specii pentru {today.toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' })}.
+                            </p>
+                        </div>
+
+                        <div className="relative mt-8 md:hidden rounded-2xl border border-white/10 bg-white/[0.045] p-4 text-center">
+                            <div className="flex items-center justify-between gap-3">
+                                <div className="font-display text-lg font-bold text-white">{formatDate(today)}</div>
+                                <div className="px-2 py-0.5 bg-white/[0.045] rounded-full text-[10px] font-mono border border-white/10 text-slate-300">
+                                    {locationName}
+                                </div>
+                            </div>
+
+                            <div className="animate-breathe mx-auto my-4 h-[150px] w-[150px] relative">
+                                <Moon3DWrapper phase={getMoonage(today) / 29.53} illumination={todayData.moonIllumination} size={180} />
+                            </div>
+
+                            <div>
+                                <div className="text-amber-200 font-bold text-base tracking-wide">
+                                    {getMoonPhaseName(todayData.moonPhase).startsWith('În') ? `Lună ${getMoonPhaseName(todayData.moonPhase).toLowerCase()}` : getMoonPhaseName(todayData.moonPhase)}
+                                </div>
+                                <div className="text-slate-400 text-xs mb-3">{todayData.moonIllumination}% iluminare</div>
+
+                                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-300/10 border border-amber-200/25 rounded-full mb-3">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-amber-300 animate-pulse" />
+                                    <span className="text-amber-100 font-bold text-[10px] uppercase tracking-wide">Activitate {todayData.overallRating >= 4 ? 'Excelentă' : todayData.overallRating >= 3 ? 'Bună' : 'Medie'}</span>
+                                </div>
+
+                                <div className="flex justify-center gap-1">
+                                    {[1, 2, 3, 4, 5].map(s => (
+                                        <svg key={s} className={`w-4 h-4 ${s <= todayData.overallRating ? 'text-amber-300' : 'text-slate-700'}`} fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="relative mt-8 grid grid-cols-2 gap-2 sm:grid-cols-3 xl:grid-cols-6">
+                            {[
+                                { label: 'Presiune', value: `${weather.pressure} hPa`, subtext: 'Stabilă' },
+                                { label: 'Temp. aer', value: `${weather.temperature}°C` },
+                                { label: 'Temp. apă', value: `${weather.waterTemp}°C` },
+                                { label: 'Vânt', value: `${weather.windSpeed} km/h`, subtext: getWindDirectionString(weather.windDirection) },
+                                { label: 'Faza lunii', value: `${todayData.moonIllumination}%`, subtext: getMoonPhaseName(todayData.moonPhase) },
+                                { label: 'Rating', value: `${todayData.overallRating}/5`, subtext: 'Activitate bună' },
+                            ].map((stat, index) => (
+                                <div key={stat.label} className="animate-soft-rise rounded-2xl border border-white/10 bg-white/[0.045] p-3 min-h-[86px]" style={{ '--stagger': index + 1 } as CSSProperties}>
+                                    <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400">{stat.label}</p>
+                                    <p className="mt-1 font-mono text-lg font-bold text-white">{stat.value}</p>
+                                    {stat.subtext && <p className="mt-1 text-[11px] leading-tight text-amber-100/70">{stat.subtext}</p>}
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                </div>
+                </section>
 
                 {/* Active Fish Banner (Mobile + Desktop) — species names link to guides */}
-                <div className="mb-6 bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-3 flex items-center gap-3 overflow-hidden relative">
-                    <div className="shrink-0 text-emerald-400 font-bold text-xs md:text-sm uppercase tracking-wider whitespace-nowrap px-2 border-r border-emerald-500/30">
+                <div className="animate-soft-rise mb-6 taste-surface bg-[#151b25]/76 border border-amber-200/15 rounded-2xl p-3 flex items-center gap-3 overflow-hidden relative" style={{ '--stagger': 2 } as CSSProperties}>
+                    <div className="shrink-0 text-amber-100 font-bold text-xs md:text-sm uppercase tracking-wider whitespace-nowrap px-2 border-r border-amber-200/15">
                         Specii Active
                     </div>
                     <div className="flex-1 overflow-hidden relative h-6">
-                        <div className="animate-marquee absolute whitespace-nowrap text-emerald-200 text-sm font-mono flex gap-8 items-center h-full">
+                        <div className="animate-marquee absolute whitespace-nowrap text-slate-200 text-sm font-mono flex gap-8 items-center h-full">
                             {(() => {
                                 const activeFish = getActiveFish(today, todayData.moonPhase);
                                 const fishSlugMap: Record<string, string> = {
@@ -155,13 +192,13 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                                     ? [...activeFish, ...activeFish, ...activeFish].map((fish, i) => {
                                         const href = fishSlugMap[fish];
                                         return href ? (
-                                            <Link key={i} href={href} className="flex items-center gap-2 hover:text-emerald-100 transition-colors">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                                            <Link key={i} href={href} className="flex items-center gap-2 hover:text-amber-100 transition-colors">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-amber-300 animate-pulse" />
                                                 {fish}
                                             </Link>
                                         ) : (
                                             <span key={i} className="flex items-center gap-2">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                                                <span className="w-1.5 h-1.5 rounded-full bg-amber-300 animate-pulse" />
                                                 {fish}
                                             </span>
                                         );
@@ -176,17 +213,17 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6 mb-8 md:mb-12">
 
                     {/* Left: Moon Card */}
-                    <div className="lg:col-span-4 card-panel p-4 md:p-6 flex flex-col items-center justify-between min-h-[300px] md:min-h-[400px] relative overflow-hidden group">
+                    <div className="animate-soft-rise hidden md:flex lg:col-span-4 card-panel taste-surface p-4 md:p-6 flex-col items-center justify-between min-h-[300px] md:min-h-[400px] relative overflow-hidden group" style={{ '--stagger': 3 } as CSSProperties}>
                         {/* Header */}
                         <div className="w-full flex justify-between items-center mb-1 md:mb-2 z-10">
                             <div className="font-display font-bold text-base md:text-xl text-white">{formatDate(today)}</div>
-                            <div className="px-2 py-0.5 bg-white/5 rounded-full text-[9px] md:text-xs font-mono border border-white/10 text-night-300">
+                            <div className="px-2 py-0.5 bg-white/[0.045] rounded-full text-[9px] md:text-xs font-mono border border-white/10 text-slate-300">
                                 {locationName}
                             </div>
                         </div>
 
                         {/* Main Moon */}
-                        <div className="w-[120px] h-[120px] md:w-[200px] md:h-[200px] relative z-10 my-1 md:my-2 lg:scale-125 transition-transform duration-700 group-hover:scale-110">
+                        <div className="animate-breathe w-[120px] h-[120px] md:w-[200px] md:h-[200px] relative z-10 my-1 md:my-2 lg:scale-125 transition-transform duration-700 group-hover:scale-110">
                             <Moon3DWrapper phase={getMoonage(today) / 29.53} illumination={todayData.moonIllumination} size={200} />
                         </div>
 
@@ -195,16 +232,16 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                             <div className="text-amber-200 font-bold mb-0 text-sm md:text-lg tracking-wide">
                                 {getMoonPhaseName(todayData.moonPhase).startsWith('În') ? `Lună ${getMoonPhaseName(todayData.moonPhase).toLowerCase()}` : getMoonPhaseName(todayData.moonPhase)}
                             </div>
-                            <div className="text-night-400 text-[10px] md:text-xs mb-2 md:mb-4">{todayData.moonIllumination}% iluminare</div>
+                            <div className="text-slate-400 text-[10px] md:text-xs mb-2 md:mb-4">{todayData.moonIllumination}% iluminare</div>
 
-                            <div className="inline-flex items-center gap-1.5 px-3 py-1 md:px-6 md:py-2 bg-gradient-to-r from-teal-500/10 to-emerald-500/10 border border-teal-500/30 rounded-full mb-2 md:mb-3">
-                                <div className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
-                                <span className="text-teal-300 font-bold text-[10px] md:text-sm uppercase tracking-wide">Activitate {todayData.overallRating >= 4 ? 'Excelentă' : todayData.overallRating >= 3 ? 'Bună' : 'Medie'}</span>
+                            <div className="inline-flex items-center gap-1.5 px-3 py-1 md:px-6 md:py-2 bg-amber-300/10 border border-amber-200/25 rounded-full mb-2 md:mb-3">
+                                <div className="w-1.5 h-1.5 rounded-full bg-amber-300 animate-pulse" />
+                                <span className="text-amber-100 font-bold text-[10px] md:text-sm uppercase tracking-wide">Activitate {todayData.overallRating >= 4 ? 'Excelentă' : todayData.overallRating >= 3 ? 'Bună' : 'Medie'}</span>
                             </div>
 
                             <div className="flex justify-center gap-1">
                                 {[1, 2, 3, 4, 5].map(s => (
-                                    <svg key={s} className={`w-3.5 h-3.5 md:w-5 md:h-5 ${s <= todayData.overallRating ? 'text-amber-400' : 'text-night-700'}`} fill="currentColor" viewBox="0 0 20 20">
+                                    <svg key={s} className={`w-3.5 h-3.5 md:w-5 md:h-5 ${s <= todayData.overallRating ? 'text-amber-300' : 'text-slate-700'}`} fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                     </svg>
                                 ))}
@@ -215,100 +252,91 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 bg-amber-400/5 blur-[80px] rounded-full pointer-events-none" />
                     </div>
 
-                    {/* Right: Graph, Schedule & Times */}
-                    <div className="lg:col-span-8 flex flex-col gap-4 md:gap-6">
-                        {/* Graph & Schedule Grid */}
-                        <div className="grid md:grid-cols-2 gap-4 md:gap-6 flex-1">
-                            {/* 1. Graph Card */}
-                            <div className="card-panel p-4 md:p-6 min-h-[220px] relative flex flex-col justify-center">
-                                <ActivityGraph majorPeriods={todayData.majorPeriods} minorPeriods={todayData.minorPeriods} />
-                                <div className="flex justify-center gap-4 md:gap-6 mt-3 text-[10px] md:text-xs font-mono text-night-400 uppercase tracking-wider">
-                                    <span className="flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-amber-400" /> Majoră</span>
-                                    <span className="flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-cyan-400" /> Minoră</span>
-                                </div>
+                    {/* Right: Unified day plan */}
+                    <div className="animate-soft-rise lg:col-span-8 card-panel taste-surface p-4 md:p-6 flex flex-col gap-5" style={{ '--stagger': 4 } as CSSProperties}>
+                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                            <div>
+                                <p className="text-[10px] uppercase tracking-[0.22em] text-amber-200/75 font-bold">Planul zilei</p>
+                                <h2 className="mt-1 text-2xl md:text-3xl font-display font-bold text-white">Fereastră, grafic și ore</h2>
                             </div>
-
-                            {/* 2. Fishing Schedule (New!) */}
-                            <div className="card-panel p-5 flex flex-col justify-center">
-                                <h3 className="text-white font-bold mb-4 flex items-center gap-2">
-                                    <svg className="w-5 h-5 text-moon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                    Orar Pescuit
-                                </h3>
-                                <ScheduleCard type="good" start={formatTime(bestStart)} end={formatTime(bestEnd)} />
-                                <div className="my-2 border-t border-white/5" />
-                                <ScheduleCard type="bad" start={formatTime(badStart)} end={formatTime(badEnd)} />
+                            <div className="rounded-2xl border border-amber-200/20 bg-amber-300/10 px-4 py-3">
+                                <p className="text-[10px] uppercase tracking-[0.18em] text-amber-100/75 font-bold">Recomandat</p>
+                                <p className="mt-1 font-mono text-2xl font-bold text-white">{formatTime(bestStart)} <span className="text-amber-200">→</span> {formatTime(bestEnd)}</p>
                             </div>
                         </div>
 
-                        {/* Sun/Moon Grid */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-                            <div className="card-glass p-3 md:p-4 flex items-center justify-between md:justify-start gap-3">
-                                <div className="p-2 rounded-lg bg-amber-500/10 text-amber-500 shrink-0">
-                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                        <div className="grid gap-3 md:grid-cols-3">
+                            {todayData.majorPeriods.map((period, index) => (
+                                <div key={index} className="rounded-2xl border border-white/10 bg-white/[0.045] p-3">
+                                    <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400">Majoră {index + 1}</p>
+                                    <p className="mt-1 font-mono text-lg font-bold text-white">{formatTime(period.start)} <span className="text-amber-200">→</span> {formatTime(period.end)}</p>
                                 </div>
-                                <div className="text-right md:text-left">
-                                    <p className="text-[9px] md:text-[10px] uppercase text-night-400 font-bold tracking-wider">Răsărit Soare</p>
-                                    <p className="text-base md:text-xl font-mono text-white">{formatTime(todayData.sunrise)}</p>
-                                </div>
+                            ))}
+                            <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-3">
+                                <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400">Evită</p>
+                                <p className="mt-1 font-mono text-lg font-bold text-slate-200">{formatTime(badStart)} <span className="text-slate-500">→</span> {formatTime(badEnd)}</p>
                             </div>
-                            <div className="card-glass p-3 md:p-4 flex items-center justify-between md:justify-start gap-3">
-                                <div className="p-2 rounded-lg bg-orange-500/10 text-orange-500 shrink-0">
-                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                        </div>
+
+                        <ActivityGraph majorPeriods={todayData.majorPeriods} minorPeriods={todayData.minorPeriods} showHeader={false} />
+
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                            {[
+                                { label: 'Răsărit soare', value: formatTime(todayData.sunrise) },
+                                { label: 'Apus soare', value: formatTime(todayData.sunset) },
+                                { label: 'Răsărit lună', value: todayData.moonrise ? formatTime(todayData.moonrise) : '--:--' },
+                                { label: 'Apus lună', value: todayData.moonset ? formatTime(todayData.moonset) : '--:--' },
+                            ].map((item) => (
+                                <div key={item.label} className="rounded-2xl border border-white/10 bg-white/[0.045] p-3">
+                                    <p className="text-[9px] md:text-[10px] uppercase text-slate-400 font-bold tracking-wider">{item.label}</p>
+                                    <p className="mt-1 text-base md:text-xl font-mono text-white">{item.value}</p>
                                 </div>
-                                <div className="text-right md:text-left">
-                                    <p className="text-[9px] md:text-[10px] uppercase text-night-400 font-bold tracking-wider">Apus Soare</p>
-                                    <p className="text-base md:text-xl font-mono text-white">{formatTime(todayData.sunset)}</p>
-                                </div>
-                            </div>
-                            <div className="card-glass p-3 md:p-4 flex items-center justify-between md:justify-start gap-3">
-                                <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400 shrink-0">
-                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
-                                </div>
-                                <div className="text-right md:text-left">
-                                    <p className="text-[9px] md:text-[10px] uppercase text-night-400 font-bold tracking-wider">Răsărit Lună</p>
-                                    <p className="text-base md:text-xl font-mono text-white">{todayData.moonrise ? formatTime(todayData.moonrise) : '--:--'}</p>
-                                </div>
-                            </div>
-                            <div className="card-glass p-3 md:p-4 flex items-center justify-between md:justify-start gap-3">
-                                <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-400 shrink-0">
-                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
-                                </div>
-                                <div className="text-right md:text-left">
-                                    <p className="text-[9px] md:text-[10px] uppercase text-night-400 font-bold tracking-wider">Apus Lună</p>
-                                    <p className="text-base md:text-xl font-mono text-white">{todayData.moonset ? formatTime(todayData.moonset) : '--:--'}</p>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
                 </div>
 
-                {/* Top Ad — moved below dashboard so users see data first */}
-                <AdUnit
-                    slotId="2812628769"
-                    format="horizontal"
-                    className="min-h-[90px] mb-6"
-                    label="Reclamă"
-                />
-
                 {/* CTA Strip: Solunar Azi */}
-                <Link href="/azi" className="mb-6 bg-gradient-to-r from-indigo-900/40 to-blue-900/30 border border-indigo-500/30 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 group hover:border-indigo-400/50 transition-colors block">
+                <Link href="/azi" className="interactive-lift taste-surface mb-4 bg-slate-900/70 border border-amber-400/20 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 group hover:border-amber-300/40 transition-colors block">
                     <div>
                         <p className="text-white font-bold text-sm md:text-base">Solunar Azi — Ore Exacte pentru {today.toLocaleDateString('ro-RO', { day: 'numeric', month: 'long' })}</p>
-                        <p className="text-indigo-300 text-xs md:text-sm">Pagina dedicată cu scor detaliat, perioade pe ore și sfaturi meteo.</p>
+                        <p className="text-amber-100/70 text-xs md:text-sm">Pagina dedicată cu scor detaliat, perioade pe ore și sfaturi meteo.</p>
                     </div>
-                    <span className="shrink-0 px-5 py-2 bg-indigo-600 group-hover:bg-indigo-500 text-white font-bold rounded-xl transition-colors text-sm whitespace-nowrap">
+                    <span className="shrink-0 px-5 py-2 bg-amber-300 group-hover:bg-amber-200 text-[#111827] font-bold rounded-xl transition-colors text-sm whitespace-nowrap">
                         Vezi Solunar Azi &rarr;
                     </span>
                 </Link>
 
-                {/* Middle Ad (Medium Rectangle) */}
-                <LazyAdUnit
-                    slotId="6301173988"
-                    format="rectangle"
-                    style={{ minHeight: '280px' }}
-                    className="mb-8"
-                    label="Reclamă"
-                />
+                <section className="mb-6 grid md:grid-cols-[1.15fr_0.85fr] gap-3">
+                    <Link
+                        href={nextMonth.href}
+                        className="interactive-lift taste-surface relative overflow-hidden rounded-2xl border border-amber-400/30 bg-amber-400/10 p-4 md:p-5 group"
+                    >
+                        <div className="relative">
+                            <p className="text-[11px] uppercase tracking-[0.18em] text-amber-200/80 font-bold mb-1">Planifică luna următoare</p>
+                            <h2 className="text-xl md:text-2xl font-display font-bold text-white mb-2">
+                                Solunar {nextMonth.name} {nextMonth.year}
+                            </h2>
+                            <p className="text-sm text-slate-300 leading-relaxed max-w-2xl">
+                                Ghid lunar cu zile bune, ore exacte, faze lunare și specii active, pregătit pentru pescarii care își aleg ieșirile din timp.
+                            </p>
+                        </div>
+                        <span className="relative mt-4 inline-flex text-sm font-bold text-amber-200 group-hover:text-white transition-colors">
+                            Vezi calendarul pentru {nextMonth.name} &rarr;
+                        </span>
+                    </Link>
+                    <div className="taste-surface rounded-2xl border border-white/10 bg-white/[0.04] p-4 md:p-5">
+                        <h2 className="text-base md:text-lg font-display font-bold text-white mb-2">
+                            Acces rapid
+                        </h2>
+                        <div className="grid grid-cols-2 gap-2 text-xs">
+                            <Link href="/" className="rounded-xl bg-white/[0.045] px-3 py-2 text-slate-300 border border-white/10 hover:text-white transition-colors">Solunar 2026</Link>
+                            <Link href="/azi" className="rounded-xl bg-white/[0.045] px-3 py-2 text-slate-300 border border-white/10 hover:text-white transition-colors">Solunar azi</Link>
+                            <Link href={currentMonth.href} className="rounded-xl bg-white/[0.045] px-3 py-2 text-slate-300 border border-white/10 hover:text-white transition-colors">{currentMonth.name} {currentMonth.year}</Link>
+                            <Link href={nextMonth.href} className="rounded-xl bg-white/[0.045] px-3 py-2 text-slate-300 border border-white/10 hover:text-white transition-colors">{nextMonth.name} {nextMonth.year}</Link>
+                        </div>
+                    </div>
+                </section>
 
                 {/* Forecast Stripes - Lazy loaded */}
                 <LazyForecast weekData={weekData} />
@@ -317,38 +345,38 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 <h2 className="text-lg md:text-xl font-display font-bold text-white mb-4">Detalii Activitate Pescuit</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 pb-8">
                     {/* Card 1 */}
-                    <div className="card-glass p-4 min-h-[120px] flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 justify-between group hover:bg-white/10 transition-colors">
+                    <div className="card-glass taste-surface p-4 min-h-[120px] flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 justify-between group hover:bg-white/[0.075] transition-colors">
                         <div className="flex justify-between items-start w-full">
                             <h3 className="font-bold text-amber-400 text-sm md:text-base">Perioade Majore</h3>
                             <div className="text-amber-500 hidden md:block">
                                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" /></svg>
                             </div>
                         </div>
-                        <p className="text-[10px] md:text-xs text-night-300 leading-relaxed md:mt-2 text-right md:text-left max-w-[200px] md:max-w-none">
+                        <p className="text-[10px] md:text-xs text-slate-300 leading-relaxed md:mt-2 text-right md:text-left max-w-[200px] md:max-w-none">
                             {majorDesc}
                         </p>
                     </div>
                     {/* Card 2 */}
-                    <div className="card-glass p-4 min-h-[120px] flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 justify-between group hover:bg-white/10 transition-colors">
+                    <div className="card-glass taste-surface p-4 min-h-[120px] flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 justify-between group hover:bg-white/[0.075] transition-colors">
                         <div className="flex justify-between items-start w-full">
-                            <h3 className="font-bold text-cyan-400 text-sm md:text-base">Perioade Minore</h3>
-                            <div className="text-cyan-500 hidden md:block">
+                            <h3 className="font-bold text-amber-200 text-sm md:text-base">Perioade Minore</h3>
+                            <div className="text-amber-300 hidden md:block">
                                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" /></svg>
                             </div>
                         </div>
-                        <p className="text-[10px] md:text-xs text-night-300 leading-relaxed md:mt-2 text-right md:text-left max-w-[200px] md:max-w-none">
+                        <p className="text-[10px] md:text-xs text-slate-300 leading-relaxed md:mt-2 text-right md:text-left max-w-[200px] md:max-w-none">
                             {minorDesc}
                         </p>
                     </div>
                     {/* Card 3 */}
-                    <div className="card-glass p-4 min-h-[120px] flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 justify-between group hover:bg-white/10 transition-colors">
+                    <div className="card-glass taste-surface p-4 min-h-[120px] flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 justify-between group hover:bg-white/[0.075] transition-colors">
                         <div className="flex justify-between items-start w-full">
                             <h3 className="font-bold text-white text-sm md:text-base">Sfatul Zilei</h3>
-                            <div className="text-yellow-400 hidden md:block">
+                            <div className="text-amber-300 hidden md:block">
                                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z" /></svg>
                             </div>
                         </div>
-                        <p className="text-[10px] md:text-xs text-night-300 leading-relaxed md:mt-2 text-right md:text-left max-w-[200px] md:max-w-none">
+                        <p className="text-[10px] md:text-xs text-slate-300 leading-relaxed md:mt-2 text-right md:text-left max-w-[200px] md:max-w-none">
                             {advice}
                         </p>
                     </div>
@@ -358,19 +386,20 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 <section className="mb-8 md:mb-12">
                     <h2 className="text-lg md:text-xl font-display font-bold text-white mb-4">Solunar {today.getFullYear()} pe Luni</h2>
                     <div className="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-3">
-                        {['februarie', 'martie', 'aprilie', 'mai', 'iunie', 'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie'].map((luna) => {
-                            const monthIndex = ['ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie', 'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie'].indexOf(luna);
-                            const isCurrent = monthIndex === today.getMonth();
+                        {monthLinks.map((month) => {
                             return (
                                 <Link
-                                    key={luna}
-                                    href={`/blog/solunar-${luna}-${today.getFullYear()}-ghid`}
-                                    className={`p-2 md:p-3 rounded-xl text-center text-xs md:text-sm font-medium transition-colors ${isCurrent
-                                        ? 'bg-moon/20 border border-moon/50 text-moon'
-                                        : 'bg-white/5 hover:bg-white/10 text-night-300 hover:text-white'
+                                    key={month.slug}
+                                    href={month.href}
+                                    className={`interactive-lift taste-surface p-2 md:p-3 rounded-xl text-center text-xs md:text-sm font-medium transition-colors ${month.isCurrent
+                                        ? 'bg-amber-300/12 border border-amber-200/35 text-amber-100'
+                                        : month.isNext
+                                            ? 'bg-amber-300/8 border border-amber-200/20 text-amber-100 hover:bg-amber-300/12'
+                                            : 'bg-white/[0.045] border border-white/10 hover:bg-white/[0.075] text-slate-300 hover:text-white'
                                     }`}
                                 >
-                                    {luna.charAt(0).toUpperCase() + luna.slice(1)}
+                                    {month.name}
+                                    {month.isNext && <span className="block text-[9px] text-amber-100/75 mt-0.5">următor</span>}
                                 </Link>
                             );
                         })}
@@ -385,10 +414,10 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                             <Link
                                 key={city.slug}
                                 href={`/${city.slug}`}
-                                className="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition-colors"
+                                className="interactive-lift taste-surface p-3 bg-white/[0.045] border border-white/10 hover:bg-white/[0.075] rounded-xl transition-colors"
                             >
                                 <p className="text-white font-bold text-sm">{city.name}</p>
-                                <p className="text-night-400 text-xs">{city.county}</p>
+                                <p className="text-slate-400 text-xs">{city.county}</p>
                             </Link>
                         ))}
                     </div>
@@ -402,17 +431,17 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                             <Link
                                 key={loc.slug}
                                 href={`/locuri-pescuit/${loc.slug}`}
-                                className="card-glass p-3 group hover:bg-white/10 transition-colors"
+                                className="card-glass taste-surface p-3 group hover:bg-white/[0.075] transition-colors"
                             >
-                                <h3 className="text-sm font-bold text-white group-hover:text-moon transition-colors line-clamp-1">
+                                <h3 className="text-sm font-bold text-white group-hover:text-amber-100 transition-colors line-clamp-1">
                                     {loc.name}
                                 </h3>
-                                <p className="text-night-500 text-xs">{loc.county} &bull; {loc.fish.slice(0, 2).join(', ')}</p>
+                                <p className="text-slate-400 text-xs">{loc.county} &bull; {loc.fish.slice(0, 2).join(', ')}</p>
                             </Link>
                         ))}
                     </div>
                     <div className="text-center mt-4">
-                        <Link href="/locuri-pescuit" className="text-moon text-sm hover:underline">
+                        <Link href="/locuri-pescuit" className="text-amber-200 text-sm hover:underline">
                             Vezi toate cele {getAllLocations().length} locuri de pescuit &rarr;
                         </Link>
                     </div>
@@ -426,26 +455,26 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                             <Link
                                 key={article.slug}
                                 href={`/blog/${article.slug}`}
-                                className="card-glass p-4 group hover:bg-white/10 transition-colors"
+                                className="card-glass taste-surface p-4 group hover:bg-white/[0.075] transition-colors"
                             >
-                                <h3 className="text-sm font-bold text-white group-hover:text-moon transition-colors line-clamp-2 mb-1">
+                                <h3 className="text-sm font-bold text-white group-hover:text-amber-100 transition-colors line-clamp-2 mb-1">
                                     {article.title}
                                 </h3>
-                                <p className="text-night-500 text-xs">{article.readTime} min citire</p>
+                                <p className="text-slate-400 text-xs">{article.readTime} min citire</p>
                             </Link>
                         ))}
                     </div>
                     <div className="text-center mt-4">
-                        <Link href="/blog" className="text-moon text-sm hover:underline">
+                        <Link href="/blog" className="text-amber-200 text-sm hover:underline">
                             Vezi toate ghidurile &rarr;
                         </Link>
                     </div>
                 </section>
 
                 {/* SEO Text Content */}
-                <section className="mb-8 md:mb-12 card-panel p-6 md:p-8">
+                <section className="mb-8 md:mb-12 card-panel taste-surface p-6 md:p-8">
                     <h2 className="text-lg md:text-xl font-display font-bold text-white mb-3">Ce este Calendarul Solunar?</h2>
-                    <div className="text-night-300 text-sm leading-relaxed space-y-3">
+                    <div className="text-slate-300 text-sm leading-relaxed space-y-3">
                         <p>
                             Calendarul solunar este un instrument esențial pentru pescari, bazat pe teoria dezvoltată de John Alden Knight în 1926.
                             Acesta calculează perioadele de activitate maximă a peștilor în funcție de pozițiile Soarelui și Lunii.
@@ -457,24 +486,24 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                         </p>
                         <p>
                             Calendarul nostru solunar {today.getFullYear()} este actualizat zilnic și calculat pentru coordonatele exacte ale orașului tău din România.
-                            Verifică solunar-ul pentru <Link href="/azi" className="text-moon hover:underline">azi</Link>,
-                            consultă <Link href="/lunar" className="text-moon hover:underline">fazele lunii</Link>,
-                            explorează <Link href="/locuri-pescuit" className="text-moon hover:underline">locuri de pescuit din România</Link>,
-                            sau citește <Link href="/blog/ce-este-calendarul-solunar" className="text-moon hover:underline">ghidul complet despre calendarul solunar</Link>.
+                            Verifică solunar-ul pentru <Link href="/azi" className="text-amber-200 hover:underline">azi</Link>,
+                            consultă <Link href="/lunar" className="text-amber-200 hover:underline">fazele lunii</Link>,
+                            explorează <Link href="/locuri-pescuit" className="text-amber-200 hover:underline">locuri de pescuit din România</Link>,
+                            sau citește <Link href="/blog/ce-este-calendarul-solunar" className="text-amber-200 hover:underline">ghidul complet despre calendarul solunar</Link>.
                         </p>
                     </div>
                 </section>
 
                 {/* Cum se citeste solunarul - educational content for SEO depth */}
-                <section className="mb-8 md:mb-12 card-panel p-6 md:p-8">
+                <section className="mb-8 md:mb-12 card-panel taste-surface p-6 md:p-8">
                     <h2 className="text-lg md:text-xl font-display font-bold text-white mb-3">Cum se Citește Tabelul Solunar?</h2>
-                    <div className="text-night-300 text-sm leading-relaxed space-y-3">
+                    <div className="text-slate-300 text-sm leading-relaxed space-y-3">
                         <p>
                             Pentru a folosi eficient calendarul solunar, trebuie să înțelegi cele 3 elemente cheie:
                         </p>
                         <ul className="list-disc list-inside space-y-2 pl-2">
                             <li><strong className="text-amber-400">Perioadele majore</strong> — durează ~2 ore, sunt cele mai intense momente de activitate. Coincid cu tranzitul lunar (luna direct deasupra sau sub orizont). Prioritizează aceste ferestre!</li>
-                            <li><strong className="text-cyan-400">Perioadele minore</strong> — durează ~1 oră, activitate bună dar mai puțin intensă. Apar la răsăritul și apusul lunii.</li>
+                            <li><strong className="text-amber-200">Perioadele minore</strong> — durează ~1 oră, activitate bună dar mai puțin intensă. Apar la răsăritul și apusul lunii.</li>
                             <li><strong className="text-white">Rating-ul zilnic</strong> (1-5 stele) — combină faza lunii, durata perioadelor și alinierea cu răsăritul/apusul soarelui. Zilele cu 4-5 stele sunt optime.</li>
                         </ul>
                         <p>
@@ -486,9 +515,9 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 </section>
 
                 {/* Sezon Pescuit - target seasonal queries */}
-                <section className="mb-8 md:mb-12 card-panel p-6 md:p-8">
+                <section className="mb-8 md:mb-12 card-panel taste-surface p-6 md:p-8">
                     <h2 className="text-lg md:text-xl font-display font-bold text-white mb-3">Sezon Pescuit {today.getFullYear()} — Când se Deschide?</h2>
-                    <div className="text-night-300 text-sm leading-relaxed space-y-3">
+                    <div className="text-slate-300 text-sm leading-relaxed space-y-3">
                         <p>
                             <strong className="text-white">Sezonul de pescuit {today.getFullYear()}</strong> este deschis tot anul pentru speciile comune (crap, caras, plătică, babușcă).
                             Prohibiția generală pentru răpitori (șalău, știucă, somn) se aplică de obicei între 15 aprilie - 15 iunie,
@@ -497,7 +526,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                         <p>
                             Pentru cele mai bune rezultate, combină informațiile despre <strong className="text-white">sezonul de pescuit</strong> cu
                             calendarul solunar. Perioadele majore și minore din tabelul solunar îți arată orele exacte când peștii sunt cei mai activi,
-                            indiferent de sezon. Consultă <Link href="/blog/cele-mai-bune-ore-pescuit-2026" className="text-moon hover:underline">ghidul orelor optime de pescuit {today.getFullYear()}</Link> pentru
+                            indiferent de sezon. Consultă <Link href="/blog/cele-mai-bune-ore-pescuit-2026" className="text-amber-200 hover:underline">ghidul orelor optime de pescuit {today.getFullYear()}</Link> pentru
                             detalii complete pe luni și specii.
                         </p>
                     </div>
@@ -505,15 +534,6 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
 
                 {/* FAQ Section with Schema Markup */}
                 <FAQSection />
-
-                {/* Bottom Ad (Responsive) */}
-                <LazyAdUnit
-                    slotId="2812628769"
-                    format="auto"
-                    layout="in-article"
-                    className="min-h-[120px]"
-                    label="Reclamă"
-                />
 
             </div >
         </div >

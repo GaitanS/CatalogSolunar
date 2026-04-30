@@ -10,17 +10,17 @@ const config: Config = {
         extend: {
             colors: {
                 night: {
-                    50: '#f0f9ff',
-                    100: '#e0f2fe',
-                    200: '#bae6fd',
-                    300: '#7dd3fc',
-                    400: '#38bdf8',
-                    500: '#0ea5e9',
-                    600: '#0284c7',
-                    700: '#0369a1',
-                    800: '#075985',
-                    900: '#0c4a6e',
-                    950: '#020617', // Very dark blue base
+                    50: '#f8fafc',
+                    100: '#e5e7eb',
+                    200: '#cbd5e1',
+                    300: '#94a3b8',
+                    400: '#64748b',
+                    500: '#475569',
+                    600: '#334155',
+                    700: '#1f2937',
+                    800: '#151b25',
+                    900: '#111827',
+                    950: '#070b14',
                 },
                 moon: {
                     DEFAULT: '#fbbf24', // amber-400 (Golden moon)
@@ -28,7 +28,7 @@ const config: Config = {
                 },
             },
             fontFamily: {
-                display: ['var(--font-roboto-slab)', 'serif'],
+                display: ['var(--font-outfit)', 'sans-serif'],
                 body: ['var(--font-open-sans)', 'sans-serif'],
             },
             backgroundImage: {

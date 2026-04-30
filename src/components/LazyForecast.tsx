@@ -7,7 +7,7 @@ import { type DaySolunarData } from '@/lib/solunar';
 const ForecastCarousel = dynamic(() => import('./ForecastCarousel'), {
     ssr: false,
     loading: () => (
-        <div className="h-[180px] bg-night-900/50 rounded-2xl animate-pulse" />
+        <div className="h-[180px] bg-white/[0.045] rounded-2xl animate-pulse border border-white/10" />
     ),
 });
 
@@ -41,10 +41,18 @@ export default function LazyForecast({ weekData }: LazyForecastProps) {
     }, []);
 
     return (
-        <div id="forecast-section" className="mb-8 md:mb-12">
-            <h2 className="text-sm md:text-base font-bold text-white mb-3 md:mb-4 px-1">
-                Prognoza 14 zile
-            </h2>
+        <section id="forecast-section" className="mb-8 md:mb-12 card-panel taste-surface overflow-hidden p-4 md:p-5">
+            <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-amber-200/75 font-bold">
+                        Următoarele ieșiri
+                    </p>
+                    <h2 className="mt-1 text-xl md:text-2xl font-display font-bold text-white">
+                        Prognoza 14 zile
+                    </h2>
+                </div>
+                <p className="text-xs text-slate-400">Ferestre majore, faza lunii și activitate estimată</p>
+            </div>
             {isVisible ? (
                 <ForecastCarousel>
                     {weekData.map((d, i) => (
@@ -54,10 +62,10 @@ export default function LazyForecast({ weekData }: LazyForecastProps) {
                     ))}
                 </ForecastCarousel>
             ) : (
-                <div className="h-[180px] bg-night-900/30 rounded-2xl flex items-center justify-center">
-                    <div className="w-8 h-8 border-2 border-moon border-t-transparent rounded-full animate-spin" />
+                <div className="h-[180px] bg-white/[0.045] rounded-2xl border border-white/10 flex items-center justify-center">
+                    <div className="w-8 h-8 border-2 border-amber-300 border-t-transparent rounded-full animate-spin" />
                 </div>
             )}
-        </div>
+        </section>
     );
 }

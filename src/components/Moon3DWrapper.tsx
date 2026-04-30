@@ -8,7 +8,14 @@ const Moon3D = dynamic(() => import('./Moon3D'), {
     ssr: false,
     loading: () => (
         <div className="w-full h-full flex items-center justify-center">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-amber-200 to-amber-400 animate-pulse" />
+            <div
+                className="w-24 h-24 rounded-full animate-pulse bg-cover bg-center"
+                style={{
+                    backgroundImage: 'url(/moon-texture.jpg)',
+                    boxShadow: '0 0 46px rgba(148, 163, 184, 0.18)',
+                    filter: 'grayscale(1) contrast(1.08) brightness(0.95)',
+                }}
+            />
         </div>
     ),
 });
@@ -37,18 +44,17 @@ export default function Moon3DWrapper({ phase, illumination, size = 200 }: Moon3
     const [actualSize, setActualSize] = useState(120); // Default to mobile size for SSR
 
     useEffect(() => {
-        // Check if we should use 3D (desktop + WebGL available)
+        // Use the textured 3D moon on mobile too when WebGL is available.
         const isMobile = window.innerWidth < 768;
-        const shouldUse3D = !isMobile && isWebGLAvailable();
+        const shouldUse3D = isWebGLAvailable();
         setUse2D(!shouldUse3D);
-        // Use smaller size on mobile
-        setActualSize(isMobile ? Math.min(size, 120) : size);
+        setActualSize(isMobile ? Math.min(size, 180) : size);
 
         const handleResize = () => {
             const isMobile = window.innerWidth < 768;
-            const shouldUse3D = !isMobile && isWebGLAvailable();
+            const shouldUse3D = isWebGLAvailable();
             setUse2D(!shouldUse3D);
-            setActualSize(isMobile ? Math.min(size, 120) : size);
+            setActualSize(isMobile ? Math.min(size, 180) : size);
         };
 
         window.addEventListener('resize', handleResize);

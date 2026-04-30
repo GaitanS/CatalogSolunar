@@ -3,8 +3,6 @@ import { getSolunarData, getMoonPhaseName, formatTime, getActiveFish, getMoonage
 import { getFishingAdvice } from '@/lib/advice';
 import Moon3DWrapper from '@/components/Moon3DWrapper';
 import ActivityGraph from '@/components/ActivityGraph';
-import AdUnit from '@/components/AdUnit';
-import LazyAdUnit from '@/components/LazyAdUnit';
 import Link from 'next/link';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { getLocationBySlug, getAllLocations, getLocationsByCounty, countyToSlug } from '@/data/fishingLocations';
@@ -125,7 +123,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
     const dateStr = today.toLocaleDateString('ro-RO', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
     const capitalizedDate = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
     const ratingLabels = ['', 'Slaba', 'Moderata', 'Buna', 'Foarte Buna', 'Excelenta'];
-    const ratingColors = ['', 'text-red-400', 'text-orange-400', 'text-yellow-400', 'text-emerald-400', 'text-green-400'];
+    const ratingColors = ['', 'text-red-400', 'text-amber-400', 'text-yellow-400', 'text-amber-400', 'text-green-400'];
 
     const nearbyLocations = getLocationsByCounty(loc.county).filter(l => l.slug !== loc.slug).slice(0, 6);
     const allLocations = getAllLocations();
@@ -182,10 +180,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
                         </div>
                     </div>
                 </div>
-
-                <AdUnit slotId="2812628769" format="horizontal" className="min-h-[90px] mb-8" label="Reclama" />
-
-                {/* Solunar Periods */}
+{/* Solunar Periods */}
                 <div className="grid md:grid-cols-2 gap-6 mb-8">
                     <div className="card-panel p-6">
                         <h2 className="text-xl font-display font-bold text-amber-400 mb-4">Perioade Majore</h2>
@@ -202,13 +197,13 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
                         </div>
                     </div>
                     <div className="card-panel p-6">
-                        <h2 className="text-xl font-display font-bold text-cyan-400 mb-4">Perioade Minore</h2>
+                        <h2 className="text-xl font-display font-bold text-amber-400 mb-4">Perioade Minore</h2>
                         <p className="text-night-400 text-sm mb-4">Durata ~1 ora. Activitate moderata.</p>
                         <div className="space-y-3">
                             {data.minorPeriods.map((p, i) => (
-                                <div key={i} className="flex items-center justify-between p-3 bg-cyan-500/10 border border-cyan-500/20 rounded-lg">
+                                <div key={i} className="flex items-center justify-between p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg">
                                     <div className="flex items-center gap-3">
-                                        <div className="w-2 h-2 rounded-full bg-cyan-400" />
+                                        <div className="w-2 h-2 rounded-full bg-amber-400" />
                                         <span className="text-white font-mono font-bold">{formatTime(p.start)} - {formatTime(p.end)}</span>
                                     </div>
                                 </div>
@@ -226,7 +221,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
                 {/* Fish Species & Advice */}
                 <div className="grid md:grid-cols-2 gap-6 mb-8">
                     <div className="card-panel p-6">
-                        <h2 className="text-xl font-display font-bold text-emerald-400 mb-4">Specii de Pești</h2>
+                        <h2 className="text-xl font-display font-bold text-amber-400 mb-4">Specii de Pești</h2>
                         {loc.fish.length > 0 ? (
                             <div className="flex flex-wrap gap-2">
                                 {loc.fish.map((fish, i) => {
@@ -238,9 +233,9 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
                                     };
                                     const href = fishSlugMap[fish];
                                     return href ? (
-                                        <Link key={i} href={href} className="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-300 text-sm hover:bg-emerald-500/20 transition-colors">{fish}</Link>
+                                        <Link key={i} href={href} className="px-3 py-1.5 bg-amber-500/10 border border-amber-500/20 rounded-full text-amber-300 text-sm hover:bg-amber-500/20 transition-colors">{fish}</Link>
                                     ) : (
-                                        <span key={i} className="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-300 text-sm">{fish}</span>
+                                        <span key={i} className="px-3 py-1.5 bg-amber-500/10 border border-amber-500/20 rounded-full text-amber-300 text-sm">{fish}</span>
                                     );
                                 })}
                             </div>
@@ -270,16 +265,13 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
                         </div>
                         <div>
                             <span className="text-night-500 block">Acces</span>
-                            <span className={`font-medium ${loc.paid ? 'text-yellow-300' : 'text-emerald-300'}`}>
+                            <span className={`font-medium ${loc.paid ? 'text-yellow-300' : 'text-amber-300'}`}>
                                 {loc.paid ? 'Cu taxa / permis' : 'Gratuit (autorizatie ANPA)'}
                             </span>
                         </div>
                     </div>
                 </div>
-
-                <LazyAdUnit slotId="6301173988" format="rectangle" style={{ minHeight: '280px' }} className="mb-8" label="Reclama" />
-
-                {/* FAQ */}
+{/* FAQ */}
                 <div className="card-panel p-6 md:p-8 mb-8">
                     <h2 className="text-2xl font-display font-bold text-white mb-6">Intrebari Frecvente - {loc.name}</h2>
                     <div className="space-y-4">
@@ -376,9 +368,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
                         </Link>
                     </div>
                 </div>
-
-                <LazyAdUnit slotId="1044977874" format="auto" layout="in-article" className="min-h-[120px] mt-8" label="Reclama" />
-            </div>
+</div>
         </div>
     );
 }

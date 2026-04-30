@@ -8,7 +8,7 @@ export default function ScheduleCard({ type, start, end }: ScheduleCardProps) {
     const isGood = type === 'good';
     return (
         <div className="mb-4 last:mb-0">
-            <div className={`flex items-center gap-2 mb-2 ${isGood ? 'text-emerald-400' : 'text-red-400'}`}>
+            <div className={`flex items-center gap-2 mb-2 ${isGood ? 'text-amber-200' : 'text-slate-300'}`}>
                 {isGood ? (
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
@@ -28,12 +28,12 @@ export default function ScheduleCard({ type, start, end }: ScheduleCardProps) {
                     {isGood ? 'Orar pescuit favorabil:' : 'Orar pescuit nefavorabil:'}
                 </span>
             </div>
-            <div className="flex items-center justify-between p-3 bg-night-950/50 rounded-xl border border-white/5">
-                <div className="bg-night-800 px-3 py-1.5 rounded-lg text-white font-mono font-bold text-lg shadow-inner">
+            <div className="flex items-center justify-between p-3 bg-[#111827]/70 rounded-2xl border border-white/10">
+                <div className="bg-white/[0.055] px-3 py-1.5 rounded-xl text-white font-mono font-bold text-lg shadow-inner">
                     {start}
                 </div>
-                <div className={`text-lg ${isGood ? 'text-emerald-500' : 'text-red-500'}`}>→</div>
-                <div className="bg-night-800 px-3 py-1.5 rounded-lg text-white font-mono font-bold text-lg shadow-inner">
+                <div className={`text-lg ${isGood ? 'text-amber-200' : 'text-slate-400'}`}>→</div>
+                <div className="bg-white/[0.055] px-3 py-1.5 rounded-xl text-white font-mono font-bold text-lg shadow-inner">
                     {end}
                 </div>
             </div>
