@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 
 interface Moon3DProps {
@@ -14,13 +14,34 @@ export default function Moon3D({ phase, illumination, size = 250 }: Moon3DProps)
     const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
     const sceneRef = useRef<THREE.Scene | null>(null);
     const moonRef = useRef<THREE.Mesh | null>(null);
+    const [isReady, setIsReady] = useState(false);
 
     useEffect(() => {
-        if (!containerRef.current) return;
+        const container = containerRef.current;
+        if (!container || isReady) return;
+
+        const updateReadyState = () => {
+            if (container.clientWidth > 0 && container.clientHeight > 0) {
+                setIsReady(true);
+            }
+        };
+
+        updateReadyState();
+        const observer = new ResizeObserver(updateReadyState);
+        observer.observe(container);
+
+        return () => observer.disconnect();
+    }, [isReady]);
+
+    useEffect(() => {
+        if (!containerRef.current || !isReady) return;
 
         const container = containerRef.current;
-        const width = container.clientWidth || size;
-        const height = container.clientHeight || size;
+        let width = container.clientWidth;
+        let height = container.clientHeight;
+        if (!width || !height) {
+            return;
+        }
 
         // Scene setup
         const scene = new THREE.Scene();
@@ -37,7 +58,7 @@ export default function Moon3D({ phase, illumination, size = 250 }: Moon3DProps)
             powerPreference: 'high-performance'
         });
         renderer.setSize(width, height);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
         container.appendChild(renderer.domElement);
         rendererRef.current = renderer;
 
@@ -49,7 +70,7 @@ export default function Moon3D({ phase, illumination, size = 250 }: Moon3DProps)
         moonTexture.colorSpace = THREE.SRGBColorSpace;
 
         // Geometry
-        const geometry = new THREE.SphereGeometry(1, 64, 64);
+        const geometry = new THREE.SphereGeometry(1, 48, 48);
 
         // Material - increased brightness and roughness
         const material = new THREE.MeshStandardMaterial({
@@ -98,33 +119,61 @@ export default function Moon3D({ phase, illumination, size = 250 }: Moon3DProps)
         scene.add(sunLight);
 
         // Animation Loop
-        let animationId: number;
-        const animate = () => {
-            animationId = requestAnimationFrame(animate);
+        let animationId = 0;
+        let isVisible = false;
+        let lastFrame = 0;
+        const frameInterval = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? Infinity : 1000 / 30;
 
-            // Very slow rotation
-            if (moonRef.current) {
-                moonRef.current.rotation.y += 0.0005;
-            }
-
+        const renderFrame = () => {
             renderer.render(scene, camera);
         };
-        animate();
 
-        const handleResize = () => {
+        const animate = (time: number) => {
+            animationId = requestAnimationFrame(animate);
+            if (!isVisible || document.hidden || time - lastFrame < frameInterval) return;
+            lastFrame = time;
+
+            if (moonRef.current) {
+                moonRef.current.rotation.y += 0.0007;
+            }
+
+            renderFrame();
+        };
+        renderFrame();
+
+        const resizeObserver = new ResizeObserver(() => {
             if (!container || !renderer) return;
             const w = container.clientWidth;
             const h = container.clientHeight;
+            if (!w || !h) return;
+            width = w;
+            height = h;
             camera.aspect = w / h;
             camera.updateProjectionMatrix();
             renderer.setSize(w, h);
-        };
+            renderFrame();
+        });
 
-        window.addEventListener('resize', handleResize);
+        const visibilityObserver = new IntersectionObserver((entries) => {
+            isVisible = entries.some((entry) => entry.isIntersecting);
+            if (isVisible && !animationId) {
+                animationId = requestAnimationFrame(animate);
+            }
+            if (isVisible) {
+                renderFrame();
+            }
+        }, { threshold: 0.01 });
+
+        resizeObserver.observe(container);
+        visibilityObserver.observe(container);
+        animationId = requestAnimationFrame(animate);
 
         return () => {
-            window.removeEventListener('resize', handleResize);
-            cancelAnimationFrame(animationId);
+            resizeObserver.disconnect();
+            visibilityObserver.disconnect();
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
 
             // Proper cleanup to prevent memory leaks
             textures.forEach(texture => texture.dispose());
@@ -150,7 +199,7 @@ export default function Moon3D({ phase, illumination, size = 250 }: Moon3DProps)
                 container.removeChild(renderer.domElement);
             }
         };
-    }, [phase, size]);
+    }, [isReady, phase, size]);
 
     // Update light position on phase change
     useEffect(() => {
