@@ -15,7 +15,7 @@ const nextConfig = {
         optimizeCss: true,
         optimizePackageImports: ['three', 'suncalc'],
     },
-    allowedDevOrigins: ['127.0.0.1:3500', 'localhost:3500'],
+    allowedDevOrigins: ['127.0.0.1', 'localhost'],
     images: {
         unoptimized: true,
     },
