@@ -4869,17 +4869,21 @@ Peștii nu stau în curent puternic. Caută slack water.
     },
     {
         slug: 'solunar-mai-2026-ghid',
-        title: 'Solunar Mai 2026 - Zile Bune, Ore Exacte și Calendar Pescuit',
-        excerpt: 'Solunar mai 2026: vezi cele mai bune zile de pescuit, fazele lunii, perioadele solunar și speciile active în luna mai.',
+        title: 'Solunar Mai 2026 - Calendar Pescuit, Ore Exacte și Zile Bune',
+        excerpt: 'Solunar Mai 2026 pentru pescuit: calendar pe zile, perioade majore și minore, faze lunare, cele mai bune ore și specii active.',
         date: '2026-04-30',
         author: 'Echipa Calendar Solunar',
         category: 'Calendar',
         readTime: 7,
-        keywords: ['solunar mai 2026', 'solunar pescuit mai 2026', 'calendar solunar mai 2026', 'calendar pescuit mai 2026', 'cand pescuiesc mai', 'luna plina mai 2026', 'zile bune pescuit mai'],
+        keywords: ['solunar mai 2026', 'solunar pescuit mai 2026', 'calendar solunar mai 2026', 'calendar pescuit mai 2026', 'ore pescuit mai 2026', 'perioade majore mai 2026', 'cel mai bun solunar mai 2026', 'cand pescuiesc mai', 'luna plina mai 2026', 'zile bune pescuit mai'],
         content: `
-Solunar mai 2026 complet: calendar de pescuit pentru luna mai, cu fazele lunii, cele mai bune zile, ore recomandate și speciile care devin active când apa se încălzește.
+Solunar Mai 2026 complet: calendar de pescuit pentru luna mai, cu fazele lunii, cele mai bune zile, ore recomandate și speciile care devin active când apa se încălzește. Pentru orele calculate zilnic, verifică și [Calendar Solunar 2026](/) sau pagina [Solunar Azi](/azi).
 
 Mai este luna în care pescuitul intră în ritm de sezon. Apa se stabilizează, zilele sunt lungi, iar perioadele solunar majore pot face diferența între o ieșire obișnuită și una memorabilă.
+
+## Răspuns Rapid: Solunar Mai 2026
+
+Pentru solunar pescuit mai 2026, cele mai bune ferestre sunt în jurul lunii pline din 2-4 mai și al lunii noi din 16-18 mai. Dimineața devreme, seara și perioadele majore calculate în ziua ieșirii sunt cele mai importante repere. Folosește acest ghid pentru planificare lunară, apoi verifică orele exacte în ziua pescuitului pe [calendarul solunar](/).
 
 ## De Ce Mai E Luna de Aur
 
@@ -4998,7 +5002,7 @@ Mai este luna în care pescuitul intră în ritm de sezon. Apa se stabilizează,
 - Profită de perioadele majore
 - Verifică regulamentele locale și perioadele de prohibiție înainte să pleci
 
-## Calendar Solunar Mai 2026 - Verificare
+## Calendar Solunar Mai 2026 - Verificare Zilnică
 
 Pentru perioade majore și minore exacte, verifică zilnic pe [Calendar Solunar](/) sau consultă pagina [Solunar Azi](/azi).
 
@@ -5016,7 +5020,7 @@ Primul vine cu lună plină, al doilea cu lună nouă. Sunt cele mai bune două 
 
 Dacă ai de ales o singură sesiune lungă în mai, alege una dintre aceste ferestre și verifică orele exacte în ziua plecării.
 
-[Verifică calendarul solunar pentru mai 2026 →](/)
+[Verifică orele exacte în calendarul solunar 2026 →](/)
         `
     },
     {

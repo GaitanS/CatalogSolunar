@@ -4,9 +4,11 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import { getAllArticles, getMonthlyArticles } from '@/data/blogArticles';
 
 export const metadata: Metadata = {
-    title: 'Calendar Pescuit 2026 - Solunar pe Luni, Ghiduri și Ore Bune',
-    description: 'Calendar pescuit 2026 cu solunar pe luni, zile bune, ore optime, faze lunare și ghiduri pentru crap, șalău, somn, știucă și păstrăv.',
+    title: 'Solunar Mai 2026 - Calendar Pescuit 2026 pe Luni',
+    description: 'Solunar Mai 2026 și calendar pescuit 2026 pe luni: zile bune, ore optime, perioade majore, faze lunare și ghiduri pentru fiecare specie.',
     keywords: [
+        'solunar mai 2026', 'solunar pescuit mai 2026', 'calendar pescuit mai 2026',
+        'calendar solunar mai 2026', 'zile bune pescuit mai',
         'ghid pescuit 2026', 'sfaturi pescuit', 'tehnici pescuit',
         'pescuit crap', 'pescuit salau', 'pescuit pastrav',
         'cele mai bune ore pescuit', 'sezon pescuit 2026',
@@ -17,8 +19,8 @@ export const metadata: Metadata = {
         canonical: 'https://calendarsolunar.ro/blog',
     },
     openGraph: {
-        title: 'Calendar Pescuit 2026 — Solunar pe Luni și Ghiduri',
-        description: 'Solunar 2026 pe luni, ore bune de pescuit, faze lunare și ghiduri practice pentru pescari.',
+        title: 'Solunar Mai 2026 — Calendar Pescuit 2026 pe Luni',
+        description: 'Solunar Mai 2026, ore bune de pescuit, faze lunare și ghiduri practice pentru pescari.',
         url: 'https://calendarsolunar.ro/blog',
     },
 };
@@ -26,6 +28,10 @@ export const metadata: Metadata = {
 export default function BlogPage() {
     const articles = getAllArticles();
     const monthlyArticles = getMonthlyArticles();
+    const highlightedMonthlyArticle = monthlyArticles.find(article => article.slug === 'solunar-mai-2026-ghid') || monthlyArticles[0];
+    const orderedMonthlyArticles = highlightedMonthlyArticle
+        ? [highlightedMonthlyArticle, ...monthlyArticles.filter(article => article.slug !== highlightedMonthlyArticle.slug)]
+        : monthlyArticles;
     const categories = [...new Set(articles.map(a => a.category))];
     const articlesByCategory = categories.reduce((acc, cat) => {
         acc[cat] = articles.filter(a => a.category === cat);
@@ -45,9 +51,29 @@ export default function BlogPage() {
                         Calendar Pescuit 2026
                     </h1>
                     <p className="text-night-300 text-base md:text-lg leading-relaxed max-w-[65ch]">
-                        Solunar pe luni, zile bune, ore optime și ghiduri practice pentru fiecare specie importantă.
+                        Solunar Mai 2026, calendar pescuit 2026 pe luni, zile bune, ore optime și ghiduri practice pentru fiecare specie importantă.
                     </p>
                 </div>
+
+                {highlightedMonthlyArticle && (
+                    <Link
+                        href={`/blog/${highlightedMonthlyArticle.slug}`}
+                        className="interactive-lift taste-surface mb-8 block rounded-2xl border border-amber-300/30 bg-amber-300/10 p-5 md:p-6 group"
+                    >
+                        <p className="text-[11px] uppercase tracking-[0.22em] text-amber-100/75 font-bold">
+                            Recomandat acum
+                        </p>
+                        <h2 className="mt-2 text-2xl md:text-3xl font-display font-bold text-white group-hover:text-amber-100 transition-colors">
+                            Solunar Mai 2026 - calendar pescuit, zile bune și ore exacte
+                        </h2>
+                        <p className="mt-3 max-w-[72ch] text-sm md:text-base leading-relaxed text-night-300">
+                            Pagina lunii mai răspunde direct căutărilor pentru solunar pescuit mai 2026, cu faze lunare, ferestre recomandate și specii active.
+                        </p>
+                        <span className="mt-4 inline-flex rounded-xl bg-amber-300 px-4 py-2 text-sm font-bold text-night-950 transition-colors group-hover:bg-amber-200">
+                            Vezi ghidul pentru Mai 2026 &rarr;
+                        </span>
+                    </Link>
+                )}
 
                 <section className="mb-10 md:mb-12">
                     <div className="flex items-end justify-between gap-4 mb-4">
@@ -64,7 +90,7 @@ export default function BlogPage() {
                         </Link>
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                        {monthlyArticles.map((article) => (
+                        {orderedMonthlyArticles.map((article) => (
                             <Link
                                 key={article.slug}
                                 href={`/blog/${article.slug}`}

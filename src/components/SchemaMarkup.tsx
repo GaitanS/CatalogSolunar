@@ -23,6 +23,7 @@ export default function SchemaMarkup() {
     const websiteSchema = {
         "@context": "https://schema.org",
         "@type": "WebSite",
+        "@id": "https://calendarsolunar.ro/#website",
         "name": "Calendar Solunar",
         "url": "https://calendarsolunar.ro",
         "description": "Calendar solunar precis cu timpuri de pescuit pentru România",
@@ -51,7 +52,7 @@ export default function SchemaMarkup() {
             "price": "0",
             "priceCurrency": "RON"
         },
-        "featureList": "Calendar solunar zilnic, Perioade majore și minore, Faze lunare, Rating pescuit, Prognoze 7 zile"
+        "featureList": "Calendar solunar zilnic, Solunar Mai 2026, Perioade majore și minore, Faze lunare, Rating pescuit, Prognoză 14 zile"
     };
 
     // Using dangerouslySetInnerHTML is safe here because we control the static JSON content

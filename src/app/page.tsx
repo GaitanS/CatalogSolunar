@@ -33,22 +33,27 @@ function getMonthTarget(date: Date, offset = 0) {
     };
 }
 
+function getPriorityMonth(currentMonth: ReturnType<typeof getMonthTarget>, nextMonth: ReturnType<typeof getMonthTarget>) {
+    return [currentMonth, nextMonth].find((month) => month.slug === 'mai' && month.year === 2026) || nextMonth;
+}
+
 
 export async function generateMetadata() {
     const date = new Date();
     const currentMonth = getMonthTarget(date);
     const nextMonth = getMonthTarget(date, 1);
+    const priorityMonth = getPriorityMonth(currentMonth, nextMonth);
     const year = currentMonth.year;
 
     return {
-        title: `Calendar Solunar ${year} Pescuit - Ore Exacte, ${currentMonth.name} și ${nextMonth.name}`,
-        description: `Calendar solunar ${year} pentru pescuit, cu ore exacte, perioade majore și minore, faze lunare, tabel solunar pe luni și prognoză 14 zile. Vezi solunar ${currentMonth.slug} ${year} și ${nextMonth.slug} ${nextMonth.year}.`,
+        title: `Solunar ${priorityMonth.name} ${priorityMonth.year} - Calendar Solunar ${year} Pescuit`,
+        description: `Solunar ${priorityMonth.slug} ${priorityMonth.year} și calendar solunar ${year} pentru pescuit: ore exacte, perioade majore și minore, faze lunare, prognoză 14 zile și solunar azi.`,
         alternates: {
             canonical: 'https://calendarsolunar.ro/',
         },
         openGraph: {
-            title: `Calendar Solunar ${year} — Pescuit pe Ore Exacte`,
-            description: `Solunar ${year} pe luni, perioade majore, faze lunare, specii active și prognoză pentru pescuit.`,
+            title: `Solunar ${priorityMonth.name} ${priorityMonth.year} — Calendar Solunar ${year}`,
+            description: `Calendar solunar pentru pescuit: ${currentMonth.name} ${year}, ${priorityMonth.name} ${priorityMonth.year}, perioade majore, faze lunare și prognoză.`,
             url: 'https://calendarsolunar.ro/',
         },
     };
@@ -62,6 +67,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
     const locationName = params.loc || 'București';
     const currentMonth = getMonthTarget(today);
     const nextMonth = getMonthTarget(today, 1);
+    const priorityMonth = getPriorityMonth(currentMonth, nextMonth);
     const monthLinks = monthSlugs.map((luna, index) => {
         const isCurrent = index === today.getMonth();
         const isNext = index === ((today.getMonth() + 1) % 12);
@@ -92,9 +98,60 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
     badStart.setHours(badStart.getHours() - 6);
     const badEnd = new Date(badStart);
     badEnd.setHours(badEnd.getHours() + 2);
+    const homepageSchema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebPage",
+                "@id": "https://calendarsolunar.ro/#webpage",
+                "url": "https://calendarsolunar.ro/",
+                "name": `Solunar ${priorityMonth.name} ${priorityMonth.year} - Calendar Solunar ${today.getFullYear()} Pescuit`,
+                "description": `Calendar solunar ${today.getFullYear()} pentru pescuit în România, cu solunar ${currentMonth.name} ${currentMonth.year}, solunar ${priorityMonth.name} ${priorityMonth.year}, ore exacte, faze lunare și prognoză 14 zile.`,
+                "inLanguage": "ro",
+                "isPartOf": {
+                    "@id": "https://calendarsolunar.ro/#website"
+                },
+                "about": [
+                    "solunar mai 2026",
+                    "calendar solunar 2026",
+                    "solunar pescuit 2026",
+                    "ore pescuit",
+                    "faze lunare"
+                ],
+                "mainEntity": {
+                    "@id": "https://calendarsolunar.ro/#monthly-solunar-list"
+                }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "@id": "https://calendarsolunar.ro/#breadcrumb",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Calendar Solunar",
+                        "item": "https://calendarsolunar.ro/"
+                    }
+                ]
+            },
+            {
+                "@type": "ItemList",
+                "@id": "https://calendarsolunar.ro/#monthly-solunar-list",
+                "name": `Calendar solunar ${today.getFullYear()} pe luni`,
+                "itemListElement": monthLinks.map((month, index) => ({
+                    "@type": "ListItem",
+                    "position": index + 1,
+                    "name": `Solunar ${month.name} ${month.href.match(/-(\d{4})-ghid$/)?.[1] || today.getFullYear()}`,
+                    "url": `https://calendarsolunar.ro${month.href}`
+                }))
+            }
+        ]
+    };
+    const homepageSchemaJson = JSON.stringify(homepageSchema);
 
     return (
         <div className="relative overflow-hidden pb-20 pt-3 md:pt-8">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: homepageSchemaJson }} />
             <div className="absolute inset-x-0 top-0 h-[520px] pointer-events-none bg-[radial-gradient(circle_at_18%_12%,rgba(245,208,111,0.16),transparent_28%),radial-gradient(circle_at_86%_6%,rgba(52,211,153,0.12),transparent_30%)]" />
 
             <div className="container-custom px-4 relative z-10">
@@ -296,6 +353,38 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                     </div>
                 </div>
 
+                <section className="mb-6 grid gap-3 md:grid-cols-[1.2fr_0.8fr]">
+                    <Link
+                        href={priorityMonth.href}
+                        className="interactive-lift taste-surface relative overflow-hidden rounded-2xl border border-amber-300/30 bg-amber-300/10 p-4 md:p-5 group"
+                    >
+                        <div className="absolute -right-10 -top-12 h-32 w-32 rounded-full bg-amber-300/10 blur-2xl pointer-events-none" />
+                        <div className="relative">
+                            <p className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-amber-100/75 font-bold">
+                                Căutat acum
+                            </p>
+                            <h2 className="mt-1 text-xl md:text-2xl font-display font-bold text-white">
+                                Solunar {priorityMonth.name} {priorityMonth.year} pentru pescuit
+                            </h2>
+                            <p className="mt-2 text-sm leading-relaxed text-slate-300">
+                                Pagina lunii prioritare cu zile bune, perioade majore, faze lunare și recomandări pe specii. Este legătura principală pentru cei care caută calendar pescuit {priorityMonth.name.toLowerCase()} {priorityMonth.year}.
+                            </p>
+                            <span className="mt-4 inline-flex rounded-xl bg-amber-300 px-4 py-2 text-sm font-bold text-[#111827] transition-colors group-hover:bg-amber-200">
+                                Vezi Solunar {priorityMonth.name} {priorityMonth.year} &rarr;
+                            </span>
+                        </div>
+                    </Link>
+                    <div className="taste-surface rounded-2xl border border-white/10 bg-white/[0.045] p-4 md:p-5">
+                        <h2 className="text-base md:text-lg font-display font-bold text-white">Cautări rapide</h2>
+                        <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
+                            <Link href={currentMonth.href} className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 transition-colors hover:text-white">Solunar {currentMonth.name} {currentMonth.year}</Link>
+                            <Link href={priorityMonth.href} className="rounded-xl border border-amber-200/20 bg-amber-300/10 px-3 py-2 text-amber-100 transition-colors hover:text-white">Solunar {priorityMonth.name} {priorityMonth.year}</Link>
+                            <Link href="/azi" className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 transition-colors hover:text-white">Solunar azi</Link>
+                            <Link href="/lunar" className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 transition-colors hover:text-white">Faze lunare</Link>
+                        </div>
+                    </div>
+                </section>
+
                 {/* CTA Strip: Solunar Azi */}
                 <Link href="/azi" className="interactive-lift taste-surface mb-4 bg-slate-900/70 border border-amber-400/20 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 group hover:border-amber-300/40 transition-colors block">
                     <div>
@@ -313,12 +402,12 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                         className="interactive-lift taste-surface relative overflow-hidden rounded-2xl border border-amber-400/30 bg-amber-400/10 p-4 md:p-5 group"
                     >
                         <div className="relative">
-                            <p className="text-[11px] uppercase tracking-[0.18em] text-amber-200/80 font-bold mb-1">Planifică luna următoare</p>
+                            <p className="text-[11px] uppercase tracking-[0.18em] text-amber-200/80 font-bold mb-1">Calendar pescuit următoarea lună</p>
                             <h2 className="text-xl md:text-2xl font-display font-bold text-white mb-2">
-                                Solunar {nextMonth.name} {nextMonth.year}
+                                Solunar {nextMonth.name} {nextMonth.year} - zile bune și ore exacte
                             </h2>
                             <p className="text-sm text-slate-300 leading-relaxed max-w-2xl">
-                                Ghid lunar cu zile bune, ore exacte, faze lunare și specii active, pregătit pentru pescarii care își aleg ieșirile din timp.
+                                Ghid lunar cu perioade majore, perioade minore, faze lunare și specii active, pregătit pentru pescarii care își aleg ieșirile din timp.
                             </p>
                         </div>
                         <span className="relative mt-4 inline-flex text-sm font-bold text-amber-200 group-hover:text-white transition-colors">
@@ -385,6 +474,12 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 {/* Solunar pe Luni - target monthly search queries */}
                 <section className="mb-8 md:mb-12">
                     <h2 className="text-lg md:text-xl font-display font-bold text-white mb-4">Solunar {today.getFullYear()} pe Luni</h2>
+                    <Link
+                        href={priorityMonth.href}
+                        className="mb-3 block rounded-2xl border border-amber-300/25 bg-amber-300/10 p-3 text-sm text-amber-100 transition-colors hover:border-amber-200/50 hover:text-white"
+                    >
+                        Recomandat acum: <strong>Solunar {priorityMonth.name} {priorityMonth.year}</strong> - calendar pescuit, faze lunare și ore exacte &rarr;
+                    </Link>
                     <div className="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-3">
                         {monthLinks.map((month) => {
                             return (
@@ -398,7 +493,8 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                                             : 'bg-white/[0.045] border border-white/10 hover:bg-white/[0.075] text-slate-300 hover:text-white'
                                     }`}
                                 >
-                                    {month.name}
+                                    <span className="block">Solunar</span>
+                                    <span className="block font-bold">{month.name}</span>
                                     {month.isNext && <span className="block text-[9px] text-amber-100/75 mt-0.5">următor</span>}
                                 </Link>
                             );

@@ -320,6 +320,9 @@ export default async function ArticlePage({ params }: Props) {
         "@type": "BlogPosting",
         "headline": article.title,
         "description": article.excerpt,
+        "image": [
+            "https://calendarsolunar.ro/logo.webp"
+        ],
         "datePublished": article.date,
         "dateModified": article.date,
         "author": {
