@@ -111,7 +111,7 @@ export default async function RootLayout({
             <body className={`${openSans.variable} ${outfit.variable} font-body bg-night-950 text-slate-100 min-h-screen antialiased selection:bg-moon selection:text-night-950`}>
                 <ClientProviders>
                     <LazyBackground />
-                    <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#111827]/88 backdrop-blur-xl">
+                    <header className="desktop-header fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#111827]/88 backdrop-blur-xl">
                         <div className="container-custom py-3 flex items-center justify-center md:justify-between">
                             <a href="/" className="interactive-lift flex items-center gap-3 group rounded-2xl pr-3">
                                 <Image
@@ -134,7 +134,7 @@ export default async function RootLayout({
                             </nav>
                         </div>
                     </header>
-                    <main className="pt-20 pb-20 md:pb-0">
+                    <main className="pb-20 md:pb-0 md:pt-20">
                         {children}
                     </main>
                     <nav className="mobile-bottom-nav fixed bottom-3 left-3 right-3 z-50 bg-[#111827]/92 backdrop-blur-xl border border-white/10 rounded-2xl flex items-center justify-around py-2 px-3 taste-surface md:hidden">

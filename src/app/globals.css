@@ -127,6 +127,10 @@
     display: flex;
   }
 
+  .desktop-header {
+    display: none;
+  }
+
   .site-nav-link[data-nav-active="true"] {
     background: rgba(255, 255, 255, 0.075);
     color: #ffffff;
@@ -134,6 +138,10 @@
 }
 
 @media (min-width: 768px) {
+  .desktop-header {
+    display: block;
+  }
+
   .mobile-bottom-nav {
     display: none !important;
   }
