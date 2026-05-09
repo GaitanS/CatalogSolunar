@@ -58,7 +58,7 @@ export default function Moon3D({ phase, illumination, size = 250 }: Moon3DProps)
             powerPreference: 'high-performance'
         });
         renderer.setSize(width, height);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
         container.appendChild(renderer.domElement);
         rendererRef.current = renderer;
 
@@ -70,7 +70,7 @@ export default function Moon3D({ phase, illumination, size = 250 }: Moon3DProps)
         moonTexture.colorSpace = THREE.SRGBColorSpace;
 
         // Geometry
-        const geometry = new THREE.SphereGeometry(1, 48, 48);
+        const geometry = new THREE.SphereGeometry(1, 32, 32);
 
         // Material - increased brightness and roughness
         const material = new THREE.MeshStandardMaterial({
@@ -122,7 +122,7 @@ export default function Moon3D({ phase, illumination, size = 250 }: Moon3DProps)
         let animationId = 0;
         let isVisible = false;
         let lastFrame = 0;
-        const frameInterval = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? Infinity : 1000 / 30;
+        const frameInterval = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? Infinity : 1000 / 15;
 
         const renderFrame = () => {
             renderer.render(scene, camera);
@@ -134,7 +134,7 @@ export default function Moon3D({ phase, illumination, size = 250 }: Moon3DProps)
             lastFrame = time;
 
             if (moonRef.current) {
-                moonRef.current.rotation.y += 0.0007;
+                moonRef.current.rotation.y += 0.00045;
             }
 
             renderFrame();

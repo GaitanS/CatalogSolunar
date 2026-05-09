@@ -95,7 +95,7 @@ Vrei să-ți iei concediu pentru pescuit? Pune-l în mai sau septembrie, dar ver
 
 Cele mai bune ore de pescuit în 2026 sunt dimineața devreme, seara și perioadele majore solunar calculate pentru ziua ieșirii. Ca regulă rapidă, începe cu 04:30-07:00, 18:00-20:30 și 22:00-02:00 pentru speciile active noaptea.
 
-Pentru planificare rapidă, verifică [calendarul solunar 2026](/), ghidul pentru [solunar mai 2026](/blog/solunar-mai-2026-ghid) și ghidul pentru [solunar iunie 2026](/blog/solunar-iunie-2026-ghid).
+Pentru planificare rapidă, verifică [calendarul solunar pescuit 2026](/solunar-pescuit-2026), ghidul pentru [solunar mai 2026](/solunar-mai-2026) și ghidul pentru [solunar iunie 2026](/solunar-iunie-2026).
 
 | Moment | Ore bune | Când merită | Specii active |
 |--------|----------|-------------|---------------|
@@ -106,11 +106,11 @@ Pentru planificare rapidă, verifică [calendarul solunar 2026](/), ghidul pentr
 
 ## Cele 3 Luni de Top în 2026
 
-**[Mai](/blog/solunar-mai-2026-ghid)** - Peștii au ieșit din prohibiție, sunt flămânzi, apa s-a încălzit. Este luna cu cele mai multe căutări pentru solunar pescuit mai 2026 și merită planificată din timp.
+**[Mai](/solunar-mai-2026)** - Peștii au ieșit din prohibiție, sunt flămânzi, apa s-a încălzit. Este luna cu cele mai multe căutări pentru solunar pescuit mai 2026 și merită planificată din timp.
 
 **Septembrie** - Crapii se îngrașă înainte de iarnă. Mușcă tot ce-arunci. Plus vremea e încă bună, dar lacurile nu mai sunt pline de turiști.
 
-**[Iunie](/blog/solunar-iunie-2026-ghid)** - Zile lungi = mai multe ore de pescuit. Șalăul e activ noaptea, crapul dimineața.
+**[Iunie](/solunar-iunie-2026)** - Zile lungi = mai multe ore de pescuit. Șalăul e activ noaptea, crapul dimineața.
 
 ## Luna Plină 2026
 
@@ -177,7 +177,7 @@ Verifică solunarul în dimineața plecării și cu o zi înainte, pentru că or
 
 ## Ce lună este cea mai bună pentru pescuit în 2026?
 
-Mai este una dintre cele mai bune luni pentru pescuit în 2026, mai ales în jurul ferestrelor solunare puternice. Dacă planifici ieșiri în sezon, începe cu [Solunar Mai 2026](/blog/solunar-mai-2026-ghid), apoi urmărește și [Solunar Iunie 2026](/blog/solunar-iunie-2026-ghid).
+Mai este una dintre cele mai bune luni pentru pescuit în 2026, mai ales în jurul ferestrelor solunare puternice. Dacă planifici ieșiri în sezon, începe cu [Solunar Mai 2026](/solunar-mai-2026), apoi urmărește și [Solunar Iunie 2026](/solunar-iunie-2026).
         `
     },
     {
@@ -4917,7 +4917,7 @@ Pentru solunar pescuit mai 2026, cele mai bune ferestre sunt în jurul lunii pli
 | ore pescuit mai 2026 | dimineața, seara și noaptea în jurul lunii pline/noi |
 | calendar pescuit mai 2026 | folosește ghidul lunar plus [Solunar Azi](/azi) |
 
-Dacă vrei să compari luna mai cu restul sezonului, vezi și ghidul pentru [cele mai bune ore de pescuit 2026](/blog/cele-mai-bune-ore-pescuit-2026) și următoarea lună din calendar: [Solunar Iunie 2026](/blog/solunar-iunie-2026-ghid).
+Dacă vrei să compari luna mai cu restul sezonului, vezi și ghidul pentru [cele mai bune ore de pescuit 2026](/blog/cele-mai-bune-ore-pescuit-2026) și următoarea lună din calendar: [Solunar Iunie 2026](/solunar-iunie-2026).
 
 ## De Ce Mai E Luna de Aur
 

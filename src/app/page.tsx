@@ -11,6 +11,7 @@ import type { CSSProperties } from 'react';
 import { getAllCities } from '@/data/cities';
 import { getAllArticles } from '@/data/blogArticles';
 import { getAllLocations } from '@/data/fishingLocations';
+import { monthlySeoLandingPages } from '@/data/seoLandingPages';
 
 const monthSlugs = [
     'ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie',
@@ -25,11 +26,13 @@ function getMonthTarget(date: Date, offset = 0) {
     const target = new Date(date.getFullYear(), date.getMonth() + offset, 1);
     const slug = monthSlugs[target.getMonth()];
     const name = capitalize(slug);
+    const year = target.getFullYear();
+    const landing = monthlySeoLandingPages.find((page) => page.monthIndex === target.getMonth() && page.year === year);
     return {
         slug,
         name,
-        year: target.getFullYear(),
-        href: `/blog/solunar-${slug}-${target.getFullYear()}-ghid`,
+        year,
+        href: landing ? `/${landing.slug}` : `/blog/solunar-${slug}-${year}-ghid`,
     };
 }
 
@@ -71,11 +74,13 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
     const monthLinks = monthSlugs.map((luna, index) => {
         const isCurrent = index === today.getMonth();
         const isNext = index === ((today.getMonth() + 1) % 12);
-        const targetYear = index < today.getMonth() ? today.getFullYear() + 1 : today.getFullYear();
+        const targetYear = today.getFullYear();
+        const landing = monthlySeoLandingPages.find((page) => page.monthIndex === index && page.year === targetYear);
         return {
             slug: luna,
             name: capitalize(luna),
-            href: `/blog/solunar-${luna}-${targetYear}-ghid`,
+            year: targetYear,
+            href: landing ? `/${landing.slug}` : `/blog/solunar-${luna}-${targetYear}-ghid`,
             isCurrent,
             isNext,
         };
@@ -141,7 +146,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 "itemListElement": monthLinks.map((month, index) => ({
                     "@type": "ListItem",
                     "position": index + 1,
-                    "name": `Solunar ${month.name} ${month.href.match(/-(\d{4})-ghid$/)?.[1] || today.getFullYear()}`,
+                    "name": `Solunar ${month.name} ${month.year}`,
                     "url": `https://calendarsolunar.ro${month.href}`
                 }))
             }
@@ -419,9 +424,9 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                             Acces rapid
                         </h2>
                         <div className="grid grid-cols-2 gap-2 text-xs">
-                            <Link href="/" className="rounded-xl bg-white/[0.045] px-3 py-2 text-slate-300 border border-white/10 hover:text-white transition-colors">Solunar 2026</Link>
+                            <Link href="/solunar-pescuit-2026" className="rounded-xl bg-white/[0.045] px-3 py-2 text-slate-300 border border-white/10 hover:text-white transition-colors">Solunar pescuit 2026</Link>
+                            <Link href="/calendar-pescuit-2026" className="rounded-xl bg-white/[0.045] px-3 py-2 text-slate-300 border border-white/10 hover:text-white transition-colors">Calendar pescuit</Link>
                             <Link href="/azi" className="rounded-xl bg-white/[0.045] px-3 py-2 text-slate-300 border border-white/10 hover:text-white transition-colors">Solunar azi</Link>
-                            <Link href={currentMonth.href} className="rounded-xl bg-white/[0.045] px-3 py-2 text-slate-300 border border-white/10 hover:text-white transition-colors">{currentMonth.name} {currentMonth.year}</Link>
                             <Link href={nextMonth.href} className="rounded-xl bg-white/[0.045] px-3 py-2 text-slate-300 border border-white/10 hover:text-white transition-colors">{nextMonth.name} {nextMonth.year}</Link>
                         </div>
                     </div>

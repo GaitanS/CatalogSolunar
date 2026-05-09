@@ -3,6 +3,7 @@ import { getAllArticles } from '@/data/blogArticles';
 import { getAllCities } from '@/data/cities';
 import { getAllSpecies } from '@/data/species';
 import { getAllLocations, getAllCountySlugs } from '@/data/fishingLocations';
+import { annualSeoLandingPages, monthlySeoLandingPages } from '@/data/seoLandingPages';
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://calendarsolunar.ro';
@@ -84,6 +85,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.85,
     }));
 
+    const seoLandingPages: MetadataRoute.Sitemap = [
+        ...monthlySeoLandingPages.map((page) => ({
+            url: `${baseUrl}/${page.slug}`,
+            lastModified: new Date(),
+            changeFrequency: 'daily' as const,
+            priority: page.slug === 'solunar-mai-2026' ? 0.98 : 0.92,
+        })),
+        ...annualSeoLandingPages.map((page) => ({
+            url: `${baseUrl}/${page.slug}`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly' as const,
+            priority: page.slug === 'solunar-pescuit-2026' ? 0.96 : 0.93,
+        })),
+    ];
+
     // Blog articles
     const articlePages: MetadataRoute.Sitemap = articles.map((article) => ({
         url: `${baseUrl}/blog/${article.slug}`,
@@ -119,6 +135,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     return [
         ...staticPages,
+        ...seoLandingPages,
         ...cityPages,
         ...speciesPages,
         ...articlePages,

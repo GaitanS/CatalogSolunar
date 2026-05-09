@@ -6,22 +6,62 @@ import Moon3DWrapper from '@/components/Moon3DWrapper';
 import ActivityGraph from '@/components/ActivityGraph';
 import Link from 'next/link';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import MonthlySolunarLanding from '@/components/MonthlySolunarLanding';
+import AnnualSolunarLanding from '@/components/AnnualSolunarLanding';
 import { getCityBySlug, getAllCities } from '@/data/cities';
 import { getSpeciesBySlug, getAllSpecies } from '@/data/species';
 import { getAllArticles } from '@/data/blogArticles';
 import { getAllLocations } from '@/data/fishingLocations';
+import { getAllSeoLandingSlugs, getAnnualLandingBySlug, getMonthlyLandingBySlug } from '@/data/seoLandingPages';
 import type { Metadata } from 'next';
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
+    const seoParams = getAllSeoLandingSlugs().map((slug) => ({ slug }));
     const cityParams = getAllCities().map((city) => ({ slug: city.slug }));
     const speciesParams = getAllSpecies().map((species) => ({ slug: species.slug }));
-    return [...cityParams, ...speciesParams];
+    return [...seoParams, ...cityParams, ...speciesParams];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;
+
+    const monthlyLanding = getMonthlyLandingBySlug(slug);
+    if (monthlyLanding) {
+        return {
+            title: monthlyLanding.metaTitle,
+            description: monthlyLanding.description,
+            keywords: monthlyLanding.keywords,
+            alternates: { canonical: `https://calendarsolunar.ro/${monthlyLanding.slug}` },
+            openGraph: {
+                title: monthlyLanding.title,
+                description: monthlyLanding.description,
+                url: `https://calendarsolunar.ro/${monthlyLanding.slug}`,
+                siteName: 'Calendar Solunar',
+                locale: 'ro_RO',
+                type: 'website',
+            },
+        };
+    }
+
+    const annualLanding = getAnnualLandingBySlug(slug);
+    if (annualLanding) {
+        return {
+            title: annualLanding.metaTitle,
+            description: annualLanding.description,
+            keywords: annualLanding.keywords,
+            alternates: { canonical: `https://calendarsolunar.ro/${annualLanding.slug}` },
+            openGraph: {
+                title: annualLanding.title,
+                description: annualLanding.description,
+                url: `https://calendarsolunar.ro/${annualLanding.slug}`,
+                siteName: 'Calendar Solunar',
+                locale: 'ro_RO',
+                type: 'website',
+            },
+        };
+    }
 
     // Check if it's a city
     const city = getCityBySlug(slug);
@@ -498,6 +538,16 @@ function SpeciesPageContent({ species }: { species: ReturnType<typeof getSpecies
 // Main Page Component
 export default async function SlugPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
+
+    const monthlyLanding = getMonthlyLandingBySlug(slug);
+    if (monthlyLanding) {
+        return <MonthlySolunarLanding page={monthlyLanding} />;
+    }
+
+    const annualLanding = getAnnualLandingBySlug(slug);
+    if (annualLanding) {
+        return <AnnualSolunarLanding page={annualLanding} />;
+    }
 
     // Check if it's a city
     const city = getCityBySlug(slug);
