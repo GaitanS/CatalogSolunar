@@ -51,6 +51,27 @@ const nextConfig = {
                 ],
             },
             {
+                // Generated social images are assets, not indexable landing pages.
+                source: '/:path*/opengraph-image',
+                headers: [
+                    { key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' },
+                ],
+            },
+            {
+                // Same for Twitter/X image routes when present.
+                source: '/:path*/twitter-image',
+                headers: [
+                    { key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' },
+                ],
+            },
+            {
+                // Keep framework assets out of Google's page index reports.
+                source: '/_next/static/:path*',
+                headers: [
+                    { key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' },
+                ],
+            },
+            {
                 // Cache all HTML pages - public so CDN/Googlebot can cache
                 source: '/:path*',
                 headers: [
@@ -69,6 +90,7 @@ const nextConfig = {
                 source: '/_next/static/(.*)',
                 headers: [
                     { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+                    { key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' },
                 ],
             },
         ];
