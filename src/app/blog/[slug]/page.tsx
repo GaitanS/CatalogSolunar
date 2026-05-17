@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { getArticleBySlug, getAllArticles, BlogArticle, getAdjacentMonthlyArticles } from '@/data/blogArticles';
 import { getAllCities } from '@/data/cities';
 import { getAllSpecies } from '@/data/species';
+import { monthlySeoLandingPages } from '@/data/seoLandingPages';
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -24,20 +25,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         return { title: 'Articol Negăsit' };
     }
 
+    const monthlyLanding = monthlySeoLandingPages.find((page) => page.blogHref === `/blog/${slug}`);
+    const canonicalUrl = monthlyLanding
+        ? `https://calendarsolunar.ro/${monthlyLanding.slug}`
+        : `https://calendarsolunar.ro/blog/${slug}`;
+    const cleanTitle = article.title.replace(/\s*✓\s*/g, ' - ');
+
     return {
-        title: article.title,
+        title: cleanTitle,
         description: article.excerpt,
         keywords: article.keywords.join(', '),
         alternates: {
-            canonical: `https://calendarsolunar.ro/blog/${slug}`,
+            canonical: canonicalUrl,
         },
         openGraph: {
-            title: article.title,
+            title: cleanTitle,
             description: article.excerpt,
             type: 'article',
             publishedTime: article.date,
             authors: [article.author],
-            url: `https://calendarsolunar.ro/blog/${slug}`,
+            url: canonicalUrl,
         },
     };
 }
@@ -314,11 +321,13 @@ export default async function ArticlePage({ params }: Props) {
     const otherArticles = allArticles.filter(a => a.slug !== article.slug && a.category !== article.category);
     const relatedArticles = [...sameCategory, ...otherArticles].slice(0, 6);
     const categoryArticles = sameCategory.slice(0, 5);
+    const monthlyLanding = monthlySeoLandingPages.find((page) => page.blogHref === `/blog/${article.slug}`);
+    const cleanArticleTitle = article.title.replace(/\s*✓\s*/g, ' - ');
 
     const articleSchema = {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
-        "headline": article.title,
+        "headline": cleanArticleTitle,
         "description": article.excerpt,
         "image": [
             "https://calendarsolunar.ro/logo.webp"
@@ -340,7 +349,7 @@ export default async function ArticlePage({ params }: Props) {
         },
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": `https://calendarsolunar.ro/blog/${article.slug}`
+            "@id": monthlyLanding ? `https://calendarsolunar.ro/${monthlyLanding.slug}` : `https://calendarsolunar.ro/blog/${article.slug}`
         },
         "keywords": article.keywords.join(', '),
         "articleSection": article.category,
@@ -354,7 +363,7 @@ export default async function ArticlePage({ params }: Props) {
         "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://calendarsolunar.ro" },
             { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://calendarsolunar.ro/blog" },
-            { "@type": "ListItem", "position": 3, "name": article.title, "item": `https://calendarsolunar.ro/blog/${article.slug}` }
+            { "@type": "ListItem", "position": 3, "name": cleanArticleTitle, "item": `https://calendarsolunar.ro/blog/${article.slug}` }
         ]
     };
 
@@ -412,7 +421,7 @@ export default async function ArticlePage({ params }: Props) {
                         <span>/</span>
                         <Link href="/blog" className="hover:text-moon transition-colors">Blog</Link>
                         <span>/</span>
-                        <span className="text-night-300 truncate max-w-[200px]">{article.title}</span>
+                        <span className="text-night-300 truncate max-w-[200px]">{cleanArticleTitle}</span>
                     </nav>
 
                     {/* Article Header */}
@@ -426,7 +435,7 @@ export default async function ArticlePage({ params }: Props) {
                             </span>
                         </div>
                         <h1 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
-                            {article.title}
+                            {cleanArticleTitle}
                         </h1>
                         <p className="text-lg text-night-300 mb-6">
                             {article.excerpt}
@@ -447,6 +456,21 @@ export default async function ArticlePage({ params }: Props) {
                             </div>
                         </div>
                     </header>
+
+                    {monthlyLanding && (
+                        <section className="mb-10 rounded-2xl border border-amber-200/20 bg-amber-200/[0.08] p-5">
+                            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-amber-200/80">Pagina canonica actualizata</p>
+                            <h2 className="mt-2 text-xl font-display font-bold text-white">
+                                Tabelul complet este pe {monthlyLanding.title}
+                            </h2>
+                            <p className="mt-2 text-sm leading-relaxed text-night-300">
+                                Acest articol explica strategia lunii. Pentru calendarul indexabil cu zile, rating, faze lunare si perioade majore, foloseste pagina lunara principala.
+                            </p>
+                            <Link href={`/${monthlyLanding.slug}`} className="mt-4 inline-flex rounded-xl bg-moon px-4 py-2 text-sm font-bold text-night-950 hover:bg-moon/90">
+                                Vezi solunarul complet pentru {monthlyLanding.monthName} {monthlyLanding.year}
+                            </Link>
+                        </section>
+                    )}
 
                     {/* Table of Contents */}
                     {(() => {

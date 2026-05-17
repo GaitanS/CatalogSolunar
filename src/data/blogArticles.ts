@@ -5071,7 +5071,7 @@ Da. Ghidul lunar te ajută să alegi zilele, dar perioadele majore și minore se
     },
     {
         slug: 'solunar-septembrie-2026-ghid',
-        title: 'Solunar Septembrie 2026 ✓ Sezonul de Aur al Pescuitului',
+        title: 'Solunar Septembrie 2026 - Sezonul de Aur al Pescuitului',
         excerpt: 'Septembrie e considerat cel mai bun sezon de pescuit. Iată cum să profiți la maxim.',
         date: '2026-01-28',
         author: 'Echipa Calendar Solunar',
@@ -6814,7 +6814,7 @@ Alege o zi bună cu [calendarul solunar](/) și creează amintiri care durează 
     },
     {
         slug: 'solunar-iunie-2026-ghid',
-        title: 'Solunar Iunie 2026 ✓ Când Trage Peștele în Iunie',
+        title: 'Solunar Iunie 2026 - Când Trage Peștele în Iunie',
         excerpt: 'Ghid solunar complet pentru iunie 2026: cele mai bune zile și ore pentru pescuit, faze lunare, specii active și recomandări pentru fiecare weekend de vară.',
         content: `
 # Calendar Solunar Iunie 2026: Ghid Lunar de Pescuit
@@ -6949,7 +6949,7 @@ Este luna în care se fac capturile anului.
     },
     {
         slug: 'solunar-octombrie-2026-ghid',
-        title: 'Solunar Octombrie 2026 ✓ Pescuit de Toamnă pe Ore',
+        title: 'Solunar Octombrie 2026 - Pescuit de Toamnă pe Ore',
         excerpt: 'Ghid solunar complet pentru octombrie 2026: cele mai bune zile, specii de toamnă, tehnici specifice, faze lunare și strategie pentru prădătorii activi.',
         content: `
 # Calendar Solunar Octombrie 2026: Toamna de Aur a Pescuitului
@@ -7598,7 +7598,7 @@ Verifică [calendarul solunar](/) pentru Constanța, alege ziua perfectă, și d
     },
     {
         slug: 'solunar-februarie-2026-ghid',
-        title: 'Solunar Februarie 2026 ✓ Ore și Zile Optime Pescuit',
+        title: 'Solunar Februarie 2026 - Ore și Zile Optime Pescuit',
         excerpt: 'Februarie 2026: luna provocărilor. Pești leneși, ape reci, dar oportunități reale dacă știi când să mergi.',
         date: '2026-02-01',
         author: 'Echipa Calendar Solunar',
@@ -7745,7 +7745,7 @@ Pregătește echipamentul acum și verifică [calendarul solunar](/) pentru orel
     },
     {
         slug: 'solunar-martie-2026-ghid',
-        title: 'Solunar Martie 2026 ✓ Când Trage Peștele în Martie',
+        title: 'Solunar Martie 2026 - Când Trage Peștele în Martie',
         excerpt: 'Martie 2026: trezirea apelor. Temperatura crește, peștii se activează, iar oportunitățile explodează.',
         date: '2026-02-01',
         author: 'Echipa Calendar Solunar',
@@ -8031,7 +8031,7 @@ Planifică din timp, rezervă locul pe lac, și verifică [calendarul solunar](/
     },
     {
         slug: 'solunar-iulie-2026-ghid',
-        title: 'Solunar Iulie 2026 ✓ Ore Optime și Zile de Pescuit',
+        title: 'Solunar Iulie 2026 - Ore Optime și Zile de Pescuit',
         excerpt: 'Iulie 2026: caniculă și pești capricioși. Cum să prinzi și la 35°C dacă știi orele corecte.',
         date: '2026-02-01',
         author: 'Echipa Calendar Solunar',
@@ -8174,7 +8174,7 @@ Două luni pline în iulie (1 și 30) = două weekenduri de aur. Nu le rata.
     },
     {
         slug: 'solunar-august-2026-ghid',
-        title: 'Solunar August 2026 ✓ Zile și Ore Optime Pescuit',
+        title: 'Solunar August 2026 - Zile și Ore Optime Pescuit',
         excerpt: 'August 2026: ultimele nopți calde, primele semne de toamnă. Cum să profiți de tranziție.',
         date: '2026-02-01',
         author: 'Echipa Calendar Solunar',
@@ -8311,7 +8311,7 @@ Planifică o sesiune de 48h și pregătește echipament pentru crap + somn.
     },
     {
         slug: 'solunar-noiembrie-2026-ghid',
-        title: 'Solunar Noiembrie 2026 ✓ Ore și Zile Optime Pescuit',
+        title: 'Solunar Noiembrie 2026 - Ore și Zile Optime Pescuit',
         excerpt: 'Noiembrie 2026: ultimele șanse înainte de iarnă. Peștii se hrănesc agresiv — profită.',
         date: '2026-02-01',
         author: 'Echipa Calendar Solunar',
@@ -8440,7 +8440,7 @@ E ultima fereastră mare de pescuit din 2026 unde poți prinde crap mare consist
     },
     {
         slug: 'solunar-decembrie-2026-ghid',
-        title: 'Solunar Decembrie 2026 ✓ Pescuit de Iarnă pe Ore',
+        title: 'Solunar Decembrie 2026 - Pescuit de Iarnă pe Ore',
         excerpt: 'Decembrie 2026: pescuitul de iarnă nu e pentru toți. Dar pentru cei care merg, recompensele sunt mari.',
         date: '2026-02-01',
         author: 'Echipa Calendar Solunar',

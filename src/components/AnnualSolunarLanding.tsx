@@ -26,6 +26,20 @@ function shortDate(date: Date) {
 }
 
 function AnnualJsonLd({ page }: { page: AnnualSeoLandingPage }) {
+    const howToSteps = [
+        {
+            name: 'Alege luna de pescuit',
+            text: `Porneste de la calendarul ${page.year} pe luni si alege luna potrivita pentru specie si sezon.`,
+        },
+        {
+            name: 'Verifica zilele recomandate',
+            text: 'Deschide pagina lunii si compara zilele cu rating mare, fazele lunii si perioadele majore.',
+        },
+        {
+            name: 'Planifica partida dupa vreme',
+            text: 'Confirma presiunea, vantul, temperatura apei si regulile locale inainte de plecare.',
+        },
+    ];
     const faqs = [
         {
             question: `Ce inseamna ${page.primaryKeyword}?`,
@@ -74,6 +88,27 @@ function AnnualJsonLd({ page }: { page: AnnualSeoLandingPage }) {
                 })),
             },
             {
+                '@type': 'Dataset',
+                '@id': `${baseUrl}/${page.slug}#annual-solunar-dataset`,
+                name: `${page.primaryKeyword} pe luni`,
+                description: `Index anual cu pagini lunare, zile recomandate, faze lunare si perioade majore pentru pescuit in ${page.year}.`,
+                url: `${baseUrl}/${page.slug}`,
+                inLanguage: 'ro',
+                variableMeasured: ['luna', 'zile bune pescuit', 'rating solunar', 'faza lunii', 'perioade majore'],
+            },
+            {
+                '@type': 'HowTo',
+                '@id': `${baseUrl}/${page.slug}#how-to-use`,
+                name: `Cum folosesti ${page.primaryKeyword}`,
+                description: `Metoda simpla pentru planificarea unei partide folosind calendarul solunar ${page.year}.`,
+                step: howToSteps.map((step, index) => ({
+                    '@type': 'HowToStep',
+                    position: index + 1,
+                    name: step.name,
+                    text: step.text,
+                })),
+            },
+            {
                 '@type': 'FAQPage',
                 '@id': `${baseUrl}/${page.slug}#faq`,
                 mainEntity: faqs.map((faq) => ({
@@ -119,6 +154,21 @@ export default function AnnualSolunarLanding({ page }: { page: AnnualSeoLandingP
                         )}
                         <Link href="/azi" className="rounded-xl border border-white/10 bg-white/[0.045] px-4 py-2 text-sm font-bold text-slate-200 hover:text-white">Solunar azi</Link>
                         <Link href="/locuri-pescuit" className="rounded-xl border border-white/10 bg-white/[0.045] px-4 py-2 text-sm font-bold text-slate-200 hover:text-white">Locuri pescuit</Link>
+                    </div>
+                </section>
+
+                <section className="card-panel taste-surface mb-6 grid gap-5 p-5 md:grid-cols-3 md:p-6">
+                    <div>
+                        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-amber-200/80">Context solunar</p>
+                        <h2 className="mt-2 font-display text-2xl font-bold text-white">Ce arata calendarul solunar 2026</h2>
+                    </div>
+                    <div className="space-y-3 text-sm leading-relaxed text-slate-300 md:col-span-2">
+                        <p>
+                            Calendarul solunar ordoneaza zilele dupa influenta Lunii si a Soarelui asupra activitatii pestilor. Perioadele majore marcheaza intervale de aproximativ doua ore in care sansele cresc, iar perioadele minore sunt ferestre mai scurte, utile cand se suprapun cu rasaritul sau apusul.
+                        </p>
+                        <p>
+                            Pentru 2026, foloseste pagina anuala ca hub si intra pe luna dorita pentru tabelul complet. Solunarul este un instrument de planificare, nu o garantie; vremea, presiunea, temperatura apei si locul ales raman decisive.
+                        </p>
                     </div>
                 </section>
 

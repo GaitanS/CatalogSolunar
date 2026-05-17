@@ -2,10 +2,11 @@ export default function SchemaMarkup() {
     const organizationSchema = {
         "@context": "https://schema.org",
         "@type": "Organization",
+        "@id": "https://calendarsolunar.ro/#organization",
         "name": "Calendar Solunar",
         "url": "https://calendarsolunar.ro",
         "logo": "https://calendarsolunar.ro/logo.webp",
-        "description": "Calendarul solunar nr. 1 din România pentru pescuit planificat inteligent",
+        "description": "Calendar solunar pentru pescuit în România, cu perioade majore și minore, faze lunare, prognoză și ghiduri pentru planificarea partidelor.",
         "foundingDate": "2024",
         "areaServed": {
             "@type": "Country",
@@ -28,6 +29,9 @@ export default function SchemaMarkup() {
         "url": "https://calendarsolunar.ro",
         "description": "Calendar solunar precis cu timpuri de pescuit pentru România",
         "inLanguage": "ro",
+        "publisher": {
+            "@id": "https://calendarsolunar.ro/#organization"
+        },
         "potentialAction": {
             "@type": "SearchAction",
             "target": {
@@ -47,12 +51,22 @@ export default function SchemaMarkup() {
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "All",
         "inLanguage": "ro",
+        "publisher": {
+            "@id": "https://calendarsolunar.ro/#organization"
+        },
         "offers": {
             "@type": "Offer",
             "price": "0",
             "priceCurrency": "RON"
         },
-        "featureList": "Calendar solunar zilnic, Solunar Mai 2026, Perioade majore și minore, Faze lunare, Rating pescuit, Prognoză 14 zile"
+        "featureList": [
+            "Calendar solunar zilnic",
+            "Pagini lunare pentru 2026",
+            "Perioade majore și minore",
+            "Faze lunare",
+            "Rating pescuit",
+            "Prognoză 14 zile"
+        ]
     };
 
     // Using dangerouslySetInnerHTML is safe here because we control the static JSON content

@@ -49,8 +49,8 @@ export async function generateMetadata({
     const n = locations.length;
 
     return {
-        title: `Locuri Pescuit ${county} ${year} ✓ ${n} Bălți, Lacuri și Râuri`,
-        description: `✅ ${n} locuri de pescuit verificate în județul ${county}: bălți, lacuri, râuri cu coordonate GPS, specii de pești și calendar solunar pe fiecare locație. Gratuit!`,
+        title: `Locuri Pescuit ${county} ${year} - ${n} Bălți, Lacuri și Râuri`,
+        description: `${n} locuri de pescuit în județul ${county}: bălți, lacuri și râuri cu coordonate GPS, specii de pești și calendar solunar pe fiecare locație.`,
         keywords: [
             `locuri pescuit ${county.toLowerCase()}`,
             `balti pescuit ${county.toLowerCase()}`,

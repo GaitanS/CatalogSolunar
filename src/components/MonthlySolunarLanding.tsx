@@ -25,6 +25,10 @@ function getDaysInMonth(page: MonthlySeoLandingPage) {
             rating: data.overallRating,
             illumination: data.moonIllumination,
             moonPhase: getMoonPhaseName(data.moonPhase),
+            majorOneStart: majorOne?.start,
+            majorOneEnd: majorOne?.end,
+            majorTwoStart: majorTwo?.start,
+            majorTwoEnd: majorTwo?.end,
             majorOne: majorOne ? `${formatTime(majorOne.start)} - ${formatTime(majorOne.end)}` : 'n/a',
             majorTwo: majorTwo ? `${formatTime(majorTwo.start)} - ${formatTime(majorTwo.end)}` : 'n/a',
             activeFish: getActiveFish(date, data.moonPhase).slice(0, 4),
@@ -33,6 +37,20 @@ function getDaysInMonth(page: MonthlySeoLandingPage) {
 }
 
 function MonthJsonLd({ page, topDays }: { page: MonthlySeoLandingPage; topDays: ReturnType<typeof getDaysInMonth> }) {
+    const howToSteps = [
+        {
+            name: 'Alege zilele cu rating mare',
+            text: `Pentru ${page.primaryKeyword}, incepe cu zilele de 4/5 sau 5/5 din tabelul lunar.`,
+        },
+        {
+            name: 'Verifica perioadele majore',
+            text: 'Programeaza partida in jurul perioadelor majore, care dureaza aproximativ doua ore si indica activitate crescuta.',
+        },
+        {
+            name: 'Confirma vremea si locul',
+            text: 'Compara solunarul cu presiunea, vantul, temperatura apei si speciile active din zona aleasa.',
+        },
+    ];
     const faqs = [
         {
             question: `Care sunt cele mai bune zile de pescuit in ${page.monthName} ${page.year}?`,
@@ -81,6 +99,60 @@ function MonthJsonLd({ page, topDays }: { page: MonthlySeoLandingPage; topDays: 
                 })),
             },
             {
+                '@type': 'Dataset',
+                '@id': `${baseUrl}/${page.slug}#solunar-table`,
+                name: `Tabel solunar ${page.monthName} ${page.year}`,
+                description: `Date solunare zilnice pentru ${page.monthName} ${page.year}: rating, faza lunii, iluminare si perioade majore de pescuit.`,
+                url: `${baseUrl}/${page.slug}`,
+                inLanguage: 'ro',
+                variableMeasured: ['rating pescuit', 'faza lunii', 'iluminare luna', 'perioada majora', 'specii active'],
+            },
+            {
+                '@type': 'ItemList',
+                '@id': `${baseUrl}/${page.slug}#major-events`,
+                name: `Ferestre majore de pescuit ${page.monthName} ${page.year}`,
+                itemListElement: topDays.slice(0, 6).flatMap((day, dayIndex) => {
+                    const events = [
+                        day.majorOneStart && day.majorOneEnd ? { start: day.majorOneStart, end: day.majorOneEnd, label: '1' } : null,
+                        day.majorTwoStart && day.majorTwoEnd ? { start: day.majorTwoStart, end: day.majorTwoEnd, label: '2' } : null,
+                    ].filter(Boolean) as { start: Date; end: Date; label: string }[];
+
+                    return events.map((event, eventIndex) => ({
+                        '@type': 'ListItem',
+                        position: dayIndex * 2 + eventIndex + 1,
+                        item: {
+                            '@type': 'Event',
+                            name: `Perioada majora ${event.label} pescuit - ${roDate(day.date)}`,
+                            startDate: event.start.toISOString(),
+                            endDate: event.end.toISOString(),
+                            eventStatus: 'https://schema.org/EventScheduled',
+                            eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+                            location: {
+                                '@type': 'Place',
+                                name: 'Romania',
+                                address: {
+                                    '@type': 'PostalAddress',
+                                    addressCountry: 'RO',
+                                },
+                            },
+                            description: `${day.moonPhase}, rating ${day.rating}/5, ${day.illumination}% iluminare. Fereastra este orientativa si trebuie verificata cu vremea locala.`,
+                        },
+                    }));
+                }),
+            },
+            {
+                '@type': 'HowTo',
+                '@id': `${baseUrl}/${page.slug}#how-to-use`,
+                name: `Cum folosesti solunarul pentru ${page.monthName} ${page.year}`,
+                description: `Metoda rapida pentru alegerea unei zile bune de pescuit folosind solunarul ${page.monthName} ${page.year}.`,
+                step: howToSteps.map((step, index) => ({
+                    '@type': 'HowToStep',
+                    position: index + 1,
+                    name: step.name,
+                    text: step.text,
+                })),
+            },
+            {
                 '@type': 'FAQPage',
                 '@id': `${baseUrl}/${page.slug}#faq`,
                 mainEntity: faqs.map((faq) => ({
@@ -123,7 +195,7 @@ export default function MonthlySolunarLanding({ page }: { page: MonthlySeoLandin
                         {page.title}
                     </h1>
                     <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-300 md:text-lg">
-                        {page.description} Pentru intentia <strong className="text-amber-200">{page.primaryKeyword}</strong>, pagina aceasta concentreaza zilele bune, orele majore si recomandarile lunii intr-un singur loc.
+                        {page.description} Pentru cautarea <strong className="text-amber-200">{page.primaryKeyword}</strong>, pagina concentreaza zilele bune, perioadele majore, fazele lunii si recomandarile lunii intr-un singur loc.
                     </p>
 
                     <div className="mt-6 grid gap-3 md:grid-cols-3">
@@ -139,6 +211,21 @@ export default function MonthlySolunarLanding({ page }: { page: MonthlySeoLandin
                             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">Strategie</p>
                             <p className="mt-2 text-sm leading-relaxed text-slate-200">{page.strategy}</p>
                         </div>
+                    </div>
+                </section>
+
+                <section className="card-panel taste-surface mb-6 grid gap-5 p-5 md:grid-cols-3 md:p-6">
+                    <div>
+                        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-amber-200/80">Teoria solunara</p>
+                        <h2 className="mt-2 font-display text-2xl font-bold text-white">Cum se calculeaza solunarul</h2>
+                    </div>
+                    <div className="space-y-3 text-sm leading-relaxed text-slate-300 md:col-span-2">
+                        <p>
+                            Solunarul estimeaza activitatea pestilor dupa pozitia Lunii si a Soarelui fata de locul ales. Perioadele majore apar in jurul tranzitului lunar si dureaza de obicei aproximativ doua ore; perioadele minore apar in jurul rasaritului si apusului Lunii si sunt mai scurte.
+                        </p>
+                        <p>
+                            Luna noua si luna plina pot amplifica activitatea, dar nu garanteaza captura. Pentru rezultate mai bune, foloseste tabelul impreuna cu presiunea atmosferica, temperatura apei, vantul si experienta locala.
+                        </p>
                     </div>
                 </section>
 

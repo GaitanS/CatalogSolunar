@@ -26,23 +26,23 @@ const openSans = Open_Sans({
 export const metadata: Metadata = {
     metadataBase: new URL('https://calendarsolunar.ro'),
     title: {
-        default: 'Solunar 2026 Pescuit pe Ore ✓ Calendar Solunar | Când Trage Peștele',
+        default: 'Solunar 2026 Pescuit pe Ore - Calendar Solunar România',
         template: '%s | Calendar Solunar 2026 Pescuit'
     },
-    description: "✅ Cel mai bun calendar solunar 2026 cu ore exacte de pescuit. Perioade majore și minore, faze lunare și prognoză 14 zile. Actualizat zilnic, gratuit pentru toată România!",
+    description: "Calendar solunar 2026 cu ore de pescuit, perioade majore și minore, faze lunare și prognoză pe 14 zile. Date actualizate pentru orașe și locuri de pescuit din România.",
     keywords: [
         "solunar 2026", "solunar pescuit 2026", "calendar solunar",
         "calendar solunar 2026", "solunar pescuit pe ore", "calendar pescuit 2026",
-        "cel mai bun solunar 2026", "calendarul pescarului 2026", "solunar azi",
+        "zile bune pescuit 2026", "calendarul pescarului 2026", "solunar azi",
         "cand trage pestele", "solunar aprilie 2026", "solunar mai 2026",
         "solunar pescuit", "faze lunare pescuit", "perioade majore solunar",
         "solunar romania", "calendar lunar pescuit", "calendarul pescarului",
-        "tabel solunar", "cel mai bun solunar", "calendar de pescuit",
+        "tabel solunar", "ore bune pescuit", "calendar de pescuit",
         "calendar pescuit", "solunar calendar 2026",
     ],
     openGraph: {
         title: 'Calendar Pescuit 2026 - Solunar pe Ore Exacte',
-        description: 'Când trage peștele? Calendar de pescuit 2026 cu solunar pe ore, faze lunare și prognoză 14 zile. 100% Gratuit!',
+        description: 'Calendar de pescuit 2026 cu solunar pe ore, faze lunare, perioade majore și prognoză pe 14 zile pentru România.',
         url: 'https://calendarsolunar.ro',
         siteName: 'Calendar Solunar',
         locale: 'ro_RO',
@@ -172,7 +172,7 @@ export default async function RootLayout({
                                     <span className="font-display text-lg font-bold text-white">Calendar Solunar</span>
                                 </div>
                                 <p className="text-night-400 text-sm leading-relaxed max-w-sm">
-                                    Resursa ta numărul 1 pentru pescuit planificat inteligent.
+                                    Resursă pentru pescuit planificat cu date solunare, faze lunare și informații meteo.
                                     Folosim algoritmi astronomici preciși pentru a calcula cele mai bune momente de activitate a peștilor.
                                 </p>
                             </div>

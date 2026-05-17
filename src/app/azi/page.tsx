@@ -15,8 +15,8 @@ export async function generateMetadata(): Promise<Metadata> {
     const year = today.getFullYear();
 
     return {
-        title: `Solunar Azi ${dayNum} ${monthName.charAt(0).toUpperCase() + monthName.slice(1)} ✓ Când Trage Peștele?`,
-        description: `✅ Ce pești sunt activi azi ${dayNum} ${monthName} ${year}? Perioade majore și minore pe ore exacte, faza lunii și specii active. Verifică acum, gratuit!`,
+        title: `Solunar Azi ${dayNum} ${monthName.charAt(0).toUpperCase() + monthName.slice(1)} - Ore Pescuit și Faza Lunii`,
+        description: `Solunar azi ${dayNum} ${monthName} ${year}: perioade majore și minore pe ore exacte, faza lunii, vremea și specii active pentru pescuit.`,
         keywords: [
             'solunar azi', 'calendar solunar azi', 'activitate pesti azi',
             'cand trage pestele azi', 'pescuit azi', 'faza lunii azi',

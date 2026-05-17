@@ -2,11 +2,11 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: 'Despre Noi - Calendar Solunar Pescuit România',
-    description: 'Află povestea din spatele Calendar Solunar - resursa ta pentru pescuit planificat inteligent, bazat pe fazele lunii și teoria solunar.',
+    description: 'Află cum sunt calculate datele Calendar Solunar: perioade majore și minore, faze lunare, limitele prognozei și modul de folosire în pescuit.',
     alternates: { canonical: 'https://calendarsolunar.ro/despre' },
     openGraph: {
-        title: 'Despre Calendar Solunar - Pescuit Planificat Inteligent',
-        description: 'Resursa ta pentru pescuit planificat inteligent, bazat pe fazele lunii și teoria solunar.',
+        title: 'Despre Calendar Solunar - Metodologie și Date Solunare',
+        description: 'Cum sunt calculate perioadele solunare, fazele lunii și recomandările de pescuit pentru România.',
         url: 'https://calendarsolunar.ro/despre',
     },
 };
@@ -21,7 +21,7 @@ export default function DesprePage() {
                         Despre <span className="text-moon">Calendar Solunar</span>
                     </h1>
                     <p className="text-night-300 text-lg max-w-2xl mx-auto">
-                        Resursa ta numărul 1 pentru pescuit planificat inteligent în România.
+                        Date solunare, faze lunare și explicații practice pentru pescuit planificat în România.
                     </p>
                 </div>
 
@@ -109,6 +109,32 @@ export default function DesprePage() {
                             <h3 className="font-bold text-white mb-2">Rating Zilnic</h3>
                             <p className="text-night-400 text-sm">
                                 Combinăm datele pentru a oferi un rating de 1-5 stele pentru fiecare zi.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-8 md:gap-12 mb-16">
+                    <div className="card-panel p-6 md:p-8">
+                        <h2 className="text-xl font-display font-bold text-white mb-4">Metodologie</h2>
+                        <div className="space-y-4 text-night-300 leading-relaxed">
+                            <p>
+                                Datele solunare sunt calculate pe baza poziției Lunii și a Soarelui pentru coordonatele alese. Pentru fiecare zi afișăm perioade majore, perioade minore, faza lunii, iluminarea și un rating orientativ.
+                            </p>
+                            <p>
+                                Paginile anuale și lunare sunt actualizate pentru 2026 și oferă o versiune statică, ușor de citit, a datelor importante pentru pescari.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="card-panel p-6 md:p-8">
+                        <h2 className="text-xl font-display font-bold text-white mb-4">Limite și verificări</h2>
+                        <div className="space-y-4 text-night-300 leading-relaxed">
+                            <p>
+                                Solunarul este un instrument de planificare, nu o garanție a capturii. Presiunea atmosferică, temperatura apei, vântul, nivelul apei, sezonul și experiența locală pot schimba rezultatul unei partide.
+                            </p>
+                            <p>
+                                Dacă observi o eroare de locație, text sau date, trimite detaliile prin pagina de contact. Corecturile utile ajută la îmbunătățirea calendarului pentru toți pescarii.
                             </p>
                         </div>
                     </div>
