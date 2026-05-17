@@ -102,7 +102,7 @@ export default function MonthlySolunarLanding({ page }: { page: MonthlySeoLandin
     const previousPage = monthlySeoLandingPages[currentIndex - 1];
     const nextPage = monthlySeoLandingPages[currentIndex + 1];
     const cities = getAllCities().slice(0, 8);
-    const annualPage = annualSeoLandingPages.find((item) => item.intent === 'solunar');
+    const annualPage = annualSeoLandingPages.find((item) => item.slug === 'solunar-2026');
 
     return (
         <div className="relative overflow-hidden pb-20 pt-3 md:pt-8">
@@ -214,7 +214,8 @@ export default function MonthlySolunarLanding({ page }: { page: MonthlySeoLandin
                     <div className="card-panel taste-surface p-5 md:p-6">
                         <h2 className="font-display text-xl font-bold text-white">Navigare rapida</h2>
                         <div className="mt-4 grid gap-2 text-sm">
-                            {annualPage && <Link href={`/${annualPage.slug}`} className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Solunar pescuit 2026</Link>}
+                            {annualPage && <Link href={`/${annualPage.slug}`} className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Solunar 2026</Link>}
+                            <Link href="/solunar-pescuit-2026" className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Solunar pescuit 2026</Link>
                             <Link href="/calendar-pescuit-2026" className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Calendar pescuit 2026</Link>
                             <Link href="/azi" className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Solunar azi</Link>
                             <Link href="/locuri-pescuit" className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Locuri pescuit</Link>

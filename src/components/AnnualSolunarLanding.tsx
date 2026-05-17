@@ -26,7 +26,6 @@ function shortDate(date: Date) {
 }
 
 function AnnualJsonLd({ page }: { page: AnnualSeoLandingPage }) {
-    const currentAnnual = annualSeoLandingPages.find((item) => item.intent === page.intent) || page;
     const faqs = [
         {
             question: `Ce inseamna ${page.primaryKeyword}?`,
@@ -60,7 +59,7 @@ function AnnualJsonLd({ page }: { page: AnnualSeoLandingPage }) {
                 '@id': `${baseUrl}/${page.slug}#breadcrumb`,
                 itemListElement: [
                     { '@type': 'ListItem', position: 1, name: 'Calendar Solunar', item: baseUrl },
-                    { '@type': 'ListItem', position: 2, name: currentAnnual.title, item: `${baseUrl}/${page.slug}` },
+                    { '@type': 'ListItem', position: 2, name: page.title, item: `${baseUrl}/${page.slug}` },
                 ],
             },
             {
@@ -115,6 +114,9 @@ export default function AnnualSolunarLanding({ page }: { page: AnnualSeoLandingP
                     </p>
                     <div className="mt-6 flex flex-wrap gap-2">
                         <Link href="/solunar-mai-2026" className="rounded-xl bg-amber-300 px-4 py-2 text-sm font-bold text-slate-950">Vezi luna Mai</Link>
+                        {page.slug !== 'solunar-pescuit-2026' && (
+                            <Link href="/solunar-pescuit-2026" className="rounded-xl border border-white/10 bg-white/[0.045] px-4 py-2 text-sm font-bold text-slate-200 hover:text-white">Solunar pescuit</Link>
+                        )}
                         <Link href="/azi" className="rounded-xl border border-white/10 bg-white/[0.045] px-4 py-2 text-sm font-bold text-slate-200 hover:text-white">Solunar azi</Link>
                         <Link href="/locuri-pescuit" className="rounded-xl border border-white/10 bg-white/[0.045] px-4 py-2 text-sm font-bold text-slate-200 hover:text-white">Locuri pescuit</Link>
                     </div>
@@ -181,6 +183,7 @@ export default function AnnualSolunarLanding({ page }: { page: AnnualSeoLandingP
                     <div className="card-panel taste-surface p-5 md:p-6">
                         <h2 className="font-display text-2xl font-bold text-white">Pagini utile pentru planificare</h2>
                         <div className="mt-4 grid gap-2 text-sm">
+                            <Link href="/solunar-2026" className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Solunar 2026</Link>
                             <Link href="/solunar-pescuit-2026" className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Solunar pescuit 2026</Link>
                             <Link href="/calendar-pescuit-2026" className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Calendar pescuit 2026</Link>
                             <Link href="/blog/cele-mai-bune-ore-pescuit-2026" className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Cele mai bune ore de pescuit</Link>

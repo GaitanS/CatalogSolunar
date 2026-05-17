@@ -19,6 +19,72 @@ const nextConfig = {
     images: {
         unoptimized: true,
     },
+    async redirects() {
+        const monthSlugs = [
+            'ianuarie',
+            'februarie',
+            'martie',
+            'aprilie',
+            'mai',
+            'iunie',
+            'iulie',
+            'august',
+            'septembrie',
+            'octombrie',
+            'noiembrie',
+            'decembrie',
+        ];
+
+        return [
+            {
+                source: '/calendar-solunar-2026',
+                destination: '/solunar-2026',
+                permanent: true,
+            },
+            {
+                source: '/tabela-solunar-2026',
+                destination: '/solunar-2026',
+                permanent: true,
+            },
+            {
+                source: '/solunare-2026',
+                destination: '/solunar-2026',
+                permanent: true,
+            },
+            {
+                source: '/solunar-pescuit',
+                destination: '/solunar-pescuit-2026',
+                permanent: true,
+            },
+            {
+                source: '/calendar-pescuit',
+                destination: '/calendar-pescuit-2026',
+                permanent: true,
+            },
+            {
+                source: '/calendarul-pescarului-2026',
+                destination: '/calendar-pescuit-2026',
+                permanent: true,
+            },
+            ...monthSlugs.flatMap((month) => [
+                {
+                    source: `/solunar-${month}`,
+                    destination: `/solunar-${month}-2026`,
+                    permanent: true,
+                },
+                {
+                    source: `/solunar-pescuit-${month}-2026`,
+                    destination: `/solunar-${month}-2026`,
+                    permanent: true,
+                },
+                {
+                    source: `/blog/solunar-${month}-2026`,
+                    destination: `/blog/solunar-${month}-2026-ghid`,
+                    permanent: true,
+                },
+            ]),
+        ];
+    },
     async headers() {
         const isProduction = process.env.NODE_ENV === 'production';
 

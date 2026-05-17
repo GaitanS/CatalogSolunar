@@ -424,10 +424,10 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                             Acces rapid
                         </h2>
                         <div className="grid grid-cols-2 gap-2 text-xs">
-                            <Link href="/solunar-pescuit-2026" className="rounded-xl bg-white/[0.045] px-3 py-2 text-slate-300 border border-white/10 hover:text-white transition-colors">Solunar pescuit 2026</Link>
+                            <Link href="/solunar-2026" className="rounded-xl bg-white/[0.045] px-3 py-2 text-slate-300 border border-white/10 hover:text-white transition-colors">Solunar 2026</Link>
+                            <Link href="/solunar-pescuit-2026" className="rounded-xl bg-white/[0.045] px-3 py-2 text-slate-300 border border-white/10 hover:text-white transition-colors">Solunar pescuit</Link>
                             <Link href="/calendar-pescuit-2026" className="rounded-xl bg-white/[0.045] px-3 py-2 text-slate-300 border border-white/10 hover:text-white transition-colors">Calendar pescuit</Link>
                             <Link href="/azi" className="rounded-xl bg-white/[0.045] px-3 py-2 text-slate-300 border border-white/10 hover:text-white transition-colors">Solunar azi</Link>
-                            <Link href={nextMonth.href} className="rounded-xl bg-white/[0.045] px-3 py-2 text-slate-300 border border-white/10 hover:text-white transition-colors">{nextMonth.name} {nextMonth.year}</Link>
                         </div>
                     </div>
                 </section>

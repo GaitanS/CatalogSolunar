@@ -212,6 +212,16 @@ export const monthlySeoLandingPages: MonthlySeoLandingPage[] = [
 
 export const annualSeoLandingPages: AnnualSeoLandingPage[] = [
     {
+        slug: 'solunar-2026',
+        year,
+        title: 'Solunar 2026 - Calendar Solunar pe Luni, Zile și Ore',
+        metaTitle: 'Solunar 2026 - Calendar Solunar pe Luni și Ore',
+        description: 'Solunar 2026 complet pentru pescuit: calendar pe luni, zile bune, perioade majore și minore, faze lunare și ore recomandate.',
+        primaryKeyword: 'solunar 2026',
+        keywords: ['solunar 2026', 'calendar solunar 2026', 'tabela solunar 2026', 'solunare 2026', '2026 solunar calendar'],
+        intent: 'solunar',
+    },
+    {
         slug: 'solunar-pescuit-2026',
         year,
         title: 'Solunar Pescuit 2026 - Calendar pe Luni, Zile și Ore',
