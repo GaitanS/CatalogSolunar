@@ -6,6 +6,13 @@ import { monthlySeoLandingPages, annualSeoLandingPages, type MonthlySeoLandingPa
 const baseUrl = 'https://calendarsolunar.ro';
 const defaultLat = 44.4268;
 const defaultLng = 26.1025;
+const datasetCreator = {
+    '@type': 'Organization',
+    '@id': `${baseUrl}/#organization`,
+    name: 'Calendar Solunar',
+    url: baseUrl,
+};
+const datasetLicense = `${baseUrl}/termeni`;
 
 function roDate(date: Date) {
     return date.toLocaleDateString('ro-RO', { weekday: 'short', day: 'numeric', month: 'short' });
@@ -105,37 +112,39 @@ function MonthJsonLd({ page, topDays }: { page: MonthlySeoLandingPage; topDays: 
                 description: `Date solunare zilnice pentru ${page.monthName} ${page.year}: rating, faza lunii, iluminare si perioade majore de pescuit.`,
                 url: `${baseUrl}/${page.slug}`,
                 inLanguage: 'ro',
+                creator: datasetCreator,
+                license: datasetLicense,
                 variableMeasured: ['rating pescuit', 'faza lunii', 'iluminare luna', 'perioada majora', 'specii active'],
             },
             {
                 '@type': 'ItemList',
-                '@id': `${baseUrl}/${page.slug}#major-events`,
+                '@id': `${baseUrl}/${page.slug}#major-windows`,
                 name: `Ferestre majore de pescuit ${page.monthName} ${page.year}`,
                 itemListElement: topDays.slice(0, 6).flatMap((day, dayIndex) => {
-                    const events = [
+                    const windows = [
                         day.majorOneStart && day.majorOneEnd ? { start: day.majorOneStart, end: day.majorOneEnd, label: '1' } : null,
                         day.majorTwoStart && day.majorTwoEnd ? { start: day.majorTwoStart, end: day.majorTwoEnd, label: '2' } : null,
                     ].filter(Boolean) as { start: Date; end: Date; label: string }[];
 
-                    return events.map((event, eventIndex) => ({
+                    return windows.map((window, windowIndex) => ({
                         '@type': 'ListItem',
-                        position: dayIndex * 2 + eventIndex + 1,
+                        position: dayIndex * 2 + windowIndex + 1,
                         item: {
-                            '@type': 'Event',
-                            name: `Perioada majora ${event.label} pescuit - ${roDate(day.date)}`,
-                            startDate: event.start.toISOString(),
-                            endDate: event.end.toISOString(),
-                            eventStatus: 'https://schema.org/EventScheduled',
-                            eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-                            location: {
-                                '@type': 'Place',
-                                name: 'Romania',
-                                address: {
-                                    '@type': 'PostalAddress',
-                                    addressCountry: 'RO',
-                                },
-                            },
+                            '@type': 'Thing',
+                            name: `Perioada majora ${window.label} pescuit - ${roDate(day.date)}`,
                             description: `${day.moonPhase}, rating ${day.rating}/5, ${day.illumination}% iluminare. Fereastra este orientativa si trebuie verificata cu vremea locala.`,
+                            additionalProperty: [
+                                {
+                                    '@type': 'PropertyValue',
+                                    name: 'startDate',
+                                    value: window.start.toISOString(),
+                                },
+                                {
+                                    '@type': 'PropertyValue',
+                                    name: 'endDate',
+                                    value: window.end.toISOString(),
+                                },
+                            ],
                         },
                     }));
                 }),

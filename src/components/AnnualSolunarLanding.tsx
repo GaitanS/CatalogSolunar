@@ -5,6 +5,13 @@ import { annualSeoLandingPages, monthlySeoLandingPages, type AnnualSeoLandingPag
 const baseUrl = 'https://calendarsolunar.ro';
 const defaultLat = 44.4268;
 const defaultLng = 26.1025;
+const datasetCreator = {
+    '@type': 'Organization',
+    '@id': `${baseUrl}/#organization`,
+    name: 'Calendar Solunar',
+    url: baseUrl,
+};
+const datasetLicense = `${baseUrl}/termeni`;
 
 function getMonthSummary(monthIndex: number, year: number) {
     const daysCount = new Date(year, monthIndex + 1, 0).getDate();
@@ -94,6 +101,8 @@ function AnnualJsonLd({ page }: { page: AnnualSeoLandingPage }) {
                 description: `Index anual cu pagini lunare, zile recomandate, faze lunare si perioade majore pentru pescuit in ${page.year}.`,
                 url: `${baseUrl}/${page.slug}`,
                 inLanguage: 'ro',
+                creator: datasetCreator,
+                license: datasetLicense,
                 variableMeasured: ['luna', 'zile bune pescuit', 'rating solunar', 'faza lunii', 'perioade majore'],
             },
             {
