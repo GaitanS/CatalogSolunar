@@ -36,8 +36,8 @@ function getMonthTarget(date: Date, offset = 0) {
     };
 }
 
-function getPriorityMonth(currentMonth: ReturnType<typeof getMonthTarget>, nextMonth: ReturnType<typeof getMonthTarget>) {
-    return [currentMonth, nextMonth].find((month) => month.slug === 'mai' && month.year === 2026) || nextMonth;
+function getPriorityMonth(currentMonth: ReturnType<typeof getMonthTarget>, nextMonth: ReturnType<typeof getMonthTarget>, date: Date) {
+    return date.getDate() >= 24 ? nextMonth : currentMonth;
 }
 
 
@@ -45,7 +45,7 @@ export async function generateMetadata() {
     const date = new Date();
     const currentMonth = getMonthTarget(date);
     const nextMonth = getMonthTarget(date, 1);
-    const priorityMonth = getPriorityMonth(currentMonth, nextMonth);
+    const priorityMonth = getPriorityMonth(currentMonth, nextMonth, date);
     const year = currentMonth.year;
 
     return {
@@ -70,7 +70,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
     const locationName = params.loc || 'București';
     const currentMonth = getMonthTarget(today);
     const nextMonth = getMonthTarget(today, 1);
-    const priorityMonth = getPriorityMonth(currentMonth, nextMonth);
+    const priorityMonth = getPriorityMonth(currentMonth, nextMonth, today);
     const monthLinks = monthSlugs.map((luna, index) => {
         const isCurrent = index === today.getMonth();
         const isNext = index === ((today.getMonth() + 1) % 12);
@@ -117,7 +117,8 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                     "@id": "https://calendarsolunar.ro/#website"
                 },
                 "about": [
-                    "solunar mai 2026",
+                    `solunar ${currentMonth.slug} ${currentMonth.year}`,
+                    `solunar ${priorityMonth.slug} ${priorityMonth.year}`,
                     "calendar solunar 2026",
                     "solunar pescuit 2026",
                     "ore pescuit",
