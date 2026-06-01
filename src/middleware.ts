@@ -6,6 +6,21 @@ export function middleware(request: NextRequest) {
     const hostname = request.headers.get('host') || '';
     const hostWithoutPort = hostname.split(':')[0];
     const isLocalhost = hostWithoutPort === 'localhost' || hostWithoutPort === '127.0.0.1' || hostWithoutPort === '::1';
+    const canonicalOrigin = isLocalhost ? url.origin : 'https://calendarsolunar.ro';
+    const pathname = url.pathname;
+
+    if (pathname === '/$' || pathname === '/&') {
+        return NextResponse.redirect(new URL('/', canonicalOrigin), 301);
+    }
+
+    if (pathname === '/blog/solunar-ianuarie-2026-ghid') {
+        return NextResponse.redirect(new URL('/solunar-ianuarie-2026', canonicalOrigin), 301);
+    }
+
+    const staleMonthlyGuideMatch = pathname.match(/^\/blog\/solunar-[a-z-]+-2027-ghid$/);
+    if (staleMonthlyGuideMatch) {
+        return NextResponse.redirect(new URL('/solunar-2026', canonicalOrigin), 302);
+    }
 
     // Redirect www to non-www
     if (!isLocalhost && hostname.startsWith('www.')) {
