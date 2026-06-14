@@ -9,6 +9,8 @@ export interface FishingLocation {
     fish: string[];
     paid: boolean;
     description: string;
+    /** Optional 150–250 word editorial section rendered in the location guide for SEO depth. */
+    longDescription?: string;
 }
 
 export const fishingLocations: FishingLocation[] = [
@@ -93,9 +95,10 @@ export const fishingLocations: FishingLocation[] = [
         lat: 46.5833,
         lng: 24.7833,
         type: 'lac',
-        fish: ['crap', 'caras'],
+        fish: ['crap', 'caras', 'amur'],
         paid: true,
-        description: 'Lac de pescuit in zona Acatari, judetul Mures.',
+        description: 'Lac de pescuit in zona Acatari, judetul Mures, cu crap, caras si amur.',
+        longDescription: 'Lacul Bersa se află la Roteni, în comuna Acățari, județul Mureș, fiind un lac de pescuit apreciat de pescarii din zona Târgu Mureș. Apele liniștite și malurile accesibile îl fac potrivit atât pentru pescuitul la crap și caras, cât și pentru amur. Lacul oferă exemplare frumoase de crap, mai ales în lunile calde, când apa se încălzește și activitatea de hrănire crește. Pescuitul se practică de regulă cu taxă, în standuri amenajate. Tehnicile eficiente includ pescuitul staționar la crap cu boilies și porumb, precum și feeder-ul pentru caras. Cele mai bune rezultate apar în perioadele majore solunar de dimineață devreme și seara, iar zilele cu lună plină sau lună nouă concentrează activitatea. Consultă calendarul solunar de mai jos, calculat pe coordonatele lacului Bersa, pentru orele optime de ieșire.',
     },
     {
         slug: 'lacul-bala',
@@ -706,6 +709,21 @@ export const fishingLocations: FishingLocation[] = [
         fish: ['crap', 'caras', 'amur', 'somn'],
         paid: true,
         description: 'Balta populara printre pescarii din Bucuresti.',
+        longDescription: 'Complexul de bălți Brănești se află în comuna Brănești, județul Ilfov, la doar 25 km de București pe DN3 (ieșirea spre Călărași), fiind una dintre cele mai accesibile destinații de pescuit pentru bucureșteni. Complexul cuprinde mai multe bălți numerotate (Brănești 1, 2, 3 și 4), fiecare cu propriul regulament și populare piscicolă. Speciile dominante sunt crapul, carasul, amurul și somnul, cu exemplare de crap care depășesc frecvent 10 kg. Apa stabilă și fundul nămolos fac din complex un loc bun pentru pescuitul la crap cu boilies, porumb și pelete. Cele mai bune rezultate vin în perioadele majore solunar de dimineață devreme (05:00–09:00) și seara târziu (19:00–23:00), mai ales în zilele cu lună plină sau lună nouă. Pescuitul se face cu taxă, iar accesul auto este facil. Verifică solunarul zilnic mai jos pentru orele exacte de activitate calculate pe coordonatele complexului.',
+    },
+    {
+        // Dedicated page for "balta branesti 4" — a frequently searched specific lake in the complex.
+        slug: 'balta-branesti-4',
+        name: 'Balta Branesti 4',
+        county: 'Ilfov',
+        locality: 'Branesti',
+        lat: 44.4512,
+        lng: 26.2701,
+        type: 'balta',
+        fish: ['crap', 'caras', 'amur', 'somn', 'platica'],
+        paid: true,
+        description: 'Balta 4 din complexul Brănești, Ilfov — crap mare, caras și amur, la 25 km de București.',
+        longDescription: 'Balta Brănești 4 este una dintre bălțile din complexul piscicol Brănești (Ilfov), foarte căutată de pescarii din București pentru exemplarele mari de crap și pentru accesul rapid pe DN3. Balta 4 se remarcă printr-o populare bună de crap, caras, amur și somn, plus plătică, și printr-un regulament orientat spre pescuitul sportiv. Distanța față de București este de aproximativ 25 km (30–40 de minute pe DN3, ieșirea spre Călărași). Pescuitul se practică cu taxă, cu standuri amenajate pe maluri. Tehnicile recomandate sunt crapul la boilies și method feeder, carasul la vierme și porumb, iar somnul cu momeală vie în sesiunile nocturne. Cele mai productive ferestre sunt perioadele majore solunar dimineața (în jurul răsăritului) și seara, iar zilele cu lună nouă sau lună plină aduc activitate maximă. Folosește calendarul solunar de mai jos, calculat pe coordonatele bălții, pentru a-ți planifica ieșirea în orele cu cele mai mari șanse. Vezi și celelalte bălți din complex pe pagina Balta Brănești.',
     },
     {
         slug: 'lacul-snagov',

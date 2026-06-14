@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { getMoonPhaseName, getSolunarData, formatTime } from '@/lib/solunar';
 import { annualSeoLandingPages, monthlySeoLandingPages, type AnnualSeoLandingPage } from '@/data/seoLandingPages';
+import AdUnit from '@/components/AdUnit';
+import LazyAdUnit from '@/components/LazyAdUnit';
 
 const baseUrl = 'https://calendarsolunar.ro';
 const defaultLat = 44.4268;
@@ -137,9 +139,16 @@ export default function AnnualSolunarLanding({ page }: { page: AnnualSeoLandingP
         month,
         summary: getMonthSummary(month.monthIndex, month.year),
     }));
-    const heroMonths = monthSummaries
-        .filter(({ month }) => ['Mai', 'Iunie', 'Septembrie', 'Octombrie'].includes(month.monthName))
+    // Surface the current month first, then the upcoming ones (wraps around the
+    // year). Keeps the hub fresh instead of permanently pointing at "Mai".
+    const now = new Date();
+    const curIdx = now.getMonth();
+    const heroMonths = [...monthSummaries]
+        .sort((a, b) => ((a.month.monthIndex - curIdx + 12) % 12) - ((b.month.monthIndex - curIdx + 12) % 12))
         .slice(0, 4);
+    // Priority month for the primary CTA: switch to next month from the 24th.
+    const priorityIdx = now.getDate() >= 24 ? (curIdx + 1) % 12 : curIdx;
+    const priorityLanding = monthlySeoLandingPages.find((m) => m.monthIndex === priorityIdx) ?? monthlySeoLandingPages[0];
 
     return (
         <div className="relative overflow-hidden pb-20 pt-3 md:pt-8">
@@ -157,7 +166,7 @@ export default function AnnualSolunarLanding({ page }: { page: AnnualSeoLandingP
                         {page.description} Pagina este construita pentru cautarea <strong className="text-amber-200">{page.primaryKeyword}</strong> si trimite direct catre fiecare luna din 2026.
                     </p>
                     <div className="mt-6 flex flex-wrap gap-2">
-                        <Link href="/solunar-mai-2026" className="rounded-xl bg-amber-300 px-4 py-2 text-sm font-bold text-slate-950">Vezi luna Mai</Link>
+                        <Link href={`/${priorityLanding.slug}`} className="rounded-xl bg-amber-300 px-4 py-2 text-sm font-bold text-slate-950">Vezi luna {priorityLanding.monthName}</Link>
                         {page.slug !== 'solunar-pescuit-2026' && (
                             <Link href="/solunar-pescuit-2026" className="rounded-xl border border-white/10 bg-white/[0.045] px-4 py-2 text-sm font-bold text-slate-200 hover:text-white">Solunar pescuit</Link>
                         )}
@@ -165,6 +174,9 @@ export default function AnnualSolunarLanding({ page }: { page: AnnualSeoLandingP
                         <Link href="/locuri-pescuit" className="rounded-xl border border-white/10 bg-white/[0.045] px-4 py-2 text-sm font-bold text-slate-200 hover:text-white">Locuri pescuit</Link>
                     </div>
                 </section>
+
+                {/* Ad: top in-content (eager, below hero) */}
+                <AdUnit slotId="2812628769" format="horizontal" className="mb-6" />
 
                 <section className="card-panel taste-surface mb-6 grid gap-5 p-5 md:grid-cols-3 md:p-6">
                     <div>
@@ -226,6 +238,9 @@ export default function AnnualSolunarLanding({ page }: { page: AnnualSeoLandingP
                         })}
                     </div>
                 </section>
+
+                {/* Ad: mid-content rectangle after the full month grid (lazy) */}
+                <LazyAdUnit slotId="6301173988" format="rectangle" className="mb-6" />
 
                 <section className="mb-6 grid gap-4 md:grid-cols-2">
                     <div className="card-panel taste-surface p-5 md:p-6">

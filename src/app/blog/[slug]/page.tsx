@@ -5,6 +5,10 @@ import { getArticleBySlug, getAllArticles, BlogArticle, getAdjacentMonthlyArticl
 import { getAllCities } from '@/data/cities';
 import { getAllSpecies } from '@/data/species';
 import { monthlySeoLandingPages } from '@/data/seoLandingPages';
+import LazyAdUnit from '@/components/LazyAdUnit';
+
+// Ad slots (configured in the AdSense account).
+const BLOG_AD_SLOTS = ['6301173988', '1044977874', '2812628769'];
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -131,7 +135,7 @@ function injectInternalLinks(content: string, currentSlug: string, articles: Blo
 }
 
 // Simple markdown-like parser for the content
-function parseContent(content: string, currentSlug?: string, articles?: BlogArticle[]) {
+function parseContent(content: string, currentSlug?: string, articles?: BlogArticle[], injectAds = false) {
     // Inject internal links if articles provided
     if (currentSlug && articles) {
         content = injectInternalLinks(content, currentSlug, articles);
@@ -143,6 +147,25 @@ function parseContent(content: string, currentSlug?: string, articles?: BlogArti
     let tableRows: string[][] = [];
     let listItems: string[] = [];
     let inList = false;
+    let h2Count = 0;
+    let adsInserted = 0;
+
+    // Inject an in-article ad after every 2nd H2 heading, up to 3 per article.
+    const maybeInsertAd = () => {
+        if (!injectAds) return;
+        h2Count += 1;
+        if (h2Count >= 2 && h2Count % 2 === 0 && adsInserted < 3) {
+            elements.push(
+                <LazyAdUnit
+                    key={`ad-${adsInserted}`}
+                    slotId={BLOG_AD_SLOTS[adsInserted % BLOG_AD_SLOTS.length]}
+                    format="fluid"
+                    layout="in-article"
+                />
+            );
+            adsInserted += 1;
+        }
+    };
 
     const flushList = () => {
         if (listItems.length > 0) {
@@ -223,6 +246,7 @@ function parseContent(content: string, currentSlug?: string, articles?: BlogArti
         // Top-level headings inside article content are rendered as H2 to avoid duplicate H1s.
         if (trimmedLine.startsWith('# ')) {
             flushList();
+            maybeInsertAd();
             const headingText = trimmedLine.slice(2);
             const headingId = headingText.toLowerCase()
                 .replace(/[^\w\săâîșț-]/g, '')
@@ -239,6 +263,7 @@ function parseContent(content: string, currentSlug?: string, articles?: BlogArti
         // Heading 2
         if (trimmedLine.startsWith('## ')) {
             flushList();
+            maybeInsertAd();
             const headingText = trimmedLine.slice(3);
             const headingId = headingText.toLowerCase()
                 .replace(/[^\w\săâîșț-]/g, '')
@@ -330,7 +355,7 @@ export default async function ArticlePage({ params }: Props) {
             "https://calendarsolunar.ro/logo.webp"
         ],
         "datePublished": article.date,
-        "dateModified": article.date,
+        "dateModified": article.updated ?? article.date,
         "author": {
             "@type": "Organization",
             "name": article.author,
@@ -496,8 +521,11 @@ export default async function ArticlePage({ params }: Props) {
 
                     {/* Article Content */}
                     <article className="prose prose-invert max-w-none">
-                        {parseContent(article.content, article.slug, allArticles)}
+                        {parseContent(article.content, article.slug, allArticles, true)}
                     </article>
+
+                    {/* Ad: end of article (lazy) */}
+                    <LazyAdUnit slotId="1044977874" format="auto" className="mt-10" />
 
                     {/* Keywords */}
                     <div className="mt-12 pt-8 border-t border-night-800">

@@ -4,6 +4,8 @@ import { getWeatherData } from '@/lib/weather';
 import { getFishingAdvice } from '@/lib/advice';
 import Moon3DWrapper from '@/components/Moon3DWrapper';
 import ActivityGraph from '@/components/ActivityGraph';
+import AdUnit from '@/components/AdUnit';
+import LazyAdUnit from '@/components/LazyAdUnit';
 import Link from 'next/link';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import MonthlySolunarLanding from '@/components/MonthlySolunarLanding';
@@ -16,6 +18,9 @@ import { getAllSeoLandingSlugs, getAnnualLandingBySlug, getMonthlyLandingBySlug 
 import type { Metadata } from 'next';
 
 export const dynamicParams = false;
+// Pages show today's solunar data — regenerate hourly (ISR) so static output
+// never goes stale after the deploy-day build.
+export const revalidate = 3600;
 
 export function generateStaticParams() {
     const seoParams = getAllSeoLandingSlugs().map((slug) => ({ slug }));
@@ -72,7 +77,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         const capitalizedMonth = monthName.charAt(0).toUpperCase() + monthName.slice(1);
 
         return {
-            title: `Solunar ${city.name} ${capitalizedMonth} ${year} - Pescuit pe Ore`,
+            title: { absolute: `Solunar ${city.name} ${capitalizedMonth} ${year} - Pescuit pe Ore` },
             description: `Calendar solunar ${city.name} ${year}. Perioade majore și minore de activitate a peștilor, faze lunare, vremea și locuri de pescuit în ${city.county}. Actualizat zilnic.`,
             keywords: [
                 `solunar ${city.name.toLowerCase()}`,
@@ -98,7 +103,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     if (species) {
         const year = new Date().getFullYear();
         return {
-            title: `Pescuit ${species.name} ${year} - Ore Solunar și Tehnici`,
+            title: { absolute: `Pescuit ${species.name} ${year} - Ore Solunar și Tehnici` },
             description: `Ghid pescuit ${species.name.toLowerCase()} ${year}: perioade solunare, faze lunare, tehnici de pescuit, momeli recomandate și sezon activ.`,
             keywords: [
                 `pescuit ${species.name.toLowerCase()}`,
@@ -154,15 +159,22 @@ function CityFAQSchema({ city, nearbyWaters }: { city: { name: string; county: s
 
 // Species JSON-LD Schema
 function SpeciesJsonLd({ species }: { species: { name: string; slug: string; scientificName: string; description: string } }) {
+    const year = new Date().getFullYear();
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'Article',
+        headline: `Ghid Pescuit ${species.name} ${year} - Ore Solunar și Tehnici`,
         name: `Ghid Pescuit ${species.name}`,
         description: species.description,
+        image: [`https://calendarsolunar.ro/${species.slug}/opengraph-image`],
+        datePublished: `${year}-01-01`,
+        dateModified: new Date().toISOString().slice(0, 10),
         url: `https://calendarsolunar.ro/${species.slug}`,
-        author: { '@type': 'Organization', name: 'Calendar Solunar' },
-        publisher: { '@type': 'Organization', name: 'Calendar Solunar', url: 'https://calendarsolunar.ro' },
+        inLanguage: 'ro',
+        author: { '@type': 'Organization', name: 'Calendar Solunar', url: 'https://calendarsolunar.ro' },
+        publisher: { '@type': 'Organization', name: 'Calendar Solunar', logo: { '@type': 'ImageObject', url: 'https://calendarsolunar.ro/logo.webp' }, url: 'https://calendarsolunar.ro' },
         about: { '@type': 'Thing', name: species.name, alternateName: species.scientificName },
+        mainEntityOfPage: { '@type': 'WebPage', '@id': `https://calendarsolunar.ro/${species.slug}` },
     };
     return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />;
 }
@@ -234,6 +246,7 @@ function CityPageContent({ city }: { city: ReturnType<typeof getCityBySlug> & {}
                         </div>
                     </div>
                 </div>
+                <AdUnit slotId="2812628769" format="horizontal" className="mb-8" />
 <div className="grid md:grid-cols-2 gap-6 mb-8">
                     <div className="card-panel p-6">
                         <h2 className="text-xl font-display font-bold text-amber-400 mb-4">Perioade Majore {city.name}</h2>
@@ -323,6 +336,8 @@ function CityPageContent({ city }: { city: ReturnType<typeof getCityBySlug> & {}
                     );
                 })()}
 
+                <LazyAdUnit slotId="6301173988" format="rectangle" className="mb-8" />
+
                 <div className="card-panel p-6 md:p-8 mb-8">
                     <h2 className="text-2xl font-display font-bold text-white mb-6">Intrebari Frecvente - {city.name}</h2>
                     <div className="space-y-4">
@@ -408,6 +423,7 @@ function SpeciesPageContent({ species }: { species: ReturnType<typeof getSpecies
                         </div>
                     </div>
                 </div>
+                <AdUnit slotId="2812628769" format="horizontal" className="mb-8" />
 <div className="grid md:grid-cols-2 gap-6 mb-8">
                     <div className="card-panel p-6">
                         <h2 className="text-xl font-display font-bold text-amber-400 mb-4">Sezon si Ora Optima</h2>
@@ -450,6 +466,8 @@ function SpeciesPageContent({ species }: { species: ReturnType<typeof getSpecies
                     <h2 className="text-2xl font-display font-bold text-white mb-4">Sfat Solunar pentru {species.name}</h2>
                     <p className="text-night-300 leading-relaxed">{species.solunarTip}</p>
                 </div>
+
+                <LazyAdUnit slotId="6301173988" format="rectangle" className="mb-8" />
 
                 <div className="card-panel p-6 md:p-8 mb-8">
                     <h2 className="text-2xl font-display font-bold text-white mb-6">Intrebari Frecvente — Pescuit {species.name}</h2>

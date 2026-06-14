@@ -3,13 +3,16 @@ import Link from 'next/link';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { getAllArticles, getMonthlyArticles } from '@/data/blogArticles';
 
+// Evergreen index — regenerate hourly so the "recommended" month stays current.
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
-    title: 'Solunar Mai 2026 - Calendar Pescuit 2026 pe Luni',
-    description: 'Solunar Mai 2026 și calendar pescuit 2026 pe luni: zile bune, ore optime, perioade majore, faze lunare și ghiduri pentru fiecare specie.',
+    title: 'Ghiduri Pescuit 2026 - Solunar pe Luni, Specii și Tehnici',
+    description: 'Ghiduri de pescuit 2026: calendar solunar pe luni cu zile bune și ore optime, faze lunare, plus ghiduri pe specii și tehnici de pescuit.',
     keywords: [
-        'solunar mai 2026', 'solunar pescuit mai 2026', 'calendar pescuit mai 2026',
-        'calendar solunar mai 2026', 'zile bune pescuit mai',
-        'ghid pescuit 2026', 'sfaturi pescuit', 'tehnici pescuit',
+        'ghiduri pescuit 2026', 'solunar 2026 pe luni', 'calendar pescuit 2026',
+        'calendar solunar 2026', 'zile bune pescuit', 'ore optime pescuit',
+        'sfaturi pescuit', 'tehnici pescuit',
         'pescuit crap', 'pescuit salau', 'pescuit pastrav',
         'cele mai bune ore pescuit', 'sezon pescuit 2026',
         'cand se deschide sezonul de pescuit', 'pescuit method feeder',
@@ -19,16 +22,25 @@ export const metadata: Metadata = {
         canonical: 'https://calendarsolunar.ro/blog',
     },
     openGraph: {
-        title: 'Solunar Mai 2026 — Calendar Pescuit 2026 pe Luni',
-        description: 'Solunar Mai 2026, ore bune de pescuit, faze lunare și ghiduri practice pentru pescari.',
+        title: 'Ghiduri Pescuit 2026 — Solunar pe Luni, Specii și Tehnici',
+        description: 'Calendar solunar 2026 pe luni, ore bune de pescuit, faze lunare și ghiduri practice pentru pescari.',
         url: 'https://calendarsolunar.ro/blog',
     },
 };
 
+const MONTH_SLUGS = ['ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie', 'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie'];
+
 export default function BlogPage() {
     const articles = getAllArticles();
     const monthlyArticles = getMonthlyArticles();
-    const highlightedMonthlyArticle = monthlyArticles.find(article => article.slug === 'solunar-mai-2026-ghid') || monthlyArticles[0];
+    // Highlight the current month (or next month from the 24th) instead of a
+    // hardcoded one, so the index never looks frozen on a past month.
+    const now = new Date();
+    const priorityIdx = now.getDate() >= 24 ? (now.getMonth() + 1) % 12 : now.getMonth();
+    const prioritySlug = MONTH_SLUGS[priorityIdx];
+    const priorityName = prioritySlug.charAt(0).toUpperCase() + prioritySlug.slice(1);
+    const priorityYear = now.getMonth() === 11 && now.getDate() >= 24 ? now.getFullYear() + 1 : now.getFullYear();
+    const highlightedMonthlyArticle = monthlyArticles.find(article => article.slug === `solunar-${prioritySlug}-2026-ghid`) || monthlyArticles[0];
     const orderedMonthlyArticles = highlightedMonthlyArticle
         ? [highlightedMonthlyArticle, ...monthlyArticles.filter(article => article.slug !== highlightedMonthlyArticle.slug)]
         : monthlyArticles;
@@ -51,7 +63,7 @@ export default function BlogPage() {
                         Calendar Pescuit 2026
                     </h1>
                     <p className="text-night-300 text-base md:text-lg leading-relaxed max-w-[65ch]">
-                        Solunar Mai 2026, calendar pescuit 2026 pe luni, zile bune, ore optime și ghiduri practice pentru fiecare specie importantă.
+                        Calendar pescuit 2026 pe luni, zile bune, ore optime și ghiduri practice pentru fiecare specie importantă. Începe cu solunar {priorityName} {priorityYear}.
                     </p>
                 </div>
 
@@ -64,13 +76,13 @@ export default function BlogPage() {
                             Recomandat acum
                         </p>
                         <h2 className="mt-2 text-2xl md:text-3xl font-display font-bold text-white group-hover:text-amber-100 transition-colors">
-                            Solunar Mai 2026 - calendar pescuit, zile bune și ore exacte
+                            Solunar {priorityName} {priorityYear} - calendar pescuit, zile bune și ore exacte
                         </h2>
                         <p className="mt-3 max-w-[72ch] text-sm md:text-base leading-relaxed text-night-300">
-                            Pagina lunii mai răspunde direct căutărilor pentru solunar pescuit mai 2026, cu faze lunare, ferestre recomandate și specii active.
+                            Pagina lunii {priorityName.toLowerCase()} răspunde direct căutărilor pentru solunar pescuit {priorityName.toLowerCase()} {priorityYear}, cu faze lunare, ferestre recomandate și specii active.
                         </p>
                         <span className="mt-4 inline-flex rounded-xl bg-amber-300 px-4 py-2 text-sm font-bold text-night-950 transition-colors group-hover:bg-amber-200">
-                            Vezi ghidul pentru Mai 2026 &rarr;
+                            Vezi ghidul pentru {priorityName} {priorityYear} &rarr;
                         </span>
                     </Link>
                 )}

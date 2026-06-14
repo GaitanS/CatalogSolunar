@@ -66,6 +66,13 @@ const nextConfig = {
                 destination: '/calendar-pescuit-2026',
                 permanent: true,
             },
+            // Capture residual demand on prior-year queries (e.g. "calendar pescuit 2024").
+            { source: '/calendar-pescuit-2024', destination: '/calendar-pescuit-2026', permanent: true },
+            { source: '/calendar-pescuit-2025', destination: '/calendar-pescuit-2026', permanent: true },
+            { source: '/solunar-2024', destination: '/solunar-2026', permanent: true },
+            { source: '/solunar-2025', destination: '/solunar-2026', permanent: true },
+            { source: '/solunar-pescuit-2024', destination: '/solunar-pescuit-2026', permanent: true },
+            { source: '/solunar-pescuit-2025', destination: '/solunar-pescuit-2026', permanent: true },
             ...monthSlugs.flatMap((month) => [
                 {
                     source: `/solunar-${month}`,

@@ -3,21 +3,28 @@ import { getMoonPhase, getMoonIllumination, getMoonPhaseName, getSolunarData } f
 import RatingBars from '@/components/RatingBars';
 import MoonIcon from '@/components/MoonIcon';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import AdUnit from '@/components/AdUnit';
+import LazyAdUnit from '@/components/LazyAdUnit';
+import JsonLd from '@/components/JsonLd';
 import Link from 'next/link';
 
+// Shows today's moon phase + current month's calendar — regenerate hourly.
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
-    title: 'Faza Lunii Azi și Calendar Lunar 2026 - Fazele Lunii pentru Pescuit',
-    description: 'Faza lunii azi, calendar lunar 2026, lună plină, lună nouă, procent de iluminare și rating solunar pentru pescuit. Actualizat zilnic.',
+    // Absolute title bypasses the global template so it stays short (~52 chars).
+    title: { absolute: 'Faza Lunii Azi + Calendar Lunar 2026 - Fazele Lunii' },
+    description: 'Faza lunii azi, calendar lunar 2026 cu toate fazele lunii pe luni, lună plină, lună nouă, procent de iluminare și rating solunar pentru pescuit. Actualizat zilnic.',
     keywords: [
-        'calendar lunar 2026', 'fazele lunii', 'calendar lunar',
-        'calendar lunar azi', 'luna plina', 'luna noua',
+        'fazele lunii azi', 'faza lunii azi', 'calendar lunar 2026', 'fazele lunii',
+        'fazele lunii 2026', 'calendar lunar', 'luna plina', 'luna noua',
         'calendar fazele lunii', 'faze lunare pescuit',
         'calendar lunar fazele lunii', 'luna azi',
     ],
     alternates: { canonical: 'https://calendarsolunar.ro/lunar' },
     openGraph: {
         title: 'Faza Lunii Azi — Calendar Lunar 2026',
-        description: 'Vezi faza lunii de azi, iluminarea, calendarul lunar și impactul asupra pescuitului.',
+        description: 'Vezi faza lunii de azi, iluminarea, calendarul lunar 2026 cu toate fazele și impactul asupra pescuitului.',
         url: 'https://calendarsolunar.ro/lunar',
     },
 };
@@ -77,8 +84,36 @@ export default function LunarPage() {
 
     const monthName = today.toLocaleDateString('ro-RO', { month: 'long', year: 'numeric' });
 
+    // Full-year moon phases — powers the "Fazele Lunii 2026" annual section,
+    // which targets "fazele lunii 2026" / "calendar fazele lunii" queries.
+    const monthNamesRo = ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie'];
+    const annualPhases = monthNamesRo.map((mName, mIdx) => {
+        const phases: { date: Date; phase: string; name: string }[] = [];
+        const daysInThisMonth = new Date(currentYear, mIdx + 1, 0).getDate();
+        for (let d = 1; d <= daysInThisMonth; d++) {
+            const date = new Date(currentYear, mIdx, d);
+            const age = getMoonage(date);
+            const prevAge = getMoonage(new Date(currentYear, mIdx, d - 1));
+            if (age < 1 && prevAge > 28) phases.push({ date, phase: 'new', name: 'Lună Nouă' });
+            if (prevAge < 7.4 && age >= 7.4) phases.push({ date, phase: 'first-quarter', name: 'Primul Pătrar' });
+            if (prevAge < 14.8 && age >= 14.8) phases.push({ date, phase: 'full', name: 'Lună Plină' });
+            if (prevAge < 22.1 && age >= 22.1) phases.push({ date, phase: 'last-quarter', name: 'Ultimul Pătrar' });
+        }
+        return { monthName: mName, slug: mName.toLowerCase(), phases };
+    });
+
+    const lunarSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://calendarsolunar.ro/" },
+            { "@type": "ListItem", "position": 2, "name": "Calendar Lunar", "item": "https://calendarsolunar.ro/lunar" }
+        ]
+    };
+
     return (
         <div className="min-h-[100dvh] py-12 md:py-20">
+            <JsonLd data={lunarSchema} />
             <Breadcrumbs items={[
                 { label: 'Acasă', href: '/' },
                 { label: 'Calendar Lunar' },
@@ -94,8 +129,9 @@ export default function LunarPage() {
                     </p>
                 </div>
 
-                {/* Top Ad */}
-{/* Today's Moon Info */}
+                {/* Top Ad (eager) */}
+                <AdUnit slotId="2812628769" format="horizontal" className="mb-8 max-w-2xl mx-auto" />
+                {/* Today's Moon Info */}
                 <div className="card-panel p-6 md:p-8 mb-8 max-w-2xl mx-auto">
                     <div className="flex flex-col md:flex-row items-center gap-6">
                         <div className="text-moon">
@@ -157,8 +193,9 @@ export default function LunarPage() {
                     </div>
                 )}
 
-                {/* Middle Ad */}
-{/* Calendar Grid */}
+                {/* Middle Ad (lazy) */}
+                <LazyAdUnit slotId="6301173988" format="rectangle" className="mb-8 max-w-2xl mx-auto" />
+                {/* Calendar Grid */}
                 <div className="card-panel p-4 md:p-6 max-w-4xl mx-auto">
                     <div className="grid grid-cols-7 gap-1 mb-4">
                         {['Lu', 'Ma', 'Mi', 'Jo', 'Vi', 'Sâ', 'Du'].map(day => (
@@ -226,6 +263,52 @@ export default function LunarPage() {
                         </div>
                     </div>
                 </div>
+
+                {/* Fazele Lunii 2026 — annual calendar (targets "fazele lunii 2026", "calendar fazele lunii") */}
+                <section className="mt-12 mb-8 max-w-4xl mx-auto">
+                    <h2 className="text-xl md:text-2xl font-display font-bold text-white mb-2 text-center">Fazele Lunii {currentYear} — Calendar Anual</h2>
+                    <p className="text-night-400 text-sm text-center mb-6 max-w-2xl mx-auto">
+                        Toate fazele lunii din {currentYear}: lună nouă, primul pătrar, lună plină și ultimul pătrar pentru fiecare lună. Datele exacte te ajută să planifici cele mai bune zile de pescuit.
+                    </p>
+                    <div className="overflow-x-auto card-panel p-4 md:p-6">
+                        <table className="w-full text-sm">
+                            <thead>
+                                <tr className="border-b border-night-700 text-night-300">
+                                    <th className="text-left py-2 px-2 font-bold">Luna</th>
+                                    <th className="text-left py-2 px-2 font-bold">🌑 Lună Nouă</th>
+                                    <th className="text-left py-2 px-2 font-bold">🌓 Primul Pătrar</th>
+                                    <th className="text-left py-2 px-2 font-bold">🌕 Lună Plină</th>
+                                    <th className="text-left py-2 px-2 font-bold">🌗 Ultimul Pătrar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {annualPhases.map((m) => {
+                                    const pick = (name: string) => {
+                                        const p = m.phases.find((x) => x.name === name);
+                                        return p ? p.date.getDate() : '—';
+                                    };
+                                    const isCurrent = monthNamesRo[currentMonth] === m.monthName;
+                                    return (
+                                        <tr key={m.slug} className={`border-b border-night-800 ${isCurrent ? 'bg-moon/5' : ''}`}>
+                                            <td className="py-2 px-2 font-bold">
+                                                <Link href={`/solunar-${m.slug}-${currentYear}`} className="text-white hover:text-moon transition-colors">
+                                                    {m.monthName}
+                                                </Link>
+                                            </td>
+                                            <td className="py-2 px-2 text-night-300">{pick('Lună Nouă')}</td>
+                                            <td className="py-2 px-2 text-night-300">{pick('Primul Pătrar')}</td>
+                                            <td className="py-2 px-2 text-night-300">{pick('Lună Plină')}</td>
+                                            <td className="py-2 px-2 text-night-300">{pick('Ultimul Pătrar')}</td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
+                    <p className="text-night-500 text-xs mt-3 text-center">
+                        Zilele afișate sunt calculate astronomic pentru fusul orar al României. Apasă pe o lună pentru calendarul solunar complet.
+                    </p>
+                </section>
 
                 {/* SEO Content - Fazele Lunii */}
                 <section className="mt-12 mb-8 card-panel p-6 md:p-8 max-w-4xl mx-auto">
@@ -312,8 +395,9 @@ export default function LunarPage() {
                     </div>
                 </section>
 
-                {/* Bottom Ad */}
-{/* CTA */}
+                {/* Bottom Ad (lazy) */}
+                <LazyAdUnit slotId="1044977874" format="auto" className="mb-8 max-w-2xl mx-auto" />
+                {/* CTA */}
                 <div className="text-center mt-12">
                     <a
                         href="/"

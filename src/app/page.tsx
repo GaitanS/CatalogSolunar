@@ -6,6 +6,8 @@ import LocationPicker from '@/components/LocationPicker';
 import ActivityGraph from '@/components/ActivityGraph';
 import LazyForecast from '@/components/LazyForecast';
 import FAQSection from '@/components/FAQSection';
+import AdUnit from '@/components/AdUnit';
+import LazyAdUnit from '@/components/LazyAdUnit';
 import Link from 'next/link';
 import type { CSSProperties } from 'react';
 import { getAllCities } from '@/data/cities';
@@ -235,6 +237,9 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                         </div>
                     </div>
                 </section>
+
+                {/* Ad: top in-content banner (eager — above the fold after hero, high viewability) */}
+                <AdUnit slotId="2812628769" format="horizontal" className="mb-6" />
 
                 {/* Active Fish Banner (Mobile + Desktop) — species names link to guides */}
                 <div className="animate-soft-rise mb-6 taste-surface bg-[#151b25]/76 border border-amber-200/15 rounded-2xl p-3 flex items-center gap-3 overflow-hidden relative" style={{ '--stagger': 2 } as CSSProperties}>
@@ -477,6 +482,9 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                     </div>
                 </div>
 
+                {/* Ad: in-feed rectangle (lazy — loads as the user scrolls toward the monthly list) */}
+                <LazyAdUnit slotId="6301173988" format="rectangle" className="mb-8 md:mb-12" />
+
                 {/* Solunar pe Luni - target monthly search queries */}
                 <section className="mb-8 md:mb-12">
                     <h2 className="text-lg md:text-xl font-display font-bold text-white mb-4">Solunar {today.getFullYear()} pe Luni</h2>
@@ -596,6 +604,9 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                     </div>
                 </section>
 
+                {/* Ad: in-article fluid (lazy — sits between two long-form text blocks) */}
+                <LazyAdUnit slotId="1044977874" format="fluid" layout="in-article" className="mb-8 md:mb-12" />
+
                 {/* Cum se citeste solunarul - educational content for SEO depth */}
                 <section className="mb-8 md:mb-12 card-panel taste-surface p-6 md:p-8">
                     <h2 className="text-lg md:text-xl font-display font-bold text-white mb-3">Cum se Citește Tabelul Solunar?</h2>
@@ -623,7 +634,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                         <p>
                             <strong className="text-white">Sezonul de pescuit {today.getFullYear()}</strong> este deschis tot anul pentru speciile comune (crap, caras, plătică, babușcă).
                             Prohibiția generală pentru răpitori (șalău, știucă, somn) se aplică de obicei între 15 aprilie - 15 iunie,
-                            iar pentru păstrăv între 1 octombrie - 30 aprilie.
+                            iar pentru păstrăv între 1 octombrie - 30 aprilie. Vezi calendarul complet în <Link href="/blog/prohibitie-pescuit-2026" className="text-amber-200 hover:underline">ghidul prohibiției la pescuit {today.getFullYear()}</Link>.
                         </p>
                         <p>
                             Pentru cele mai bune rezultate, combină informațiile despre <strong className="text-white">sezonul de pescuit</strong> cu
@@ -633,6 +644,9 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                         </p>
                     </div>
                 </section>
+
+                {/* Ad: bottom in-content unit before FAQ (lazy) */}
+                <LazyAdUnit slotId="2812628769" format="auto" className="mb-8 md:mb-12" />
 
                 {/* FAQ Section with Schema Markup */}
                 <FAQSection />

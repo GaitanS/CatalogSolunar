@@ -17,12 +17,14 @@ const FALLBACK_WEATHER: WeatherData = {
 /**
  * Retry fetch with exponential backoff
  */
-async function fetchWithRetry(url: string, options: RequestInit, maxRetries = 3): Promise<Response> {
+async function fetchWithRetry(url: string, options: RequestInit, maxRetries = 2): Promise<Response> {
     let lastError: Error | null = null;
 
     for (let attempt = 0; attempt < maxRetries; attempt++) {
         try {
-            const response = await fetch(url, options);
+            // Hard per-attempt timeout so a slow upstream can never block SSR /
+            // hold up TTFB for Googlebot. Falls back to FALLBACK_WEATHER instead.
+            const response = await fetch(url, { ...options, signal: AbortSignal.timeout(2500) });
             if (response.ok) return response;
 
             // Don't retry on 4xx errors (client errors)
@@ -31,10 +33,9 @@ async function fetchWithRetry(url: string, options: RequestInit, maxRetries = 3)
             }
         } catch (error) {
             lastError = error instanceof Error ? error : new Error('Unknown error');
-
-            // Wait before retrying (exponential backoff: 1s, 2s, 4s)
+            // Single short backoff before the one retry — no exponential waits.
             if (attempt < maxRetries - 1) {
-                await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
+                await new Promise(resolve => setTimeout(resolve, 300));
             }
         }
     }

@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { getActiveFish, getMoonPhaseName, getSolunarData, formatTime } from '@/lib/solunar';
 import { getAllCities } from '@/data/cities';
 import { monthlySeoLandingPages, annualSeoLandingPages, type MonthlySeoLandingPage } from '@/data/seoLandingPages';
+import AdUnit from '@/components/AdUnit';
+import LazyAdUnit from '@/components/LazyAdUnit';
 
 const baseUrl = 'https://calendarsolunar.ro';
 const defaultLat = 44.4268;
@@ -223,6 +225,9 @@ export default function MonthlySolunarLanding({ page }: { page: MonthlySeoLandin
                     </div>
                 </section>
 
+                {/* Ad: top in-content (eager, below hero) */}
+                <AdUnit slotId="2812628769" format="horizontal" className="mb-6" />
+
                 <section className="card-panel taste-surface mb-6 grid gap-5 p-5 md:grid-cols-3 md:p-6">
                     <div>
                         <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-amber-200/80">Teoria solunara</p>
@@ -292,6 +297,9 @@ export default function MonthlySolunarLanding({ page }: { page: MonthlySeoLandin
                     </div>
                 </section>
 
+                {/* Ad: mid-content rectangle after the full table (lazy) */}
+                <LazyAdUnit slotId="6301173988" format="rectangle" className="mb-6" />
+
                 <section className="mb-6 grid gap-4 md:grid-cols-3">
                     <div className="card-panel taste-surface p-5 md:p-6 md:col-span-2">
                         <h2 className="font-display text-2xl font-bold text-white">Cum alegi ziua buna de pescuit</h2>
@@ -333,6 +341,9 @@ export default function MonthlySolunarLanding({ page }: { page: MonthlySeoLandin
                         </Link>
                     )}
                 </section>
+
+                {/* Ad: end-of-page (lazy) */}
+                <LazyAdUnit slotId="1044977874" format="auto" className="mb-6" />
 
                 <section className="mb-8 card-panel taste-surface p-5 md:p-6">
                     <h2 className="font-display text-2xl font-bold text-white">Solunar pe orase populare</h2>

@@ -66,7 +66,7 @@ export default function Moon3D({ phase, illumination, size = 250 }: Moon3DProps)
         const textureLoader = new THREE.TextureLoader();
 
         // Load textures
-        const moonTexture = textureLoader.load('/moon-texture.jpg');
+        const moonTexture = textureLoader.load('/moon-texture-1024.webp');
         moonTexture.colorSpace = THREE.SRGBColorSpace;
 
         // Geometry

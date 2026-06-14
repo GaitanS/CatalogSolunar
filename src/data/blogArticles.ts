@@ -4,6 +4,8 @@ export interface BlogArticle {
     excerpt: string;
     content: string;
     date: string;
+    /** ISO date of the last substantive content revision (drives dateModified + sitemap lastmod). */
+    updated?: string;
     author: string;
     category: string;
     readTime: number;
@@ -6816,6 +6818,7 @@ Alege o zi bună cu [calendarul solunar](/) și creează amintiri care durează 
         slug: 'solunar-iunie-2026-ghid',
         title: 'Solunar Iunie 2026 - Când Trage Peștele în Iunie',
         excerpt: 'Ghid solunar complet pentru iunie 2026: cele mai bune zile și ore pentru pescuit, faze lunare, specii active și recomandări pentru fiecare weekend de vară.',
+        updated: '2026-06-13',
         content: `
 # Calendar Solunar Iunie 2026: Ghid Lunar de Pescuit
 
@@ -6825,25 +6828,28 @@ Iunie este luna de aur a pescuitului. Zilele sunt lungi, apa e caldă, peștii s
 
 | Dată | Faza Lunară | Impact Pescuit |
 |------|-------------|---------------|
-| 3 Iunie | Lună Plină | ★★★★★ Nocturn excepțional |
-| 11 Iunie | Ultimul Pătrar | ★★★☆☆ Dimineața devreme |
-| 18 Iunie | Lună Nouă | ★★★★★ Pescuit de zi excelent |
-| 25 Iunie | Primul Pătrar | ★★★★☆ Seara și noaptea |
+| 1 Iunie | Lună Plină | ★★★★★ Nocturn excepțional |
+| 9 Iunie | Ultimul Pătrar | ★★★☆☆ Dimineața devreme |
+| 16 Iunie | Lună Nouă | ★★★★★ Pescuit de zi excelent |
+| 22 Iunie | Primul Pătrar | ★★★★☆ Seara și noaptea |
+| 30 Iunie | Lună Plină | ★★★★★ A doua lună plină a lunii |
+
+**Bonus:** Iunie 2026 are DOUĂ luni pline (1 și 30 iunie) — un avantaj rar pentru pescuitul nocturn.
 
 ## Cele Mai Bune Zile
 
 ### Top 5 Zile Iunie 2026
-1. **3 Iunie** — Lună plină + perioadă majoră seara → pescuit nocturn de top
-2. **18 Iunie** — Lună nouă + perioadă majoră dimineața → zi perfectă
-3. **4 Iunie** — Zi după luna plină, activitate prelungită
-4. **17 Iunie** — Ziua dinaintea lunii noi, tranziție excelentă
-5. **25 Iunie** — Primul pătrar, seara activă
+1. **16 Iunie** — Lună nouă + perioadă majoră dimineața → zi perfectă
+2. **1 Iunie** — Lună plină + perioadă majoră seara → pescuit nocturn de top
+3. **30 Iunie** — A doua lună plină, forță gravitațională mare + nopți calde
+4. **15 Iunie** — Ziua dinaintea lunii noi, tranziție excelentă
+5. **22 Iunie** — Primul pătrar, seara activă, aproape de solstițiu
 
 ### Weekenduri
 - **6-7 Iunie**: ★★★★☆ Efect rezidual lună plină
-- **13-14 Iunie**: ★★★☆☆ Tranziție spre lună nouă
-- **20-21 Iunie**: ★★★★★ Post-lună nouă + solstițiu vară
-- **27-28 Iunie**: ★★★★☆ Creștere lunară
+- **13-14 Iunie**: ★★★★☆ Tranziție spre luna nouă (16 iunie)
+- **20-21 Iunie**: ★★★★★ Post-lună nouă + solstițiu de vară
+- **27-28 Iunie**: ★★★★☆ Creștere lunară spre luna plină
 
 ## Specii Active în Iunie
 
@@ -8574,6 +8580,81 @@ Luna nouă, zi de mijloc de săptămână (liniște pe lac), perioadele majore d
 Și dacă prinzi un crap de iarnă — e cel mai frumos cadou de Crăciun pe care ți-l poți face.
 
 [Verifică calendarul solunar pentru decembrie 2026 →](/)
+        `
+    },
+    {
+        slug: 'prohibitie-pescuit-2026',
+        title: 'Prohibiție Pescuit 2026 - Când Se Deschide Sezonul',
+        excerpt: 'Calendarul prohibiției la pescuit în România 2026: perioadele de prohibiție pe specii, când se deschide și se închide sezonul, excepții și amenzi.',
+        date: '2026-01-15',
+        updated: '2026-06-13',
+        author: 'Echipa Calendar Solunar',
+        category: 'Ghiduri',
+        readTime: 7,
+        keywords: ['prohibitie pescuit 2026', 'cand se deschide sezonul de pescuit', 'cand incepe sezonul de pescuit', 'sezon pescuit 2026', 'prohibitie 2026', 'perioada prohibitie pescuit'],
+        content: `
+# Prohibiție Pescuit 2026: Când Se Deschide și Se Închide Sezonul
+
+Prohibiția la pescuit protejează peștii în perioada de reproducere. Înainte de orice ieșire, verifică dacă specia pe care o vizezi este în perioadă de prohibiție — amenzile sunt mari, iar reglementările se aplică pe tot teritoriul României. Mai jos găsești calendarul complet pe specii pentru 2026.
+
+## Răspuns Rapid: Când Se Deschide Pescuitul în 2026?
+
+Pentru speciile comune de ciprinide (crap, caras, plătică, babușcă) pescuitul recreativ este permis tot anul în majoritatea apelor, cu respectarea autorizației. Prohibiția generală pentru reproducere se aplică în special răpitorilor și speciilor migratoare. Datele exacte sunt stabilite anual prin ordinul ANPA (Agenția Națională pentru Pescuit și Acvacultură) — verifică ordinul oficial pentru anul în curs.
+
+## Perioadele de Prohibiție 2026 pe Specii
+
+| Specie | Perioadă de prohibiție (orientativ) | Observații |
+|--------|--------------------------------------|------------|
+| Știucă | 1 februarie - 15 martie | Reproducere timpurie |
+| Șalău, biban | 1 aprilie - 10 iunie | Protejat în sezonul de cuib |
+| Somn | 15 aprilie - 15 iunie | Reproducere de primăvară |
+| Crap, caras, plătică | Prohibiție generală ~6 săptămâni primăvara | Variază pe bazine |
+| Păstrăv | 1 octombrie - 30 aprilie | Salmonide de munte |
+| Lipan, lostriță | Reglementări speciale | Specii protejate |
+| Scrumbie de Dunăre | Ferestre specifice primăvara | Specie migratoare |
+
+**Important:** Datele de mai sus sunt orientative și se actualizează anual. Perioada exactă de prohibiție 2026 este cea publicată în ordinul ANPA / Ministerul Mediului. Consultă întotdeauna sursa oficială înainte de ieșire.
+
+## Prohibiția Generală — Cum Funcționează
+
+Prohibiția generală pe ape naturale (râuri, fluvii, lacuri naturale, Dunăre, Delta) durează de obicei aproximativ 60 de zile în primăvară, acoperind vârful reproducerii pentru majoritatea speciilor. În acest interval, pescuitul recreativ este restricționat sau interzis pe apele vizate.
+
+## Excepție Importantă: Bălțile Private
+
+În bălțile și lacurile private cu administrator, pescuitul se poate practica și în perioada de prohibiție, deoarece nu sunt ape în regim natural. Acolo se aplică regulamentul administratorului, nu prohibiția națională. Vezi [locurile de pescuit din România](/locuri-pescuit) pentru bălți cu acces în orice sezon.
+
+## Amenzi pentru Pescuit în Prohibiție
+
+Pescuitul în perioada de prohibiție sau al speciilor protejate se sancționează cu amenzi substanțiale și confiscarea echipamentului și capturii. Pescuitul cu unelte interzise (plase, curent electric) constituie infracțiune. Respectă reglementările — protejezi resursa pentru sezoanele viitoare.
+
+## Cum Te Pregătești pentru Deschiderea Sezonului
+
+Când se ridică prohibiția, peștii sunt flămânzi după reproducere — primele zile sunt printre cele mai productive din an. Pentru a profita la maximum:
+
+1. **Verifică data exactă de deschidere** în ordinul ANPA pentru apa ta.
+2. **Pregătește echipamentul** din timp.
+3. **Planifică prima ieșire pe o zi cu solunar bun** — folosește [calendarul solunar](/) și [solunar azi](/azi) pentru orele cu activitate maximă.
+4. **Alege perioadele majore** care coincid cu răsăritul sau apusul.
+
+## Întrebări Frecvente
+
+## Când se deschide sezonul de pescuit în 2026?
+
+Pentru speciile comune, pescuitul recreativ este permis tot anul în multe ape, cu autorizație. Prohibiția generală de primăvară (aproximativ 60 de zile) se ridică de regulă la mijlocul lunii iunie. Data exactă pentru 2026 este cea din ordinul ANPA.
+
+## Când începe prohibiția la pescuit 2026?
+
+Prohibiția generală începe de obicei primăvara devreme (februarie-aprilie, în funcție de specie și bazin) și acoperă vârful reproducerii. Răpitorii precum știuca au prohibiție mai timpurie.
+
+## Pot pescui în prohibiție pe baltă privată?
+
+Da. În bălțile private cu administrator, prohibiția națională nu se aplică — se respectă regulamentul bălții. Este cea mai bună opțiune pentru pescuit în perioada de prohibiție.
+
+## Ce amendă primesc dacă pescuiesc în prohibiție?
+
+Amenzile sunt mari și includ confiscarea echipamentului și a capturii. Pescuitul cu unelte interzise este infracțiune. Respectarea prohibiției este obligatorie.
+
+[Verifică solunarul pentru următoarea ieșire →](/)
         `
     }
 ];

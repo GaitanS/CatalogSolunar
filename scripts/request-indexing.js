@@ -37,6 +37,7 @@ function getAllUrls() {
     `${BASE_URL}/`,
     `${BASE_URL}/azi`,
     `${BASE_URL}/lunar`,
+    `${BASE_URL}/rasarit-apus-soare`,
     `${BASE_URL}/blog`,
     `${BASE_URL}/locuri-pescuit`,
     `${BASE_URL}/despre`,
@@ -45,6 +46,13 @@ function getAllUrls() {
     `${BASE_URL}/termeni`,
     `${BASE_URL}/cookies`,
   );
+
+  // Landing-uri SEO (lunare + anuale) — lipseau anterior
+  const landingFile = path.join(__dirname, '..', 'src', 'data', 'seoLandingPages.ts');
+  const landingSlugs = extractSlugs(landingFile, /slug:\s*['"][^'"]+['"]/g);
+  landingSlugs.filter(s => s !== 'string').forEach(slug => {
+    urls.push(`${BASE_URL}/${slug}`);
+  });
 
   // Specii
   const speciesFile = path.join(__dirname, '..', 'src', 'data', 'species.ts');
@@ -74,6 +82,15 @@ function getAllUrls() {
   locationSlugs.filter(s => s !== 'string').forEach(slug => {
     urls.push(`${BASE_URL}/locuri-pescuit/${slug}`);
   });
+
+  // Pagini judet — derivate din valorile county:
+  const locContent = fs.readFileSync(locationsFile, 'utf-8');
+  const countyToSlug = (county) =>
+    county.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/ş|ș/g, 's').replace(/ţ|ț/g, 't').replace(/ă|â/g, 'a').replace(/î/g, 'i')
+      .replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  const counties = new Set((locContent.match(/county:\s*['"][^'"]+['"]/g) || []).map(m => m.match(/['"]([^'"]+)['"]/)[1]));
+  counties.forEach(c => urls.push(`${BASE_URL}/locuri-pescuit/judet/${countyToSlug(c)}`));
 
   return [...new Set(urls)]; // deduplicate
 }

@@ -5,10 +5,14 @@ import Moon3DWrapper from '@/components/Moon3DWrapper';
 import ActivityGraph from '@/components/ActivityGraph';
 import Link from 'next/link';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import AdUnit from '@/components/AdUnit';
+import LazyAdUnit from '@/components/LazyAdUnit';
 import { getLocationBySlug, getAllLocations, getLocationsByCounty, countyToSlug } from '@/data/fishingLocations';
 import type { Metadata } from 'next';
 
 export const dynamicParams = false;
+// Shows today's solunar data — regenerate hourly so it never goes stale.
+export const revalidate = 3600;
 
 export function generateStaticParams() {
     return getAllLocations().map((loc) => ({ slug: loc.slug }));
@@ -294,10 +298,14 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
                     </div>
                 </div>
 
+                {/* Ad: in-content (lazy) */}
+                <LazyAdUnit slotId="6301173988" format="rectangle" className="mb-8" />
+
                 {/* SEO Content — species links + fishing tips for this location */}
                 <div className="card-panel p-6 md:p-8 mb-8">
                     <h2 className="text-xl font-display font-bold text-white mb-4">Ghid Pescuit {loc.name}</h2>
                     <div className="text-night-300 text-sm leading-relaxed space-y-3">
+                        {loc.longDescription && <p>{loc.longDescription}</p>}
                         <p>
                             <strong className="text-white">{loc.name}</strong> ({typeLabels[loc.type] || loc.type}) este situat în {loc.locality}, județul {loc.county}.
                             {loc.paid

@@ -6,29 +6,45 @@ import ActivityGraph from '@/components/ActivityGraph';
 import LocationPicker from '@/components/LocationPicker';
 import Link from 'next/link';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import AdUnit from '@/components/AdUnit';
+import LazyAdUnit from '@/components/LazyAdUnit';
+import JsonLd from '@/components/JsonLd';
 import type { Metadata } from 'next';
+
+const RATING_WORDS = ['', 'Slabă', 'Moderată', 'Bună', 'Foarte Bună', 'Excelentă'];
 
 export async function generateMetadata(): Promise<Metadata> {
     const today = new Date();
     const dayNum = today.getDate();
     const monthName = today.toLocaleDateString('ro-RO', { month: 'long' });
+    const monthCap = monthName.charAt(0).toUpperCase() + monthName.slice(1);
     const year = today.getFullYear();
 
+    // Compute the day's rating + first major window for a richer, higher-CTR snippet.
+    const data = getSolunarData(today, 44.4268, 26.1025);
+    const ratingWord = RATING_WORDS[data.overallRating] || 'Bună';
+    const firstMajor = data.majorPeriods[0];
+    const majorStr = firstMajor ? `${formatTime(firstMajor.start)}-${formatTime(firstMajor.end)}` : '';
+    const moonName = getMoonPhaseName(data.moonPhase);
+
     return {
-        title: `Solunar Azi ${dayNum} ${monthName.charAt(0).toUpperCase() + monthName.slice(1)} - Ore Pescuit și Faza Lunii`,
-        description: `Solunar azi ${dayNum} ${monthName} ${year}: perioade majore și minore pe ore exacte, faza lunii, vremea și specii active pentru pescuit.`,
+        // Absolute title bypasses the global template so it stays under ~60 chars.
+        title: {
+            absolute: `Solunar Azi ${dayNum} ${monthCap} ⭐ Activitate ${ratingWord} - Ore Pescuit`,
+        },
+        description: `Solunar azi ${dayNum} ${monthName} ${year}: activitate ${ratingWord.toLowerCase()}${majorStr ? `, perioadă majoră ${majorStr}` : ''}, ${moonName.toLowerCase()}. Ore exacte de pescuit, perioade minore, vreme și specii active.`,
         keywords: [
             'solunar azi', 'calendar solunar azi', 'activitate pesti azi',
             'cand trage pestele azi', 'pescuit azi', 'faza lunii azi',
             'perioade majore azi', 'solunar pescuit azi', 'luna azi pescuit',
-            'cand musca pestele azi', 'ore pescuit azi',
+            'cand musca pestele azi', 'ore pescuit azi', 'solunar pe ore',
         ],
         alternates: {
             canonical: 'https://calendarsolunar.ro/azi',
         },
         openGraph: {
-            title: `Solunar Azi ${dayNum} ${monthName.charAt(0).toUpperCase() + monthName.slice(1)} — Ce Pești Sunt Activi?`,
-            description: `Verifică solunar-ul pentru azi ${dayNum} ${monthName}: perioade majore, faza lunii, vremea și specii active.`,
+            title: `Solunar Azi ${dayNum} ${monthCap} — Activitate ${ratingWord}, Ore Pescuit`,
+            description: `Verifică solunar-ul pentru azi ${dayNum} ${monthName}: perioade majore${majorStr ? ` (${majorStr})` : ''}, faza lunii, vremea și specii active.`,
             url: 'https://calendarsolunar.ro/azi',
             siteName: 'Calendar Solunar',
             locale: 'ro_RO',
@@ -60,8 +76,59 @@ export default async function AziPage({ searchParams }: { searchParams: Promise<
     const ratingLabels = ['', 'Slabă', 'Moderată', 'Bună', 'Foarte Bună', 'Excelentă'];
     const ratingColors = ['', 'text-slate-400', 'text-slate-300', 'text-amber-200', 'text-amber-300', 'text-amber-300'];
 
+    // Structured data: WebPage (dynamic for today) + FAQPage (matches the visible FAQ) + Breadcrumb.
+    const aziSchema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebPage",
+                "@id": "https://calendarsolunar.ro/azi#webpage",
+                "url": "https://calendarsolunar.ro/azi",
+                "name": `Solunar Azi ${capitalizedDate} - Ore Pescuit și Faza Lunii`,
+                "description": `Solunar azi ${capitalizedDate}: activitate ${(ratingLabels[data.overallRating] || 'bună').toLowerCase()}, perioade majore și minore pe ore exacte, faza lunii și specii active.`,
+                "inLanguage": "ro",
+                "isPartOf": { "@id": "https://calendarsolunar.ro/#website" },
+                "datePublished": today.toISOString().slice(0, 10),
+                "dateModified": today.toISOString().slice(0, 10),
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    { "@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://calendarsolunar.ro/" },
+                    { "@type": "ListItem", "position": 2, "name": "Solunar Azi", "item": "https://calendarsolunar.ro/azi" }
+                ]
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "Când mușcă peștele cel mai bine azi?",
+                        "acceptedAnswer": { "@type": "Answer", "text": "Peștele mușcă cel mai bine în perioadele majore solunar (durată ~2 ore) afișate pe pagină. Acestea coincid cu tranzitul lunar și oferă cea mai intensă activitate. Perioadele minore (~1 oră) sunt de asemenea productive." }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Cât de precis este calendarul solunar?",
+                        "acceptedAnswer": { "@type": "Answer", "text": "Teoria solunar are o rată de succes de aproximativ 60-70% conform studiilor. Precizia crește când perioadele solunar coincid cu condiții meteo favorabile: presiune atmosferică stabilă (1013-1025 hPa), vânt slab și temperatură optimă a apei." }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Ce fază a lunii este azi și cum afectează pescuitul?",
+                        "acceptedAnswer": { "@type": "Answer", "text": `Azi luna este ${getMoonPhaseName(data.moonPhase).toLowerCase()} (${data.moonIllumination}% iluminare). Luna plină și luna nouă oferă activitate maximă (rating 4-5), pătrarii oferă activitate moderată (rating 3).` }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Cum aleg locul de pescuit în funcție de solunar?",
+                        "acceptedAnswer": { "@type": "Answer", "text": "Datele solunar variază în funcție de locație deoarece tranzitul lunar diferă. Folosește calendarul solunar cu selectare de locație pentru date calculate pe coordonatele exacte ale zonei tale." }
+                    }
+                ]
+            }
+        ]
+    };
+
     return (
         <div className="pb-20 pt-4 md:pt-8 relative">
+            <JsonLd data={aziSchema} />
             <Breadcrumbs items={[
                 { label: 'Acasă', href: '/' },
                 { label: 'Solunar Azi' },
@@ -119,6 +186,9 @@ export default async function AziPage({ searchParams }: { searchParams: Promise<
                         </div>
                     </div>
                 </div>
+
+                {/* Ad: top in-content (eager, below the rating hero) */}
+                <AdUnit slotId="2812628769" format="horizontal" className="mb-8" />
 
                 {/* Periods Grid */}
                 <div className="grid md:grid-cols-2 gap-6 mb-8">
@@ -185,7 +255,14 @@ export default async function AziPage({ searchParams }: { searchParams: Promise<
                     </div>
                 </div>
 
+                {/* Ad: mid-content rectangle (lazy) */}
+                <LazyAdUnit slotId="6301173988" format="rectangle" className="mb-8" />
+
                 {/* Sun/Moon Times */}
+                <h2 className="text-xl font-display font-bold text-white mb-2">Răsărit și Apus Soare Azi</h2>
+                <p className="text-slate-400 text-sm mb-4 max-w-2xl">
+                    Azi, {capitalizedDate}, în {locationName}: răsăritul soarelui la <strong className="text-amber-300">{formatTime(data.sunrise)}</strong> și apusul la <strong className="text-amber-300">{formatTime(data.sunset)}</strong>. Răsăritul și apusul lunii completează ferestrele solunare — când o perioadă majoră coincide cu răsăritul sau apusul soarelui, activitatea peștilor este maximă.
+                </p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
                     <div className="card-glass p-4 text-center">
                         <p className="text-[10px] uppercase text-slate-400 font-bold tracking-wider mb-1">Răsărit Soare</p>
@@ -292,6 +369,9 @@ export default async function AziPage({ searchParams }: { searchParams: Promise<
                         </div>
                     </div>
                 </div>
+
+                {/* Ad: end-of-page (lazy) */}
+                <LazyAdUnit slotId="1044977874" format="auto" className="mb-8" />
 
                 {/* Internal Links */}
                 <div className="card-panel p-6 md:p-8">

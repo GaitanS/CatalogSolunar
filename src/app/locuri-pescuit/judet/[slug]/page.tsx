@@ -10,6 +10,8 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import CountyJsonLd from './CountyJsonLd';
 
 export const dynamicParams = false;
+// Shows today's solunar data — regenerate hourly so it never goes stale.
+export const revalidate = 3600;
 
 export function generateStaticParams() {
     return getAllCountySlugs().map((c) => ({ slug: c.slug }));

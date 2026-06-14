@@ -70,14 +70,14 @@
     }
   }
 
+  /* Animate transform only — never opacity:0 — so the LCP hero paints on the
+     first frame instead of waiting out the animation delay + duration. */
   @keyframes softRise {
     from {
-      transform: translateY(18px);
-      opacity: 0;
+      transform: translateY(14px);
     }
     to {
       transform: translateY(0);
-      opacity: 1;
     }
   }
 
