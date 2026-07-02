@@ -8,6 +8,12 @@ import LazyForecast from '@/components/LazyForecast';
 import FAQSection from '@/components/FAQSection';
 import AdUnit from '@/components/AdUnit';
 import LazyAdUnit from '@/components/LazyAdUnit';
+import BiteScoreChart from '@/components/BiteScoreChart';
+import PressureTrendCard from '@/components/PressureTrendCard';
+import CatchJournal from '@/components/CatchJournal';
+import GoldenWindowBadge from '@/components/GoldenWindowBadge';
+import { getPressureHistory } from '@/lib/pressure';
+import { isGoldenPeriod } from '@/lib/biteScore';
 import Link from 'next/link';
 import type { CSSProperties } from 'react';
 import { getAllCities } from '@/data/cities';
@@ -91,7 +97,11 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
     // Fetch data
     const todayData = getSolunarData(today, lat, lng);
     const weekData = getWeekSolunarData(today, lat, lng);
-    const weather = await getWeatherData(lat, lng);
+    // Meteo si presiune in paralel — ambele au timeout + fallback propriu.
+    const [weather, pressure] = await Promise.all([
+        getWeatherData(lat, lng),
+        getPressureHistory(lat, lng),
+    ]);
 
     const advice = getFishingAdvice(weather, todayData);
     const majorDesc = getMajorPeriodsDescription(todayData.majorPeriods);
@@ -338,6 +348,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                                 <div key={index} className="rounded-2xl border border-white/10 bg-white/[0.045] p-3">
                                     <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400">Majoră {index + 1}</p>
                                     <p className="mt-1 font-mono text-lg font-bold text-white">{formatTime(period.start)} <span className="text-amber-200">→</span> {formatTime(period.end)}</p>
+                                    {isGoldenPeriod(period, todayData) && <div className="mt-1"><GoldenWindowBadge /></div>}
                                 </div>
                             ))}
                             <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-3">
@@ -347,6 +358,8 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                         </div>
 
                         <ActivityGraph majorPeriods={todayData.majorPeriods} minorPeriods={todayData.minorPeriods} showHeader={false} />
+
+                        <BiteScoreChart day={todayData} pressureTrend6h={pressure.trend6h} isToday />
 
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                             {[
@@ -361,6 +374,8 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                                 </div>
                             ))}
                         </div>
+
+                        <PressureTrendCard history={pressure} currentPressure={weather.pressure} />
                     </div>
                 </div>
 
@@ -484,6 +499,12 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
 
                 {/* Ad: in-feed rectangle (lazy — loads as the user scrolls toward the monthly list) */}
                 <LazyAdUnit slotId="6301173988" format="rectangle" className="mb-8 md:mb-12" />
+
+                {/* Jurnal de capturi — statistica personala a pescarului, salvata local in browser */}
+                <section className="mb-8 md:mb-12 max-w-2xl">
+                    <h2 className="text-lg md:text-xl font-display font-bold text-white mb-4">Jurnalul Tău de Capturi</h2>
+                    <CatchJournal lat={lat} lng={lng} locationName={locationName} />
+                </section>
 
                 {/* Solunar pe Luni - target monthly search queries */}
                 <section className="mb-8 md:mb-12">
