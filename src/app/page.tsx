@@ -205,7 +205,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                             </div>
 
                             <div className="animate-breathe mx-auto my-4 h-[150px] w-[150px] relative">
-                                <Moon3DWrapper phase={getMoonage(today) / 29.53} illumination={todayData.moonIllumination} size={180} />
+                                <Moon3DWrapper phase={getMoonage(today) / 29.53} illumination={todayData.moonIllumination} size={150} />
                             </div>
 
                             <div>
