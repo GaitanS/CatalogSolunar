@@ -23,8 +23,8 @@ const config: Config = {
                     950: '#070b14',
                 },
                 moon: {
-                    DEFAULT: '#fbbf24', // amber-400 (Golden moon)
-                    glow: '#fef3c7',    // amber-100
+                    DEFAULT: '#F2CE72', // auriul din designul Solunar Mobile
+                    glow: '#FFE9A8',
                 },
             },
             fontFamily: {

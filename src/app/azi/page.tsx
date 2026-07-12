@@ -1,9 +1,12 @@
 import { getSolunarData, getMoonPhaseName, formatTime, getActiveFish, getMoonage } from '@/lib/solunar';
 import { getWeatherData } from '@/lib/weather';
 import { getFishingAdvice } from '@/lib/advice';
-import Moon3DWrapper from '@/components/Moon3DWrapper';
-import ActivityGraph from '@/components/ActivityGraph';
-import LocationPicker from '@/components/LocationPicker';
+import MoonHero from '@/components/MoonHero';
+import ActivityNowCard from '@/components/ActivityNowCard';
+import PeriodsTimeline from '@/components/PeriodsTimeline';
+import BiteScoreChart from '@/components/BiteScoreChart';
+import CityPickerPill from '@/components/CityPickerPill';
+import { getPressureHistory } from '@/lib/pressure';
 import Link from 'next/link';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import AdUnit from '@/components/AdUnit';
@@ -61,9 +64,14 @@ export default async function AziPage({ searchParams }: { searchParams: Promise<
     const locationName = params.loc || 'București';
 
     const data = getSolunarData(today, lat, lng);
-    const weather = await getWeatherData(lat, lng);
+    const [weather, pressure] = await Promise.all([
+        getWeatherData(lat, lng),
+        getPressureHistory(lat, lng),
+    ]);
     const advice = getFishingAdvice(weather, data);
     const activeFish = getActiveFish(today, data.moonPhase);
+    const phaseNameRaw = getMoonPhaseName(data.moonPhase);
+    const phaseName = phaseNameRaw.startsWith('În') ? `Lună ${phaseNameRaw.toLowerCase()}` : phaseNameRaw;
 
     const dateStr = today.toLocaleDateString('ro-RO', {
         weekday: 'long',
@@ -74,7 +82,6 @@ export default async function AziPage({ searchParams }: { searchParams: Promise<
     const capitalizedDate = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
 
     const ratingLabels = ['', 'Slabă', 'Moderată', 'Bună', 'Foarte Bună', 'Excelentă'];
-    const ratingColors = ['', 'text-slate-400', 'text-slate-300', 'text-amber-200', 'text-amber-300', 'text-amber-300'];
 
     // Structured data: WebPage (dynamic for today) + FAQPage (matches the visible FAQ) + Breadcrumb.
     const aziSchema = {
@@ -146,113 +153,30 @@ export default async function AziPage({ searchParams }: { searchParams: Promise<
                                 Verifică activitatea peștilor pentru ziua de azi. Date calculate cu algoritmi astronomici preciși.
                             </p>
                         </div>
-                        <div className="w-full sm:w-auto">
-                            <LocationPicker />
+                        <div className="w-fit">
+                            <CityPickerPill />
                         </div>
                     </div>
                 </div>
 
-                {/* Rating Hero Card */}
-                <div className="card-panel taste-surface p-6 md:p-8 mb-8 text-center">
-                    <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12">
-                        {/* Moon */}
-                        <div className="w-[120px] h-[120px] md:w-[160px] md:h-[160px]">
-                            <Moon3DWrapper phase={getMoonage(today) / 29.53} illumination={data.moonIllumination} size={160} />
-                        </div>
-
-                        {/* Rating */}
-                        <div>
-                            <div className="text-6xl md:text-8xl font-display font-bold text-white mb-1">
-                                {data.overallRating}<span className="text-3xl md:text-4xl text-slate-500">/5</span>
-                            </div>
-                            <div className={`text-lg md:text-xl font-bold ${ratingColors[data.overallRating]}`}>
-                                Activitate {ratingLabels[data.overallRating]}
-                            </div>
-                            <div className="flex justify-center gap-1 mt-2">
-                                {[1, 2, 3, 4, 5].map(s => (
-                                    <svg key={s} className={`w-5 h-5 ${s <= data.overallRating ? 'text-amber-400' : 'text-slate-700'}`} fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Moon Info */}
-                        <div className="text-center md:text-left">
-                            <p className="text-amber-200 font-bold text-lg">{getMoonPhaseName(data.moonPhase)}</p>
-                            <p className="text-slate-400 text-sm">{data.moonIllumination}% iluminare</p>
-                            <p className="text-slate-400 text-sm mt-1">Temp: {weather.temperature}°C</p>
-                            <p className="text-slate-400 text-sm">Presiune: {weather.pressure} hPa</p>
-                        </div>
+                {/* Luna hero + activitate (design Solunar Mobile) */}
+                <div className="mb-8 grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
+                    <div className="lg:col-span-5">
+                        <MoonHero phaseName={phaseName} illumination={data.moonIllumination} moonAgeDays={getMoonage(today)} />
+                    </div>
+                    <div className="lg:col-span-7 flex flex-col gap-4">
+                        <ActivityNowCard day={data} isToday />
+                        <BiteScoreChart day={data} pressureTrend6h={pressure.trend6h} isToday />
                     </div>
                 </div>
 
                 {/* Ad: top in-content (eager, below the rating hero) */}
                 <AdUnit slotId="2812628769" format="horizontal" className="mb-8" />
 
-                {/* Periods Grid */}
-                <div className="grid md:grid-cols-2 gap-6 mb-8">
-                    {/* Major Periods */}
-                    <div className="card-panel taste-surface p-6">
-                        <h2 className="text-xl font-display font-bold text-amber-400 mb-4 flex items-center gap-2">
-                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" /></svg>
-                            Perioade Majore Azi
-                        </h2>
-                        <p className="text-slate-400 text-sm mb-4">Durată ~2 ore. Activitate maximă a peștilor.</p>
-                        <div className="space-y-3">
-                            {data.majorPeriods.map((p, i) => (
-                                <div key={i} className="flex items-center justify-between p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-                                        <span className="text-white font-mono font-bold">{formatTime(p.start)} - {formatTime(p.end)}</span>
-                                    </div>
-                                    <div className="flex gap-0.5">
-                                        {[1, 2, 3, 4, 5].map(s => (
-                                            <svg key={s} className={`w-3.5 h-3.5 ${s <= p.rating ? 'text-amber-400' : 'text-slate-700'}`} fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                            </svg>
-                                        ))}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Minor Periods */}
-                    <div className="card-panel taste-surface p-6">
-                        <h2 className="text-xl font-display font-bold text-amber-200 mb-4 flex items-center gap-2">
-                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" /></svg>
-                            Perioade Minore Azi
-                        </h2>
-                        <p className="text-slate-400 text-sm mb-4">Durată ~1 oră. Activitate moderată.</p>
-                        <div className="space-y-3">
-                            {data.minorPeriods.map((p, i) => (
-                                <div key={i} className="flex items-center justify-between p-3 bg-white/[0.045] border border-white/10 rounded-lg">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-2 h-2 rounded-full bg-amber-200/80" />
-                                        <span className="text-white font-mono font-bold">{formatTime(p.start)} - {formatTime(p.end)}</span>
-                                    </div>
-                                    <div className="flex gap-0.5">
-                                        {[1, 2, 3, 4, 5].map(s => (
-                                            <svg key={s} className={`w-3.5 h-3.5 ${s <= p.rating ? 'text-amber-200' : 'text-slate-700'}`} fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                            </svg>
-                                        ))}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-
-                {/* Activity Graph */}
-                <div className="card-panel taste-surface p-6 mb-8">
-                    <h2 className="text-xl font-display font-bold text-white mb-4">Grafic Activitate Azi</h2>
-                    <ActivityGraph majorPeriods={data.majorPeriods} minorPeriods={data.minorPeriods} />
-                    <div className="flex justify-center gap-6 mt-3 text-xs font-mono text-slate-400 uppercase tracking-wider">
-                        <span className="flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-amber-400" /> Majoră</span>
-                        <span className="flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-amber-200/80" /> Minoră</span>
-                    </div>
+                {/* Perioade solunare — axa 24h + lista (design Solunar Mobile) */}
+                <div className="mb-8">
+                    <h2 className="text-xl font-display font-bold text-white mb-4">Perioade Solunare Azi — Ore Exacte</h2>
+                    <PeriodsTimeline day={data} isToday />
                 </div>
 
                 {/* Ad: mid-content rectangle (lazy) */}

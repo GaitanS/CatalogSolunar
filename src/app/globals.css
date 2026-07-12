@@ -139,12 +139,18 @@
     @apply w-full max-w-[1400px] mx-auto px-4 sm:px-6;
   }
 
+  /* Suprafete aliniate la designul Solunar Mobile (dc-card) */
   .card-panel {
-    @apply bg-[#151b25]/90 border border-white/10 rounded-2xl shadow-2xl;
+    background: rgba(148, 170, 220, 0.055);
+    border: 1px solid rgba(148, 170, 220, 0.12);
+    border-radius: 20px;
   }
 
   .card-glass {
-    @apply bg-white/[0.055] backdrop-blur-sm border border-white/10 rounded-2xl;
+    background: rgba(148, 170, 220, 0.055);
+    border: 1px solid rgba(148, 170, 220, 0.12);
+    border-radius: 20px;
+    @apply backdrop-blur-sm;
   }
 
   .mobile-bottom-nav {
