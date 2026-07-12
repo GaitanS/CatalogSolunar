@@ -28,6 +28,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { url: baseUrl, lastModified: today, changeFrequency: 'daily', priority: 1 },
         { url: `${baseUrl}/azi`, lastModified: today, changeFrequency: 'daily', priority: 0.95 },
         { url: `${baseUrl}/lunar`, lastModified: today, changeFrequency: 'daily', priority: 0.9 },
+        { url: `${baseUrl}/prognoza`, lastModified: today, changeFrequency: 'daily', priority: 0.9 },
+        { url: `${baseUrl}/specii`, lastModified: today, changeFrequency: 'weekly', priority: 0.85 },
         { url: `${baseUrl}/rasarit-apus-soare`, lastModified: today, changeFrequency: 'daily', priority: 0.85 },
         { url: `${baseUrl}/despre`, lastModified: evergreen, changeFrequency: 'monthly', priority: 0.5 },
         { url: `${baseUrl}/contact`, lastModified: evergreen, changeFrequency: 'monthly', priority: 0.4 },

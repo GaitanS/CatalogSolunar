@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
-import { getMoonPhase, getMoonIllumination, getMoonPhaseName, getSolunarData } from '@/lib/solunar';
+import { getMoonPhase, getMoonIllumination, getMoonPhaseName } from '@/lib/solunar';
 import RatingBars from '@/components/RatingBars';
 import MoonIcon from '@/components/MoonIcon';
+import MiniMoon from '@/components/MiniMoon';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import AdUnit from '@/components/AdUnit';
 import LazyAdUnit from '@/components/LazyAdUnit';
@@ -195,42 +196,46 @@ export default function LunarPage() {
 
                 {/* Middle Ad (lazy) */}
                 <LazyAdUnit slotId="6301173988" format="rectangle" className="mb-8 max-w-2xl mx-auto" />
-                {/* Calendar Grid */}
-                <div className="card-panel p-4 md:p-6 max-w-4xl mx-auto">
-                    <div className="grid grid-cols-7 gap-1 mb-4">
-                        {['Lu', 'Ma', 'Mi', 'Jo', 'Vi', 'Sâ', 'Du'].map(day => (
-                            <div key={day} className="text-center text-xs font-bold text-night-400 py-2">
+                {/* Calendar Grid — celule cu mini-luni (design Solunar Mobile) */}
+                <div className="card-panel p-3 md:p-5 max-w-4xl mx-auto">
+                    <div className="mb-1.5 grid grid-cols-7 gap-0.5">
+                        {['LU', 'MA', 'MI', 'JO', 'VI', 'SÂ', 'DU'].map(day => (
+                            <span key={day} className="text-center text-[9.5px] tracking-[0.08em] text-[#67718A]">
                                 {day}
-                            </div>
+                            </span>
                         ))}
                     </div>
-                    <div className="grid grid-cols-7 gap-1">
+                    <div className="grid grid-cols-7 gap-0.5">
                         {days.map((date, i) => {
                             if (!date) {
-                                return <div key={i} className="aspect-square" />;
+                                return <div key={i} />;
                             }
                             const isToday = date.toDateString() === today.toDateString();
                             const phase = getMoonPhase(date);
                             const illumination = getMoonIllumination(date);
-                            const data = getSolunarData(date);
+                            const special = phase === 'full' || phase === 'new';
+                            const tag = phase === 'full' ? 'Plină' : phase === 'new' ? 'Nouă' : '';
 
                             return (
                                 <div
                                     key={i}
-                                    className={`aspect-square p-1 md:p-2 rounded-lg flex flex-col items-center justify-center gap-1 transition-colors ${isToday
-                                        ? 'bg-moon/10 border border-moon/50'
-                                        : 'bg-night-900/50 hover:bg-night-800/80'
-                                        }`}
+                                    className="flex flex-col items-center gap-1 rounded-xl px-0.5 pb-1 pt-[7px]"
+                                    style={{
+                                        background: isToday
+                                            ? 'rgba(242,206,114,0.1)'
+                                            : special
+                                                ? 'rgba(148,170,220,0.06)'
+                                                : 'transparent',
+                                        border: isToday
+                                            ? '1px solid rgba(242,206,114,0.45)'
+                                            : '1px solid transparent',
+                                    }}
                                 >
-                                    <span className={`text-xs md:text-sm font-bold ${isToday ? 'text-moon' : 'text-white'}`}>
+                                    <span className={`text-[10px] ${isToday ? 'font-bold text-moon' : 'text-[#8C96AB]'}`}>
                                         {date.getDate()}
                                     </span>
-                                    <div className="text-moon/80">
-                                        <MoonIcon phase={phase} className="w-6 h-6 md:w-8 md:h-8" />
-                                    </div>
-                                    <span className="text-[8px] md:text-[10px] text-night-400 hidden sm:block">{illumination}%</span>
-
-                                    <RatingBars rating={data.overallRating} className="h-2 w-full max-w-[40px]" />
+                                    <MiniMoon fraction={illumination / 100} phaseValue={getMoonage(date) / 29.53058867} size={24} />
+                                    <span className="h-2.5 text-[8px] font-semibold text-moon">{tag}</span>
                                 </div>
                             );
                         })}

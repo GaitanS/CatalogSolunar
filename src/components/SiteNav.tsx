@@ -62,9 +62,9 @@ export default function SiteNav() {
             >
                 {[
                     { label: 'Azi', href: '/' },
-                    { label: 'Prognoză', href: '/#prognoza' },
+                    { label: 'Prognoză', href: '/prognoza' },
                     { label: 'Lună', href: '/lunar' },
-                    { label: 'Specii', href: '/#specii' },
+                    { label: 'Specii', href: '/specii' },
                     { label: 'Jurnal', href: '/#jurnal' },
                 ].map((t) => {
                     const anchor = t.href.includes('#') ? t.href.slice(t.href.indexOf('#')) : '';
