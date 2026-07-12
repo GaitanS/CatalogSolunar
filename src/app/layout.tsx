@@ -98,7 +98,10 @@ export default function RootLayout({
             </head>
             <body className={`${openSans.variable} ${outfit.variable} font-body bg-night-950 text-slate-100 min-h-screen antialiased selection:bg-moon selection:text-night-950`}>
                 <ClientProviders>
-                    <LazyBackground />
+                    {/* Constelatiile doar pe desktop — designul mobil are stelele lui statice */}
+                    <div className="hidden md:block">
+                        <LazyBackground />
+                    </div>
                     <SiteNav />
                     <main className="pb-20 md:pb-0 md:pt-20">
                         {children}

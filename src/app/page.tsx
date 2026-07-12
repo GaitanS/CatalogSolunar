@@ -1,7 +1,8 @@
-import { getSolunarData, getWeekSolunarData, getMoonPhaseName, formatTime, formatDate, getActiveFish, getMoonage } from '@/lib/solunar';
+import { getSolunarData, getWeekSolunarData, getMoonPhaseName, formatTime, getActiveFish, getMoonage } from '@/lib/solunar';
 import { getWeatherData } from '@/lib/weather';
 import { getFishingAdvice, getMajorPeriodsDescription, getMinorPeriodsDescription } from '@/lib/advice';
-import LocationPicker from '@/components/LocationPicker';
+import Image from 'next/image';
+import CityPickerPill from '@/components/CityPickerPill';
 import LazyForecast from '@/components/LazyForecast';
 import FAQSection from '@/components/FAQSection';
 import AdUnit from '@/components/AdUnit';
@@ -47,6 +48,22 @@ function getMonthTarget(date: Date, offset = 0) {
 function getPriorityMonth(currentMonth: ReturnType<typeof getMonthTarget>, nextMonth: ReturnType<typeof getMonthTarget>, date: Date) {
     return date.getDate() >= 24 ? nextMonth : currentMonth;
 }
+
+// Ape de pescuit din apropierea oraselor principale (nota de subsol din design)
+const CITY_WATERS: Record<string, string> = {
+    'București': 'Cernica, Snagov, Lacul Morii',
+    'Cluj-Napoca': 'Tarnița, Gilău, Someșul Mic',
+    'Timișoara': 'Bega, Surduc',
+    'Iași': 'Ciric, Prut',
+    'Constanța': 'Siutghiol, Tăbăcărie, Marea Neagră',
+    'Brașov': 'Noua, Olt',
+    'Galați': 'Dunărea, Brateș',
+    'Craiova': 'Jiu, Fântânele',
+    'Oradea': 'Crișul Repede',
+    'Sibiu': 'Olt, Cibin',
+    'Târgu Mureș': 'Mureș',
+    'Bacău': 'Siret, Bistrița',
+};
 
 
 export async function generateMetadata() {
@@ -133,6 +150,11 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
 
     const phaseNameRaw = getMoonPhaseName(dayData.moonPhase);
     const phaseName = phaseNameRaw.startsWith('În') ? `Lună ${phaseNameRaw.toLowerCase()}` : phaseNameRaw;
+
+    // Eticheta de data din antetul aplicatiei (design Solunar Mobile)
+    const DOW_FULL = ['Duminică', 'Luni', 'Marți', 'Miercuri', 'Joi', 'Vineri', 'Sâmbătă'];
+    const dateLabel = `${isToday ? 'Azi · ' : ''}${DOW_FULL[selDate.getDay()]}, ${selDate.getDate()} ${monthSlugs[selDate.getMonth()]}`;
+    const cityWaters = CITY_WATERS[locationName];
     const homepageSchema = {
         "@context": "https://schema.org",
         "@graph": [
@@ -188,57 +210,32 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
     return (
         <div className="relative overflow-hidden pb-20 pt-3 md:pt-8">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: homepageSchemaJson }} />
-            <div className="absolute inset-x-0 top-0 h-[520px] pointer-events-none bg-[radial-gradient(circle_at_18%_12%,rgba(245,208,111,0.16),transparent_28%),radial-gradient(circle_at_86%_6%,rgba(52,211,153,0.12),transparent_30%)]" />
 
             <div className="container-custom px-4 relative z-10">
 
-                <section className="mb-6 md:mb-8">
-                    <div className="animate-soft-rise card-panel taste-surface relative overflow-hidden p-5 sm:p-6 md:p-8 lg:p-10 flex flex-col justify-between border-amber-200/10">
-                        <div className="absolute -right-20 -top-24 h-56 w-56 rounded-full bg-amber-300/10 blur-3xl pointer-events-none" />
-                        <div className="relative text-center sm:text-left">
-                            <div className="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between gap-3 mb-8">
-                                <div className="inline-flex w-fit items-center justify-center gap-2 rounded-full border border-amber-200/20 bg-amber-200/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.22em] text-amber-100">
-                                    <span className="h-1.5 w-1.5 rounded-full bg-amber-300 animate-pulse" />
-                                    Solunar live
-                                </div>
-                                <div className="mx-auto w-full max-w-[340px] sm:mx-0 sm:w-auto">
-                                    <LocationPicker />
-                                </div>
-                            </div>
-
-                            <h1 className="mx-auto max-w-[12ch] text-4xl md:text-6xl lg:text-7xl font-display font-extrabold leading-none tracking-tight text-white sm:mx-0">
-                                Calendar Solunar <span className="text-amber-300">{today.getFullYear()}</span>
-                            </h1>
-                            <p className="mx-auto mt-4 max-w-[62ch] text-sm md:text-base leading-relaxed text-slate-300 sm:mx-0">
-                                Solunar {currentMonth.name} {today.getFullYear()} pentru {locationName}. Ore exacte, perioade majore și minore, vreme, faza lunii și activitate pe specii pentru {today.toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' })}.
-                            </p>
+                {/* Antet compact de aplicatie (design Solunar Mobile) */}
+                <div className="mb-3 flex items-center justify-between md:mt-2">
+                    <div className="flex items-center gap-2.5">
+                        <Image src="/logo.webp" alt="Calendar Solunar" width={30} height={30} className="rounded-[9px] object-contain" priority />
+                        <div>
+                            <div className="text-[15px] font-bold leading-none tracking-[0.01em] text-white">Solunar</div>
+                            <div className="mt-[3px] text-[10.5px] text-[#8C96AB]">{dateLabel}</div>
                         </div>
-
                     </div>
-                </section>
+                    <CityPickerPill />
+                </div>
 
                 {/* Selector de zile (design Solunar Mobile) */}
                 <div className="mb-4">
                     <DayChips days={dayChips} selected={dayOffset} locationQuery={locationQuery} />
                 </div>
 
-                {/* Ad: top in-content banner (eager — above the fold after hero, high viewability) */}
-                <AdUnit slotId="2812628769" format="horizontal" className="mb-6" />
-
                 {/* Dashboard Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6 mb-8 md:mb-12">
 
                     {/* Left: luna hero + activitate (design Solunar Mobile) */}
                     <div className="lg:col-span-4 flex flex-col gap-4">
-                        <div className="dc-card taste-surface relative overflow-hidden px-4 pb-5 pt-2">
-                            <div className="flex w-full items-center justify-between px-1 pt-2">
-                                <div className="font-display text-base font-bold text-white">{formatDate(selDate)}</div>
-                                <div className="rounded-full border border-white/10 bg-white/[0.045] px-2 py-0.5 font-mono text-[10px] text-slate-300">
-                                    {locationName}
-                                </div>
-                            </div>
-                            <MoonHero phaseName={phaseName} illumination={dayData.moonIllumination} moonAgeDays={getMoonage(dayData.date)} />
-                        </div>
+                        <MoonHero phaseName={phaseName} illumination={dayData.moonIllumination} moonAgeDays={getMoonage(dayData.date)} />
                         <ActivityNowCard day={dayData} isToday={isToday} />
                     </div>
 
@@ -268,10 +265,32 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 </div>
 
                 {/* Conditii meteo + specii active (design Solunar Mobile) */}
-                <div className="mb-8 grid gap-4 md:grid-cols-2 md:items-start">
+                <div id="specii" className="mb-4 grid scroll-mt-20 gap-4 md:grid-cols-2 md:items-start">
                     <ConditionsCard weather={weather} history={pressure} advice={advice} />
                     <SpeciesChips fish={getActiveFish(dayData.date, dayData.moonPhase)} />
                 </div>
+
+                {/* Nota de subsol a ecranului-aplicatie (design Solunar Mobile) */}
+                <div className="mb-8 text-center text-[10px] leading-relaxed text-[#4E586F]">
+                    Calcul astronomic în timp real · precizie ±1 min
+                    {cityWaters ? <><br />Ape aproape: {cityWaters}</> : null}
+                </div>
+
+                {/* Ad: banner sub ecranul-aplicatie (pastreaza layoutul de design curat sus) */}
+                <AdUnit slotId="2812628769" format="horizontal" className="mb-6" />
+
+                {/* SEO hero: H1 + descriere — continutul care claseaza pagina, sub ecranul-aplicatie */}
+                <section className="mb-6 md:mb-8">
+                    <div className="card-panel taste-surface relative overflow-hidden p-5 sm:p-6 md:p-8">
+                        <div className="absolute -right-20 -top-24 h-56 w-56 rounded-full bg-amber-300/10 blur-3xl pointer-events-none" />
+                        <h1 className="relative max-w-[14ch] text-3xl md:text-5xl font-display font-extrabold leading-none tracking-tight text-white">
+                            Calendar Solunar <span className="text-amber-300">{today.getFullYear()}</span>
+                        </h1>
+                        <p className="relative mt-4 max-w-[62ch] text-sm md:text-base leading-relaxed text-slate-300">
+                            Solunar {currentMonth.name} {today.getFullYear()} pentru {locationName}. Ore exacte, perioade majore și minore, vreme, faza lunii și activitate pe specii pentru {today.toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' })}.
+                        </p>
+                    </div>
+                </section>
 
                 <section className="mb-6 grid gap-3 md:grid-cols-[1.2fr_0.8fr]">
                     <Link
@@ -348,7 +367,9 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 </section>
 
                 {/* Forecast Stripes - Lazy loaded */}
-                <LazyForecast weekData={weekData} />
+                <div id="prognoza" className="scroll-mt-20">
+                    <LazyForecast weekData={weekData} />
+                </div>
 
                 {/* Info Cards Bottom */}
                 <h2 className="text-lg md:text-xl font-display font-bold text-white mb-4">Detalii Activitate Pescuit</h2>
@@ -395,7 +416,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 <LazyAdUnit slotId="6301173988" format="rectangle" className="mb-8 md:mb-12" />
 
                 {/* Jurnal de capturi — statistica personala a pescarului, salvata local in browser */}
-                <section className="mb-8 md:mb-12 max-w-2xl">
+                <section id="jurnal" className="mb-8 scroll-mt-20 md:mb-12 max-w-2xl">
                     <h2 className="text-lg md:text-xl font-display font-bold text-white mb-4">Jurnalul Tău de Capturi</h2>
                     <CatchJournal lat={lat} lng={lng} locationName={locationName} />
                 </section>
