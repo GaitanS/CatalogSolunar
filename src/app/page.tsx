@@ -1,21 +1,21 @@
 import { getSolunarData, getWeekSolunarData, getMoonPhaseName, formatTime, formatDate, getActiveFish, getMoonage } from '@/lib/solunar';
-import { getWeatherData, getWindDirectionString } from '@/lib/weather';
+import { getWeatherData } from '@/lib/weather';
 import { getFishingAdvice, getMajorPeriodsDescription, getMinorPeriodsDescription } from '@/lib/advice';
-import Moon3DWrapper from '@/components/Moon3DWrapper';
 import LocationPicker from '@/components/LocationPicker';
-import ActivityGraph from '@/components/ActivityGraph';
 import LazyForecast from '@/components/LazyForecast';
 import FAQSection from '@/components/FAQSection';
 import AdUnit from '@/components/AdUnit';
 import LazyAdUnit from '@/components/LazyAdUnit';
 import BiteScoreChart from '@/components/BiteScoreChart';
-import PressureTrendCard from '@/components/PressureTrendCard';
 import CatchJournal from '@/components/CatchJournal';
-import GoldenWindowBadge from '@/components/GoldenWindowBadge';
+import MoonHero from '@/components/MoonHero';
+import ActivityNowCard from '@/components/ActivityNowCard';
+import PeriodsTimeline from '@/components/PeriodsTimeline';
+import ConditionsCard from '@/components/ConditionsCard';
+import SpeciesChips from '@/components/SpeciesChips';
+import DayChips from '@/components/DayChips';
 import { getPressureHistory } from '@/lib/pressure';
-import { isGoldenPeriod } from '@/lib/biteScore';
 import Link from 'next/link';
-import type { CSSProperties } from 'react';
 import { getAllCities } from '@/data/cities';
 import { getAllArticles } from '@/data/blogArticles';
 import { getAllLocations } from '@/data/fishingLocations';
@@ -70,12 +70,17 @@ export async function generateMetadata() {
     };
 }
 
-export default async function HomePage({ searchParams }: { searchParams: Promise<{ lat?: string; lng?: string; loc?: string }> }) {
+export default async function HomePage({ searchParams }: { searchParams: Promise<{ lat?: string; lng?: string; loc?: string; d?: string }> }) {
     const params = await searchParams;
     const today = new Date();
     const lat = params.lat ? parseFloat(params.lat) : 44.4268;
     const lng = params.lng ? parseFloat(params.lng) : 26.1025;
     const locationName = params.loc || 'București';
+    // Ziua selectata din chips-urile de zile (0 = azi, max +13)
+    const dayOffset = Math.min(13, Math.max(0, parseInt(params.d ?? '0', 10) || 0));
+    const selDate = new Date(today);
+    selDate.setDate(selDate.getDate() + dayOffset);
+    const isToday = dayOffset === 0;
     const currentMonth = getMonthTarget(today);
     const nextMonth = getMonthTarget(today, 1);
     const priorityMonth = getPriorityMonth(currentMonth, nextMonth, today);
@@ -97,6 +102,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
     // Fetch data
     const todayData = getSolunarData(today, lat, lng);
     const weekData = getWeekSolunarData(today, lat, lng);
+    const dayData = isToday ? todayData : getSolunarData(selDate, lat, lng);
     // Meteo si presiune in paralel — ambele au timeout + fallback propriu.
     const [weather, pressure] = await Promise.all([
         getWeatherData(lat, lng),
@@ -107,14 +113,26 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
     const majorDesc = getMajorPeriodsDescription(todayData.majorPeriods);
     const minorDesc = getMinorPeriodsDescription(todayData.minorPeriods);
 
-    // Calculate generic bad time (simulation)
-    const bestStart = todayData.majorPeriods[0] ? todayData.majorPeriods[0].start : new Date(today.setHours(12, 0, 0, 0));
-    const bestEnd = todayData.majorPeriods[0] ? todayData.majorPeriods[0].end : new Date(today.setHours(14, 0, 0, 0));
+    // Chips-urile de zile (14 zile, design Solunar Mobile)
+    const DOW3 = ['Dum', 'Lun', 'Mar', 'Mie', 'Joi', 'Vin', 'Sâm'];
+    const dayChips = Array.from({ length: 14 }, (_, i) => {
+        const d = new Date(today);
+        d.setDate(d.getDate() + i);
+        const data = i === 0 ? todayData : (i === dayOffset ? dayData : getSolunarData(d, lat, lng));
+        return {
+            dow: i === 0 ? 'Azi' : DOW3[d.getDay()],
+            num: d.getDate(),
+            rating: data.overallRating,
+        };
+    });
+    const locationQuery = [
+        params.lat ? `lat=${encodeURIComponent(params.lat)}` : null,
+        params.lng ? `lng=${encodeURIComponent(params.lng)}` : null,
+        params.loc ? `loc=${encodeURIComponent(params.loc)}` : null,
+    ].filter(Boolean).join('&');
 
-    const badStart = new Date(bestStart);
-    badStart.setHours(badStart.getHours() - 6);
-    const badEnd = new Date(badStart);
-    badEnd.setHours(badEnd.getHours() + 2);
+    const phaseNameRaw = getMoonPhaseName(dayData.moonPhase);
+    const phaseName = phaseNameRaw.startsWith('În') ? `Lună ${phaseNameRaw.toLowerCase()}` : phaseNameRaw;
     const homepageSchema = {
         "@context": "https://schema.org",
         "@graph": [
@@ -196,187 +214,63 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                             </p>
                         </div>
 
-                        <div className="relative mt-8 md:hidden rounded-2xl border border-white/10 bg-white/[0.045] p-4 text-center">
-                            <div className="flex items-center justify-between gap-3">
-                                <div className="font-display text-lg font-bold text-white">{formatDate(today)}</div>
-                                <div className="px-2 py-0.5 bg-white/[0.045] rounded-full text-[10px] font-mono border border-white/10 text-slate-300">
-                                    {locationName}
-                                </div>
-                            </div>
-
-                            <div className="animate-breathe mx-auto my-4 h-[150px] w-[150px] relative">
-                                <Moon3DWrapper phase={getMoonage(today) / 29.53} illumination={todayData.moonIllumination} size={150} />
-                            </div>
-
-                            <div>
-                                <div className="text-amber-200 font-bold text-base tracking-wide">
-                                    {getMoonPhaseName(todayData.moonPhase).startsWith('În') ? `Lună ${getMoonPhaseName(todayData.moonPhase).toLowerCase()}` : getMoonPhaseName(todayData.moonPhase)}
-                                </div>
-                                <div className="text-slate-400 text-xs mb-3">{todayData.moonIllumination}% iluminare</div>
-
-                                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-300/10 border border-amber-200/25 rounded-full mb-3">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-amber-300 animate-pulse" />
-                                    <span className="text-amber-100 font-bold text-[10px] uppercase tracking-wide">Activitate {todayData.overallRating >= 4 ? 'Excelentă' : todayData.overallRating >= 3 ? 'Bună' : 'Medie'}</span>
-                                </div>
-
-                                <div className="flex justify-center gap-1">
-                                    {[1, 2, 3, 4, 5].map(s => (
-                                        <svg key={s} className={`w-4 h-4 ${s <= todayData.overallRating ? 'text-amber-300' : 'text-slate-700'}`} fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="relative mt-8 grid grid-cols-2 gap-2 sm:grid-cols-3 xl:grid-cols-6">
-                            {[
-                                { label: 'Presiune', value: `${weather.pressure} hPa`, subtext: 'Stabilă' },
-                                { label: 'Temp. aer', value: `${weather.temperature}°C` },
-                                { label: 'Temp. apă', value: `${weather.waterTemp}°C` },
-                                { label: 'Vânt', value: `${weather.windSpeed} km/h`, subtext: getWindDirectionString(weather.windDirection) },
-                                { label: 'Faza lunii', value: `${todayData.moonIllumination}%`, subtext: getMoonPhaseName(todayData.moonPhase) },
-                                { label: 'Rating', value: `${todayData.overallRating}/5`, subtext: 'Activitate bună' },
-                            ].map((stat, index) => (
-                                <div key={stat.label} className="animate-soft-rise rounded-2xl border border-white/10 bg-white/[0.045] p-3 min-h-[86px]" style={{ '--stagger': index + 1 } as CSSProperties}>
-                                    <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400">{stat.label}</p>
-                                    <p className="mt-1 font-mono text-lg font-bold text-white">{stat.value}</p>
-                                    {stat.subtext && <p className="mt-1 text-[11px] leading-tight text-amber-100/70">{stat.subtext}</p>}
-                                </div>
-                            ))}
-                        </div>
                     </div>
                 </section>
+
+                {/* Selector de zile (design Solunar Mobile) */}
+                <div className="mb-4">
+                    <DayChips days={dayChips} selected={dayOffset} locationQuery={locationQuery} />
+                </div>
 
                 {/* Ad: top in-content banner (eager — above the fold after hero, high viewability) */}
                 <AdUnit slotId="2812628769" format="horizontal" className="mb-6" />
 
-                {/* Active Fish Banner (Mobile + Desktop) — species names link to guides */}
-                <div className="animate-soft-rise mb-6 taste-surface bg-[#151b25]/76 border border-amber-200/15 rounded-2xl p-3 flex items-center gap-3 overflow-hidden relative" style={{ '--stagger': 2 } as CSSProperties}>
-                    <div className="shrink-0 text-amber-100 font-bold text-xs md:text-sm uppercase tracking-wider whitespace-nowrap px-2 border-r border-amber-200/15">
-                        Specii Active
+                {/* Dashboard Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6 mb-8 md:mb-12">
+
+                    {/* Left: luna hero + activitate (design Solunar Mobile) */}
+                    <div className="lg:col-span-4 flex flex-col gap-4">
+                        <div className="dc-card taste-surface relative overflow-hidden px-4 pb-5 pt-2">
+                            <div className="flex w-full items-center justify-between px-1 pt-2">
+                                <div className="font-display text-base font-bold text-white">{formatDate(selDate)}</div>
+                                <div className="rounded-full border border-white/10 bg-white/[0.045] px-2 py-0.5 font-mono text-[10px] text-slate-300">
+                                    {locationName}
+                                </div>
+                            </div>
+                            <MoonHero phaseName={phaseName} illumination={dayData.moonIllumination} moonAgeDays={getMoonage(dayData.date)} />
+                        </div>
+                        <ActivityNowCard day={dayData} isToday={isToday} />
                     </div>
-                    <div className="flex-1 overflow-hidden relative h-6">
-                        <div className="animate-marquee absolute whitespace-nowrap text-slate-200 text-sm font-mono flex gap-8 items-center h-full">
-                            {(() => {
-                                const activeFish = getActiveFish(today, todayData.moonPhase);
-                                const fishSlugMap: Record<string, string> = {
-                                    'Crap': '/pescuit-crap', 'Șalău': '/pescuit-salau', 'Somn': '/pescuit-somn',
-                                    'Știucă': '/pescuit-stiuca', 'Păstrăv': '/pescuit-pastrav', 'Caras': '/pescuit-caras',
-                                    'Plătică': '/pescuit-platica', 'Biban': '/pescuit-biban', 'Lin': '/pescuit-lin',
-                                    'Babușcă': '/pescuit-babusca', 'Clean': '/pescuit-clean', 'Fitofag': '/pescuit-fitofag',
-                                };
-                                return activeFish.length > 0
-                                    ? [...activeFish, ...activeFish, ...activeFish].map((fish, i) => {
-                                        const href = fishSlugMap[fish];
-                                        return href ? (
-                                            <Link key={i} href={href} className="flex items-center gap-2 hover:text-amber-100 transition-colors">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-amber-300 animate-pulse" />
-                                                {fish}
-                                            </Link>
-                                        ) : (
-                                            <span key={i} className="flex items-center gap-2">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-amber-300 animate-pulse" />
-                                                {fish}
-                                            </span>
-                                        );
-                                    })
-                                    : <span className="opacity-70">Activitate generală redusă</span>;
-                            })()}
+
+                    {/* Right: scor muscatura + perioade solunare (design Solunar Mobile) */}
+                    <div className="lg:col-span-8 flex flex-col gap-4">
+                        <BiteScoreChart day={dayData} pressureTrend6h={pressure.trend6h} isToday={isToday} />
+
+                        <PeriodsTimeline day={dayData} isToday={isToday} />
+
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
+                            {[
+                                { label: 'Răsărit soare', value: formatTime(dayData.sunrise), dot: '#F2CE72' },
+                                { label: 'Apus soare', value: formatTime(dayData.sunset), dot: '#E8A15C' },
+                                { label: 'Răsărit lună', value: dayData.moonrise ? formatTime(dayData.moonrise) : '—', dot: '#93B4E8' },
+                                { label: 'Apus lună', value: dayData.moonset ? formatTime(dayData.moonset) : '—', dot: '#5F718F' },
+                            ].map((item) => (
+                                <div key={item.label} className="dc-card px-3.5 py-3">
+                                    <p className="flex items-center gap-1.5 text-[10.5px] text-[#8C96AB]">
+                                        <span className="h-1.5 w-1.5 rounded-full" style={{ background: item.dot }} />
+                                        {item.label}
+                                    </p>
+                                    <p className="mt-1 text-[17px] font-semibold tabular-nums text-white">{item.value}</p>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
 
-                {/* Dashboard Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6 mb-8 md:mb-12">
-
-                    {/* Left: Moon Card */}
-                    <div className="animate-soft-rise hidden md:flex lg:col-span-4 card-panel taste-surface p-4 md:p-6 flex-col items-center justify-between min-h-[300px] md:min-h-[400px] relative overflow-hidden group" style={{ '--stagger': 3 } as CSSProperties}>
-                        {/* Header */}
-                        <div className="w-full flex justify-between items-center mb-1 md:mb-2 z-10">
-                            <div className="font-display font-bold text-base md:text-xl text-white">{formatDate(today)}</div>
-                            <div className="px-2 py-0.5 bg-white/[0.045] rounded-full text-[9px] md:text-xs font-mono border border-white/10 text-slate-300">
-                                {locationName}
-                            </div>
-                        </div>
-
-                        {/* Main Moon */}
-                        <div className="animate-breathe w-[120px] h-[120px] md:w-[200px] md:h-[200px] relative z-10 my-1 md:my-2 lg:scale-125 transition-transform duration-700 group-hover:scale-110">
-                            <Moon3DWrapper phase={getMoonage(today) / 29.53} illumination={todayData.moonIllumination} size={200} />
-                        </div>
-
-                        {/* Status Badge */}
-                        <div className="z-10 text-center w-full">
-                            <div className="text-amber-200 font-bold mb-0 text-sm md:text-lg tracking-wide">
-                                {getMoonPhaseName(todayData.moonPhase).startsWith('În') ? `Lună ${getMoonPhaseName(todayData.moonPhase).toLowerCase()}` : getMoonPhaseName(todayData.moonPhase)}
-                            </div>
-                            <div className="text-slate-400 text-[10px] md:text-xs mb-2 md:mb-4">{todayData.moonIllumination}% iluminare</div>
-
-                            <div className="inline-flex items-center gap-1.5 px-3 py-1 md:px-6 md:py-2 bg-amber-300/10 border border-amber-200/25 rounded-full mb-2 md:mb-3">
-                                <div className="w-1.5 h-1.5 rounded-full bg-amber-300 animate-pulse" />
-                                <span className="text-amber-100 font-bold text-[10px] md:text-sm uppercase tracking-wide">Activitate {todayData.overallRating >= 4 ? 'Excelentă' : todayData.overallRating >= 3 ? 'Bună' : 'Medie'}</span>
-                            </div>
-
-                            <div className="flex justify-center gap-1">
-                                {[1, 2, 3, 4, 5].map(s => (
-                                    <svg key={s} className={`w-3.5 h-3.5 md:w-5 md:h-5 ${s <= todayData.overallRating ? 'text-amber-300' : 'text-slate-700'}`} fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Background Glow */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 bg-amber-400/5 blur-[80px] rounded-full pointer-events-none" />
-                    </div>
-
-                    {/* Right: Unified day plan */}
-                    <div className="animate-soft-rise lg:col-span-8 card-panel taste-surface p-4 md:p-6 flex flex-col gap-5" style={{ '--stagger': 4 } as CSSProperties}>
-                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                            <div>
-                                <p className="text-[10px] uppercase tracking-[0.22em] text-amber-200/75 font-bold">Planul zilei</p>
-                                <h2 className="mt-1 text-2xl md:text-3xl font-display font-bold text-white">Fereastră, grafic și ore</h2>
-                            </div>
-                            <div className="rounded-2xl border border-amber-200/20 bg-amber-300/10 px-4 py-3">
-                                <p className="text-[10px] uppercase tracking-[0.18em] text-amber-100/75 font-bold">Recomandat</p>
-                                <p className="mt-1 font-mono text-2xl font-bold text-white">{formatTime(bestStart)} <span className="text-amber-200">→</span> {formatTime(bestEnd)}</p>
-                            </div>
-                        </div>
-
-                        <div className="grid gap-3 md:grid-cols-3">
-                            {todayData.majorPeriods.map((period, index) => (
-                                <div key={index} className="rounded-2xl border border-white/10 bg-white/[0.045] p-3">
-                                    <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400">Majoră {index + 1}</p>
-                                    <p className="mt-1 font-mono text-lg font-bold text-white">{formatTime(period.start)} <span className="text-amber-200">→</span> {formatTime(period.end)}</p>
-                                    {isGoldenPeriod(period, todayData) && <div className="mt-1"><GoldenWindowBadge /></div>}
-                                </div>
-                            ))}
-                            <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-3">
-                                <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400">Evită</p>
-                                <p className="mt-1 font-mono text-lg font-bold text-slate-200">{formatTime(badStart)} <span className="text-slate-500">→</span> {formatTime(badEnd)}</p>
-                            </div>
-                        </div>
-
-                        <ActivityGraph majorPeriods={todayData.majorPeriods} minorPeriods={todayData.minorPeriods} showHeader={false} />
-
-                        <BiteScoreChart day={todayData} pressureTrend6h={pressure.trend6h} isToday />
-
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                            {[
-                                { label: 'Răsărit soare', value: formatTime(todayData.sunrise) },
-                                { label: 'Apus soare', value: formatTime(todayData.sunset) },
-                                { label: 'Răsărit lună', value: todayData.moonrise ? formatTime(todayData.moonrise) : '--:--' },
-                                { label: 'Apus lună', value: todayData.moonset ? formatTime(todayData.moonset) : '--:--' },
-                            ].map((item) => (
-                                <div key={item.label} className="rounded-2xl border border-white/10 bg-white/[0.045] p-3">
-                                    <p className="text-[9px] md:text-[10px] uppercase text-slate-400 font-bold tracking-wider">{item.label}</p>
-                                    <p className="mt-1 text-base md:text-xl font-mono text-white">{item.value}</p>
-                                </div>
-                            ))}
-                        </div>
-
-                        <PressureTrendCard history={pressure} currentPressure={weather.pressure} />
-                    </div>
+                {/* Conditii meteo + specii active (design Solunar Mobile) */}
+                <div className="mb-8 grid gap-4 md:grid-cols-2 md:items-start">
+                    <ConditionsCard weather={weather} history={pressure} advice={advice} />
+                    <SpeciesChips fish={getActiveFish(dayData.date, dayData.moonPhase)} />
                 </div>
 
                 <section className="mb-6 grid gap-3 md:grid-cols-[1.2fr_0.8fr]">
