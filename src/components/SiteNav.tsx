@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 function navState(pathname: string, href: string) {
     const active = href === '/' ? pathname === '/' : pathname.startsWith(href);
@@ -16,6 +17,14 @@ function navState(pathname: string, href: string) {
 // headers(), so every page can be statically rendered / ISR-cached.
 export default function SiteNav() {
     const pathname = usePathname() || '/';
+    // Ancora curenta (#prognoza/#specii/#jurnal) pentru tab-ul activ de jos
+    const [hash, setHash] = useState('');
+    useEffect(() => {
+        const sync = () => setHash(window.location.hash);
+        sync();
+        window.addEventListener('hashchange', sync);
+        return () => window.removeEventListener('hashchange', sync);
+    }, [pathname]);
 
     return (
         <>
@@ -58,7 +67,12 @@ export default function SiteNav() {
                     { label: 'Specii', href: '/#specii' },
                     { label: 'Jurnal', href: '/#jurnal' },
                 ].map((t) => {
-                    const active = t.href === '/' ? pathname === '/' : (!t.href.includes('#') && pathname.startsWith(t.href));
+                    const anchor = t.href.includes('#') ? t.href.slice(t.href.indexOf('#')) : '';
+                    const active = anchor
+                        ? pathname === '/' && hash === anchor
+                        : t.href === '/'
+                            ? pathname === '/' && !hash
+                            : pathname.startsWith(t.href);
                     return (
                         <a
                             key={t.label}
