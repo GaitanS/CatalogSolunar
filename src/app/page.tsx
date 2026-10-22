@@ -280,7 +280,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 <AdUnit slotId="2812628769" format="horizontal" className="mb-6" />
 
                 {/* SEO hero: H1 + descriere — continutul care claseaza pagina, sub ecranul-aplicatie */}
-                <section className="mb-6 md:mb-8">
+                <section className="cv-auto mb-6 md:mb-8">
                     <div className="card-panel taste-surface relative overflow-hidden p-5 sm:p-6 md:p-8">
                         <div className="absolute -right-20 -top-24 h-56 w-56 rounded-full bg-amber-300/10 blur-3xl pointer-events-none" />
                         <h1 className="relative max-w-[14ch] text-3xl md:text-5xl font-display font-extrabold leading-none tracking-tight text-white">
@@ -292,7 +292,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                     </div>
                 </section>
 
-                <section className="mb-6 grid gap-3 md:grid-cols-[1.2fr_0.8fr]">
+                <section className="cv-auto mb-6 grid gap-3 md:grid-cols-[1.2fr_0.8fr]">
                     <Link
                         href={priorityMonth.href}
                         className="interactive-lift taste-surface relative overflow-hidden rounded-2xl border border-amber-300/30 bg-amber-300/10 p-4 md:p-5 group"
@@ -335,7 +335,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                     </span>
                 </Link>
 
-                <section className="mb-6 grid md:grid-cols-[1.15fr_0.85fr] gap-3">
+                <section className="cv-auto mb-6 grid md:grid-cols-[1.15fr_0.85fr] gap-3">
                     <Link
                         href={nextMonth.href}
                         className="interactive-lift taste-surface relative overflow-hidden rounded-2xl border border-amber-400/30 bg-amber-400/10 p-4 md:p-5 group"
@@ -367,13 +367,13 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 </section>
 
                 {/* Forecast Stripes - Lazy loaded */}
-                <div id="prognoza" className="scroll-mt-20">
+                <div id="prognoza" className="cv-auto scroll-mt-20">
                     <LazyForecast weekData={weekData} />
                 </div>
 
                 {/* Info Cards Bottom */}
                 <h2 className="text-lg md:text-xl font-display font-bold text-white mb-4">Detalii Activitate Pescuit</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 pb-8">
+                <div className="cv-auto grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 pb-8">
                     {/* Card 1 */}
                     <div className="card-glass taste-surface p-4 min-h-[120px] flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 justify-between group hover:bg-white/[0.075] transition-colors">
                         <div className="flex justify-between items-start w-full">
@@ -416,13 +416,13 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 <LazyAdUnit slotId="6301173988" format="rectangle" className="mb-8 md:mb-12" />
 
                 {/* Jurnal de capturi — statistica personala a pescarului, salvata local in browser */}
-                <section id="jurnal" className="mb-8 scroll-mt-20 md:mb-12 max-w-2xl">
+                <section id="jurnal" className="cv-auto mb-8 scroll-mt-20 md:mb-12 max-w-2xl">
                     <h2 className="text-lg md:text-xl font-display font-bold text-white mb-4">Jurnalul Tău de Capturi</h2>
                     <CatchJournal lat={lat} lng={lng} locationName={locationName} />
                 </section>
 
                 {/* Solunar pe Luni - target monthly search queries */}
-                <section className="mb-8 md:mb-12">
+                <section className="cv-auto mb-8 md:mb-12">
                     <h2 className="text-lg md:text-xl font-display font-bold text-white mb-4">Solunar {today.getFullYear()} pe Luni</h2>
                     <Link
                         href={priorityMonth.href}
@@ -453,7 +453,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 </section>
 
                 {/* Orașe Populare - internal links for city pages */}
-                <section className="mb-8 md:mb-12">
+                <section className="cv-auto mb-8 md:mb-12">
                     <h2 className="text-lg md:text-xl font-display font-bold text-white mb-4">Calendar Solunar pe Orașe</h2>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
                         {getAllCities().slice(0, 12).map((city) => (
@@ -470,7 +470,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 </section>
 
                 {/* Locuri de Pescuit - internal links */}
-                <section className="mb-8 md:mb-12">
+                <section className="cv-auto mb-8 md:mb-12">
                     <h2 className="text-lg md:text-xl font-display font-bold text-white mb-4">Locuri de Pescuit Populare</h2>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
                         {getAllLocations().slice(0, 8).map((loc) => (
@@ -494,7 +494,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 </section>
 
                 {/* Articole Populare - internal links for blog */}
-                <section className="mb-8 md:mb-12">
+                <section className="cv-auto mb-8 md:mb-12">
                     <h2 className="text-lg md:text-xl font-display font-bold text-white mb-4">Ghiduri de Pescuit</h2>
                     <div className="grid md:grid-cols-3 gap-3 md:gap-4">
                         {getAllArticles().slice(0, 6).map((article) => (
@@ -518,7 +518,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 </section>
 
                 {/* SEO Text Content */}
-                <section className="mb-8 md:mb-12 card-panel taste-surface p-6 md:p-8">
+                <section className="cv-auto mb-8 md:mb-12 card-panel taste-surface p-6 md:p-8">
                     <h2 className="text-lg md:text-xl font-display font-bold text-white mb-3">Ce este Calendarul Solunar?</h2>
                     <div className="text-slate-300 text-sm leading-relaxed space-y-3">
                         <p>
@@ -544,7 +544,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 <LazyAdUnit slotId="1044977874" format="fluid" layout="in-article" className="mb-8 md:mb-12" />
 
                 {/* Cum se citeste solunarul - educational content for SEO depth */}
-                <section className="mb-8 md:mb-12 card-panel taste-surface p-6 md:p-8">
+                <section className="cv-auto mb-8 md:mb-12 card-panel taste-surface p-6 md:p-8">
                     <h2 className="text-lg md:text-xl font-display font-bold text-white mb-3">Cum se Citește Tabelul Solunar?</h2>
                     <div className="text-slate-300 text-sm leading-relaxed space-y-3">
                         <p>
@@ -564,7 +564,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 </section>
 
                 {/* Sezon Pescuit - target seasonal queries */}
-                <section className="mb-8 md:mb-12 card-panel taste-surface p-6 md:p-8">
+                <section className="cv-auto mb-8 md:mb-12 card-panel taste-surface p-6 md:p-8">
                     <h2 className="text-lg md:text-xl font-display font-bold text-white mb-3">Sezon Pescuit {today.getFullYear()} — Când se Deschide?</h2>
                     <div className="text-slate-300 text-sm leading-relaxed space-y-3">
                         <p>
@@ -585,7 +585,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 <LazyAdUnit slotId="2812628769" format="auto" className="mb-8 md:mb-12" />
 
                 {/* FAQ Section with Schema Markup */}
-                <FAQSection />
+                <div className="cv-auto"><FAQSection /></div>
 
             </div >
         </div >

@@ -66,12 +66,23 @@
     border-radius: 20px;
   }
 
+  /* Below-the-fold homepage sections: the browser skips their layout and
+     paint until they near the viewport, so the first frame is not held back
+     by the long SEO content. Text stays in the DOM for crawlers. */
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
+  }
+
   .animate-cs-pulse {
     animation: csPulse 2.2s ease-in-out infinite;
   }
 
+  /* Slides a two-tile texture strip on the compositor. Animating
+     background-position instead repaints the moon on every frame. */
   .animate-moon-spin {
     animation: csMoonSpin 60s linear infinite;
+    will-change: transform;
   }
 
   @keyframes csPulse {
@@ -80,8 +91,8 @@
   }
 
   @keyframes csMoonSpin {
-    from { background-position-x: 0; }
-    to { background-position-x: -400px; }
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-400px, 0, 0); }
   }
 
   @keyframes slideUp {
@@ -193,6 +204,8 @@
   .animate-slide-up,
   .animate-soft-rise,
   .animate-breathe,
+  .animate-moon-spin,
+  .animate-cs-pulse,
   .interactive-lift {
     animation: none !important;
     transition: none !important;

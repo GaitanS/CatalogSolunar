@@ -6,6 +6,7 @@ import LazyBackground from "@/components/LazyBackground";
 import ClientProviders from "@/components/ClientProviders";
 import SchemaMarkup from "@/components/SchemaMarkup";
 import SiteNav from "@/components/SiteNav";
+import AdSenseScript from "@/components/AdSenseScript";
 
 const outfit = Outfit({
     subsets: ["latin", "latin-ext"],
@@ -75,13 +76,6 @@ export default function RootLayout({
     return (
         <html lang="ro">
             <head>
-                {process.env.NODE_ENV === 'production' && (
-                    <script
-                        async
-                        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4509784482094331"
-                        crossOrigin="anonymous"
-                    />
-                )}
                 <meta name="google-adsense-account" content="ca-pub-4509784482094331" />
                 {process.env.NODE_ENV === 'production' && (
                     <>
@@ -97,6 +91,7 @@ export default function RootLayout({
             </head>
             <body className={`${openSans.variable} ${outfit.variable} font-body bg-night-950 text-slate-100 min-h-screen antialiased selection:bg-moon selection:text-night-950`}>
                 <ClientProviders>
+                    <AdSenseScript />
                     {/* Constelatiile doar pe desktop — designul mobil are stelele lui statice */}
                     <div className="hidden md:block">
                         <LazyBackground />

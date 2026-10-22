@@ -13,6 +13,7 @@ const nextConfig = {
     },
     experimental: {
         optimizeCss: true,
+        inlineCss: true,
         optimizePackageImports: ['three', 'suncalc'],
     },
     allowedDevOrigins: ['127.0.0.1', 'localhost'],

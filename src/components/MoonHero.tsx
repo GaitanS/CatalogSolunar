@@ -30,6 +30,8 @@ export default function MoonHero({ phaseName, illumination, moonAgeDays }: MoonH
 
     return (
         <div className="relative flex flex-col items-center px-0 pb-1 pt-4">
+            {/* The moon is the LCP element; React hoists this preload into <head>. */}
+            <link rel="preload" as="image" href="/moon-texture-512.webp" fetchPriority="high" />
             {STARS.map((st, i) => (
                 <span
                     key={i}
@@ -52,8 +54,9 @@ export default function MoonHero({ phaseName, illumination, moonAgeDays }: MoonH
                 style={{ boxShadow: '0 0 70px rgba(242,206,114,0.16), inset 0 0 26px rgba(0,0,0,0.55)' }}
             >
                 <div
-                    className="animate-moon-spin absolute inset-0 rounded-full"
+                    className="animate-moon-spin absolute inset-y-0 left-0"
                     style={{
+                        width: 800,
                         backgroundImage: 'url(/moon-texture-512.webp)',
                         backgroundSize: 'auto 100%',
                         backgroundRepeat: 'repeat-x',
