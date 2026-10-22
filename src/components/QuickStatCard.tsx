@@ -8,7 +8,7 @@ interface QuickStatCardProps {
 
 export default function QuickStatCard({ icon, label, value, subtext, colorClass }: QuickStatCardProps) {
     return (
-        <div className="interactive-lift min-w-[118px] p-3 rounded-2xl bg-[#151b25]/86 border border-white/10 flex flex-col items-start justify-center gap-2 snap-start text-left taste-surface">
+        <div className="interactive-lift min-w-[118px] p-3 glass-tile flex flex-col items-start justify-center gap-2 snap-start text-left taste-surface">
             <div className={`p-1.5 rounded-lg bg-white/[0.055] ${colorClass}`}>
                 {icon}
             </div>

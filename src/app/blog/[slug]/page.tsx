@@ -431,11 +431,11 @@ export default async function ArticlePage({ params }: Props) {
     const faqSchemaJson = faqSchema ? JSON.stringify(faqSchema) : null;
 
     return (
-        <div className="min-h-screen py-12 md:py-20">
+        <div className="min-h-screen pb-12 pt-4 md:pt-6">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: articleSchemaJson }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchemaJson }} />
             {faqSchemaJson && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqSchemaJson }} />}
-            <div className="container-custom px-4">
+            <div className="container-custom">
                 <div className="max-w-3xl mx-auto">
                     {/* Breadcrumb */}
                     <nav className="flex items-center gap-2 text-sm text-night-400 mb-8">
@@ -456,7 +456,7 @@ export default async function ArticlePage({ params }: Props) {
                                 {article.readTime} min citire
                             </span>
                         </div>
-                        <h1 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
+                        <h1 className="text-3xl md:text-4xl font-editorial text-white mb-4 tracking-tight">
                             {cleanArticleTitle}
                         </h1>
                         <p className="text-lg text-night-300 mb-6">
@@ -533,7 +533,7 @@ export default async function ArticlePage({ params }: Props) {
                             {article.keywords.map((keyword) => (
                                 <span
                                     key={keyword}
-                                    className="px-3 py-1 bg-night-800 text-night-300 rounded-full text-xs"
+                                    className="glass-chip px-3 py-1 text-slate-300 rounded-full text-xs"
                                 >
                                     {keyword}
                                 </span>

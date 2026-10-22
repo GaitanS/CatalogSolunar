@@ -113,16 +113,16 @@ export default function LunarPage() {
     };
 
     return (
-        <div className="min-h-[100dvh] py-12 md:py-20">
+        <div className="min-h-[100dvh] pb-12 pt-4 md:pt-6">
             <JsonLd data={lunarSchema} />
             <Breadcrumbs items={[
                 { label: 'Acasă', href: '/' },
                 { label: 'Calendar Lunar' },
             ]} />
-            <div className="container-custom px-4">
+            <div className="container-custom">
                 {/* Hero */}
                 <div className="mb-12 max-w-3xl">
-                    <h1 className="text-4xl md:text-6xl font-display font-bold tracking-tight leading-none text-white mb-5">
+                    <h1 className="text-4xl md:text-6xl font-editorial tracking-tight leading-none text-white mb-5">
                         Faza Lunii Azi <span className="text-moon capitalize">{monthName}</span>
                     </h1>
                     <p className="text-night-300 text-base md:text-lg leading-relaxed max-w-[65ch]">

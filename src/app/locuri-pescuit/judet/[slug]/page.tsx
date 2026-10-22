@@ -112,9 +112,9 @@ export default async function CountyPage({
                     { label: `Judet ${county}` },
                 ]}
             />
-            <div className="container-custom px-4 relative z-10">
+            <div className="container-custom relative z-10">
                 <div className="text-center mb-8 md:mb-12">
-                    <h1 className="text-3xl md:text-5xl font-display font-bold text-white mb-3">
+                    <h1 className="text-3xl md:text-5xl font-editorial text-white mb-3 tracking-tight">
                         Locuri Pescuit <span className="text-amber-400">{county}</span>
                     </h1>
                     <p className="text-night-300 text-sm md:text-lg max-w-2xl mx-auto">

@@ -80,7 +80,7 @@ export default function CatchJournal({ lat, lng, locationName }: CatchJournalPro
 
     return (
         <div className="space-y-3">
-            <div className="p-4 rounded-2xl bg-[#151b25]/86 border border-white/10 taste-surface">
+            <div className="dc-card p-4">
                 <p className="text-[10px] text-night-400 uppercase font-bold tracking-wider">Adaugă captură</p>
                 <div className="flex gap-1.5 overflow-x-auto mt-2.5 pb-1 -mx-1 px-1 [scrollbar-width:none]">
                     {species.map((s, i) => (
@@ -142,7 +142,7 @@ export default function CatchJournal({ lat, lng, locationName }: CatchJournalPro
                         ? 'text-sky-300 bg-sky-300/10 border-sky-300/30'
                         : 'text-night-300 bg-white/[0.06] border-white/15';
                 return (
-                    <div key={c.ts} className="flex items-center gap-2.5 px-3.5 py-3 rounded-2xl bg-[#151b25]/86 border border-white/10">
+                    <div key={c.ts} className="flex items-center gap-2.5 px-3.5 py-3 glass-tile">
                         <span className={`w-[54px] text-center text-[9px] font-bold tracking-wider px-1.5 py-1 rounded-md border shrink-0 ${badgeClass}`}>
                             {badge}
                         </span>

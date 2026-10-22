@@ -161,13 +161,13 @@ export default function AnnualSolunarLanding({ page }: { page: AnnualSeoLandingP
     return (
         <div className="relative overflow-hidden pb-20 pt-3 md:pt-8">
             <AnnualJsonLd page={page} />
-            <div className="container-custom px-4 relative z-10">
+            <div className="container-custom relative z-10">
                 <section className="card-panel taste-surface mb-6 p-5 md:p-8">
                     <div className="inline-flex w-fit items-center gap-2 rounded-full border border-amber-200/20 bg-amber-200/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.22em] text-amber-100">
                         <span className="h-1.5 w-1.5 rounded-full bg-amber-300" />
                         Ghid anual
                     </div>
-                    <h1 className="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-tight text-white md:text-6xl">
+                    <h1 className="mt-5 max-w-4xl font-editorial text-4xl leading-tight text-white md:text-6xl tracking-tight">
                         {page.title}
                     </h1>
                     <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-300 md:text-lg">

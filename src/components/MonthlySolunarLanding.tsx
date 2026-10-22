@@ -195,7 +195,7 @@ export default function MonthlySolunarLanding({ page }: { page: MonthlySeoLandin
     return (
         <div className="relative overflow-hidden pb-20 pt-3 md:pt-8">
             <MonthJsonLd page={page} topDays={topDays} />
-            <div className="container-custom px-4 relative z-10">
+            <div className="container-custom relative z-10">
                 <section className="card-panel taste-surface mb-6 md:mb-8 p-5 md:p-8">
                     <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                         <div className="inline-flex w-fit items-center gap-2 rounded-full border border-amber-200/20 bg-amber-200/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.22em] text-amber-100">
@@ -207,7 +207,7 @@ export default function MonthlySolunarLanding({ page }: { page: MonthlySeoLandin
                         </Link>
                     </div>
 
-                    <h1 className="max-w-4xl font-display text-4xl font-extrabold leading-tight text-white md:text-6xl">
+                    <h1 className="max-w-4xl font-editorial text-4xl leading-tight text-white md:text-6xl tracking-tight">
                         {page.title}
                     </h1>
                     <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-300 md:text-lg">

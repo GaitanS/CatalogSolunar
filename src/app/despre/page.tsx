@@ -13,11 +13,11 @@ export const metadata: Metadata = {
 
 export default function DesprePage() {
     return (
-        <div className="min-h-screen py-12 md:py-20">
-            <div className="container-custom px-4">
+        <div className="min-h-screen pb-12 pt-4 md:pt-6">
+            <div className="container-custom">
                 {/* Hero */}
                 <div className="text-center mb-12 md:mb-16">
-                    <h1 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">
+                    <h1 className="text-3xl md:text-5xl font-editorial text-white mb-4 tracking-tight">
                         Despre <span className="text-moon">Calendar Solunar</span>
                     </h1>
                     <p className="text-night-300 text-lg max-w-2xl mx-auto">

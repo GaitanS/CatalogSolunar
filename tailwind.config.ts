@@ -28,8 +28,11 @@ const config: Config = {
                 },
             },
             fontFamily: {
-                display: ['var(--font-outfit)', 'sans-serif'],
-                body: ['var(--font-open-sans)', 'sans-serif'],
+                display: ['var(--font-sora)', 'system-ui', 'sans-serif'],
+                body: ['var(--font-sora)', 'system-ui', 'sans-serif'],
+                // Times and numbers: Sora with tabular figures instead of a system monospace.
+                mono: ['var(--font-sora)', 'system-ui', 'sans-serif'],
+                editorial: ['var(--font-fraunces)', 'Georgia', 'serif'],
             },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

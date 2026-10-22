@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getAllLocations, getAllCounties, getLocationsByCounty, countyToSlug } from '@/data/fishingLocations';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import LocationExplorer from '@/components/LocationExplorer';
 import type { Metadata } from 'next';
 
 const year = new Date().getFullYear();
@@ -27,133 +28,82 @@ export const metadata: Metadata = {
     },
 };
 
-const typeLabels: Record<string, string> = {
-    lac: 'Lac',
-    balta: 'Balta',
-    acumulare: 'Acumulare',
-    iaz: 'Iaz',
-    rau: 'Rau',
-    canal: 'Canal',
-    delta: 'Delta',
-};
-
-const typeColors: Record<string, string> = {
-    lac: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
-    balta: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
-    acumulare: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
-    iaz: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
-    rau: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
-    canal: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
-    delta: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
-};
-
 export default function LocuriPescuitPage() {
     const counties = getAllCounties();
     const allLocations = getAllLocations();
 
+    const explorerCounties = counties.map((county) => ({
+        name: county,
+        slug: countyToSlug(county),
+        locations: getLocationsByCounty(county).map((loc) => ({
+            slug: loc.slug,
+            name: loc.name,
+            locality: loc.locality,
+            type: loc.type,
+            fish: loc.fish,
+            paid: Boolean(loc.paid),
+        })),
+    }));
+    const stats = [
+        { value: allLocations.length, label: 'Locuri' },
+        { value: counties.length, label: 'Județe' },
+        { value: allLocations.filter(l => !l.paid).length, label: 'Gratuite' },
+        { value: allLocations.filter(l => l.paid).length, label: 'Cu taxă' },
+    ];
+
     return (
         <div className="pb-20 pt-4 md:pt-8 relative">
             <Breadcrumbs items={[{ label: 'Acasa', href: '/' }, { label: 'Locuri de Pescuit' }]} />
-            <div className="container-custom px-4 relative z-10">
-                <div className="text-center mb-8 md:mb-12">
-                    <h1 className="text-3xl md:text-5xl font-display font-bold text-white mb-3">
-                        Locuri de Pescuit <span className="text-amber-400">Romania</span>
-                    </h1>
-                    <p className="text-night-300 text-sm md:text-lg max-w-2xl mx-auto">
-                        Peste {allLocations.length} de locuri de pescuit verificate din toata Romania.
-                        Fiecare loc include coordonate GPS, specii de pesti si calendar solunar calculat pentru locatia exacta.
-                    </p>
+            <div className="container-custom relative z-10">
+                <div className="card-panel relative mb-6 overflow-hidden p-6 sm:p-8 lg:p-10">
+                    <div className="pointer-events-none absolute -left-20 -top-24 h-72 w-72 rounded-full bg-sky-300/10 blur-3xl" />
+                    <div className="relative grid grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-end">
+                        <div>
+                            <p className="eyebrow">Ghid de ape · GPS · solunar</p>
+                            <h1 className="mt-3 font-editorial text-4xl leading-[1.05] tracking-tight text-white md:text-6xl">
+                                Locuri de Pescuit <span className="gold-text">Romania</span>
+                            </h1>
+                            <p className="mt-5 max-w-[62ch] text-sm leading-relaxed text-slate-300 md:text-base">
+                                Peste {allLocations.length} de locuri de pescuit verificate din toata Romania.
+                                Fiecare loc include coordonate GPS, specii de pesti si calendar solunar calculat pentru locatia exacta.
+                            </p>
+                        </div>
+                        <div className="grid grid-cols-4 gap-2 lg:grid-cols-2 lg:gap-3">
+                            {stats.map((stat) => (
+                                <div key={stat.label} className="glass-tile px-2 py-3 text-center lg:px-4 lg:py-4">
+                                    <div className="text-xl font-bold tabular-nums text-moon md:text-3xl">{stat.value}</div>
+                                    <div className="mt-0.5 text-[10.5px] text-slate-400 md:text-xs">{stat.label}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-                    <div className="card-panel p-4 text-center">
-                        <div className="text-2xl md:text-3xl font-display font-bold text-amber-400">{allLocations.length}</div>
-                        <div className="text-night-400 text-xs">Locuri</div>
-                    </div>
-                    <div className="card-panel p-4 text-center">
-                        <div className="text-2xl md:text-3xl font-display font-bold text-amber-400">{counties.length}</div>
-                        <div className="text-night-400 text-xs">Judete</div>
-                    </div>
-                    <div className="card-panel p-4 text-center">
-                        <div className="text-2xl md:text-3xl font-display font-bold text-amber-400">{allLocations.filter(l => !l.paid).length}</div>
-                        <div className="text-night-400 text-xs">Gratuite</div>
-                    </div>
-                    <div className="card-panel p-4 text-center">
-                        <div className="text-2xl md:text-3xl font-display font-bold text-amber-400">{allLocations.filter(l => l.paid).length}</div>
-                        <div className="text-night-400 text-xs">Cu Taxa</div>
-                    </div>
-                </div>
-{/* Quick navigation by county — targets "balti pescuit [judet]" queries */}
-                <div className="card-panel p-4 md:p-6 mb-8">
-                    <h2 className="text-base md:text-lg font-display font-bold text-white mb-3">
-                        Salt rapid pe județe
-                    </h2>
-                    <div className="flex flex-wrap gap-2">
+                {/* Quick navigation by county — targets "balti pescuit [judet]" queries */}
+                <details className="card-panel group mb-6 p-4 md:p-5">
+                    <summary className="flex cursor-pointer list-none items-center justify-between gap-3 [&::-webkit-details-marker]:hidden">
+                        <h2 className="text-base font-bold text-white md:text-lg">Salt rapid pe județe</h2>
+                        <span className="glass-chip rounded-full px-3 py-1 text-xs font-semibold text-slate-300">
+                            {counties.length} județe
+                            <span className="ml-1 inline-block transition-transform group-open:rotate-180">▾</span>
+                        </span>
+                    </summary>
+                    <div className="mt-4 flex flex-wrap gap-2">
                         {counties.map((county) => (
                             <Link
                                 key={county}
                                 href={`/locuri-pescuit/judet/${countyToSlug(county)}`}
-                                className="px-3 py-1.5 bg-amber-500/10 border border-amber-500/20 rounded-full text-amber-300 text-xs hover:bg-amber-500/20 transition-colors"
+                                className="glass-chip rounded-full px-3 py-1.5 text-xs text-slate-300 transition-colors hover:text-amber-100"
                             >
-                                {county} ({getLocationsByCounty(county).length})
+                                {county} <span className="opacity-60">({getLocationsByCounty(county).length})</span>
                             </Link>
                         ))}
                     </div>
-                </div>
+                </details>
 
-                {counties.map((county, idx) => {
-                    const locations = getLocationsByCounty(county);
-                    return (
-                        <div key={county} className="mb-8">
-                            <h2 className="text-xl md:text-2xl font-display font-bold text-white mb-4 flex items-center gap-2 flex-wrap">
-                                <svg className="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                </svg>
-                                <Link
-                                    href={`/locuri-pescuit/judet/${countyToSlug(county)}`}
-                                    className="hover:text-amber-400 transition-colors"
-                                >
-                                    Județul {county}
-                                </Link>
-                                <span className="text-night-500 text-sm font-normal">({locations.length} locuri)</span>
-                                <Link
-                                    href={`/locuri-pescuit/judet/${countyToSlug(county)}`}
-                                    className="text-amber-400 hover:underline text-xs font-normal ml-auto"
-                                >
-                                    Vezi toate &rarr;
-                                </Link>
-                            </h2>
-                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                {locations.map((loc) => (
-                                    <Link
-                                        key={loc.slug}
-                                        href={`/locuri-pescuit/${loc.slug}`}
-                                        className="card-panel p-4 hover:bg-white/5 transition-colors group"
-                                    >
-                                        <div className="flex items-start justify-between mb-2">
-                                            <h3 className="text-white font-bold group-hover:text-amber-400 transition-colors">{loc.name}</h3>
-                                            <span className={`text-[10px] px-2 py-0.5 rounded-full border ${typeColors[loc.type] || 'bg-white/10 text-night-300'}`}>
-                                                {typeLabels[loc.type] || loc.type}
-                                            </span>
-                                        </div>
-                                        <p className="text-night-400 text-xs mb-2">{loc.locality}</p>
-                                        <div className="flex flex-wrap gap-1">
-                                            {loc.fish.slice(0, 4).map((f, i) => (
-                                                <span key={i} className="text-[10px] px-1.5 py-0.5 bg-white/5 rounded text-night-300">{f}</span>
-                                            ))}
-                                            {loc.fish.length > 4 && (
-                                                <span className="text-[10px] px-1.5 py-0.5 bg-white/5 rounded text-night-500">+{loc.fish.length - 4}</span>
-                                            )}
-                                        </div>
-                                        {loc.paid && <span className="inline-block mt-2 text-[10px] px-2 py-0.5 bg-yellow-500/20 text-yellow-300 rounded-full border border-yellow-500/30">Cu taxa</span>}
-                                    </Link>
-                                ))}
-                            </div>
-                            
-                        </div>
-                    );
-                })}
-<div className="card-panel p-6 md:p-8 mt-8">
+                <LocationExplorer counties={explorerCounties} />
+
+                <div className="card-panel p-6 md:p-8 mt-8">
                     <h2 className="text-xl font-display font-bold text-white mb-4">Despre Locurile de Pescuit din Romania</h2>
                     <div className="text-night-300 text-sm leading-relaxed space-y-3">
                         <p>

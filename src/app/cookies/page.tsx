@@ -8,10 +8,10 @@ export const metadata: Metadata = {
 
 export default function CookiesPage() {
     return (
-        <div className="min-h-screen py-12 md:py-20">
-            <div className="container-custom px-4">
+        <div className="min-h-screen pb-12 pt-4 md:pt-6">
+            <div className="container-custom">
                 <div className="max-w-4xl mx-auto">
-                    <h1 className="text-3xl md:text-4xl font-display font-bold text-white mb-8">
+                    <h1 className="text-3xl md:text-4xl font-editorial text-white mb-8 tracking-tight">
                         Politica de Cookies
                     </h1>
 
@@ -43,7 +43,7 @@ export default function CookiesPage() {
                             <h2 className="text-xl font-display font-bold text-white mb-3">Tipuri de Cookie-uri Utilizate</h2>
 
                             <div className="mt-4 space-y-4">
-                                <div className="p-4 bg-night-900/50 rounded-xl border border-night-700">
+                                <div className="glass-tile p-4">
                                     <h3 className="font-bold text-white mb-2">🔧 Cookie-uri Esențiale</h3>
                                     <p className="text-sm">
                                         Necesare pentru funcționarea de bază a site-ului. Nu pot fi dezactivate.
@@ -51,7 +51,7 @@ export default function CookiesPage() {
                                     <p className="text-xs text-night-400 mt-2">Exemplu: preferințe de locație, stare sesiune</p>
                                 </div>
 
-                                <div className="p-4 bg-night-900/50 rounded-xl border border-night-700">
+                                <div className="glass-tile p-4">
                                     <h3 className="font-bold text-white mb-2">📊 Cookie-uri Analitice (Google Analytics)</h3>
                                     <p className="text-sm">
                                         Ne ajută să înțelegem cum interacționați cu site-ul, permițându-ne să îmbunătățim experiența.
@@ -59,7 +59,7 @@ export default function CookiesPage() {
                                     <p className="text-xs text-night-400 mt-2">Furnizor: Google | Durată: până la 2 ani</p>
                                 </div>
 
-                                <div className="p-4 bg-night-900/50 rounded-xl border border-night-700">
+                                <div className="glass-tile p-4">
                                     <h3 className="font-bold text-white mb-2">📢 Cookie-uri de Publicitate (Google AdSense)</h3>
                                     <p className="text-sm">
                                         Utilizate pentru a afișa reclame relevante pe baza intereselor dumneavoastră.

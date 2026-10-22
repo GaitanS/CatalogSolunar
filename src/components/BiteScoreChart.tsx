@@ -53,7 +53,7 @@ export default function BiteScoreChart({ day, pressureTrend6h = 0, isToday = tru
     }
 
     return (
-        <div className="p-4 rounded-2xl bg-[#151b25]/86 border border-white/10 taste-surface">
+        <div className="dc-card p-4">
             <div className="flex items-baseline justify-between">
                 <p className="text-[10px] text-night-400 uppercase font-bold tracking-wider">Scor mușcătură pe ore</p>
                 <p className="text-[11px] font-semibold text-amber-300 tabular-nums">

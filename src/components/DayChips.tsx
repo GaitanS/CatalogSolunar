@@ -28,7 +28,7 @@ export default function DayChips({ days, selected, locationQuery = '' }: DayChip
     };
 
     return (
-        <div className="scrollbar-hide -mx-1 flex gap-2 overflow-x-auto px-1 py-1">
+        <div className="scrollbar-hide -mx-4 -my-1 flex gap-2 overflow-x-auto px-4 py-2 sm:-mx-6 sm:px-6 lg:mx-0 lg:overflow-visible lg:px-0">
             {days.map((d, i) => {
                 const sel = i === selected;
                 return (
@@ -36,16 +36,16 @@ export default function DayChips({ days, selected, locationQuery = '' }: DayChip
                         key={i}
                         href={hrefFor(i)}
                         scroll={false}
-                        className="flex min-w-[48px] shrink-0 flex-col items-center rounded-[14px] px-1.5 pb-[7px] pt-2"
+                        className="flex min-w-[48px] shrink-0 flex-col items-center rounded-[14px] px-1.5 pb-[7px] pt-2 transition-colors lg:min-w-0 lg:flex-1 lg:rounded-2xl lg:py-2.5"
                         style={{
                             color: sel ? '#0A0F1C' : '#C7CEDD',
                             background: sel
                                 ? 'linear-gradient(180deg, #F5D98C, #E9BE5D)'
-                                : 'rgba(148,170,220,0.07)',
+                                : 'linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))',
                             border: sel
                                 ? '1px solid rgba(242,206,114,0.8)'
-                                : '1px solid rgba(148,170,220,0.12)',
-                            boxShadow: sel ? '0 4px 18px rgba(242,206,114,0.25)' : 'none',
+                                : '1px solid rgba(255,255,255,0.08)',
+                            boxShadow: sel ? '0 8px 18px -8px rgba(242,206,114,0.6), inset 0 1px 0 rgba(255,255,255,0.5)' : 'inset 0 1px 0 rgba(255,255,255,0.05)',
                         }}
                     >
                         <span className="text-[10px] uppercase tracking-[0.08em] opacity-70">{d.dow}</span>

@@ -8,10 +8,10 @@ export const metadata: Metadata = {
 
 export default function TermeniPage() {
     return (
-        <div className="min-h-screen py-12 md:py-20">
-            <div className="container-custom px-4">
+        <div className="min-h-screen pb-12 pt-4 md:pt-6">
+            <div className="container-custom">
                 <div className="max-w-4xl mx-auto">
-                    <h1 className="text-3xl md:text-4xl font-display font-bold text-white mb-8">
+                    <h1 className="text-3xl md:text-4xl font-editorial text-white mb-8 tracking-tight">
                         Termeni și Condiții
                     </h1>
 

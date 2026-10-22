@@ -2,6 +2,208 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ------------------------------------------------------------------
+   "Noapte pe lac" design system
+   Real backdrop-filter glass is reserved for the chrome (header, bottom
+   bar, sheets): it is expensive to composite on phones. Cards use a
+   "fake glass" recipe: layered translucent gradients over the fixed
+   night-lake backdrop, an inner top highlight and a luminous 1px edge.
+   ------------------------------------------------------------------ */
+
+:root {
+  --gold: 242 206 114;
+  --moonblue: 147 180 232;
+  --ink: #eef1f7;
+  --muted: #8c96ab;
+  --night: #05080f;
+  --card-radius: 22px;
+  --card-fill:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.018) 38%, rgba(255, 255, 255, 0.01) 100%),
+    rgba(15, 23, 42, 0.5);
+  --card-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 26px 50px -34px rgba(0, 0, 0, 0.8);
+  --edge: linear-gradient(160deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05) 28%, rgba(255, 255, 255, 0) 55%, rgba(147, 180, 232, 0.12));
+}
+
+@layer base {
+  html {
+    background-color: var(--night);
+    color-scheme: dark;
+  }
+
+  body {
+    /* Transparent so the fixed sky/lake layer below shows through. */
+    background: transparent;
+    @apply min-h-screen text-slate-100 antialiased overflow-x-hidden;
+  }
+
+  /* Night sky fading into the lake, with the moon glow top-right and its
+     gold path on the water. One fixed, composited layer: no repaint on scroll. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    transform: translateZ(0);
+    background:
+      radial-gradient(520px 420px at 82% -4%, rgba(255, 233, 168, 0.13), transparent 70%),
+      radial-gradient(900px 520px at 78% 6%, rgba(147, 180, 232, 0.1), transparent 72%),
+      radial-gradient(240px 520px at 80% 74%, rgba(242, 206, 114, 0.075), transparent 72%),
+      radial-gradient(1200px 380px at 50% 64%, rgba(30, 64, 108, 0.32), transparent 70%),
+      linear-gradient(180deg, #04070e 0%, #070c18 34%, #0a1424 58%, #081221 72%, #05090f 100%);
+  }
+
+  /* Static star field, fading out towards the horizon. */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    transform: translateZ(0);
+    opacity: 0.75;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cg fill='%23fff'%3E%3Ccircle cx='22' cy='34' r='.9' opacity='.7'/%3E%3Ccircle cx='96' cy='12' r='.6' opacity='.5'/%3E%3Ccircle cx='150' cy='70' r='1.1' opacity='.8'/%3E%3Ccircle cx='212' cy='28' r='.7' opacity='.55'/%3E%3Ccircle cx='300' cy='54' r='.9' opacity='.7'/%3E%3Ccircle cx='336' cy='140' r='.6' opacity='.45'/%3E%3Ccircle cx='58' cy='128' r='.7' opacity='.5'/%3E%3Ccircle cx='118' cy='196' r='.5' opacity='.4'/%3E%3Ccircle cx='250' cy='164' r='1' opacity='.65'/%3E%3Ccircle cx='190' cy='250' r='.6' opacity='.45'/%3E%3Ccircle cx='30' cy='262' r='.8' opacity='.55'/%3E%3Ccircle cx='310' cy='292' r='.7' opacity='.5'/%3E%3Ccircle cx='86' cy='330' r='.5' opacity='.35'/%3E%3Ccircle cx='232' cy='336' r='.9' opacity='.6'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 360px 360px;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.7) 34%, transparent 58%);
+    mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.7) 34%, transparent 58%);
+  }
+
+  ::selection {
+    background: rgba(242, 206, 114, 0.85);
+    color: #05080f;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgba(242, 206, 114, 0.75);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Real glass: only for floating chrome. */
+  .glass {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.015)),
+      rgba(10, 16, 30, 0.62);
+    -webkit-backdrop-filter: blur(22px) saturate(170%);
+    backdrop-filter: blur(22px) saturate(170%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.03),
+      0 18px 40px -18px rgba(0, 0, 0, 0.75);
+  }
+
+  /* Fake glass for content cards (all three names share one surface). */
+  .dc-card,
+  .card-panel,
+  .card-glass {
+    position: relative;
+    background: var(--card-fill);
+    border: 1px solid rgba(255, 255, 255, 0.055);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+  }
+
+  .dc-card::before,
+  .card-panel::before,
+  .card-glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--edge);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Smaller inner tiles inside a card. */
+  .glass-tile {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015));
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .glass-chip {
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .glass-chip[data-active="true"],
+  .glass-chip[aria-current="page"],
+  .glass-chip[aria-pressed="true"] {
+    background: rgba(242, 206, 114, 0.14);
+    border-color: rgba(242, 206, 114, 0.32);
+    color: #f2ce72;
+  }
+
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.16em];
+    color: rgba(147, 180, 232, 0.85);
+  }
+
+  .text-muted {
+    color: var(--muted);
+  }
+
+  .gold-text {
+    background: linear-gradient(180deg, #ffe9a8, #f2ce72 55%, #d9ae4f);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+  }
+
+  /* Long-form text (blog articles, SEO sections). */
+  .prose-night {
+    @apply text-[15px] leading-7 text-slate-300;
+  }
+
+  .prose-night h2 {
+    @apply font-editorial text-2xl text-white mt-10 mb-3;
+  }
+
+  .prose-night h3 {
+    @apply font-display text-lg font-semibold text-white mt-7 mb-2;
+  }
+
+  .prose-night a {
+    color: #f2ce72;
+    text-decoration: underline;
+    text-decoration-color: rgba(242, 206, 114, 0.35);
+    text-underline-offset: 3px;
+  }
+
+  .mobile-bottom-nav {
+    display: flex;
+  }
+
+  .desktop-header {
+    display: none;
+  }
+
+  .site-nav-link[data-nav-active="true"] {
+    background: rgba(242, 206, 114, 0.14);
+    box-shadow: inset 0 0 0 1px rgba(242, 206, 114, 0.28);
+    color: #f2ce72;
+  }
+}
+
 @layer utilities {
   .animate-marquee {
     animation: marquee 25s linear infinite;
@@ -36,7 +238,10 @@
 
   .interactive-lift:hover {
     transform: translateY(-2px);
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 22px 46px -24px rgba(0, 0, 0, 0.8),
+      0 0 0 1px rgba(242, 206, 114, 0.14);
   }
 
   .interactive-lift:active {
@@ -44,26 +249,20 @@
   }
 
   .taste-surface {
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.08),
-      0 16px 36px -28px rgba(0, 0, 0, 0.7);
+    box-shadow: var(--card-shadow);
   }
 
   .ad-reserve {
     min-height: 90px;
-    border: 1px dashed rgba(245, 208, 111, 0.26);
+    border: 1px dashed rgba(242, 206, 114, 0.22);
     border-radius: 18px;
-    background:
-      linear-gradient(135deg, rgba(245, 208, 111, 0.06), rgba(52, 211, 153, 0.035)),
-      rgba(17, 24, 39, 0.46);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    background: rgba(15, 23, 42, 0.4);
   }
 
-  /* Suprafata de card din designul "Solunar Mobile" */
-  .dc-card {
-    background: rgba(148, 170, 220, 0.055);
-    border: 1px solid rgba(148, 170, 220, 0.12);
-    border-radius: 20px;
+  /* Times and numbers line up in tables and timelines. */
+  .font-mono {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
   }
 
   /* Below-the-fold homepage sections: the browser skips their layout and
@@ -83,6 +282,15 @@
   .animate-moon-spin {
     animation: csMoonSpin 60s linear infinite;
     will-change: transform;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
   @keyframes csPulse {
@@ -129,56 +337,6 @@
   }
 }
 
-
-:root {
-  --foreground-rgb: 255, 255, 255;
-}
-
-@layer base {
-  body {
-    background-color: #070c16;
-    background-image:
-      radial-gradient(1100px 760px at 50% 0%, rgba(11, 18, 36, 0.9) 0%, transparent 62%),
-      linear-gradient(180deg, #070c16 0%, #0a1120 52%, #0b1322 100%);
-    background-size: 100% 100%;
-    @apply min-h-screen text-slate-100 antialiased overflow-x-hidden;
-  }
-}
-
-@layer components {
-  .container-custom {
-    @apply w-full max-w-[1400px] mx-auto px-4 sm:px-6;
-  }
-
-  /* Suprafete aliniate la designul Solunar Mobile (dc-card) */
-  .card-panel {
-    background: rgba(148, 170, 220, 0.055);
-    border: 1px solid rgba(148, 170, 220, 0.12);
-    border-radius: 20px;
-  }
-
-  .card-glass {
-    background: rgba(148, 170, 220, 0.055);
-    border: 1px solid rgba(148, 170, 220, 0.12);
-    border-radius: 20px;
-    @apply backdrop-blur-sm;
-  }
-
-  .mobile-bottom-nav {
-    display: flex;
-  }
-
-  .desktop-header {
-    display: none;
-  }
-
-  .site-nav-link[data-nav-active="true"] {
-    background: rgba(242, 206, 114, 0.13);
-    box-shadow: inset 0 0 0 1px rgba(242, 206, 114, 0.25);
-    color: #f2ce72;
-  }
-}
-
 @media (min-width: 768px) {
   .desktop-header {
     display: block;
@@ -189,14 +347,19 @@
   }
 }
 
-/* Custom horizontal scrollbar for forecast */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
+/* Users who ask for less transparency get solid surfaces. */
+@media (prefers-reduced-transparency: reduce) {
+  .glass {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: #0c1426;
+  }
 }
 
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .glass {
+    background: rgba(10, 16, 30, 0.94);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

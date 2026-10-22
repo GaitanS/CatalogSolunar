@@ -140,12 +140,12 @@ export default async function AziPage({ searchParams }: { searchParams: Promise<
                 { label: 'Acasă', href: '/' },
                 { label: 'Solunar Azi' },
             ]} />
-            <div className="container-custom px-4 relative z-10">
+            <div className="container-custom relative z-10">
                 {/* Hero */}
                 <div className="mb-8 md:mb-10 card-panel taste-surface p-5 md:p-8">
                     <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                         <div>
-                            <h1 className="text-4xl md:text-6xl font-display font-bold tracking-tight leading-none text-white mb-4">
+                            <h1 className="text-4xl md:text-6xl font-editorial tracking-tight leading-none text-white mb-4">
                                 Solunar <span className="text-amber-400">Azi</span>
                             </h1>
                             <p className="text-slate-400 text-sm md:text-base mb-2">{capitalizedDate} &bull; {locationName}</p>

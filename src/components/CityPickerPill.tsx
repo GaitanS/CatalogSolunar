@@ -45,8 +45,7 @@ export default function CityPickerPill() {
         <>
             <button
                 onClick={() => setOpen(true)}
-                className="flex items-center gap-[7px] rounded-full px-[13px] py-2 text-[12.5px] font-semibold text-[#EEF1F7]"
-                style={{ background: 'rgba(148,170,220,0.09)', border: '1px solid rgba(148,170,220,0.16)' }}
+                className="glass-chip flex items-center gap-[7px] rounded-full px-[13px] py-2 text-[12.5px] font-semibold text-[#EEF1F7] transition-colors hover:bg-white/10 md:px-4 md:py-2.5 md:text-[13.5px]"
             >
                 <span
                     className="h-1.5 w-1.5 rounded-full"
@@ -64,15 +63,11 @@ export default function CityPickerPill() {
                         onClick={() => setOpen(false)}
                     />
                     <div
-                        className="fixed inset-x-0 bottom-0 z-[81] max-h-[72%] overflow-y-auto px-4 pb-6 pt-3"
-                        style={{
-                            background: '#0D1526',
-                            border: '1px solid rgba(148,170,220,0.16)',
-                            borderBottom: 'none',
-                            borderRadius: '24px 24px 0 0',
-                        }}
+                        role="dialog"
+                        aria-label="Alege locația"
+                        className="glass fixed inset-x-0 bottom-0 z-[81] max-h-[72%] overflow-y-auto rounded-t-[26px] px-4 pb-6 pt-3 md:inset-x-auto md:bottom-auto md:left-1/2 md:top-24 md:max-h-[70vh] md:w-[440px] md:-translate-x-1/2 md:rounded-[26px] md:pt-5"
                     >
-                        <div className="mx-auto mb-3.5 h-1 w-[38px] rounded" style={{ background: 'rgba(148,170,220,0.3)' }} />
+                        <div className="mx-auto mb-3.5 h-1 w-[38px] rounded md:hidden" style={{ background: 'rgba(148,170,220,0.3)' }} />
                         <div className="mb-3 px-1 text-[15px] font-bold text-white">Alege locația</div>
                         <button
                             onClick={useMyLocation}

@@ -106,10 +106,10 @@ export default function RasaritApusPage() {
         <div className="pb-20 pt-4 md:pt-8 relative">
             <JsonLd data={schema} />
             <Breadcrumbs items={[{ label: 'Acasă', href: '/' }, { label: 'Răsărit și Apus Soare' }]} />
-            <div className="container-custom px-4 relative z-10">
+            <div className="container-custom relative z-10">
                 {/* Hero */}
                 <div className="mb-8 card-panel taste-surface p-5 md:p-8">
-                    <h1 className="text-3xl md:text-5xl font-display font-bold tracking-tight leading-none text-white mb-3">
+                    <h1 className="text-3xl md:text-5xl font-editorial tracking-tight leading-none text-white mb-3">
                         Răsărit și Apus <span className="text-amber-400">Soare Azi</span>
                     </h1>
                     <p className="text-slate-400 text-sm md:text-base mb-6">{capitalizedDate} &bull; România</p>

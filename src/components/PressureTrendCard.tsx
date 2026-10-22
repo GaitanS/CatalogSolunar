@@ -29,7 +29,7 @@ export default function PressureTrendCard({ history, currentPressure }: Pressure
     }
 
     return (
-        <div className="p-4 rounded-2xl bg-[#151b25]/86 border border-white/10 taste-surface">
+        <div className="dc-card p-4">
             <div className="flex items-center justify-between">
                 <p className="text-[10px] text-night-400 uppercase font-bold tracking-wider">Presiune ultimele 30h</p>
                 <p className={`text-xs font-semibold tabular-nums ${toneClass}`}>

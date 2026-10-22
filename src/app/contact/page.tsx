@@ -13,11 +13,11 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
     return (
-        <div className="min-h-screen py-12 md:py-20">
-            <div className="container-custom px-4">
+        <div className="min-h-screen pb-12 pt-4 md:pt-6">
+            <div className="container-custom">
                 {/* Hero */}
                 <div className="text-center mb-12 md:mb-16">
-                    <h1 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">
+                    <h1 className="text-3xl md:text-5xl font-editorial text-white mb-4 tracking-tight">
                         Contactează-ne
                     </h1>
                     <p className="text-night-300 text-lg max-w-2xl mx-auto">
@@ -98,7 +98,7 @@ export default function ContactPage() {
                                     type="text"
                                     id="name"
                                     name="name"
-                                    className="w-full px-4 py-3 bg-night-900 border border-night-700 rounded-xl text-white placeholder-night-500 focus:outline-none focus:border-moon transition-colors"
+                                    className="w-full px-4 py-3 bg-white/[0.05] border border-white/10 rounded-xl text-white placeholder-night-500 focus:outline-none focus:border-moon transition-colors"
                                     placeholder="Ion Pescaru"
                                 />
                             </div>
@@ -110,7 +110,7 @@ export default function ContactPage() {
                                     type="email"
                                     id="email"
                                     name="email"
-                                    className="w-full px-4 py-3 bg-night-900 border border-night-700 rounded-xl text-white placeholder-night-500 focus:outline-none focus:border-moon transition-colors"
+                                    className="w-full px-4 py-3 bg-white/[0.05] border border-white/10 rounded-xl text-white placeholder-night-500 focus:outline-none focus:border-moon transition-colors"
                                     placeholder="ion@email.com"
                                 />
                             </div>
@@ -121,7 +121,7 @@ export default function ContactPage() {
                                 <select
                                     id="subject"
                                     name="subject"
-                                    className="w-full px-4 py-3 bg-night-900 border border-night-700 rounded-xl text-white focus:outline-none focus:border-moon transition-colors"
+                                    className="w-full px-4 py-3 bg-white/[0.05] border border-white/10 rounded-xl text-white focus:outline-none focus:border-moon transition-colors"
                                 >
                                     <option value="general">Întrebare generală</option>
                                     <option value="bug">Raportare problemă</option>
@@ -137,7 +137,7 @@ export default function ContactPage() {
                                     id="message"
                                     name="message"
                                     rows={5}
-                                    className="w-full px-4 py-3 bg-night-900 border border-night-700 rounded-xl text-white placeholder-night-500 focus:outline-none focus:border-moon transition-colors resize-none"
+                                    className="w-full px-4 py-3 bg-white/[0.05] border border-white/10 rounded-xl text-white placeholder-night-500 focus:outline-none focus:border-moon transition-colors resize-none"
                                     placeholder="Scrie mesajul tău aici..."
                                 />
                             </div>
