@@ -31,14 +31,9 @@ export function middleware(request: NextRequest) {
         );
     }
 
-    // Redirect http to https (handled by checking x-forwarded-proto)
-    const proto = request.headers.get('x-forwarded-proto');
-    if (!isLocalhost && proto === 'http') {
-        return NextResponse.redirect(
-            new URL(`https://${hostname}${url.pathname}${url.search}`),
-            301
-        );
-    }
+    // http→https is enforced by the host (Hostinger SSL / nginx), not here: behind a
+    // TLS-terminating proxy x-forwarded-proto can read "http" for HTTPS requests,
+    // which would make a redirect here loop forever.
 
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set('x-pathname', url.pathname);
