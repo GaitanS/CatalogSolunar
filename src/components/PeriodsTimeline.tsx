@@ -47,87 +47,89 @@ export default function PeriodsTimeline({ day, isToday }: PeriodsTimelineProps) 
                 <div className="text-[10.5px] text-[#67718A]">ora locală</div>
             </div>
 
-            {/* Axa 24h */}
-            <div className="relative mt-3.5 h-[46px] overflow-hidden rounded-xl border border-[#94AADC]/10 bg-[#070B17]/80">
-                {/* Banda de zi (soarele pe cer) */}
-                <div
-                    className="absolute bottom-0 top-0"
-                    style={{
-                        left: `${pct(day.sunrise)}%`,
-                        width: `${pct(day.sunset) - pct(day.sunrise)}%`,
-                        background: 'linear-gradient(180deg, rgba(255,205,130,0.09), rgba(255,205,130,0.02))',
-                    }}
-                />
-                {day.majorPeriods.map((p, i) => {
-                    const gld = isGoldenPeriod(p, day);
-                    return (
+            {/* Axa 24h: linie fina cu lumina zilei, perioadele ca pastile luminoase */}
+            <div className="mt-4 px-1">
+                <div className="relative h-10">
+                    {/* Ghidaje la 06 / 12 / 18 */}
+                    {[25, 50, 75].map((x) => (
+                        <div key={x} className="absolute inset-y-1 w-px bg-white/[0.06]" style={{ left: `${x}%` }} />
+                    ))}
+                    {/* Linia noptii + segmentul de zi (rasarit -> apus) */}
+                    <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-white/[0.12]" />
+                    <div
+                        className="absolute top-1/2 h-[3px] -translate-y-1/2 rounded-full"
+                        style={{
+                            left: `${pct(day.sunrise)}%`,
+                            width: `${pct(day.sunset) - pct(day.sunrise)}%`,
+                            background: 'linear-gradient(90deg, rgba(242,206,114,0.15), rgba(255,214,140,0.5) 50%, rgba(232,161,92,0.15))',
+                        }}
+                    />
+                    {[
+                        { t: day.sunrise, color: '#F2CE72' },
+                        { t: day.sunset, color: '#E8A15C' },
+                    ].map(({ t, color }, i) => (
+                        <span
+                            key={`s${i}`}
+                            className="absolute top-1/2 h-[7px] w-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+                            style={{ left: `${pct(t)}%`, background: color, boxShadow: `0 0 8px ${color}` }}
+                        />
+                    ))}
+                    {day.minorPeriods.map((p, i) => (
                         <div
-                            key={`M${i}`}
-                            className="absolute rounded-[7px]"
+                            key={`m${i}`}
+                            className="absolute top-1/2 h-2.5 -translate-y-1/2 rounded-full"
                             style={{
-                                top: 7,
-                                bottom: 7,
                                 left: `${pct(p.start)}%`,
                                 width: `${Math.max(1.5, pct(p.end) - pct(p.start))}%`,
-                                background: gld
-                                    ? 'linear-gradient(180deg, rgba(255,233,168,0.98), rgba(242,206,114,0.45))'
-                                    : 'linear-gradient(180deg, rgba(242,206,114,0.92), rgba(242,206,114,0.38))',
-                                boxShadow: gld ? '0 0 18px rgba(255,226,150,0.6)' : '0 0 14px rgba(242,206,114,0.35)',
+                                background: 'linear-gradient(90deg, rgba(147,180,232,0.45), rgba(178,203,242,0.95) 50%, rgba(147,180,232,0.45))',
+                                boxShadow: '0 0 12px rgba(147,180,232,0.35), inset 0 1px 0 rgba(255,255,255,0.35)',
                             }}
                         />
-                    );
-                })}
-                {day.minorPeriods.map((p, i) => (
-                    <div
-                        key={`m${i}`}
-                        className="absolute rounded-md"
-                        style={{
-                            top: 11,
-                            bottom: 11,
-                            left: `${pct(p.start)}%`,
-                            width: `${Math.max(1, pct(p.end) - pct(p.start))}%`,
-                            background: 'linear-gradient(180deg, rgba(147,180,232,0.8), rgba(147,180,232,0.28))',
-                        }}
-                    />
-                ))}
-                {[day.sunrise, day.sunset].map((t, i) => (
-                    <div
-                        key={`s${i}`}
-                        className="absolute top-0"
-                        style={{
-                            height: 9,
-                            width: 2,
-                            left: `${pct(t)}%`,
-                            background: 'rgba(255,190,120,0.75)',
-                            borderRadius: '0 0 2px 2px',
-                        }}
-                    />
-                ))}
-                {isToday && now && (
-                    <div
-                        className="absolute w-0.5 rounded-sm bg-white"
-                        style={{
-                            top: -1,
-                            bottom: -1,
-                            left: `${pct(now)}%`,
-                            boxShadow: '0 0 8px rgba(255,255,255,0.85)',
-                        }}
-                    />
-                )}
-            </div>
-            <div className="mt-1.5 flex justify-between text-[10px] tabular-nums text-[#67718A]">
-                <span>00</span><span>06</span><span>12</span><span>18</span><span>24</span>
+                    ))}
+                    {day.majorPeriods.map((p, i) => {
+                        const gld = isGoldenPeriod(p, day);
+                        return (
+                            <div
+                                key={`M${i}`}
+                                className="absolute top-1/2 h-3.5 -translate-y-1/2 rounded-full"
+                                style={{
+                                    left: `${pct(p.start)}%`,
+                                    width: `${Math.max(2, pct(p.end) - pct(p.start))}%`,
+                                    background: gld
+                                        ? 'linear-gradient(90deg, rgba(255,233,168,0.6), #FFE9A8 50%, rgba(255,233,168,0.6))'
+                                        : 'linear-gradient(90deg, rgba(242,206,114,0.5), #F5D98C 50%, rgba(242,206,114,0.5))',
+                                    boxShadow: gld
+                                        ? '0 0 20px rgba(255,226,150,0.65), inset 0 1px 0 rgba(255,255,255,0.6)'
+                                        : '0 0 16px rgba(242,206,114,0.4), inset 0 1px 0 rgba(255,255,255,0.5)',
+                                }}
+                            />
+                        );
+                    })}
+                    {isToday && now && (
+                        <div className="absolute inset-y-0 -translate-x-1/2" style={{ left: `${pct(now)}%` }}>
+                            <div className="mx-auto h-full w-px bg-white/80" style={{ boxShadow: '0 0 6px rgba(255,255,255,0.8)' }} />
+                            <span className="absolute -top-1 left-1/2 h-2 w-2 -translate-x-1/2 rounded-full bg-white" style={{ boxShadow: '0 0 8px rgba(255,255,255,0.9)' }} />
+                        </div>
+                    )}
+                </div>
+                <div className="mt-1 flex justify-between text-[10px] tabular-nums text-[#67718A]">
+                    <span>00</span><span>06</span><span>12</span><span>18</span><span>24</span>
+                </div>
             </div>
 
             {/* Legenda */}
-            <div className="mt-3 flex gap-4 text-[10.5px] text-[#8C96AB]">
+            <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-[10.5px] text-[#8C96AB]">
                 <span className="flex items-center gap-1.5">
-                    <span className="h-[7px] w-3.5 rounded" style={{ background: 'linear-gradient(180deg, rgba(242,206,114,0.9), rgba(242,206,114,0.4))' }} />
+                    <span className="h-2 w-4 rounded-full" style={{ background: 'linear-gradient(90deg, rgba(242,206,114,0.5), #F5D98C 50%, rgba(242,206,114,0.5))' }} />
                     Majoră
                 </span>
                 <span className="flex items-center gap-1.5">
-                    <span className="h-[7px] w-3.5 rounded" style={{ background: 'linear-gradient(180deg, rgba(147,180,232,0.8), rgba(147,180,232,0.3))' }} />
+                    <span className="h-1.5 w-4 rounded-full" style={{ background: 'linear-gradient(90deg, rgba(147,180,232,0.45), rgba(178,203,242,0.95) 50%, rgba(147,180,232,0.45))' }} />
                     Minoră
+                </span>
+                <span className="flex items-center gap-1.5">
+                    <span className="h-[3px] w-4 rounded-full" style={{ background: 'linear-gradient(90deg, rgba(242,206,114,0.2), rgba(255,214,140,0.6), rgba(232,161,92,0.2))' }} />
+                    Lumina zilei
                 </span>
                 <span className="flex items-center gap-1.5">
                     <span className="h-2.5 w-0.5 rounded-sm bg-white" style={{ boxShadow: '0 0 6px rgba(255,255,255,0.8)' }} />
