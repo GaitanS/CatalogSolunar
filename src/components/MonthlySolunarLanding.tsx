@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { getActiveFish, getMoonPhaseName, getSolunarData, formatTime } from '@/lib/solunar';
 import { getAllCities } from '@/data/cities';
-import { monthlySeoLandingPages, annualSeoLandingPages, type MonthlySeoLandingPage } from '@/data/seoLandingPages';
+import { monthlySeoLandingPages, getAnnualLandingSlug, type MonthlySeoLandingPage } from '@/data/seoLandingPages';
 import AdUnit from '@/components/AdUnit';
 import LazyAdUnit from '@/components/LazyAdUnit';
 
@@ -185,7 +185,12 @@ export default function MonthlySolunarLanding({ page }: { page: MonthlySeoLandin
     const previousPage = monthlySeoLandingPages[currentIndex - 1];
     const nextPage = monthlySeoLandingPages[currentIndex + 1];
     const cities = getAllCities().slice(0, 8);
-    const annualPage = annualSeoLandingPages.find((item) => item.slug === 'solunar-2026');
+    const annualSlug = getAnnualLandingSlug('solunar', page.year);
+    const fishingAnnualSlug = getAnnualLandingSlug('solunar-pescuit', page.year);
+    const calendarAnnualSlug = getAnnualLandingSlug('calendar-pescuit', page.year);
+    const sameMonthOtherYear = monthlySeoLandingPages.find(
+        (item) => item.monthIndex === page.monthIndex && item.year !== page.year,
+    );
 
     return (
         <div className="relative overflow-hidden pb-20 pt-3 md:pt-8">
@@ -311,16 +316,21 @@ export default function MonthlySolunarLanding({ page }: { page: MonthlySeoLandin
                                 Al doilea filtru este vremea. O presiune stabila, vant moderat si apa cu temperatura constanta pot transforma o zi buna in partida excelenta. Daca vremea se schimba brusc, pastreaza perioada majora, dar muta locul spre zone mai adapostite.
                             </p>
                             <p>
-                                Pentru detalii tactice, vezi si <Link href={page.blogHref} className="text-amber-200 hover:text-white">ghidul complet pentru {page.monthName} {page.year}</Link>.
+                                {page.blogHref ? (
+                                    <>Pentru detalii tactice, vezi si <Link href={page.blogHref} className="text-amber-200 hover:text-white">ghidul complet pentru {page.monthName} {page.year}</Link>.</>
+                                ) : (
+                                    <>Daca esti la inceput cu solunarul, citeste si <Link href="/blog/ce-este-calendarul-solunar" className="text-amber-200 hover:text-white">ghidul despre cum functioneaza calendarul solunar</Link>.</>
+                                )}
                             </p>
                         </div>
                     </div>
                     <div className="card-panel taste-surface p-5 md:p-6">
                         <h2 className="font-display text-xl font-bold text-white">Navigare rapida</h2>
                         <div className="mt-4 grid gap-2 text-sm">
-                            {annualPage && <Link href={`/${annualPage.slug}`} className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Solunar 2026</Link>}
-                            <Link href="/solunar-pescuit-2026" className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Solunar pescuit 2026</Link>
-                            <Link href="/calendar-pescuit-2026" className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Calendar pescuit 2026</Link>
+                            {annualSlug && <Link href={`/${annualSlug}`} className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Solunar {page.year}</Link>}
+                            {fishingAnnualSlug && <Link href={`/${fishingAnnualSlug}`} className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Solunar pescuit {page.year}</Link>}
+                            {calendarAnnualSlug && <Link href={`/${calendarAnnualSlug}`} className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Calendar pescuit {page.year}</Link>}
+                            {sameMonthOtherYear && <Link href={`/${sameMonthOtherYear.slug}`} className="rounded-xl border border-amber-200/20 bg-amber-300/10 px-3 py-2 text-amber-100 hover:text-white">Solunar {sameMonthOtherYear.monthName} {sameMonthOtherYear.year}</Link>}
                             <Link href="/azi" className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Solunar azi</Link>
                             <Link href="/locuri-pescuit" className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Locuri pescuit</Link>
                         </div>

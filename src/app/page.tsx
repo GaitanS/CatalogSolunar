@@ -20,7 +20,7 @@ import Link from 'next/link';
 import { getAllCities } from '@/data/cities';
 import { getAllArticles } from '@/data/blogArticles';
 import { getAllLocations } from '@/data/fishingLocations';
-import { monthlySeoLandingPages } from '@/data/seoLandingPages';
+import { getAnnualLandingSlug, monthlySeoLandingPages } from '@/data/seoLandingPages';
 
 const monthSlugs = [
     'ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie',
@@ -101,6 +101,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
     const currentMonth = getMonthTarget(today);
     const nextMonth = getMonthTarget(today, 1);
     const priorityMonth = getPriorityMonth(currentMonth, nextMonth, today);
+    const nextYearHub = getAnnualLandingSlug('solunar', today.getFullYear() + 1);
     const monthLinks = monthSlugs.map((luna, index) => {
         const isCurrent = index === today.getMonth();
         const isNext = index === ((today.getMonth() + 1) % 12);
@@ -450,6 +451,14 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                             );
                         })}
                     </div>
+                    {nextYearHub && (
+                        <Link
+                            href={`/${nextYearHub}`}
+                            className="mt-3 block rounded-2xl border border-white/10 bg-white/[0.045] p-3 text-sm text-slate-300 transition-colors hover:text-white"
+                        >
+                            Planifici deja anul viitor? Vezi <strong className="text-amber-100">Solunar {today.getFullYear() + 1}</strong> pe luni &rarr;
+                        </Link>
+                    )}
                 </section>
 
                 {/* Orașe Populare - internal links for city pages */}

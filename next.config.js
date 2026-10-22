@@ -53,16 +53,6 @@ const nextConfig = {
                 permanent: true,
             },
             {
-                source: '/solunar-pescuit',
-                destination: '/solunar-pescuit-2026',
-                permanent: true,
-            },
-            {
-                source: '/calendar-pescuit',
-                destination: '/calendar-pescuit-2026',
-                permanent: true,
-            },
-            {
                 source: '/calendarul-pescarului-2026',
                 destination: '/calendar-pescuit-2026',
                 permanent: true,
@@ -74,10 +64,16 @@ const nextConfig = {
             { source: '/solunar-2025', destination: '/solunar-2026', permanent: true },
             { source: '/solunar-pescuit-2024', destination: '/solunar-pescuit-2026', permanent: true },
             { source: '/solunar-pescuit-2025', destination: '/solunar-pescuit-2026', permanent: true },
+            // Year-less URLs (/solunar-mai, /solunar-pescuit, /calendar-pescuit) are
+            // redirected in middleware to the year people are planning for.
+            { source: '/calendar-solunar-2027', destination: '/solunar-2027', permanent: true },
+            { source: '/tabela-solunar-2027', destination: '/solunar-2027', permanent: true },
+            { source: '/solunare-2027', destination: '/solunar-2027', permanent: true },
+            { source: '/calendarul-pescarului-2027', destination: '/calendar-pescuit-2027', permanent: true },
             ...monthSlugs.flatMap((month) => [
                 {
-                    source: `/solunar-${month}`,
-                    destination: `/solunar-${month}-2026`,
+                    source: `/solunar-pescuit-${month}-2027`,
+                    destination: `/solunar-${month}-2027`,
                     permanent: true,
                 },
                 {

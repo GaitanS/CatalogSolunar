@@ -8,7 +8,8 @@ export interface MonthlySeoLandingPage {
     description: string;
     primaryKeyword: string;
     keywords: string[];
-    blogHref: string;
+    /** Editorial blog guide for the month; only 2026 months have one. */
+    blogHref?: string;
     seasonContext: string;
     speciesFocus: string[];
     strategy: string;
@@ -208,6 +209,174 @@ export const monthlySeoLandingPages: MonthlySeoLandingPage[] = [
         speciesFocus: ['șalău', 'biban', 'clean'],
         strategy: 'Alege zone adânci, apă limpede și perioade majore din orele mai luminoase.',
     },
+    {
+        slug: 'solunar-ianuarie-2027',
+        monthIndex: 0,
+        monthName: 'Ianuarie',
+        year: 2027,
+        title: 'Solunar Ianuarie 2027 - Calendar Pescuit pe Zile și Ore',
+        metaTitle: 'Solunar Ianuarie 2027 - Calendar Pescuit și Ore Bune',
+        description: 'Solunar Ianuarie 2027 pentru pescuit: zile bune, perioade majore și minore, fazele lunii și ore recomandate pentru primele ieșiri ale anului.',
+        primaryKeyword: 'solunar ianuarie 2027',
+        keywords: ['solunar ianuarie 2027', 'calendar pescuit ianuarie 2027', 'ore pescuit ianuarie 2027', 'solunar pescuit ianuarie 2027'],
+        seasonContext: 'Ianuarie deschide anul cu apă rece și pești leneși, care se hrănesc doar în ferestre scurte și bine alese.',
+        speciesFocus: ['biban', 'șalău', 'clean', 'știucă'],
+        strategy: 'Pescuiește lent pe gropi adânci și alege perioadele majore care cad în orele cele mai calde ale zilei.',
+    },
+    {
+        slug: 'solunar-februarie-2027',
+        monthIndex: 1,
+        monthName: 'Februarie',
+        year: 2027,
+        title: 'Solunar Februarie 2027 - Calendar Pescuit și Ore Optime',
+        metaTitle: 'Solunar Februarie 2027 - Calendar Pescuit pe Ore',
+        description: 'Solunar Februarie 2027 cu zilele favorabile la pescuit, fazele lunii, perioadele majore și sfaturi pentru ultima lună de iarnă.',
+        primaryKeyword: 'solunar februarie 2027',
+        keywords: ['solunar februarie 2027', 'calendar pescuit februarie 2027', 'ore pescuit februarie 2027', 'solunar pescuit februarie 2027'],
+        seasonContext: 'Februarie e încă rece, dar zilele cresc și răpitorii prind ferestre bune după perioade de vreme stabilă.',
+        speciesFocus: ['șalău', 'biban', 'clean'],
+        strategy: 'Folosește năluci mici și prezentări lente, în perioadele solunare care coincid cu soare și presiune constantă.',
+    },
+    {
+        slug: 'solunar-martie-2027',
+        monthIndex: 2,
+        monthName: 'Martie',
+        year: 2027,
+        title: 'Solunar Martie 2027 - Când Trage Peștele Primăvara',
+        metaTitle: 'Solunar Martie 2027 - Calendar Pescuit și Zile Bune',
+        description: 'Solunar Martie 2027 pentru pescuit: calendar pe zile, perioade majore, fazele lunii și speciile care se activează odată cu încălzirea apei.',
+        primaryKeyword: 'solunar martie 2027',
+        keywords: ['solunar martie 2027', 'calendar pescuit martie 2027', 'ore pescuit martie 2027', 'solunar pescuit martie 2027'],
+        seasonContext: 'Martie marchează trezirea apelor: primele zile calde împing peștii spre maluri și zone puțin adânci.',
+        speciesFocus: ['caras', 'plătică', 'șalău', 'biban'],
+        strategy: 'Caută golfurile care se încălzesc primele și perioadele majore din jurul prânzului și al după-amiezii.',
+    },
+    {
+        slug: 'solunar-aprilie-2027',
+        monthIndex: 3,
+        monthName: 'Aprilie',
+        year: 2027,
+        title: 'Solunar Aprilie 2027 - Cele Mai Bune Zile de Pescuit',
+        metaTitle: 'Solunar Aprilie 2027 - Calendar Pescuit pe Zile',
+        description: 'Solunar Aprilie 2027 cu zile bune de pescuit, fazele lunii, ore exacte și recomandări pentru luna în care începe prohibiția de primăvară.',
+        primaryKeyword: 'solunar aprilie 2027',
+        keywords: ['solunar aprilie 2027', 'calendar pescuit aprilie 2027', 'ore pescuit aprilie 2027', 'solunar pescuit aprilie 2027'],
+        seasonContext: 'Aprilie aduce activitate crescută la pașnici, dar verifică ordinul de prohibiție 2027 pentru zona ta înainte de plecare.',
+        speciesFocus: ['caras', 'plătică', 'crap', 'lin'],
+        strategy: 'Alege apele care se încălzesc repede și ferestrele solunare dinaintea fronturilor de vreme.',
+    },
+    {
+        slug: 'solunar-mai-2027',
+        monthIndex: 4,
+        monthName: 'Mai',
+        year: 2027,
+        title: 'Solunar Mai 2027 - Calendar Pescuit, Ore Exacte și Zile Bune',
+        metaTitle: 'Solunar Mai 2027 - Calendar Pescuit și Ore Exacte',
+        description: 'Solunar Mai 2027 pentru pescuit: cele mai bune zile, ore exacte, perioade majore și minore, fazele lunii și speciile active în luna mai.',
+        primaryKeyword: 'solunar mai 2027',
+        keywords: ['solunar mai 2027', 'solunar pescuit mai 2027', 'calendar pescuit mai 2027', 'calendar solunar mai 2027', 'ore pescuit mai 2027'],
+        seasonContext: 'Mai este luna în care apa atinge temperaturi bune și peștii se hrănesc intens după iarnă.',
+        speciesFocus: ['crap', 'caras', 'lin', 'plătică'],
+        strategy: 'Organizează partidele în jurul lunii pline și al lunii noi, pe perioadele majore de dimineață și de seară.',
+    },
+    {
+        slug: 'solunar-iunie-2027',
+        monthIndex: 5,
+        monthName: 'Iunie',
+        year: 2027,
+        title: 'Solunar Iunie 2027 - Calendar Pescuit și Ore Bune',
+        metaTitle: 'Solunar Iunie 2027 - Calendar Pescuit pe Ore',
+        description: 'Solunar Iunie 2027 pentru pescuit: zile favorabile, perioade majore, fazele lunii și orele bune pentru reluarea pescuitului la răpitori.',
+        primaryKeyword: 'solunar iunie 2027',
+        keywords: ['solunar iunie 2027', 'solunar pescuit iunie 2027', 'calendar pescuit iunie 2027', 'ore pescuit iunie 2027'],
+        seasonContext: 'Iunie aduce nopți calde și activitate mare la amurg, iar după prohibiție răpitorii revin în forță.',
+        speciesFocus: ['somn', 'crap', 'șalău', 'avat'],
+        strategy: 'Mută partidele spre seară și noapte, mai ales când o perioadă majoră cade după apus.',
+    },
+    {
+        slug: 'solunar-iulie-2027',
+        monthIndex: 6,
+        monthName: 'Iulie',
+        year: 2027,
+        title: 'Solunar Iulie 2027 - Ore Optime și Zile de Pescuit',
+        metaTitle: 'Solunar Iulie 2027 - Calendar Pescuit și Zile Bune',
+        description: 'Solunar Iulie 2027 cu ore optime de pescuit, perioade majore, fazele lunii și sfaturi pentru zilele caniculare și pescuitul de noapte.',
+        primaryKeyword: 'solunar iulie 2027',
+        keywords: ['solunar iulie 2027', 'calendar pescuit iulie 2027', 'ore pescuit iulie 2027', 'solunar pescuit iulie 2027'],
+        seasonContext: 'Iulie este luna caniculei: peștii evită apa caldă de la suprafață și se hrănesc în orele răcoroase.',
+        speciesFocus: ['somn', 'crap', 'șalău', 'avat'],
+        strategy: 'Pescuiește în zori, la apus și noaptea, când perioadele solunare se suprapun cu temperaturi mai scăzute.',
+    },
+    {
+        slug: 'solunar-august-2027',
+        monthIndex: 7,
+        monthName: 'August',
+        year: 2027,
+        title: 'Solunar August 2027 - Zile și Ore Optime de Pescuit',
+        metaTitle: 'Solunar August 2027 - Calendar Pescuit pe Zile',
+        description: 'Solunar August 2027 pentru pescuit: calendar cu perioade majore, fazele lunii, zile bune și strategii pentru apele calde de final de vară.',
+        primaryKeyword: 'solunar august 2027',
+        keywords: ['solunar august 2027', 'calendar pescuit august 2027', 'ore pescuit august 2027', 'solunar pescuit august 2027'],
+        seasonContext: 'August rămâne cald, dar nopțile mai lungi și primele răciri aduc ferestre bune de hrănire.',
+        speciesFocus: ['crap', 'somn', 'șalău'],
+        strategy: 'Caută apă oxigenată și zone adânci, iar partida pune-o pe perioadele majore apropiate de apus.',
+    },
+    {
+        slug: 'solunar-septembrie-2027',
+        monthIndex: 8,
+        monthName: 'Septembrie',
+        year: 2027,
+        title: 'Solunar Septembrie 2027 - Sezonul de Aur al Pescuitului',
+        metaTitle: 'Solunar Septembrie 2027 - Calendar Pescuit și Zile Bune',
+        description: 'Solunar Septembrie 2027: zile excelente de pescuit, fazele lunii, perioade majore și speciile active la începutul toamnei.',
+        primaryKeyword: 'solunar septembrie 2027',
+        keywords: ['solunar septembrie 2027', 'calendar pescuit septembrie 2027', 'ore pescuit septembrie 2027', 'solunar pescuit septembrie 2027'],
+        seasonContext: 'Septembrie este printre cele mai bune luni ale anului: apa se răcește treptat și peștii pun rezerve pentru iarnă.',
+        speciesFocus: ['crap', 'șalău', 'știucă', 'biban'],
+        strategy: 'Profită de diminețile răcoroase și de zilele cu presiune stabilă; nădirea constantă aduce peștii pe post.',
+    },
+    {
+        slug: 'solunar-octombrie-2027',
+        monthIndex: 9,
+        monthName: 'Octombrie',
+        year: 2027,
+        title: 'Solunar Octombrie 2027 - Calendar Pescuit de Toamnă',
+        metaTitle: 'Solunar Octombrie 2027 - Ore și Zile Bune Pescuit',
+        description: 'Solunar Octombrie 2027 cu zile bune pentru pescuitul de toamnă, perioade majore, fazele lunii și speciile cele mai active.',
+        primaryKeyword: 'solunar octombrie 2027',
+        keywords: ['solunar octombrie 2027', 'calendar pescuit octombrie 2027', 'ore pescuit octombrie 2027', 'solunar pescuit octombrie 2027'],
+        seasonContext: 'Octombrie este luna răpitorilor: știuca și șalăul atacă agresiv, iar crapul mai are ferestre scurte și bune.',
+        speciesFocus: ['știucă', 'șalău', 'biban', 'crap'],
+        strategy: 'Urmărește perioadele majore din mijlocul zilei și zilele cu scădere lentă a presiunii.',
+    },
+    {
+        slug: 'solunar-noiembrie-2027',
+        monthIndex: 10,
+        monthName: 'Noiembrie',
+        year: 2027,
+        title: 'Solunar Noiembrie 2027 - Calendar Pescuit pe Vreme Rece',
+        metaTitle: 'Solunar Noiembrie 2027 - Calendar Pescuit și Ore Bune',
+        description: 'Solunar Noiembrie 2027 pentru pescuit: zile favorabile, perioade majore, fazele lunii și sfaturi pentru apa care se răcește rapid.',
+        primaryKeyword: 'solunar noiembrie 2027',
+        keywords: ['solunar noiembrie 2027', 'calendar pescuit noiembrie 2027', 'ore pescuit noiembrie 2027', 'solunar pescuit noiembrie 2027'],
+        seasonContext: 'Noiembrie scurtează zilele și răcește apa; răpitorii rămân activi, dar pe ferestre tot mai înguste.',
+        speciesFocus: ['știucă', 'șalău', 'biban'],
+        strategy: 'Pescuiește aproape de structuri și pe drop-off-uri, în perioadele solunare care cad pe lumină bună.',
+    },
+    {
+        slug: 'solunar-decembrie-2027',
+        monthIndex: 11,
+        monthName: 'Decembrie',
+        year: 2027,
+        title: 'Solunar Decembrie 2027 - Calendar Pescuit de Iarnă',
+        metaTitle: 'Solunar Decembrie 2027 - Ore Bune pentru Pescuit',
+        description: 'Solunar Decembrie 2027 cu perioade majore, fazele lunii și zilele bune pentru pescuitul de iarnă la răpitori.',
+        primaryKeyword: 'solunar decembrie 2027',
+        keywords: ['solunar decembrie 2027', 'calendar pescuit decembrie 2027', 'ore pescuit decembrie 2027', 'solunar pescuit decembrie 2027'],
+        seasonContext: 'Decembrie închide anul cu puține ieșiri, dar zilele senine și stabile pot surprinde plăcut la răpitori.',
+        speciesFocus: ['șalău', 'biban', 'clean'],
+        strategy: 'Alege apă limpede, zone adânci și perioadele majore din orele cu cea mai multă lumină.',
+    },
 ];
 
 export const annualSeoLandingPages: AnnualSeoLandingPage[] = [
@@ -241,6 +410,36 @@ export const annualSeoLandingPages: AnnualSeoLandingPage[] = [
         keywords: ['calendar pescuit 2026', 'calendarul pescarului 2026', 'zile bune pescuit 2026', 'solunar pescuit 2026'],
         intent: 'calendar',
     },
+    {
+        slug: 'solunar-2027',
+        year: 2027,
+        title: 'Solunar 2027 - Calendar Solunar pe Luni, Zile și Ore',
+        metaTitle: 'Solunar 2027 - Calendar Solunar pe Luni și Ore',
+        description: 'Solunar 2027 complet pentru pescuit: calendar pe luni, zile bune, perioade majore și minore, fazele lunii și ore recomandate pentru tot anul.',
+        primaryKeyword: 'solunar 2027',
+        keywords: ['solunar 2027', 'calendar solunar 2027', 'tabela solunar 2027', 'solunare 2027', '2027 solunar calendar'],
+        intent: 'solunar',
+    },
+    {
+        slug: 'solunar-pescuit-2027',
+        year: 2027,
+        title: 'Solunar Pescuit 2027 - Calendar pe Luni, Zile și Ore',
+        metaTitle: 'Solunar Pescuit 2027 - Calendar pe Luni și Ore Exacte',
+        description: 'Solunar pescuit 2027: calendar pe luni, zile bune, perioade majore și minore, fazele lunii, specii active și legături către fiecare lună a anului.',
+        primaryKeyword: 'solunar pescuit 2027',
+        keywords: ['solunar pescuit 2027', 'solunar 2027 pescuit', 'calendar solunar pescuit 2027', 'solunar pe luni 2027'],
+        intent: 'solunar',
+    },
+    {
+        slug: 'calendar-pescuit-2027',
+        year: 2027,
+        title: 'Calendar Pescuit 2027 - Zile Bune, Solunar și Faze Lunare',
+        metaTitle: 'Calendar Pescuit 2027 - Zile Bune și Solunar',
+        description: 'Calendar pescuit 2027 cu zilele bune pe luni, solunar, fazele lunii, ore recomandate și perioade majore pentru pescarii din România.',
+        primaryKeyword: 'calendar pescuit 2027',
+        keywords: ['calendar pescuit 2027', 'calendarul pescarului 2027', 'zile bune pescuit 2027', 'solunar pescuit 2027'],
+        intent: 'calendar',
+    },
 ];
 
 export function getMonthlyLandingBySlug(slug: string) {
@@ -249,6 +448,16 @@ export function getMonthlyLandingBySlug(slug: string) {
 
 export function getAnnualLandingBySlug(slug: string) {
     return annualSeoLandingPages.find((page) => page.slug === slug);
+}
+
+export function getMonthlyLandingsForYear(year: number) {
+    return monthlySeoLandingPages.filter((page) => page.year === year);
+}
+
+/** Annual hub for a year and intent, e.g. (2027, 'solunar-pescuit') -> /solunar-pescuit-2027. */
+export function getAnnualLandingSlug(prefix: 'solunar' | 'solunar-pescuit' | 'calendar-pescuit', year: number) {
+    const slug = `${prefix}-${year}`;
+    return annualSeoLandingPages.some((page) => page.slug === slug) ? slug : undefined;
 }
 
 export function getAllSeoLandingSlugs() {

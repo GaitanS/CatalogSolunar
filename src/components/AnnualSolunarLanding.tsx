@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { getMoonPhaseName, getSolunarData, formatTime } from '@/lib/solunar';
-import { annualSeoLandingPages, monthlySeoLandingPages, type AnnualSeoLandingPage } from '@/data/seoLandingPages';
+import { annualSeoLandingPages, getAnnualLandingSlug, getMonthlyLandingsForYear, type AnnualSeoLandingPage } from '@/data/seoLandingPages';
 import AdUnit from '@/components/AdUnit';
 import LazyAdUnit from '@/components/LazyAdUnit';
 
@@ -89,7 +89,7 @@ function AnnualJsonLd({ page }: { page: AnnualSeoLandingPage }) {
                 '@type': 'ItemList',
                 '@id': `${baseUrl}/${page.slug}#months`,
                 name: `${page.primaryKeyword} pe luni`,
-                itemListElement: monthlySeoLandingPages.map((month, index) => ({
+                itemListElement: getMonthlyLandingsForYear(page.year).map((month, index) => ({
                     '@type': 'ListItem',
                     position: index + 1,
                     name: `Solunar ${month.monthName} ${month.year}`,
@@ -135,20 +135,28 @@ function AnnualJsonLd({ page }: { page: AnnualSeoLandingPage }) {
 }
 
 export default function AnnualSolunarLanding({ page }: { page: AnnualSeoLandingPage }) {
-    const monthSummaries = monthlySeoLandingPages.map((month) => ({
+    const yearMonths = getMonthlyLandingsForYear(page.year);
+    const monthSummaries = yearMonths.map((month) => ({
         month,
         summary: getMonthSummary(month.monthIndex, month.year),
     }));
-    // Surface the current month first, then the upcoming ones (wraps around the
-    // year). Keeps the hub fresh instead of permanently pointing at "Mai".
     const now = new Date();
     const curIdx = now.getMonth();
-    const heroMonths = [...monthSummaries]
-        .sort((a, b) => ((a.month.monthIndex - curIdx + 12) % 12) - ((b.month.monthIndex - curIdx + 12) % 12))
-        .slice(0, 4);
-    // Priority month for the primary CTA: switch to next month from the 24th.
-    const priorityIdx = now.getDate() >= 24 ? (curIdx + 1) % 12 : curIdx;
-    const priorityLanding = monthlySeoLandingPages.find((m) => m.monthIndex === priorityIdx) ?? monthlySeoLandingPages[0];
+    const isFutureYear = page.year > now.getFullYear();
+    // A future year's hub starts with its first months; the current year's hub
+    // surfaces the current month first, then the upcoming ones.
+    const heroMonths = isFutureYear
+        ? monthSummaries.slice(0, 4)
+        : [...monthSummaries]
+            .sort((a, b) => ((a.month.monthIndex - curIdx + 12) % 12) - ((b.month.monthIndex - curIdx + 12) % 12))
+            .slice(0, 4);
+    // Primary CTA: the month people search now (next month from the 24th),
+    // or January when the hub is for a year that has not started yet.
+    const target = new Date(now.getFullYear(), curIdx + (now.getDate() >= 24 ? 1 : 0), 1);
+    const priorityLanding = (isFutureYear ? undefined : yearMonths.find((m) => m.monthIndex === target.getMonth()))
+        ?? yearMonths[0];
+    const fishingSlug = getAnnualLandingSlug('solunar-pescuit', page.year);
+    const otherYearHub = annualSeoLandingPages.find((p) => p.year !== page.year && p.slug === page.slug.replace(String(page.year), String(p.year)));
 
     return (
         <div className="relative overflow-hidden pb-20 pt-3 md:pt-8">
@@ -163,12 +171,15 @@ export default function AnnualSolunarLanding({ page }: { page: AnnualSeoLandingP
                         {page.title}
                     </h1>
                     <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-300 md:text-lg">
-                        {page.description} Pagina este construita pentru cautarea <strong className="text-amber-200">{page.primaryKeyword}</strong> si trimite direct catre fiecare luna din 2026.
+                        {page.description} Pagina este construita pentru cautarea <strong className="text-amber-200">{page.primaryKeyword}</strong> si trimite direct catre fiecare luna din {page.year}.
                     </p>
                     <div className="mt-6 flex flex-wrap gap-2">
                         <Link href={`/${priorityLanding.slug}`} className="rounded-xl bg-amber-300 px-4 py-2 text-sm font-bold text-slate-950">Vezi luna {priorityLanding.monthName}</Link>
-                        {page.slug !== 'solunar-pescuit-2026' && (
-                            <Link href="/solunar-pescuit-2026" className="rounded-xl border border-white/10 bg-white/[0.045] px-4 py-2 text-sm font-bold text-slate-200 hover:text-white">Solunar pescuit</Link>
+                        {fishingSlug && page.slug !== fishingSlug && (
+                            <Link href={`/${fishingSlug}`} className="rounded-xl border border-white/10 bg-white/[0.045] px-4 py-2 text-sm font-bold text-slate-200 hover:text-white">Solunar pescuit {page.year}</Link>
+                        )}
+                        {otherYearHub && (
+                            <Link href={`/${otherYearHub.slug}`} className="rounded-xl border border-amber-200/20 bg-amber-300/10 px-4 py-2 text-sm font-bold text-amber-100 hover:text-white">{otherYearHub.primaryKeyword.charAt(0).toUpperCase() + otherYearHub.primaryKeyword.slice(1)} &rarr;</Link>
                         )}
                         <Link href="/azi" className="rounded-xl border border-white/10 bg-white/[0.045] px-4 py-2 text-sm font-bold text-slate-200 hover:text-white">Solunar azi</Link>
                         <Link href="/locuri-pescuit" className="rounded-xl border border-white/10 bg-white/[0.045] px-4 py-2 text-sm font-bold text-slate-200 hover:text-white">Locuri pescuit</Link>
@@ -181,14 +192,14 @@ export default function AnnualSolunarLanding({ page }: { page: AnnualSeoLandingP
                 <section className="card-panel taste-surface mb-6 grid gap-5 p-5 md:grid-cols-3 md:p-6">
                     <div>
                         <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-amber-200/80">Context solunar</p>
-                        <h2 className="mt-2 font-display text-2xl font-bold text-white">Ce arata calendarul solunar 2026</h2>
+                        <h2 className="mt-2 font-display text-2xl font-bold text-white">Ce arata calendarul solunar {page.year}</h2>
                     </div>
                     <div className="space-y-3 text-sm leading-relaxed text-slate-300 md:col-span-2">
                         <p>
                             Calendarul solunar ordoneaza zilele dupa influenta Lunii si a Soarelui asupra activitatii pestilor. Perioadele majore marcheaza intervale de aproximativ doua ore in care sansele cresc, iar perioadele minore sunt ferestre mai scurte, utile cand se suprapun cu rasaritul sau apusul.
                         </p>
                         <p>
-                            Pentru 2026, foloseste pagina anuala ca hub si intra pe luna dorita pentru tabelul complet. Solunarul este un instrument de planificare, nu o garantie; vremea, presiunea, temperatura apei si locul ales raman decisive.
+                            Pentru {page.year}, foloseste pagina anuala ca hub si intra pe luna dorita pentru tabelul complet. Solunarul este un instrument de planificare, nu o garantie; vremea, presiunea, temperatura apei si locul ales raman decisive.
                         </p>
                     </div>
                 </section>
@@ -247,7 +258,7 @@ export default function AnnualSolunarLanding({ page }: { page: AnnualSeoLandingP
                         <h2 className="font-display text-2xl font-bold text-white">De ce conteaza solunarul in pescuit</h2>
                         <div className="mt-4 space-y-3 text-sm leading-relaxed text-slate-300">
                             <p>
-                                Calendarul solunar nu inlocuieste experienta de pe apa, dar iti arata ferestrele in care pestii tind sa fie mai activi. Pentru 2026, paginile pe luni iti dau o ruta clara: alegi luna, verifici zilele cu rating mare, apoi alegi ora majora.
+                                Calendarul solunar nu inlocuieste experienta de pe apa, dar iti arata ferestrele in care pestii tind sa fie mai activi. Pentru {page.year}, paginile pe luni iti dau o ruta clara: alegi luna, verifici zilele cu rating mare, apoi alegi ora majora.
                             </p>
                             <p>
                                 Cele mai puternice partide apar cand solunarul bun se suprapune cu presiune stabila, apa potrivita pentru specie si un loc productiv.
@@ -257,9 +268,12 @@ export default function AnnualSolunarLanding({ page }: { page: AnnualSeoLandingP
                     <div className="card-panel taste-surface p-5 md:p-6">
                         <h2 className="font-display text-2xl font-bold text-white">Pagini utile pentru planificare</h2>
                         <div className="mt-4 grid gap-2 text-sm">
-                            <Link href="/solunar-2026" className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Solunar 2026</Link>
-                            <Link href="/solunar-pescuit-2026" className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Solunar pescuit 2026</Link>
-                            <Link href="/calendar-pescuit-2026" className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Calendar pescuit 2026</Link>
+                            {annualSeoLandingPages.filter((hub) => hub.year === page.year && hub.slug !== page.slug).map((hub) => (
+                                <Link key={hub.slug} href={`/${hub.slug}`} className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">{hub.primaryKeyword.charAt(0).toUpperCase() + hub.primaryKeyword.slice(1)}</Link>
+                            ))}
+                            {otherYearHub && (
+                                <Link href={`/${otherYearHub.slug}`} className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">{otherYearHub.primaryKeyword.charAt(0).toUpperCase() + otherYearHub.primaryKeyword.slice(1)}</Link>
+                            )}
                             <Link href="/blog/cele-mai-bune-ore-pescuit-2026" className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Cele mai bune ore de pescuit</Link>
                             <Link href="/lunar" className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">Faze lunare</Link>
                         </div>

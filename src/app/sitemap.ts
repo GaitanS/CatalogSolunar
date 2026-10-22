@@ -20,8 +20,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const evergreen = new Date(now.getFullYear(), 0, 1);
 
     const currentMonthIdx = now.getMonth();
-    const nextMonthIdx = (currentMonthIdx + 1) % 12;
-    const isCurrentOrNextMonth = (monthIndex: number) => monthIndex === currentMonthIdx || monthIndex === nextMonthIdx;
+    const nextMonth = new Date(now.getFullYear(), currentMonthIdx + 1, 1);
+    const isCurrentOrNextMonth = (monthIndex: number, year: number) =>
+        (year === now.getFullYear() && monthIndex === currentMonthIdx)
+        || (year === nextMonth.getFullYear() && monthIndex === nextMonth.getMonth());
 
     // Static pages
     const staticPages: MetadataRoute.Sitemap = [
@@ -57,7 +59,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     const seoLandingPages: MetadataRoute.Sitemap = [
         ...monthlySeoLandingPages.map((page) => {
-            const priority = isCurrentOrNextMonth(page.monthIndex) ? 0.98 : 0.85;
+            const priority = isCurrentOrNextMonth(page.monthIndex, page.year) ? 0.98 : 0.85;
             // Current/next month change daily; past months are settled.
             const isPast = page.year < now.getFullYear() || (page.year === now.getFullYear() && page.monthIndex < currentMonthIdx);
             const changeFrequency: 'monthly' | 'daily' = isPast ? 'monthly' : 'daily';
@@ -72,7 +74,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
             url: `${baseUrl}/${page.slug}`,
             lastModified: today,
             changeFrequency: 'weekly' as const,
-            priority: page.slug === 'solunar-2026' ? 0.97 : 0.93,
+            priority: page.slug === `solunar-${now.getFullYear()}` ? 0.97
+                : page.slug === `solunar-${now.getFullYear() + 1}` ? 0.95
+                    : 0.93,
         })),
     ];
 

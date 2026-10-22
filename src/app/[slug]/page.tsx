@@ -35,7 +35,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const monthlyLanding = getMonthlyLandingBySlug(slug);
     if (monthlyLanding) {
         return {
-            title: monthlyLanding.metaTitle,
+            // The 2026 pages keep the titles they rank with (the layout template appends
+            // "| Calendar Solunar 2026 Pescuit"); other years must not get that suffix.
+            title: monthlyLanding.year === 2026 ? monthlyLanding.metaTitle : { absolute: monthlyLanding.metaTitle },
             description: monthlyLanding.description,
             keywords: monthlyLanding.keywords,
             alternates: { canonical: `https://calendarsolunar.ro/${monthlyLanding.slug}` },
@@ -47,13 +49,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
                 locale: 'ro_RO',
                 type: 'website',
             },
+            twitter: {
+                card: 'summary_large_image',
+                title: monthlyLanding.title,
+                description: monthlyLanding.description,
+            },
         };
     }
 
     const annualLanding = getAnnualLandingBySlug(slug);
     if (annualLanding) {
         return {
-            title: annualLanding.metaTitle,
+            title: annualLanding.year === 2026 ? annualLanding.metaTitle : { absolute: annualLanding.metaTitle },
             description: annualLanding.description,
             keywords: annualLanding.keywords,
             alternates: { canonical: `https://calendarsolunar.ro/${annualLanding.slug}` },
@@ -64,6 +71,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
                 siteName: 'Calendar Solunar',
                 locale: 'ro_RO',
                 type: 'website',
+            },
+            twitter: {
+                card: 'summary_large_image',
+                title: annualLanding.title,
+                description: annualLanding.description,
             },
         };
     }
