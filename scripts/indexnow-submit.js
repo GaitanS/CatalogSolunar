@@ -39,6 +39,8 @@ function getAllUrls() {
     `${BASE_URL}/`,
     `${BASE_URL}/azi`,
     `${BASE_URL}/lunar`,
+    `${BASE_URL}/prognoza`,
+    `${BASE_URL}/specii`,
     `${BASE_URL}/rasarit-apus-soare`,
     `${BASE_URL}/blog`,
     `${BASE_URL}/locuri-pescuit`,
@@ -83,8 +85,26 @@ function getAllUrls() {
   return [...new Set(urls)];
 }
 
+// The live sitemap is the source of truth for what is actually published;
+// the data-file list is only a fallback when the site cannot be reached.
+async function getUrlsFromSitemap() {
+  const res = await fetch(`${BASE_URL}/sitemap.xml`);
+  if (!res.ok) throw new Error(`sitemap HTTP ${res.status}`);
+  const xml = await res.text();
+  const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].trim());
+  if (!urls.length) throw new Error('sitemap fără URL-uri');
+  return [...new Set(urls)];
+}
+
 async function main() {
-  const urlList = getAllUrls();
+  let urlList;
+  try {
+    urlList = await getUrlsFromSitemap();
+    console.log('📄 URL-uri luate din sitemap.xml live');
+  } catch (err) {
+    console.warn(`⚠️  Sitemap indisponibil (${err.message}) — folosesc lista din fișierele de date`);
+    urlList = getAllUrls();
+  }
   console.log(`\n🚀 IndexNow: trimit ${urlList.length} URL-uri către Bing/Yandex...\n`);
 
   const body = {
