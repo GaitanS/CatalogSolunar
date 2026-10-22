@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Outfit, Open_Sans } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
+import logo from '@/assets/logo.webp';
 import LazyBackground from "@/components/LazyBackground";
 import ClientProviders from "@/components/ClientProviders";
 import SchemaMarkup from "@/components/SchemaMarkup";
@@ -105,7 +106,7 @@ export default function RootLayout({
                             <div className="md:col-span-2">
                                 <div className="flex items-center gap-2 mb-4">
                                     <Image
-                                        src="/logo.webp"
+                                        src={logo}
                                         alt="Solunar Logo"
                                         width={24}
                                         height={24}

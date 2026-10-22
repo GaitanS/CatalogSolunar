@@ -1,5 +1,7 @@
 'use client';
 
+import moonTexture from '@/assets/moon-texture.webp';
+
 interface SimpleMoon2DProps {
     phase: number; // 0-1, where 0 = new moon, 0.5 = full moon
     illumination: number;
@@ -25,7 +27,7 @@ export default function SimpleMoon2D({ phase, illumination, size = 200 }: Simple
             <div
                 className="absolute inset-0 rounded-full bg-cover bg-center"
                 style={{
-                    backgroundImage: 'url(/moon-texture-512.webp)',
+                    backgroundImage: `url(${moonTexture.src})`,
                     boxShadow: '0 0 58px rgba(148, 163, 184, 0.2), inset 0 0 30px rgba(2, 6, 23, 0.18)',
                     filter: 'grayscale(1) contrast(1.08) brightness(0.96)',
                 }}

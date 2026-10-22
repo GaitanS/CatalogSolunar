@@ -2,6 +2,7 @@ import { getSolunarData, getWeekSolunarData, getMoonPhaseName, formatTime, getAc
 import { getWeatherData } from '@/lib/weather';
 import { getFishingAdvice, getMajorPeriodsDescription, getMinorPeriodsDescription } from '@/lib/advice';
 import Image from 'next/image';
+import logo from '@/assets/logo.webp';
 import CityPickerPill from '@/components/CityPickerPill';
 import LazyForecast from '@/components/LazyForecast';
 import FAQSection from '@/components/FAQSection';
@@ -217,7 +218,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 {/* Antet compact de aplicatie (design Solunar Mobile) */}
                 <div className="mb-3 flex items-center justify-between md:mt-2">
                     <div className="flex items-center gap-2.5">
-                        <Image src="/logo.webp" alt="Calendar Solunar" width={30} height={30} className="rounded-[9px] object-contain" loading="eager" />
+                        <Image src={logo} alt="Calendar Solunar" width={30} height={30} className="rounded-[9px] object-contain" loading="eager" />
                         <div>
                             <div className="text-[15px] font-bold leading-none tracking-[0.01em] text-white">Solunar</div>
                             <div className="mt-[3px] text-[10.5px] text-[#8C96AB]">{dateLabel}</div>

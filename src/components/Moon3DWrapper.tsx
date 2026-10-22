@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import SimpleMoon2D from './SimpleMoon2D';
+import moonTexture from '@/assets/moon-texture.webp';
 
 const Moon3D = dynamic(() => import('./Moon3D'), {
     ssr: false,
@@ -11,7 +12,7 @@ const Moon3D = dynamic(() => import('./Moon3D'), {
             <div
                 className="w-24 h-24 rounded-full animate-pulse bg-cover bg-center"
                 style={{
-                    backgroundImage: 'url(/moon-texture-512.webp)',
+                    backgroundImage: `url(${moonTexture.src})`,
                     boxShadow: '0 0 46px rgba(148, 163, 184, 0.18)',
                     filter: 'grayscale(1) contrast(1.08) brightness(0.95)',
                 }}

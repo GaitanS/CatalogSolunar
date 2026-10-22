@@ -4,6 +4,8 @@
  * stele discrete si halo auriu. Server component — animatia e pur CSS.
  */
 
+import moonTexture from '@/assets/moon-texture.webp';
+
 interface MoonHeroProps {
     phaseName: string;
     illumination: number; // 0-100
@@ -31,7 +33,7 @@ export default function MoonHero({ phaseName, illumination, moonAgeDays }: MoonH
     return (
         <div className="relative flex flex-col items-center px-0 pb-1 pt-4">
             {/* The moon is the LCP element; React hoists this preload into <head>. */}
-            <link rel="preload" as="image" href="/moon-texture-512.webp" fetchPriority="high" />
+            <link rel="preload" as="image" href={moonTexture.src} fetchPriority="high" />
             {STARS.map((st, i) => (
                 <span
                     key={i}
@@ -57,7 +59,7 @@ export default function MoonHero({ phaseName, illumination, moonAgeDays }: MoonH
                     className="animate-moon-spin absolute inset-y-0 left-0"
                     style={{
                         width: 800,
-                        backgroundImage: 'url(/moon-texture-512.webp)',
+                        backgroundImage: `url(${moonTexture.src})`,
                         backgroundSize: 'auto 100%',
                         backgroundRepeat: 'repeat-x',
                     }}

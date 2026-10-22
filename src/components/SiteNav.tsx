@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import logo from '@/assets/logo.webp';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -32,7 +33,7 @@ export default function SiteNav() {
                 <div className="container-custom py-3 flex items-center justify-center md:justify-between">
                     <a href="/" className="interactive-lift flex items-center gap-3 group rounded-2xl pr-3">
                         <Image
-                            src="/logo.webp"
+                            src={logo}
                             alt="Solunar Logo"
                             width={32}
                             height={32}
