@@ -13,7 +13,6 @@ const outfit = Outfit({
     display: "swap",
     preload: true,
     adjustFontFallback: true,
-    weight: ["400", "500", "600", "700", "800"],
 });
 const openSans = Open_Sans({
     subsets: ["latin", "latin-ext"],

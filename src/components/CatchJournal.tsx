@@ -100,6 +100,9 @@ export default function CatchJournal({ lat, lng, locationName }: CatchJournalPro
                 <div className="flex gap-2 mt-2.5">
                     <input
                         type="text"
+                        id="catch-weight"
+                        name="weight"
+                        aria-label="Greutate captură în kg"
                         inputMode="decimal"
                         placeholder="Greutate kg (opțional)"
                         value={weight}

@@ -37,7 +37,7 @@ export default function SiteNav() {
                             width={32}
                             height={32}
                             className="object-contain group-hover:scale-110 transition-transform"
-                            priority
+                            loading="lazy"
                         />
                         <span className="font-display text-lg md:text-xl font-bold text-white tracking-tight">Calendar Solunar</span>
                     </a>
