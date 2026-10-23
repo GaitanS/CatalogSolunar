@@ -4,6 +4,7 @@ import { getAllCities } from '@/data/cities';
 import { getAllSpecies } from '@/data/species';
 import { getAllLocations, getAllCountySlugs } from '@/data/fishingLocations';
 import { annualSeoLandingPages, monthlySeoLandingPages } from '@/data/seoLandingPages';
+import { sunLocations } from '@/data/sunLocations';
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://calendarsolunar.ro';
@@ -100,6 +101,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.85,
     }));
 
+    // Sunrise/sunset per locality — times change daily
+    const sunPages: MetadataRoute.Sitemap = sunLocations.map((l) => ({
+        url: `${baseUrl}/rasarit-apus-soare/${l.slug}`,
+        lastModified: today,
+        changeFrequency: 'daily' as const,
+        priority: l.kind === 'litoral' || l.kind === 'delta' ? 0.75 : 0.7,
+    }));
+
     // County index pages — target "balti pescuit [judet]" queries
     const countyPages: MetadataRoute.Sitemap = getAllCountySlugs().map((c) => ({
         url: `${baseUrl}/locuri-pescuit/judet/${c.slug}`,
@@ -117,5 +126,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ...locationIndexPage,
         ...locationPages,
         ...countyPages,
+        ...sunPages,
     ];
 }

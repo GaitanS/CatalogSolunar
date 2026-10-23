@@ -9,6 +9,7 @@
  */
 
 import SunCalc from 'suncalc';
+import { sunriseSunsetFor } from './sunTimes';
 
 // Moon phase constants
 export type MoonPhase = 'new' | 'waxing-crescent' | 'first-quarter' | 'waxing-gibbous' |
@@ -114,15 +115,12 @@ function getMoonTimes(date: Date, lat: number, lng: number): { rise: Date | null
 }
 
 /**
- * Get sun times using SunCalc
- * Returns actual sunrise/sunset for given location
+ * Sunrise/sunset for the Romanian calendar day of `date`. Uses the NOAA
+ * algorithm from sunTimes.ts (SunCalc ran 1-2 minutes late), so these match
+ * the /rasarit-apus-soare pages.
  */
 function getSunTimes(date: Date, lat: number, lng: number): { sunrise: Date; sunset: Date } {
-    const times = SunCalc.getTimes(date, lat, lng);
-    return {
-        sunrise: times.sunrise,
-        sunset: times.sunset
-    };
+    return sunriseSunsetFor(date, lat, lng);
 }
 
 /**

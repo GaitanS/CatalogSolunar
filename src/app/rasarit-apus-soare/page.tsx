@@ -6,6 +6,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import AdUnit from '@/components/AdUnit';
 import LazyAdUnit from '@/components/LazyAdUnit';
 import JsonLd from '@/components/JsonLd';
+import { KIND_LABELS, sunLocations, type SunLocationKind } from '@/data/sunLocations';
 
 // Shows today's sunrise/sunset — regenerate hourly so static output stays fresh.
 export const revalidate = 3600;
@@ -153,7 +154,7 @@ export default function RasaritApusPage() {
                             {cities.map(({ city, sunrise, sunset }) => (
                                 <tr key={city.slug}>
                                     <td className="py-2 px-2 font-bold text-white">
-                                        <Link href={`/${city.slug}`} className="hover:text-amber-300 transition-colors">{city.name}</Link>
+                                        <Link href={`/rasarit-apus-soare/${city.slug}`} className="hover:text-amber-300 transition-colors">{city.name}</Link>
                                     </td>
                                     <td className="py-2 px-2 font-mono text-amber-300">{formatTime(sunrise)}</td>
                                     <td className="py-2 px-2 font-mono text-amber-200">{formatTime(sunset)}</td>
@@ -163,6 +164,32 @@ export default function RasaritApusPage() {
                         </tbody>
                     </table>
                 </div>
+
+                {/* Pagini pe localitati: litoral, delta, munte, orase */}
+                <section className="mb-8">
+                    <p className="eyebrow">Alege localitatea</p>
+                    <h2 className="mt-1.5 mb-4 font-editorial text-2xl text-white md:text-[28px]">Răsărit și apus pe localități</h2>
+                    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                        {(['litoral', 'delta', 'munte', 'oras'] as SunLocationKind[]).map((kind) => {
+                            const group = sunLocations.filter((l) => l.kind === kind || (kind === 'delta' && l.kind === 'dunare'));
+                            return (
+                                <div key={kind} className={`card-panel p-5 ${kind === 'oras' ? 'lg:col-span-2' : ''}`}>
+                                    <h3 className="mb-3 text-sm font-semibold text-white">
+                                        {kind === 'delta' ? 'Delta și Dunărea' : KIND_LABELS[kind]}
+                                        <span className="ml-2 text-xs font-normal text-slate-500">{group.length}</span>
+                                    </h3>
+                                    <div className="flex flex-wrap gap-2">
+                                        {group.map((l) => (
+                                            <Link key={l.slug} href={`/rasarit-apus-soare/${l.slug}`} className="glass-chip rounded-full px-3 py-1.5 text-xs text-slate-300 transition-colors hover:text-amber-100">
+                                                {l.name}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </section>
 
                 {/* Why it matters */}
                 <section className="card-panel taste-surface p-6 md:p-8 mb-8">
