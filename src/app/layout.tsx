@@ -7,21 +7,27 @@ import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import AdSenseScript from "@/components/AdSenseScript";
 
+// Both fonts are preloaded with display "optional". The CSS is inlined
+// (experimental.inlineCss), so nothing holds back the first paint: with "swap"
+// text first painted in the fallback and re-wrapped when the font arrived,
+// which is layout shift on slow phones. "optional" uses the font only if it is
+// ready within ~100 ms and never swaps later; the file is cached for the next
+// page view.
 const sora = Sora({
     subsets: ["latin", "latin-ext"],
     variable: "--font-sora",
-    display: "swap",
+    display: "optional",
     preload: true,
     adjustFontFallback: true,
 });
-// Editorial headings only; not preloaded so it never competes with the LCP.
+// Editorial headings only. Upright 600 only: no page uses italic Fraunces.
 const fraunces = Fraunces({
     subsets: ["latin", "latin-ext"],
     weight: ["600"],
-    style: ["normal", "italic"],
+    style: ["normal"],
     variable: "--font-fraunces",
-    display: "swap",
-    preload: false,
+    display: "optional",
+    preload: true,
     adjustFontFallback: true,
 });
 
