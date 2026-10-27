@@ -59,8 +59,9 @@ export async function generateMetadata({ params }: { params: Promise<{ loc: stri
     const sun = getSunDay(today, place.lat, place.lng);
     const month = MONTHS_RO[today.m - 1];
     const url = `${BASE}/rasarit-apus-soare/${place.slug}`;
-    const title = `Răsărit și Apus Soare ${place.name} Azi, ${today.d} ${cap(month)} – Ore Exacte`;
-    const description = `Azi, ${today.d} ${month}, în ${place.name} soarele răsare la ${formatClock(sun.sunrise)} și apune la ${formatClock(sun.sunset)} (zi de ${formatDuration(sun.dayLengthMs)}). Ora de aur, amurg, tabel pe ${month} și ore de pescuit.`;
+    const sunTomorrow = getSunDay(addDays(today, 1), place.lat, place.lng);
+    const title = `Răsărit și Apus Soare ${place.name} Azi și Mâine, ${today.d} ${cap(month)}`;
+    const description = `Azi, ${today.d} ${month}, în ${place.name} soarele răsare la ${formatClock(sun.sunrise)}, apune la ${formatClock(sun.sunset)} și se întunecă la ${formatClock(sun.dusk)}. Mâine răsare la ${formatClock(sunTomorrow.sunrise)}. Ora de aur, tabel pe ${month} și ore de pescuit.`;
     return {
         title: { absolute: title },
         description,
@@ -137,11 +138,19 @@ export default async function SunLocationPage({ params }: { params: Promise<{ lo
     const faq = [
         {
             q: `La ce oră răsare soarele azi în ${place.name}?`,
-            a: `Azi, ${dateLabel.toLowerCase()}, soarele răsare în ${place.name} la ${formatClock(sun.sunrise)}. Primele lumini (zorii civili) apar de la ${formatClock(sun.dawn)}. Mâine răsare la ${formatClock(sunTomorrow.sunrise)}.`,
+            a: `Azi, ${dateLabel.toLowerCase()}, soarele răsare în ${place.name} la ${formatClock(sun.sunrise)}. Primele lumini (zorii civili) apar de la ${formatClock(sun.dawn)}.`,
+        },
+        {
+            q: `La ce oră răsare soarele mâine în ${place.name}?`,
+            a: `Mâine, ${weekdayRo(tomorrow)} ${tomorrow.d} ${MONTHS_RO[tomorrow.m - 1]}, soarele răsare în ${place.name} la ${formatClock(sunTomorrow.sunrise)} și apune la ${formatClock(sunTomorrow.sunset)}. Se luminează de la ${formatClock(sunTomorrow.dawn)}.`,
         },
         {
             q: `La ce oră apune soarele azi în ${place.name}?`,
-            a: `Soarele apune azi în ${place.name} la ${formatClock(sun.sunset)}, iar amurgul civil se încheie la ${formatClock(sun.dusk)}. Durata zilei este ${formatDuration(sun.dayLengthMs)}.`,
+            a: `Soarele apune azi în ${place.name} la ${formatClock(sun.sunset)}. Durata zilei este ${formatDuration(sun.dayLengthMs)}.`,
+        },
+        {
+            q: `La ce oră se întunecă azi în ${place.name}?`,
+            a: `După apusul de la ${formatClock(sun.sunset)} mai e lumină încă aproximativ ${Math.floor(sun.dusk.getTime() / 60000) - Math.floor(sun.sunset.getTime() / 60000)} de minute. Se întunecă la ${formatClock(sun.dusk)}, când se încheie amurgul civil și e nevoie de lumină artificială afară.`,
         },
         {
             q: `Când este ora de aur în ${place.name} azi?`,
@@ -189,10 +198,10 @@ export default async function SunLocationPage({ params }: { params: Promise<{ lo
         { label: 'Amiaza solară', value: formatClock(sun.solarNoon), dot: '#FFE9A8' },
     ];
     const light = [
-        { label: 'Zori (lumină civilă)', value: formatClock(sun.dawn) },
+        { label: 'Se luminează (zori)', value: formatClock(sun.dawn) },
         { label: 'Ora de aur dimineața', value: `${formatClock(sun.sunrise)} – ${formatClock(sun.goldenHourEnd)}` },
         { label: 'Ora de aur seara', value: `${formatClock(sun.goldenHour)} – ${formatClock(sun.sunset)}` },
-        { label: 'Amurg (lumină civilă)', value: formatClock(sun.dusk) },
+        { label: 'Se întunecă (amurg)', value: formatClock(sun.dusk) },
     ];
 
     return (
@@ -236,6 +245,24 @@ export default async function SunLocationPage({ params }: { params: Promise<{ lo
                             <p className="mt-1 text-lg font-semibold tabular-nums text-white">{l.value}</p>
                         </div>
                     ))}
+                </section>
+
+                <section className="mb-6">
+                    <p className="eyebrow">Mâine, {weekdayRo(tomorrow)} {tomorrow.d} {MONTHS_RO[tomorrow.m - 1]}</p>
+                    <h2 className="mt-1.5 mb-3 font-editorial text-2xl text-white">Răsăritul de mâine în {place.name}</h2>
+                    <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+                        {[
+                            { label: 'Răsare mâine', value: formatClock(sunTomorrow.sunrise) },
+                            { label: 'Apune mâine', value: formatClock(sunTomorrow.sunset) },
+                            { label: 'Se întunecă mâine', value: formatClock(sunTomorrow.dusk) },
+                            { label: 'Durata zilei mâine', value: formatDuration(sunTomorrow.dayLengthMs) },
+                        ].map((l) => (
+                            <div key={l.label} className="dc-card px-4 py-3.5">
+                                <p className="text-[11px] text-slate-400">{l.label}</p>
+                                <p className="mt-1 text-lg font-semibold tabular-nums text-white">{l.value}</p>
+                            </div>
+                        ))}
+                    </div>
                 </section>
 
                 <AdUnit slotId="2812628769" format="horizontal" className="mb-8" />
@@ -282,7 +309,7 @@ export default async function SunLocationPage({ params }: { params: Promise<{ lo
                             })}
                         </ul>
                         <div className="mt-5 flex flex-wrap gap-2">
-                            <Link href={homeHref} className="glass-chip rounded-xl px-3.5 py-2 text-xs font-semibold text-moon hover:bg-white/10">
+                            <Link href={homeHref} rel="nofollow" className="glass-chip rounded-xl px-3.5 py-2 text-xs font-semibold text-moon hover:bg-white/10">
                                 Ziua completă de pescuit &rarr;
                             </Link>
                             <Link href={solunarHref} className="glass-chip rounded-xl px-3.5 py-2 text-xs font-semibold text-slate-300 hover:text-white">

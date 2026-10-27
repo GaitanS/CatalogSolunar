@@ -313,7 +313,7 @@ export default async function AziPage({ searchParams }: { searchParams: Promise<
                             <p className="text-white font-bold text-sm">Ghiduri Pescuit</p>
                             <p className="text-slate-400 text-xs mt-1">Articole și sfaturi</p>
                         </Link>
-                        <Link href="/blog/cum-functioneaza-calendarul-solunar" className="p-4 bg-white/5 hover:bg-white/10 rounded-xl text-center transition-colors">
+                        <Link href="/blog/ce-este-calendarul-solunar" className="p-4 bg-white/5 hover:bg-white/10 rounded-xl text-center transition-colors">
                             <p className="text-white font-bold text-sm">Cum Funcționează?</p>
                             <p className="text-slate-400 text-xs mt-1">Teoria solunar</p>
                         </Link>

@@ -39,7 +39,7 @@ export const monthlySeoLandingPages: MonthlySeoLandingPage[] = [
         description: 'Solunar Ianuarie 2026 pentru pescuit: zile bune, perioade majore, faze lunare, specii active și ore recomandate pentru ieșiri de iarnă.',
         primaryKeyword: 'solunar ianuarie 2026',
         keywords: ['solunar ianuarie 2026', 'calendar pescuit ianuarie 2026', 'ore pescuit ianuarie', 'solunar pescuit ianuarie 2026'],
-        blogHref: '/blog/solunar-ianuarie-2026-ghid',
+        // No January 2026 guide exists; middleware redirects that URL back to this page.
         seasonContext: 'Ianuarie cere pescuit lent, în ferestre scurte, pe ape reci și stabile.',
         speciesFocus: ['biban', 'șalău', 'clean'],
         strategy: 'Caută praguri adânci, zone ferite de curent și ferestrele majore din mijlocul zilei.',

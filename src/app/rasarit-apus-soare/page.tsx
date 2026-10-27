@@ -7,6 +7,7 @@ import AdUnit from '@/components/AdUnit';
 import LazyAdUnit from '@/components/LazyAdUnit';
 import JsonLd from '@/components/JsonLd';
 import { KIND_LABELS, sunLocations, type SunLocationKind } from '@/data/sunLocations';
+import { addDays, formatClock, getSunDay, todayInRomania } from '@/lib/sunTimes';
 
 // Shows today's sunrise/sunset — regenerate hourly so static output stays fresh.
 export const revalidate = 3600;
@@ -29,12 +30,12 @@ export async function generateMetadata(): Promise<Metadata> {
     const data = getSolunarData(today, BUCHAREST.lat, BUCHAREST.lng);
 
     return {
-        title: { absolute: `Răsărit și Apus Soare Azi, ${day} ${monthCap} - Ore Exacte` },
+        title: { absolute: `Răsărit și Apus Soare Azi și Mâine, ${day} ${monthCap} - Ore Exacte` },
         description: `Răsăritul soarelui azi la ${formatTime(data.sunrise)} și apusul la ${formatTime(data.sunset)} (București). Ore exacte de răsărit și apus pentru orașele din România, ${day} ${monthName} ${year}, plus răsărit/apus lună.`,
         keywords: [
             'apusul azi', 'rasaritul azi', 'apusul soarelui azi', 'rasaritul soarelui azi',
             'ora apus soare', 'ora rasarit soare', 'cat e ziua azi', 'apus soare romania',
-            'rasarit apus luna', 'apusul soarelui',
+            'rasarit apus luna', 'apusul soarelui', 'rasaritul maine', 'la ce ora se intuneca azi',
         ],
         alternates: { canonical: 'https://calendarsolunar.ro/rasarit-apus-soare' },
         openGraph: {
@@ -54,6 +55,9 @@ export default function RasaritApusPage() {
     const capitalizedDate = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
 
     const buc = getSolunarData(today, BUCHAREST.lat, BUCHAREST.lng);
+    const roToday = todayInRomania(today);
+    const bucSun = getSunDay(roToday, BUCHAREST.lat, BUCHAREST.lng);
+    const bucTomorrow = getSunDay(addDays(roToday, 1), BUCHAREST.lat, BUCHAREST.lng);
     const cities = getAllCities().map((city) => {
         const d = getSolunarData(today, city.lat, city.lng);
         return { city, sunrise: d.sunrise, sunset: d.sunset, moonrise: d.moonrise, moonset: d.moonset };
@@ -87,6 +91,16 @@ export default function RasaritApusPage() {
                         '@type': 'Question',
                         name: 'La ce oră răsare și apune soarele azi?',
                         acceptedAnswer: { '@type': 'Answer', text: `Azi, ${capitalizedDate}, în București soarele răsare la ${formatTime(buc.sunrise)} și apune la ${formatTime(buc.sunset)}. Durata zilei este ${dayLength(buc.sunrise, buc.sunset)}. Pentru alte orașe, vezi tabelul de pe pagină.` },
+                    },
+                    {
+                        '@type': 'Question',
+                        name: 'La ce oră răsare soarele mâine?',
+                        acceptedAnswer: { '@type': 'Answer', text: `Mâine, în București, soarele răsare la ${formatClock(bucTomorrow.sunrise)} și apune la ${formatClock(bucTomorrow.sunset)}. Pentru alte localități, alege orașul sau stațiunea de pe pagină.` },
+                    },
+                    {
+                        '@type': 'Question',
+                        name: 'La ce oră se întunecă azi?',
+                        acceptedAnswer: { '@type': 'Answer', text: `Azi, în București, se întunecă la ${formatClock(bucSun.dusk)}, la sfârșitul amurgului civil, la aproximativ o jumătate de oră după apusul de la ${formatClock(bucSun.sunset)}.` },
                     },
                     {
                         '@type': 'Question',
@@ -132,7 +146,8 @@ export default function RasaritApusPage() {
                             <p className="font-mono text-lg font-bold text-white">{buc.moonrise ? formatTime(buc.moonrise) : '—'} / {buc.moonset ? formatTime(buc.moonset) : '—'}</p>
                         </div>
                     </div>
-                    <p className="text-slate-400 text-xs mt-3">Orele afișate sunt pentru București. Vezi tabelul de mai jos pentru orașul tău.</p>
+                    <p className="text-slate-300 text-sm mt-4">Azi se întunecă la <strong className="text-white">{formatClock(bucSun.dusk)}</strong>. Mâine soarele răsare la <strong className="text-white">{formatClock(bucTomorrow.sunrise)}</strong> și apune la <strong className="text-white">{formatClock(bucTomorrow.sunset)}</strong>.</p>
+                    <p className="text-slate-400 text-xs mt-2">Orele afișate sunt pentru București. Vezi tabelul de mai jos sau alege localitatea ta.</p>
                 </div>
 
                 {/* Ad: top in-content (eager) */}
@@ -217,6 +232,14 @@ export default function RasaritApusPage() {
                         <div className="border-b border-white/10 pb-4">
                             <h3 className="text-base font-bold text-amber-400 mb-2">La ce oră răsare și apune soarele azi?</h3>
                             <p className="text-slate-300 text-sm">Azi, {capitalizedDate}, în București soarele răsare la {formatTime(buc.sunrise)} și apune la {formatTime(buc.sunset)}. Durata zilei este {dayLength(buc.sunrise, buc.sunset)}.</p>
+                        </div>
+                        <div className="border-b border-white/10 pb-4">
+                            <h3 className="text-base font-bold text-amber-400 mb-2">La ce oră răsare soarele mâine?</h3>
+                            <p className="text-slate-300 text-sm">Mâine, în București, soarele răsare la {formatClock(bucTomorrow.sunrise)} și apune la {formatClock(bucTomorrow.sunset)}.</p>
+                        </div>
+                        <div className="border-b border-white/10 pb-4">
+                            <h3 className="text-base font-bold text-amber-400 mb-2">La ce oră se întunecă azi?</h3>
+                            <p className="text-slate-300 text-sm">Azi, în București, se întunecă la {formatClock(bucSun.dusk)}, la aproximativ o jumătate de oră după apusul de la {formatClock(bucSun.sunset)}.</p>
                         </div>
                         <div className="border-b border-white/10 pb-4">
                             <h3 className="text-base font-bold text-amber-400 mb-2">De ce contează răsăritul și apusul pentru pescuit?</h3>

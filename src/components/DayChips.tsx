@@ -36,6 +36,7 @@ export default function DayChips({ days, selected, locationQuery = '' }: DayChip
                         key={i}
                         href={hrefFor(i)}
                         scroll={false}
+                        rel="nofollow"
                         className="flex min-w-[48px] shrink-0 flex-col items-center rounded-[14px] px-1.5 pb-[7px] pt-2 transition-colors lg:min-w-0 lg:flex-1 lg:rounded-2xl lg:py-2.5"
                         style={{
                             color: sel ? '#0A0F1C' : '#C7CEDD',
