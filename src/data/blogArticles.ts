@@ -693,6 +693,7 @@ Umblă. Nu sta în același loc 2 ore.
         title: 'Echipament de Pescuit pentru Începători - Ce Să Cumperi',
         excerpt: 'Am aruncat bani pe echipament inutil. Tu nu trebuie. Iată ce ai nevoie cu adevărat.',
         date: '2025-12-30',
+        updated: '2026-10-28',
         author: 'Echipa Calendar Solunar',
         category: 'Echipament',
         readTime: 7,
@@ -714,6 +715,10 @@ Banii nu cumpără pește. Cunoștințele da.
 
 **Total:** ~400 lei. Suficient pentru primul an.
 
+Mai jos sunt produse concrete care respectă bugetele de mai sus. Împreună ies chiar sub 400 lei.
+
+{{produse:incepatori-set-baza}}
+
 ## Ce SĂ NU Cumperi
 
 **Lansetă de carbon ultra-light** - Nu simți diferența ca începător. Și se rupe ușor.
@@ -733,6 +738,8 @@ Banii nu cumpără pește. Cunoștințele da.
 **3. Împletitură** (80-120 lei) - Pentru spinning. Simți mușcătura mai bine.
 
 **4. Minciog de calitate** (100-150 lei) - Să nu pierzi peștele la mal.
+
+{{produse:incepatori-upgrade}}
 
 ## Unde Să Cumperi
 

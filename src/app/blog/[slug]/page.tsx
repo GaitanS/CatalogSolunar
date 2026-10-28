@@ -6,6 +6,7 @@ import { getAllCities } from '@/data/cities';
 import { getAllSpecies } from '@/data/species';
 import { monthlySeoLandingPages } from '@/data/seoLandingPages';
 import LazyAdUnit from '@/components/LazyAdUnit';
+import AffiliateProducts from '@/components/AffiliateProducts';
 
 // Ad slots (configured in the AdSense account).
 const BLOG_AD_SLOTS = ['6301173988', '1044977874', '2812628769'];
@@ -149,12 +150,18 @@ function parseContent(content: string, currentSlug?: string, articles?: BlogArti
     let inList = false;
     let h2Count = 0;
     let adsInserted = 0;
+    let adDue = false;
+    let productsIndex = -1;
 
     // Inject an in-article ad after every 2nd H2 heading, up to 3 per article.
+    // An ad never sits right under a product block (its shop buttons invite
+    // accidental ad clicks); it moves to the next H2 instead.
     const maybeInsertAd = () => {
         if (!injectAds) return;
         h2Count += 1;
-        if (h2Count >= 2 && h2Count % 2 === 0 && adsInserted < 3) {
+        if (h2Count >= 2 && h2Count % 2 === 0) adDue = true;
+        if (adDue && adsInserted < 3 && productsIndex !== elements.length - 1) {
+            adDue = false;
             elements.push(
                 <LazyAdUnit
                     key={`ad-${adsInserted}`}
@@ -241,6 +248,15 @@ function parseContent(content: string, currentSlug?: string, articles?: BlogArti
             continue;
         } else if (inTable) {
             flushTable();
+        }
+
+        // Affiliate product block: a line like {{produse:incepatori-set-baza}}
+        const productsMatch = trimmedLine.match(/^\{\{produse:([\w-]+)\}\}$/);
+        if (productsMatch) {
+            flushList();
+            elements.push(<AffiliateProducts key={`products-${i}`} groupId={productsMatch[1]} />);
+            productsIndex = elements.length - 1;
+            continue;
         }
 
         // Top-level headings inside article content are rendered as H2 to avoid duplicate H1s.
