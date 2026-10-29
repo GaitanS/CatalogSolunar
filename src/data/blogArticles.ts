@@ -86,6 +86,7 @@ Dar pe un lac decent, în condiții normale? Diferență clară.
         title: 'Cele Mai Bune Ore de Pescuit 2026 - Calendar Solunar',
         excerpt: 'Cele mai bune ore de pescuit 2026: dimineața, seara, perioade majore solunar, zile bune pe luni și linkuri către solunar mai/iunie 2026.',
         date: '2026-01-07',
+        updated: '2026-10-29',
         author: 'Echipa Calendar Solunar',
         category: 'Calendar',
         readTime: 5,
@@ -118,35 +119,36 @@ Pentru planificare rapidă, verifică [calendarul solunar pescuit 2026](/solunar
 
 Marchează-ți astea în calendarul de la muncă:
 
-- 13 ianuarie (vineri - prelungește weekendul)
-- 12 februarie
-- 14 martie
-- 13 aprilie (Paște-ul e aproape, atenție la prohibiție)
-- **12 mai** (zi de top)
-- 11 iunie
-- 10 iulie
-- 9 august
-- **7 septembrie** (zi de top)
-- 7 octombrie
-- 5 noiembrie
-- 4 decembrie (deja frig, dar merge pentru șalău)
+- 3 ianuarie (sâmbătă, chiar după sărbători)
+- 2 februarie (în noaptea de duminică spre luni)
+- 3 martie
+- 2 aprilie (atenție la perioada de prohibiție)
+- **1 mai** (vineri, zi liberă: weekend prelungit, zi de top)
+- 31 mai (duminică, a doua lună plină din mai)
+- 30 iunie
+- 29 iulie
+- 28 august (vineri)
+- **26 septembrie** (sâmbătă, zi de top)
+- 26 octombrie
+- 24 noiembrie
+- 24 decembrie (deja frig, dar merge pentru șalău)
 
 ## Luna Nouă 2026
 
 La fel de bune, nopți mai întunecate:
 
-- 29 ianuarie
-- 27 februarie
-- 29 martie
-- 27 aprilie
-- **26 mai** (zi de top)
-- 25 iunie
-- 24 iulie
-- 23 august
-- **21 septembrie** (zi de top)
-- 21 octombrie
-- 20 noiembrie
-- 19 decembrie
+- 18 ianuarie
+- 17 februarie
+- 19 martie
+- 17 aprilie (vineri)
+- **16 mai** (sâmbătă, zi de top)
+- 15 iunie
+- 14 iulie
+- 12 august
+- **11 septembrie** (vineri, zi de top)
+- 10 octombrie (sâmbătă)
+- 9 noiembrie
+- 9 decembrie
 
 ## Orele de zi
 
@@ -1249,6 +1251,7 @@ Aceleași principii se aplică pentru crap, dar la scară mai mare.
         title: 'Pescuit Primăvara - Ghid Pe Luni (Martie-Mai)',
         excerpt: 'Primăvara e renașterea pescuitului. Luna cu lună, ce specii, ce momeli, ce ore - totul aici.',
         date: '2026-01-12',
+        updated: '2026-10-29',
         author: 'Echipa Calendar Solunar',
         category: 'Sezon',
         readTime: 8,
@@ -1299,7 +1302,7 @@ Perioadele majore contează mai mult ca oricând. Peștii sunt selectivi - trebu
 - Concentrează-te pe specii permise
 - E momentul perfect pentru pescuit la caras
 
-**Luna plină aprilie 2026:** 13 aprilie - zi excelentă pentru caras nocturn.
+**Luna plină aprilie 2026:** 2 aprilie - zi excelentă pentru caras nocturn.
 
 ## Mai - Luna de Aur
 
@@ -1320,8 +1323,9 @@ Perioadele majore contează mai mult ca oricând. Peștii sunt selectivi - trebu
 - Orice loc productiv în alți ani va fi productiv acum
 
 **Zile de top mai 2026:**
-- Luna plină: 12 mai (weekend prelungit ideal!)
-- Luna nouă: 26 mai
+- Luna plină: 1 mai (zi liberă, weekend prelungit ideal!)
+- Luna nouă: 16 mai (sâmbătă)
+- Luna plină: 31 mai (duminică)
 - Verifică [calendarul solunar pentru mai](/) pentru perioade exacte
 
 ## Momeile de Primăvară
@@ -1379,6 +1383,7 @@ De ce? Peștii nu mănâncă constant ca vara. Au ferestre precise de activitate
         title: 'Pescuit Vara - Cum Să Eviți Căldura și Să Prinzi Pești',
         excerpt: 'Vara e sezonul provocărilor. Căldura schimbă totul. Iată cum să te adaptezi.',
         date: '2026-01-11',
+        updated: '2026-10-29',
         author: 'Echipa Calendar Solunar',
         category: 'Sezon',
         readTime: 7,
@@ -1429,7 +1434,7 @@ Iunie e cel mai bun echilibru. Apa caldă dar nu fierbinte, zile lungi, pești a
 - Șalău - noapte și zori
 - Caras - aproape oricând dimineața
 
-**Luna plină iunie 2026:** 11 iunie - noapte ideală pentru prădători
+**Luna plină iunie 2026:** 30 iunie - noapte ideală pentru prădători
 
 **Sfat:** În iunie poți încă pescui și la prânz în zile înnorate.
 
@@ -1518,6 +1523,7 @@ Nu pleca la pescuit vara fără să verifici [calendarul](/).
         title: 'Pescuit Toamna - Cel Mai Bun Sezon din An',
         excerpt: 'Întreabă orice pescar experimentat: toamna e sezonul de aur. Iată de ce și cum să profiți.',
         date: '2026-01-10',
+        updated: '2026-10-29',
         author: 'Echipa Calendar Solunar',
         category: 'Sezon',
         readTime: 7,
@@ -1556,8 +1562,8 @@ Cea mai bună lună din an. Punct.
 - **Somn** - Ultimele festinuri înainte de hibernare
 
 **Zile de top septembrie 2026:**
-- Luna plină: 7 septembrie (zi de top)
-- Luna nouă: 21 septembrie (zi de top)
+- Luna nouă: 11 septembrie (vineri, zi de top)
+- Luna plină: 26 septembrie (sâmbătă, zi de top)
 
 [Verifică calendarul pentru septembrie →](/)
 
@@ -4906,6 +4912,7 @@ Peștii nu stau în curent puternic. Caută slack water.
         title: 'Solunar Mai 2026 - Calendar Pescuit, Ore Exacte și Zile Bune',
         excerpt: 'Solunar Mai 2026 pentru pescuit: calendar pe zile, perioade majore și minore, faze lunare, cele mai bune ore și specii active.',
         date: '2026-04-30',
+        updated: '2026-10-29',
         author: 'Echipa Calendar Solunar',
         category: 'Calendar',
         readTime: 7,
@@ -4917,11 +4924,11 @@ Mai este luna în care pescuitul intră în ritm de sezon. Apa se stabilizează,
 
 ## Răspuns Rapid: Solunar Mai 2026
 
-Pentru solunar pescuit mai 2026, cele mai bune ferestre sunt în jurul lunii pline din 2-4 mai și al lunii noi din 16-18 mai. Dimineața devreme, seara și perioadele majore calculate în ziua ieșirii sunt cele mai importante repere. Folosește acest ghid pentru planificare lunară, apoi verifică orele exacte în ziua pescuitului pe [calendarul solunar](/).
+Pentru solunar pescuit mai 2026, cele mai bune ferestre sunt în jurul lunii pline din 1-3 mai și al lunii noi din 15-17 mai. Dimineața devreme, seara și perioadele majore calculate în ziua ieșirii sunt cele mai importante repere. Folosește acest ghid pentru planificare lunară, apoi verifică orele exacte în ziua pescuitului pe [calendarul solunar](/).
 
 | Căutare | Răspuns scurt |
 |---------|---------------|
-| solunar mai 2026 | cele mai bune ferestre sunt 2-4 mai și 16-18 mai |
+| solunar mai 2026 | cele mai bune ferestre sunt 1-3 mai și 15-17 mai |
 | solunar pescuit mai 2026 | verifică perioadele majore zilnice înainte de plecare |
 | ore pescuit mai 2026 | dimineața, seara și noaptea în jurul lunii pline/noi |
 | calendar pescuit mai 2026 | folosește ghidul lunar plus [Solunar Azi](/azi) |
@@ -4936,22 +4943,23 @@ Dacă vrei să compari luna mai cu restul sezonului, vezi și ghidul pentru [cel
 
 **3. Zile lungi** - Ai ferestre bune dimineața devreme și seara târziu.
 
-**4. Solunar puternic** - Luna plină de la începutul lunii și luna nouă de la mijloc creează două intervale excelente.
+**4. Solunar puternic** - Mai 2026 are două luni pline (1 și 31 mai), iar luna nouă cade pe 16 mai: trei intervale excelente.
 
 ## Fazele Lunii în Mai 2026
 
 | Fază | Data | Rating Pescuit |
 |------|------|---------------|
-| Luna Plină | 3 Mai (Duminică) | 5/5 |
+| Luna Plină | 1 Mai (Vineri) | 5/5 |
 | Ultimul Pătrar | 10 Mai | 3/5 |
-| Luna Nouă | 17 Mai (Duminică) | 5/5 |
-| Primul Pătrar | 25 Mai | 3/5 |
+| Luna Nouă | 16 Mai (Sâmbătă) | 5/5 |
+| Primul Pătrar | 23 Mai | 3/5 |
+| Luna Plină | 31 Mai (Duminică) | 5/5 |
 
 ## Zilele de Top în Mai 2026
 
-### Top 1: 2-4 MAI (Weekend cu Lună Plină)
+### Top 1: 1-3 MAI (Weekend cu Lună Plină)
 
-**De ce:** Luna plină cade duminică, iar efectul se simte pe tot weekendul.
+**De ce:** Luna plină cade vineri, 1 Mai (zi liberă), iar efectul se simte pe tot weekendul.
 
 **Ce merge:**
 - Crap și caras dimineața
@@ -4960,7 +4968,7 @@ Dacă vrei să compari luna mai cu restul sezonului, vezi și ghidul pentru [cel
 
 **Sfat:** Dacă alegi o sesiune lungă, începe sâmbătă seara și prinde răsăritul de duminică.
 
-### Top 2: 16-18 MAI (Lună Nouă)
+### Top 2: 15-17 MAI (Lună Nouă)
 
 **De ce:** Luna nouă aduce nopți întunecate și activitate bună pe ape liniștite.
 
@@ -4971,9 +4979,9 @@ Dacă vrei să compari luna mai cu restul sezonului, vezi și ghidul pentru [cel
 
 **Sfat:** Luna nouă = pescuit nocturn de top.
 
-### Top 3: 23-25 MAI (Weekend + Primul Pătrar)
+### Top 3: 30-31 MAI (Weekend + Lună Plină)
 
-**De ce:** Apă caldă, zile lungi și activitate bună la răsărit și apus.
+**De ce:** A doua lună plină din mai cade duminică, de Rusalii. Apă caldă, zile lungi și activitate bună la răsărit și apus.
 
 **Ce merge:**
 - Crap la method feeder
@@ -5057,7 +5065,7 @@ Calendarul îți arată:
 
 ## Sfatul Lunii Mai
 
-**Nu rata weekendurile 2-4 mai și 16-18 mai.**
+**Nu rata weekendurile 1-3 mai și 15-17 mai.**
 
 Primul vine cu lună plină, al doilea cu lună nouă. Sunt cele mai bune două ferestre solunar ale lunii.
 
@@ -5067,7 +5075,7 @@ Dacă ai de ales o singură sesiune lungă în mai, alege una dintre aceste fere
 
 ## Care sunt cele mai bune zile de pescuit în Mai 2026?
 
-Cele mai bune zile de pescuit în Mai 2026 sunt 2-4 mai, 16-18 mai și 23-25 mai. Primele două ferestre sunt cele mai importante pentru că se leagă de luna plină și luna nouă, când activitatea peștilor tinde să fie mai ridicată.
+Cele mai bune zile de pescuit în Mai 2026 sunt 1-3 mai, 15-17 mai și 30-31 mai. Toate trei se leagă de luna plină sau de luna nouă, când activitatea peștilor tinde să fie mai ridicată.
 
 ## Care sunt cele mai bune ore de pescuit în Mai 2026?
 
@@ -5083,6 +5091,7 @@ Da. Ghidul lunar te ajută să alegi zilele, dar perioadele majore și minore se
         title: 'Solunar Septembrie 2026 - Sezonul de Aur al Pescuitului',
         excerpt: 'Septembrie e considerat cel mai bun sezon de pescuit. Iată cum să profiți la maxim.',
         date: '2026-01-28',
+        updated: '2026-10-29',
         author: 'Echipa Calendar Solunar',
         category: 'Calendar',
         readTime: 6,
@@ -5104,15 +5113,14 @@ Da. Ghidul lunar te ajută să alegi zilele, dar perioadele majore și minore se
 
 | Fază | Data | Rating Pescuit |
 |------|------|---------------|
-| Primul Pătrar | 2 Septembrie | 3/5 |
-| Luna Plină | 7 Septembrie (Duminică) | 5/5 |
-| Ultimul Pătrar | 14 Septembrie | 3/5 |
-| Luna Nouă | 21 Septembrie (Duminică) | 5/5 |
-| Primul Pătrar | 29 Septembrie | 3/5 |
+| Ultimul Pătrar | 4 Septembrie | 3/5 |
+| Luna Nouă | 11 Septembrie (Vineri) | 5/5 |
+| Primul Pătrar | 18 Septembrie | 3/5 |
+| Luna Plină | 26 Septembrie (Sâmbătă) | 5/5 |
 
 ## Zilele de Top în Septembrie 2026
 
-### Top 1: 5-7 SEPTEMBRIE (Weekend Luna Plină)
+### Top 1: 25-27 SEPTEMBRIE (Weekend Luna Plină)
 
 **De ce:** Weekend cu luna plină = cel mai bun interval din an.
 
@@ -5124,7 +5132,7 @@ Da. Ghidul lunar te ajută să alegi zilele, dar perioadele majore și minore se
 
 **Sfat:** Vineri seara până duminică seara. Sesiune de 48h dacă poți.
 
-### Top 2: 19-21 SEPTEMBRIE (Weekend Luna Nouă)
+### Top 2: 11-13 SEPTEMBRIE (Weekend Luna Nouă)
 
 **De ce:** A doua fereastră de aur. Luna nouă = excelent pentru crap nocturn.
 
@@ -5135,7 +5143,7 @@ Da. Ghidul lunar te ajută să alegi zilele, dar perioadele majore și minore se
 
 **Sfat:** Perfect pentru pescuit nocturn serios.
 
-### Top 3: 12-14 SEPTEMBRIE (Weekend)
+### Top 3: 18-20 SEPTEMBRIE (Weekend + Primul Pătrar)
 
 **De ce:** Mijlocul lunii, temperaturi ideale.
 
@@ -6825,7 +6833,6 @@ Alege o zi bună cu [calendarul solunar](/) și creează amintiri care durează 
         slug: 'solunar-iunie-2026-ghid',
         title: 'Solunar Iunie 2026 - Când Trage Peștele în Iunie',
         excerpt: 'Ghid solunar complet pentru iunie 2026: cele mai bune zile și ore pentru pescuit, faze lunare, specii active și recomandări pentru fiecare weekend de vară.',
-        updated: '2026-06-13',
         content: `
 # Calendar Solunar Iunie 2026: Ghid Lunar de Pescuit
 
@@ -6835,27 +6842,27 @@ Iunie este luna de aur a pescuitului. Zilele sunt lungi, apa e caldă, peștii s
 
 | Dată | Faza Lunară | Impact Pescuit |
 |------|-------------|---------------|
-| 1 Iunie | Lună Plină | ★★★★★ Nocturn excepțional |
-| 9 Iunie | Ultimul Pătrar | ★★★☆☆ Dimineața devreme |
-| 16 Iunie | Lună Nouă | ★★★★★ Pescuit de zi excelent |
+| 31 Mai | Lună Plină | ★★★★★ Nopți luminoase și la început de iunie |
+| 8 Iunie | Ultimul Pătrar | ★★★☆☆ Dimineața devreme |
+| 15 Iunie | Lună Nouă | ★★★★★ Pescuit de zi excelent |
 | 22 Iunie | Primul Pătrar | ★★★★☆ Seara și noaptea |
-| 30 Iunie | Lună Plină | ★★★★★ A doua lună plină a lunii |
+| 30 Iunie | Lună Plină | ★★★★★ Noapte caldă, pescuit nocturn de top |
 
-**Bonus:** Iunie 2026 are DOUĂ luni pline (1 și 30 iunie) — un avantaj rar pentru pescuitul nocturn.
+**Bonus:** Iunie 2026 începe imediat după luna plină din 31 mai și se încheie cu luna plină din 30 iunie, deci are nopți luminoase la ambele capete.
 
 ## Cele Mai Bune Zile
 
 ### Top 5 Zile Iunie 2026
-1. **16 Iunie** — Lună nouă + perioadă majoră dimineața → zi perfectă
-2. **1 Iunie** — Lună plină + perioadă majoră seara → pescuit nocturn de top
-3. **30 Iunie** — A doua lună plină, forță gravitațională mare + nopți calde
-4. **15 Iunie** — Ziua dinaintea lunii noi, tranziție excelentă
+1. **15 Iunie** — Lună nouă + perioadă majoră dimineața → zi perfectă
+2. **1 Iunie** — A doua zi după luna plină, zi liberă (Rusalii) → pescuit nocturn de top
+3. **30 Iunie** — Lună plină, forță gravitațională mare + nopți calde
+4. **14 Iunie** — Ziua dinaintea lunii noi, tranziție excelentă
 5. **22 Iunie** — Primul pătrar, seara activă, aproape de solstițiu
 
 ### Weekenduri
-- **6-7 Iunie**: ★★★★☆ Efect rezidual lună plină
-- **13-14 Iunie**: ★★★★☆ Tranziție spre luna nouă (16 iunie)
-- **20-21 Iunie**: ★★★★★ Post-lună nouă + solstițiu de vară
+- **6-7 Iunie**: ★★★☆☆ Lună descrescătoare, dimineți bune
+- **13-14 Iunie**: ★★★★☆ Tranziție spre luna nouă (15 iunie)
+- **20-21 Iunie**: ★★★★★ Lună în creștere + solstițiu de vară
 - **27-28 Iunie**: ★★★★☆ Creștere lunară spre luna plină
 
 ## Specii Active în Iunie
@@ -6888,7 +6895,7 @@ Iunie este luna de aur a pescuitului. Zilele sunt lungi, apa e caldă, peștii s
 - **Status**: Sezon de vârf!
 - **Ore optime**: Noapte, 22:00-04:00
 - **Momeală**: Vierme mare, pește viu, calamari
-- **Sfat**: Luna plină din 3 iunie = noapte de somn spectaculoasă
+- **Sfat**: Luna plină din 30 iunie = noapte de somn spectaculoasă
 
 ### Lin ★★★★★
 - **Status**: Cel mai activ din tot anul
@@ -6896,7 +6903,7 @@ Iunie este luna de aur a pescuitului. Zilele sunt lungi, apa e caldă, peștii s
 - **Momeală**: Vierme roșu, porumb
 - **Sfat**: Bălți mici, vegetație abundentă
 
-## Solstițiul de Vară — 20 Iunie
+## Solstițiul de Vară — 21 Iunie
 
 Cea mai lungă zi din an:
 - **Răsărit**: ~05:30
@@ -6923,7 +6930,7 @@ Cea mai lungă zi din an:
 ## Strategia Lunii
 
 ### Săptămâna 1 (1-7 Iunie)
-- Lună plină pe 3 → focusează pe nocturn
+- După luna plină din 31 mai → nopți încă luminoase, focusează pe nocturn
 - Somn și șalău preferabil
 - Sesiuni de seară 19:00 → dimineața
 - Verifică perioadele majore pe [calendarul solunar](/)
@@ -6936,8 +6943,8 @@ Cea mai lungă zi din an:
 
 ### Săptămâna 3 (15-21 Iunie)
 - **15 Iunie**: Se deschide sezonul de crap!
-- Lună nouă pe 18 → pescuit de zi excelent
-- Solstițiu pe 20 → ziua cea mai lungă
+- Lună nouă pe 15 → pescuit de zi excelent
+- Solstițiu pe 21 → ziua cea mai lungă
 - Cea mai productivă săptămână din iunie
 
 ### Săptămâna 4 (22-28 Iunie)
@@ -6955,6 +6962,7 @@ Nu rata momentele cheie — verifică [calendarul solunar](/) zilnic și planifi
 Este luna în care se fac capturile anului.
         `,
         date: '2026-01-13',
+        updated: '2026-10-29',
         author: 'Echipa CalendarSolunar.ro',
         category: 'Calendar',
         readTime: 8,
@@ -6973,29 +6981,28 @@ Octombrie este luna preferată a pescarilor experimentați. Prădătorii atacă 
 
 | Dată | Faza Lunară | Impact Pescuit |
 |------|-------------|---------------|
-| 2 Octombrie | Lună Plină | ★★★★★ Prădători activi nocturn |
-| 9 Octombrie | Ultimul Pătrar | ★★★☆☆ Dimineți reci productive |
-| 17 Octombrie | Lună Nouă | ★★★★★ Zi completă excelentă |
-| 24 Octombrie | Primul Pătrar | ★★★★☆ Seara productivă |
-| 31 Octombrie | Lună Plină | ★★★★★ A doua lună plină! Rară! |
+| 3 Octombrie | Ultimul Pătrar | ★★★☆☆ Dimineți reci productive |
+| 10 Octombrie | Lună Nouă | ★★★★★ Zi completă excelentă |
+| 18 Octombrie | Primul Pătrar | ★★★★☆ Seara productivă |
+| 26 Octombrie | Lună Plină | ★★★★★ Prădători activi nocturn |
 
-**Bonus**: Octombrie 2026 are două luni pline! A doua (31 oct) se numește "Blue Moon" — fenomen rar.
+**Bonus**: Luna nouă din 10 octombrie cade sâmbătă, iar luna plină din 26 octombrie vine imediat după weekend: două ferestre ușor de prins.
 
 ## Cele Mai Bune Zile
 
 ### Top 5 Zile Octombrie 2026
-1. **31 Octombrie** — Blue Moon + Halloween = noapte magică de pescuit
-2. **17 Octombrie** — Lună nouă, zi perfectă pentru orice specie
-3. **2 Octombrie** — Lună plină, prădători nocturn
-4. **16 Octombrie** — Ziua dinaintea lunii noi
-5. **24 Octombrie** — Primul pătrar, tranziție
+1. **26 Octombrie** — Lună plină, prădători activi noaptea
+2. **10 Octombrie** — Lună nouă într-o sâmbătă, zi perfectă pentru orice specie
+3. **25 Octombrie** — Duminica dinaintea lunii pline
+4. **9 Octombrie** — Ziua dinaintea lunii noi
+5. **18 Octombrie** — Primul pătrar, tranziție
 
 ### Weekenduri
-- **3-4 Octombrie**: ★★★★☆ Post-lună plină, activitate bună
-- **10-11 Octombrie**: ★★★☆☆ Tranziție
-- **17-18 Octombrie**: ★★★★★ Lună nouă perfectă
-- **24-25 Octombrie**: ★★★★☆ Creștere lunară
-- **31 Oct-1 Nov**: ★★★★★ Blue Moon spectaculoasă
+- **3-4 Octombrie**: ★★★☆☆ Ultimul pătrar, dimineți bune
+- **10-11 Octombrie**: ★★★★★ Lună nouă perfectă
+- **17-18 Octombrie**: ★★★★☆ Primul pătrar, creștere lunară
+- **24-25 Octombrie**: ★★★★★ Weekend înainte de luna plină (26 oct)
+- **31 Oct-1 Nov**: ★★★☆☆ Lună descrescătoare, ultimul pătrar pe 1 noiembrie
 
 ## Specii Active în Octombrie
 
@@ -7053,26 +7060,26 @@ Octombrie este luna preferată a pescarilor experimentați. Prădătorii atacă 
 ## Strategia Lunii
 
 ### Săptămâna 1 (1-7 Octombrie)
-- Lună plină pe 2 → nocturn pentru șalău
+- Ultimul pătrar pe 3 → dimineți bune pentru șalău
 - Temperaturi plăcute, stil de vară încă posibil
 - Sesiuni complete dimineață-seară
 - Spinning + feeder în aceeași zi
 
 ### Săptămâna 2 (8-14 Octombrie)
-- Luna descrescătoare
+- Lună nouă pe 10 → zi de pescuit perfectă
 - Focusează pe dimineți devreme
 - Știuca devine din ce în ce mai activă
 - Primele brume — verifică prognoza
 
 ### Săptămâna 3 (15-21 Octombrie)
-- Lună nouă pe 17 → zi de pescuit perfectă
+- Primul pătrar pe 18 → seri din ce în ce mai bune
 - Maxim de activitate diurnă
 - Crap + prădători activi simultan
-- Weekendul 17-18: cel mai bun din lună
+- Weekendul 17-18: bun pentru sesiuni lungi
 
 ### Săptămâna 4 (22-31 Octombrie)
 - Luna crește → seri din ce în ce mai productive
-- **31 Octombrie**: Blue Moon — noapte legendară
+- **26 Octombrie**: Lună plină — noapte de prădători
 - Ultimele zile calde posibile
 - Sesiuni prelungite weekend
 
@@ -7088,15 +7095,16 @@ Octombrie este luna preferată a pescarilor experimentați. Prădătorii atacă 
 
 Octombrie 2026 este luna în care pescuitul românesc atinge perfecțiunea.
 
-Prădători agresivi, crap flămând, vreme plăcută și — bonus — două luni pline într-o singură lună.
+Prădători agresivi, crap flămând, vreme plăcută și o lună plină chiar după ultimul weekend al lunii.
 
 Verifică [calendarul solunar](/) și profită de fiecare zi de toamnă. Vine iarna.
         `,
         date: '2026-01-12',
+        updated: '2026-10-29',
         author: 'Echipa CalendarSolunar.ro',
         category: 'Calendar',
         readTime: 8,
-        keywords: ['solunar octombrie 2026', 'calendar pescuit octombrie', 'pescuit toamna 2026', 'stiuca octombrie', 'salau toamna', 'pescuit pradatori', 'blue moon pescuit', 'cele mai bune zile octombrie', 'faze lunare octombrie', 'crap toamna']
+        keywords: ['solunar octombrie 2026', 'calendar pescuit octombrie', 'pescuit toamna 2026', 'stiuca octombrie', 'salau toamna', 'pescuit pradatori', 'cele mai bune zile octombrie', 'faze lunare octombrie', 'crap toamna']
     },
     {
         slug: 'siguranta-la-pescuit-ghid',
@@ -7614,6 +7622,7 @@ Verifică [calendarul solunar](/) pentru Constanța, alege ziua perfectă, și d
         title: 'Solunar Februarie 2026 - Ore și Zile Optime Pescuit',
         excerpt: 'Februarie 2026: luna provocărilor. Pești leneși, ape reci, dar oportunități reale dacă știi când să mergi.',
         date: '2026-02-01',
+        updated: '2026-10-29',
         author: 'Echipa Calendar Solunar',
         category: 'Calendar',
         readTime: 6,
@@ -7637,8 +7646,8 @@ Februarie e luna în care mulți pescari stau acasă. Greșeală. Peștii nu dor
 |------|------|---------------|
 | Luna Plină | 2 Februarie (Luni) | 5/5 |
 | Ultimul Pătrar | 9 Februarie | 3/5 |
-| Luna Nouă | 18 Februarie (Miercuri) | 5/5 |
-| Primul Pătrar | 25 Februarie | 3/5 |
+| Luna Nouă | 17 Februarie (Marți) | 5/5 |
+| Primul Pătrar | 24 Februarie | 3/5 |
 
 ## Zilele de Top în Februarie 2026
 
@@ -7653,9 +7662,9 @@ Februarie e luna în care mulți pescari stau acasă. Greșeală. Peștii nu dor
 
 **Sfat:** Pescuiește în adâncime. Peștii stau la fund unde apa e mai caldă (4°C).
 
-### Top 2: 17-19 FEBRUARIE (Marți-Joi Luna Nouă)
+### Top 2: 16-18 FEBRUARIE (Luni-Miercuri Luna Nouă)
 
-**De ce:** Luna nouă pe 18 — a doua fereastră importantă. Nopțile întunecate activează prădătorii.
+**De ce:** Luna nouă pe 17 — a doua fereastră importantă. Nopțile întunecate activează prădătorii.
 
 **Ce merge:**
 - Știucă — foarte activă în zilele din jurul lunii noi
@@ -7751,7 +7760,7 @@ Calendarul îți arată:
 
 **Nu rata 1-3 februarie.**
 
-Luna plină de la începutul lunii coincide cu un weekend. Dacă presiunea atmosferică e stabilă, e cel mai bun interval de pescuit din toată luna.
+Luna plină de la începutul lunii cade în noaptea de duminică spre luni. Dacă presiunea atmosferică e stabilă, e cel mai bun interval de pescuit din toată luna.
 
 Pregătește echipamentul acum și verifică [calendarul solunar](/) pentru orele exacte.
         `
@@ -7761,6 +7770,7 @@ Pregătește echipamentul acum și verifică [calendarul solunar](/) pentru orel
         title: 'Solunar Martie 2026 - Când Trage Peștele în Martie',
         excerpt: 'Martie 2026: trezirea apelor. Temperatura crește, peștii se activează, iar oportunitățile explodează.',
         date: '2026-02-01',
+        updated: '2026-10-29',
         author: 'Echipa Calendar Solunar',
         category: 'Calendar',
         readTime: 6,
@@ -7785,7 +7795,7 @@ Martie e luna tranziției. Iarna se retrage, apele se încălzesc, iar peștii s
 | Luna Plină | 3 Martie (Marți) | 5/5 |
 | Ultimul Pătrar | 11 Martie | 3/5 |
 | Luna Nouă | 19 Martie (Joi) | 5/5 |
-| Primul Pătrar | 26 Martie | 3/5 |
+| Primul Pătrar | 25 Martie | 3/5 |
 
 ## Zilele de Top în Martie 2026
 
@@ -7901,6 +7911,7 @@ După 15 martie, concentrează-te pe crap și caras — ei iau locul prădători
         title: 'Solunar Aprilie 2026 - Cele Mai Bune Zile de Pescuit în Aprilie',
         excerpt: 'Solunar aprilie 2026: vezi zilele cu activitate maximă, fazele lunii, perioade majore și minore. Calendar solunar pescuit aprilie 2026 actualizat.',
         date: '2026-02-01',
+        updated: '2026-10-29',
         author: 'Echipa Calendar Solunar',
         category: 'Calendar',
         readTime: 6,
@@ -7924,14 +7935,14 @@ Solunar aprilie 2026 complet: calendarul pescarului pentru aprilie cu toate peri
 |------|------|---------------|
 | Luna Plină | 2 Aprilie (Joi) | 5/5 |
 | Ultimul Pătrar | 10 Aprilie | 3/5 |
-| Luna Nouă | 18 Aprilie (Sâmbătă) | 5/5 |
+| Luna Nouă | 17 Aprilie (Vineri) | 5/5 |
 | Primul Pătrar | 24 Aprilie | 3/5 |
 
 ## Zilele de Top în Aprilie 2026
 
 ### Top 1: 17-19 APRILIE (Vineri-Duminică Luna Nouă)
 
-**De ce:** Luna nouă pe 18 aprilie CAD ÎN WEEKEND. Cel mai bun interval posibil.
+**De ce:** Luna nouă pe 17 aprilie, vineri, deschide weekendul. Cel mai bun interval posibil.
 
 **Ce merge:**
 - Crap — flămând, activ toată ziua
@@ -8037,7 +8048,7 @@ Calendarul îți arată:
 
 **Weekend-ul 17-19 aprilie e cel mai bun din lună.**
 
-Luna nouă care cade exact pe sâmbătă e un cadou rar. Temperatura apei trece de 14°C, peștii sunt în frenesia pre-depunere, iar tu ai 3 zile la dispoziție.
+Luna nouă care cade vineri, chiar la începutul weekendului, e un cadou rar. Temperatura apei trece de 14°C, peștii sunt în frenesia pre-depunere, iar tu ai 3 zile la dispoziție.
 
 Planifică din timp, rezervă locul pe lac, și verifică [calendarul solunar](/) pentru orele exacte.
         `
@@ -8047,6 +8058,7 @@ Planifică din timp, rezervă locul pe lac, și verifică [calendarul solunar](/
         title: 'Solunar Iulie 2026 - Ore Optime și Zile de Pescuit',
         excerpt: 'Iulie 2026: caniculă și pești capricioși. Cum să prinzi și la 35°C dacă știi orele corecte.',
         date: '2026-02-01',
+        updated: '2026-10-29',
         author: 'Echipa Calendar Solunar',
         category: 'Calendar',
         readTime: 6,
@@ -8068,19 +8080,18 @@ Iulie e luna cea mai fierbinte și cea mai frustrată pentru pescari. Apa caldă
 
 | Fază | Data | Rating Pescuit |
 |------|------|---------------|
-| Luna Plină | 1 Iulie (Miercuri) | 5/5 |
-| Ultimul Pătrar | 8 Iulie | 3/5 |
-| Luna Nouă | 15 Iulie (Miercuri) | 5/5 |
-| Primul Pătrar | 22 Iulie | 3/5 |
-| Luna Plină | 30 Iulie (Joi) | 5/5 |
+| Ultimul Pătrar | 7 Iulie | 3/5 |
+| Luna Nouă | 14 Iulie (Marți) | 5/5 |
+| Primul Pătrar | 21 Iulie | 3/5 |
+| Luna Plină | 29 Iulie (Miercuri) | 5/5 |
 
-**Bonus:** Iulie 2026 are DOUĂ luni pline (1 și 30 iulie). Rar și valoros.
+**Bonus:** Iulie 2026 începe imediat după luna plină din 30 iunie, deci primele nopți ale lunii sunt încă luminoase.
 
 ## Zilele de Top în Iulie 2026
 
 ### Top 1: 29-30 IULIE (Miercuri-Joi Luna Plină)
 
-**De ce:** A doua lună plină a lunii. Forță gravitațională mare + nopți calde = condiții de vis.
+**De ce:** Luna plină pe 29 iulie. Forță gravitațională mare + nopți calde = condiții de vis.
 
 **Ce merge:**
 - Somn — momeală vie pe fund, sesiune nocturnă
@@ -8089,7 +8100,7 @@ Iulie e luna cea mai fierbinte și cea mai frustrată pentru pescari. Apa caldă
 
 **Sfat:** Sesiune de noapte obligatorie. Pleacă la 20:00, pescuiește până la 06:00.
 
-### Top 2: 14-16 IULIE (Marți-Joi Luna Nouă)
+### Top 2: 13-15 IULIE (Luni-Miercuri Luna Nouă)
 
 **De ce:** Luna nouă = nopți complet întunecate. Somnul și crapul sunt hipercactivi.
 
@@ -8102,7 +8113,7 @@ Iulie e luna cea mai fierbinte și cea mai frustrată pentru pescari. Apa caldă
 
 ### Top 3: 4-5 IULIE (Weekend)
 
-**De ce:** Weekend imediat după luna plină, inerție de activitate.
+**De ce:** La câteva zile după luna plină din 30 iunie, activitatea nocturnă e încă bună.
 
 **Ce merge:**
 - Crap de noapte
@@ -8180,7 +8191,7 @@ Pentru perioade majore și minore exacte, verifică zilnic pe [Calendar Solunar]
 
 Nu încerca să pescuiești ziua la caniculă. Transformă-te în pescar nocturn. Sesiunile 20:00-06:00 sunt cele mai productive din tot anul.
 
-Două luni pline în iulie (1 și 30) = două weekenduri de aur. Nu le rata.
+Luna plină din 29 iulie, cu nopți calde = cea mai bună fereastră nocturnă a verii. Nu o rata.
 
 [Verifică calendarul solunar pentru iulie 2026 →](/)
         `
@@ -8190,6 +8201,7 @@ Două luni pline în iulie (1 și 30) = două weekenduri de aur. Nu le rata.
         title: 'Solunar August 2026 - Zile și Ore Optime Pescuit',
         excerpt: 'August 2026: ultimele nopți calde, primele semne de toamnă. Cum să profiți de tranziție.',
         date: '2026-02-01',
+        updated: '2026-10-29',
         author: 'Echipa Calendar Solunar',
         category: 'Calendar',
         readTime: 6,
@@ -8212,7 +8224,7 @@ August e luna tranziției inverse. Căldura încă domină dar nopțile se lunge
 | Fază | Data | Rating Pescuit |
 |------|------|---------------|
 | Ultimul Pătrar | 6 August | 3/5 |
-| Luna Nouă | 13 August (Joi) | 5/5 |
+| Luna Nouă | 12 August (Miercuri) | 5/5 |
 | Primul Pătrar | 20 August | 3/5 |
 | Luna Plină | 28 August (Vineri) | 5/5 |
 
@@ -8229,9 +8241,9 @@ August e luna tranziției inverse. Căldura încă domină dar nopțile se lunge
 
 **Sfat:** CEL MAI BUN weekend din august. Luna plină + răcorire + weekend = combinație perfectă.
 
-### Top 2: 12-14 AUGUST (Miercuri-Vineri Luna Nouă)
+### Top 2: 11-13 AUGUST (Marți-Joi Luna Nouă)
 
-**De ce:** Luna nouă pe 13 august. Nopți întunecate, prădători activi.
+**De ce:** Luna nouă pe 12 august. Nopți întunecate, prădători activi.
 
 **Ce merge:**
 - Somn — agresiv în nopți fără lună
@@ -8327,6 +8339,7 @@ Planifică o sesiune de 48h și pregătește echipament pentru crap + somn.
         title: 'Solunar Noiembrie 2026 - Ore și Zile Optime Pescuit',
         excerpt: 'Noiembrie 2026: ultimele șanse înainte de iarnă. Peștii se hrănesc agresiv — profită.',
         date: '2026-02-01',
+        updated: '2026-10-29',
         author: 'Echipa Calendar Solunar',
         category: 'Calendar',
         readTime: 6,
@@ -8348,10 +8361,10 @@ Noiembrie e ultima mare fereastră de pescuit înainte de iarnă. Peștii știu 
 
 | Fază | Data | Rating Pescuit |
 |------|------|---------------|
-| Ultimul Pătrar | 2 Noiembrie | 3/5 |
+| Ultimul Pătrar | 1 Noiembrie | 3/5 |
 | Luna Nouă | 9 Noiembrie (Luni) | 5/5 |
 | Primul Pătrar | 17 Noiembrie | 3/5 |
-| Luna Plină | 25 Noiembrie (Miercuri) | 5/5 |
+| Luna Plină | 24 Noiembrie (Marți) | 5/5 |
 
 ## Zilele de Top în Noiembrie 2026
 
@@ -8366,16 +8379,16 @@ Noiembrie e ultima mare fereastră de pescuit înainte de iarnă. Peștii știu 
 
 **Sfat:** Duminică-luni (8-9) e combinația ideală. Luna nouă + temperaturi stabile.
 
-### Top 2: 24-26 NOIEMBRIE (Marți-Joi Luna Plină)
+### Top 2: 23-25 NOIEMBRIE (Luni-Miercuri Luna Plină)
 
-**De ce:** Luna plină pe 25 — ultima lună plină bună pentru pescuit în 2026.
+**De ce:** Luna plină pe 24 — ultima lună plină bună pentru pescuit în 2026.
 
 **Ce merge:**
 - Crap — ultimele sesiuni mari din an
 - Știucă — luna luminează, prădătorul vânează
 - Biban — jigging vertical
 
-**Sfat:** Dacă poți lua o zi liberă, 25 noiembrie e ziua. Ultimul mare pescuit al anului.
+**Sfat:** Dacă poți lua o zi liberă, 24 noiembrie (marți) e ziua. Ultimul mare pescuit al anului.
 
 ### Top 3: 14-15 NOIEMBRIE (Weekend)
 
@@ -8456,6 +8469,7 @@ E ultima fereastră mare de pescuit din 2026 unde poți prinde crap mare consist
         title: 'Solunar Decembrie 2026 - Pescuit de Iarnă pe Ore',
         excerpt: 'Decembrie 2026: pescuitul de iarnă nu e pentru toți. Dar pentru cei care merg, recompensele sunt mari.',
         date: '2026-02-01',
+        updated: '2026-10-29',
         author: 'Echipa Calendar Solunar',
         category: 'Calendar',
         readTime: 6,
@@ -8477,11 +8491,11 @@ Decembrie e luna extremelor. Frig, zile scurte, lacuri pustii. Dar peștii sunt 
 
 | Fază | Data | Rating Pescuit |
 |------|------|---------------|
-| Ultimul Pătrar | 2 Decembrie | 3/5 |
+| Ultimul Pătrar | 1 Decembrie | 3/5 |
 | Luna Nouă | 9 Decembrie (Miercuri) | 5/5 |
 | Primul Pătrar | 17 Decembrie | 3/5 |
 | Luna Plină | 24 Decembrie (Joi) | 5/5 |
-| Ultimul Pătrar | 31 Decembrie | 3/5 |
+| Ultimul Pătrar | 30 Decembrie | 3/5 |
 
 ## Zilele de Top în Decembrie 2026
 

@@ -11,6 +11,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import MonthlySolunarLanding from '@/components/MonthlySolunarLanding';
 import AnnualSolunarLanding from '@/components/AnnualSolunarLanding';
 import { getCityBySlug, getAllCities } from '@/data/cities';
+import { getSunLocation } from '@/data/sunLocations';
 import { getSpeciesBySlug, getAllSpecies } from '@/data/species';
 import { getAllArticles } from '@/data/blogArticles';
 import { getAllLocations } from '@/data/fishingLocations';
@@ -294,6 +295,16 @@ function CityPageContent({ city }: { city: ReturnType<typeof getCityBySlug> & {}
                     <h2 className="text-xl font-display font-bold text-white mb-4">Grafic Activitate {city.name}</h2>
                     <ActivityGraph majorPeriods={data.majorPeriods} minorPeriods={data.minorPeriods} />
                 </div>
+
+                {getSunLocation(city.slug) && (
+                    <Link href={`/rasarit-apus-soare/${city.slug}`} className="card-panel p-5 md:p-6 mb-8 flex items-center justify-between gap-4 hover:bg-white/5 transition-colors">
+                        <div>
+                            <h2 className="text-lg font-display font-bold text-white mb-1">Răsărit și apus în {city.name}</h2>
+                            <p className="text-night-400 text-sm">Azi soarele răsare la {formatTime(data.sunrise)} și apune la {formatTime(data.sunset)}. Vezi și zorii, amurgul și ora de aur.</p>
+                        </div>
+                        <span className="text-moon text-sm font-semibold whitespace-nowrap">Orele →</span>
+                    </Link>
+                )}
 
                 <div className="grid md:grid-cols-2 gap-6 mb-8">
                     <div className="card-panel p-6">

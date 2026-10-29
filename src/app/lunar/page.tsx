@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import { getMoonPhase, getMoonIllumination, getMoonPhaseName } from '@/lib/solunar';
+import { datePartsInRomania, todayInRomania, weekdayRo, MONTHS_RO } from '@/lib/sunTimes';
+import { moonPhasesBetween, nextMoonPhase, PHASE_NAMES_RO } from '@/lib/moonPhases';
 import RatingBars from '@/components/RatingBars';
 import MoonIcon from '@/components/MoonIcon';
 import MiniMoon from '@/components/MiniMoon';
@@ -12,23 +14,52 @@ import Link from 'next/link';
 // Shows today's moon phase + current month's calendar — regenerate hourly.
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
-    // Absolute title bypasses the global template so it stays short (~52 chars).
-    title: { absolute: 'Faza Lunii Azi + Calendar Lunar 2026 - Fazele Lunii' },
-    description: 'Faza lunii azi, calendar lunar 2026 cu toate fazele lunii pe luni, lună plină, lună nouă, procent de iluminare și rating solunar pentru pescuit. Actualizat zilnic.',
-    keywords: [
-        'fazele lunii azi', 'faza lunii azi', 'calendar lunar 2026', 'fazele lunii',
-        'fazele lunii 2026', 'calendar lunar', 'luna plina', 'luna noua',
-        'calendar fazele lunii', 'faze lunare pescuit',
-        'calendar lunar fazele lunii', 'luna azi',
-    ],
-    alternates: { canonical: 'https://calendarsolunar.ro/lunar' },
-    openGraph: {
-        title: 'Faza Lunii Azi — Calendar Lunar 2026',
-        description: 'Vezi faza lunii de azi, iluminarea, calendarul lunar 2026 cu toate fazele și impactul asupra pescuitului.',
-        url: 'https://calendarsolunar.ro/lunar',
-    },
-};
+function dayMonth(date: Date): string {
+    const p = datePartsInRomania(date);
+    return `${p.d} ${MONTHS_RO[p.m - 1]}`;
+}
+
+/** Today's phase in Romanian, plus the next full and new moon (Romanian dates). */
+function moonToday(now: Date) {
+    const today = todayInRomania(now);
+    const name = getMoonPhaseName(getMoonPhase(now));
+    const label = name.startsWith('În') ? `Lună ${name.toLowerCase()}` : name;
+    const illumination = getMoonIllumination(now);
+    const month = MONTHS_RO[today.m - 1];
+    return {
+        today,
+        month,
+        label,
+        illumination,
+        // "Azi, joi 29 octombrie: lună în scădere, iluminată 84%."
+        summary: `Azi, ${weekdayRo(today)} ${today.d} ${month}: ${label.toLowerCase()}, iluminată ${illumination}%.`,
+        nextFull: dayMonth(nextMoonPhase('full', now)),
+        nextNew: dayMonth(nextMoonPhase('new', now)),
+    };
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+    const moon = moonToday(new Date());
+    const Month = moon.month.charAt(0).toUpperCase() + moon.month.slice(1);
+    return {
+        // Absolute title bypasses the global template. The date and phase lead,
+        // so the result reads as today's answer for "faza lunii azi" searches.
+        title: { absolute: `Faza Lunii Azi, ${moon.today.d} ${Month}: ${moon.label} ${moon.illumination}% - Calendar Lunar ${moon.today.y}` },
+        description: `${moon.summary} Următoarea lună plină: ${moon.nextFull}. Luna nouă: ${moon.nextNew}. Calendar lunar ${moon.today.y} cu toate fazele lunii și influența lor asupra pescuitului.`,
+        keywords: [
+            'fazele lunii azi', 'faza lunii azi', 'calendar lunar 2026', 'fazele lunii',
+            'fazele lunii 2026', 'calendar lunar', 'luna plina', 'luna noua',
+            'calendar fazele lunii', 'faze lunare pescuit',
+            'calendar lunar fazele lunii', 'luna azi', 'in ce faza este luna azi', 'urmatoarea luna plina',
+        ],
+        alternates: { canonical: 'https://calendarsolunar.ro/lunar' },
+        openGraph: {
+            title: `Faza Lunii Azi, ${moon.today.d} ${Month} — Calendar Lunar ${moon.today.y}`,
+            description: `${moon.summary} Următoarea lună plină: ${moon.nextFull}.`,
+            url: 'https://calendarsolunar.ro/lunar',
+        },
+    };
+}
 
 function getMoonage(date: Date): number {
     const synodic = 29.53058867;
@@ -40,8 +71,9 @@ function getMoonage(date: Date): number {
 
 export default function LunarPage() {
     const today = new Date();
-    const currentMonth = today.getMonth();
-    const currentYear = today.getFullYear();
+    const ro = todayInRomania(today);
+    const currentMonth = ro.m - 1;
+    const currentYear = ro.y;
 
     // Generate calendar for current month
     const firstDay = new Date(currentYear, currentMonth, 1);
@@ -57,51 +89,26 @@ export default function LunarPage() {
         days.push(new Date(currentYear, currentMonth, d));
     }
 
-    // Find key moon phases this month
-    const keyPhases: { date: Date; phase: string; name: string }[] = [];
-    for (let d = 1; d <= daysInMonth; d++) {
-        const date = new Date(currentYear, currentMonth, d);
-        const age = getMoonage(date);
-        const prevDate = new Date(currentYear, currentMonth, d - 1);
-        const prevAge = getMoonage(prevDate);
+    // Exact phase instants for the year, dated in Romanian time. The window is
+    // padded by two days so phases right at New Year's are not missed.
+    const yearPhases = moonPhasesBetween(new Date(Date.UTC(currentYear, 0, 1) - 2 * 86400000), new Date(Date.UTC(currentYear + 1, 0, 1) + 2 * 86400000))
+        .map((e) => ({ ...e, ro: datePartsInRomania(e.date), name: PHASE_NAMES_RO[e.phase] }))
+        .filter((e) => e.ro.y === currentYear);
 
-        // New Moon (age crosses 0)
-        if (age < 1 && prevAge > 28) {
-            keyPhases.push({ date, phase: 'new', name: 'Lună Nouă' });
-        }
-        // First Quarter (age ~7.4)
-        if (prevAge < 7.4 && age >= 7.4) {
-            keyPhases.push({ date, phase: 'first-quarter', name: 'Primul Pătrar' });
-        }
-        // Full Moon (age ~14.8)
-        if (prevAge < 14.8 && age >= 14.8) {
-            keyPhases.push({ date, phase: 'full', name: 'Lună Plină' });
-        }
-        // Last Quarter (age ~22.1)
-        if (prevAge < 22.1 && age >= 22.1) {
-            keyPhases.push({ date, phase: 'last-quarter', name: 'Ultimul Pătrar' });
-        }
-    }
+    // Key moon phases this month
+    const keyPhases = yearPhases.filter((e) => e.ro.m === currentMonth + 1);
 
-    const monthName = today.toLocaleDateString('ro-RO', { month: 'long', year: 'numeric' });
+    const monthName = today.toLocaleDateString('ro-RO', { month: 'long', year: 'numeric', timeZone: 'Europe/Bucharest' });
+    const moon = moonToday(today);
 
     // Full-year moon phases — powers the "Fazele Lunii 2026" annual section,
     // which targets "fazele lunii 2026" / "calendar fazele lunii" queries.
     const monthNamesRo = ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie'];
-    const annualPhases = monthNamesRo.map((mName, mIdx) => {
-        const phases: { date: Date; phase: string; name: string }[] = [];
-        const daysInThisMonth = new Date(currentYear, mIdx + 1, 0).getDate();
-        for (let d = 1; d <= daysInThisMonth; d++) {
-            const date = new Date(currentYear, mIdx, d);
-            const age = getMoonage(date);
-            const prevAge = getMoonage(new Date(currentYear, mIdx, d - 1));
-            if (age < 1 && prevAge > 28) phases.push({ date, phase: 'new', name: 'Lună Nouă' });
-            if (prevAge < 7.4 && age >= 7.4) phases.push({ date, phase: 'first-quarter', name: 'Primul Pătrar' });
-            if (prevAge < 14.8 && age >= 14.8) phases.push({ date, phase: 'full', name: 'Lună Plină' });
-            if (prevAge < 22.1 && age >= 22.1) phases.push({ date, phase: 'last-quarter', name: 'Ultimul Pătrar' });
-        }
-        return { monthName: mName, slug: mName.toLowerCase(), phases };
-    });
+    const annualPhases = monthNamesRo.map((mName, mIdx) => ({
+        monthName: mName,
+        slug: mName.toLowerCase(),
+        phases: yearPhases.filter((e) => e.ro.m === mIdx + 1),
+    }));
 
     const lunarSchema = {
         "@context": "https://schema.org",
@@ -125,6 +132,9 @@ export default function LunarPage() {
                     <h1 className="text-4xl md:text-6xl font-editorial tracking-tight leading-none text-white mb-5">
                         Faza Lunii Azi <span className="text-moon capitalize">{monthName}</span>
                     </h1>
+                    <p className="text-white text-base md:text-lg leading-relaxed max-w-[65ch] mb-2">
+                        {moon.summary} Următoarea lună plină este pe <strong className="text-moon">{moon.nextFull}</strong>, iar luna nouă pe <strong className="text-moon">{moon.nextNew}</strong>.
+                    </p>
                     <p className="text-night-300 text-base md:text-lg leading-relaxed max-w-[65ch]">
                         Calendar lunar cu iluminare, faze importante și rating solunar pentru pescuit.
                     </p>
@@ -140,15 +150,13 @@ export default function LunarPage() {
                         </div>
                         <div className="text-center md:text-left">
                             <h2 className="text-2xl font-display font-bold text-white mb-2">
-                                Azi: {getMoonPhaseName(getMoonPhase(today)).startsWith('În')
-                                    ? `Lună ${getMoonPhaseName(getMoonPhase(today)).toLowerCase()}`
-                                    : getMoonPhaseName(getMoonPhase(today))}
+                                Azi: {moon.label}
                             </h2>
                             <p className="text-moon text-lg font-bold mb-1">
-                                {getMoonIllumination(today)}% iluminare
+                                {moon.illumination}% iluminare
                             </p>
                             <p className="text-night-400">
-                                {today.toLocaleDateString('ro-RO', { weekday: 'long', day: 'numeric', month: 'long' })}
+                                {today.toLocaleDateString('ro-RO', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Bucharest' })}
                             </p>
                         </div>
                     </div>
@@ -186,7 +194,7 @@ export default function LunarPage() {
                                     </div>
                                     <div className="font-bold text-white text-sm mb-1">{p.name}</div>
                                     <div className="text-night-400 text-xs font-mono">
-                                        {p.date.toLocaleDateString('ro-RO', { day: 'numeric', month: 'short' })}
+                                        {p.date.toLocaleDateString('ro-RO', { day: 'numeric', month: 'short', timeZone: 'Europe/Bucharest' })}
                                     </div>
                                 </div>
                             ))}
@@ -210,11 +218,11 @@ export default function LunarPage() {
                             if (!date) {
                                 return <div key={i} />;
                             }
-                            const isToday = date.toDateString() === today.toDateString();
-                            const phase = getMoonPhase(date);
+                            const isToday = date.getDate() === ro.d;
                             const illumination = getMoonIllumination(date);
-                            const special = phase === 'full' || phase === 'new';
-                            const tag = phase === 'full' ? 'Plină' : phase === 'new' ? 'Nouă' : '';
+                            const event = keyPhases.find((e) => e.ro.d === date.getDate() && (e.phase === 'full' || e.phase === 'new'));
+                            const special = Boolean(event);
+                            const tag = event?.phase === 'full' ? 'Plină' : event?.phase === 'new' ? 'Nouă' : '';
 
                             return (
                                 <div
@@ -288,10 +296,9 @@ export default function LunarPage() {
                             </thead>
                             <tbody>
                                 {annualPhases.map((m) => {
-                                    const pick = (name: string) => {
-                                        const p = m.phases.find((x) => x.name === name);
-                                        return p ? p.date.getDate() : '—';
-                                    };
+                                    // Some months have two full (or new) moons, e.g. 1 and 31 May 2026.
+                                    const pick = (name: string) =>
+                                        m.phases.filter((x) => x.name === name).map((x) => x.ro.d).join(', ') || '—';
                                     const isCurrent = monthNamesRo[currentMonth] === m.monthName;
                                     return (
                                         <tr key={m.slug} className={`border-b border-night-800 ${isCurrent ? 'bg-moon/5' : ''}`}>
