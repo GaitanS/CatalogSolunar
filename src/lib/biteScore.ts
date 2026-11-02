@@ -21,9 +21,8 @@ export function computeBiteCurve(day: DaySolunarData, pressureTrend6h = 0): numb
     dayStart.setHours(0, 0, 0, 0);
     const start = dayStart.getTime();
 
-    let phaseBoost = 0;
-    if (day.moonPhase === 'full' || day.moonPhase === 'new') phaseBoost = 8;
-    else if (day.moonPhase === 'first-quarter' || day.moonPhase === 'last-quarter') phaseBoost = 4;
+    // Follows the day rating: +8 around new/full moon (5/5), -8 around the quarters (1/5).
+    const phaseBoost = (day.overallRating - 3) * 4;
 
     let pBoost = 0;
     if (pressureTrend6h <= -1.5) pBoost = 8;      // presiune în scădere = hrănire activă

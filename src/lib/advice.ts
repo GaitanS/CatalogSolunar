@@ -28,8 +28,14 @@ export function getFishingAdvice(weather: WeatherData, solunar: DaySolunarData):
     }
 
     // Moon/Solunar Rating check
-    if (solunar.overallRating >= 4) {
+    if (solunar.overallRating === 5) {
         return "Condiții solunare excelente! Nu rata răsăritul și apusul.";
+    }
+    if (solunar.overallRating === 4) {
+        return "Zi solunară foarte bună. Profită de perioadele majore, mai ales dacă prind răsăritul sau apusul.";
+    }
+    if (solunar.overallRating <= 2) {
+        return (tips.length > 0 ? tips.join(" ") + " " : "") + "Zi solunară slabă: peștii mănâncă în ferestre scurte, așa că mizează pe perioada majoră și pe orele de la răsărit și apus.";
     }
 
     // General fallback based on moon phase
@@ -48,11 +54,15 @@ export function getMajorPeriodsDescription(periods: any[]): string {
     if (periods.length === 0) return "Fără perioade majore azi.";
     const count = periods.length;
     const totalDuration = count * 2; // Approx 2 hours per period
-    return `Azi ai ${count} perioade majore. Aproximativ ${totalDuration} ore de activitate intensă.`;
+    return count === 1
+        ? `Azi ai o perioadă majoră. Aproximativ ${totalDuration} ore de activitate intensă.`
+        : `Azi ai ${count} perioade majore. Aproximativ ${totalDuration} ore de activitate intensă.`;
 }
 
 export function getMinorPeriodsDescription(periods: any[]): string {
     if (periods.length === 0) return "Fără perioade minore azi.";
     const count = periods.length;
-    return `Azi ai ${count} perioade minore. Activitate moderată în reprize scurte.`;
+    return count === 1
+        ? "Azi ai o perioadă minoră. Activitate moderată într-o repriză scurtă."
+        : `Azi ai ${count} perioade minore. Activitate moderată în reprize scurte.`;
 }

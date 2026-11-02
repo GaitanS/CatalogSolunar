@@ -7,21 +7,13 @@
  */
 
 import { useEffect, useState } from 'react';
-import { DaySolunarData, SolunarPeriod, formatTime } from '@/lib/solunar';
+import { DaySolunarData, SolunarPeriod, formatTime, RATING_LABELS } from '@/lib/solunar';
 import { isGoldenPeriod } from '@/lib/biteScore';
 
 interface ActivityNowCardProps {
     day: DaySolunarData;
     isToday: boolean;
 }
-
-const RATING_LABELS: Record<number, string> = {
-    1: 'Foarte slabă',
-    2: 'Slabă',
-    3: 'Bună',
-    4: 'Foarte bună',
-    5: 'Excelentă',
-};
 
 const typeName = (t: SolunarPeriod['type']) => (t === 'major' ? 'majoră' : 'minoră');
 

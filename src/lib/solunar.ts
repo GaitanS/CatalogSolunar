@@ -9,7 +9,8 @@
  */
 
 import SunCalc from 'suncalc';
-import { sunriseSunsetFor } from './sunTimes';
+import { moonPhasesBetween } from './moonPhases';
+import { datePartsInRomania, middayOf, sunriseSunsetFor } from './sunTimes';
 
 // Moon phase constants
 export type MoonPhase = 'new' | 'waxing-crescent' | 'first-quarter' | 'waxing-gibbous' |
@@ -189,25 +190,15 @@ function getMoonTransitTimes(date: Date, lat: number, lng: number): { upper: Dat
 // Constants for period calculations
 const MAJOR_PERIOD_DURATION_MS = 60 * 60 * 1000; // 1 hour = 3600000ms
 const MINOR_PERIOD_DURATION_MS = 30 * 60 * 1000; // 30 minutes = 1800000ms
-const PHASE_BOOST_THRESHOLD_LOW = 0.1;
-const PHASE_BOOST_THRESHOLD_HIGH_MIN = 0.45;
-const PHASE_BOOST_THRESHOLD_HIGH_MAX = 0.55;
 
 /**
  * Calculate major periods (around moon transit - highest activity)
  * Major periods last approximately 2 hours centered on transit
  */
-function calculateMajorPeriods(date: Date, lat: number, lng: number): SolunarPeriod[] {
+function calculateMajorPeriods(date: Date, lat: number, lng: number, dayRating: number): SolunarPeriod[] {
     const periods: SolunarPeriod[] = [];
     const transits = getMoonTransitTimes(date, lat, lng);
-    const illumination = SunCalc.getMoonIllumination(date);
-
-    // Rating boost for new/full moon
-    const isNewOrFullMoon = illumination.phase < PHASE_BOOST_THRESHOLD_LOW ||
-        (illumination.phase > PHASE_BOOST_THRESHOLD_HIGH_MIN &&
-            illumination.phase < PHASE_BOOST_THRESHOLD_HIGH_MAX);
-    const phaseBoost = isNewOrFullMoon ? 1 : 0;
-    const baseRating = 4 + phaseBoost;
+    const baseRating = dayRating;
 
     // Upper transit (moon overhead) - strongest period
     if (transits.upper) {
@@ -242,9 +233,10 @@ function calculateMajorPeriods(date: Date, lat: number, lng: number): SolunarPer
  * Calculate minor periods (around moonrise/moonset)
  * Minor periods last approximately 1 hour centered on rise/set
  */
-function calculateMinorPeriods(date: Date, lat: number, lng: number): SolunarPeriod[] {
+function calculateMinorPeriods(date: Date, lat: number, lng: number, dayRating: number): SolunarPeriod[] {
     const periods: SolunarPeriod[] = [];
     const moonTimes = getMoonTimes(date, lat, lng);
+    const rating = Math.max(1, dayRating - 1);
 
     // Moonrise period
     if (moonTimes.rise && moonTimes.rise.getDate() === date.getDate()) {
@@ -255,7 +247,7 @@ function calculateMinorPeriods(date: Date, lat: number, lng: number): SolunarPer
             type: 'minor',
             start,
             end,
-            rating: 3,
+            rating,
         });
     }
 
@@ -268,48 +260,42 @@ function calculateMinorPeriods(date: Date, lat: number, lng: number): SolunarPer
             type: 'minor',
             start,
             end,
-            rating: 3,
+            rating,
         });
     }
 
     return periods;
 }
 
-// Rating constants
-const QUARTER_MOON_PHASE_MIN_1 = 0.2;
-const QUARTER_MOON_PHASE_MAX_1 = 0.3;
-const QUARTER_MOON_PHASE_MIN_2 = 0.7;
-const QUARTER_MOON_PHASE_MAX_2 = 0.8;
-const DUAL_MAJOR_PERIOD_BONUS = 0.5;
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+// Upper bounds, in days from the nearest new or full moon, for ratings 5, 4, 3 and 2.
+// A quarter moon is ~7.4 days away, so the days around it rate 1.
+const RATING_DAY_LIMITS = [1.5, 3.5, 5, 6.5];
+
+/** Day rating labels, indexed by rating (1-5). */
+export const RATING_LABELS = ['', 'Slabă', 'Moderată', 'Bună', 'Foarte bună', 'Excelentă'];
+
+/** Days from the Romanian midday of `date` to the nearest new or full moon (Meeus instants). */
+function daysFromNewOrFullMoon(date: Date): number {
+    const midday = middayOf(datePartsInRomania(date)).getTime();
+    // New and full moons are ~14.8 days apart, so a 32-day window always holds the nearest one.
+    const events = moonPhasesBetween(new Date(midday - 16 * DAY_MS), new Date(midday + 16 * DAY_MS));
+    let nearest = Infinity;
+    for (const e of events) {
+        if (e.phase === 'new' || e.phase === 'full') nearest = Math.min(nearest, Math.abs(e.date.getTime() - midday) / DAY_MS);
+    }
+    return nearest;
+}
 
 /**
- * Calculate overall fishing rating for the day (1-5)
- * Based on moon phase and period quality
+ * Overall fishing rating for the day (1-5), from classic solunar theory:
+ * activity peaks around the new and full moon and is lowest around the quarters.
  */
-function calculateOverallRating(date: Date, majorPeriods: SolunarPeriod[], minorPeriods: SolunarPeriod[]): number {
-    const illumination = SunCalc.getMoonIllumination(date);
-    const phase = illumination.phase;
-
-    let baseRating = 3;
-
-    // New moon (0) and full moon (0.5) are best
-    const isNewOrFullMoon = phase < PHASE_BOOST_THRESHOLD_LOW ||
-        (phase > PHASE_BOOST_THRESHOLD_HIGH_MIN && phase < PHASE_BOOST_THRESHOLD_HIGH_MAX);
-    if (isNewOrFullMoon) {
-        baseRating = 5;
-    }
-    // Quarter moons (0.25, 0.75)
-    else if ((phase > QUARTER_MOON_PHASE_MIN_1 && phase < QUARTER_MOON_PHASE_MAX_1) ||
-        (phase > QUARTER_MOON_PHASE_MIN_2 && phase < QUARTER_MOON_PHASE_MAX_2)) {
-        baseRating = 4;
-    }
-
-    // Bonus for having both major periods in the day
-    if (majorPeriods.length >= 2) {
-        baseRating = Math.min(5, baseRating + DUAL_MAJOR_PERIOD_BONUS);
-    }
-
-    return Math.round(baseRating);
+function calculateOverallRating(date: Date): number {
+    const days = daysFromNewOrFullMoon(date);
+    const step = RATING_DAY_LIMITS.findIndex((limit) => days < limit);
+    return step === -1 ? 1 : 5 - step;
 }
 
 /**
@@ -345,8 +331,9 @@ export function getSolunarData(date: Date, lat: number = 44.4268, lng: number = 
     const moonTimes = getMoonTimes(date, lat, lng);
     const sunTimes = getSunTimes(date, lat, lng);
 
-    const majorPeriods = calculateMajorPeriods(date, lat, lng);
-    const minorPeriods = calculateMinorPeriods(date, lat, lng);
+    const overallRating = calculateOverallRating(date);
+    const majorPeriods = calculateMajorPeriods(date, lat, lng, overallRating);
+    const minorPeriods = calculateMinorPeriods(date, lat, lng, overallRating);
 
     return {
         date,
@@ -358,7 +345,7 @@ export function getSolunarData(date: Date, lat: number = 44.4268, lng: number = 
         sunset: sunTimes.sunset,
         majorPeriods,
         minorPeriods,
-        overallRating: calculateOverallRating(date, majorPeriods, minorPeriods),
+        overallRating,
         bestTime: getBestTime(majorPeriods, minorPeriods),
     };
 }

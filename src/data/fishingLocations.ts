@@ -1851,6 +1851,15 @@ export function getAllLocations(): FishingLocation[] {
     return fishingLocations;
 }
 
+/**
+ * Only locations with their own editorial text are indexed. The others share the
+ * template and a one-line description, so they stay noindex and out of the sitemap.
+ * County pages are noindex for the same reason.
+ */
+export function isIndexableLocation(loc: FishingLocation): boolean {
+    return Boolean(loc.longDescription);
+}
+
 export function getLocationsByCounty(county: string): FishingLocation[] {
     return fishingLocations.filter(l => l.county === county);
 }

@@ -2,8 +2,8 @@ import { MetadataRoute } from 'next';
 import { getAllArticles } from '@/data/blogArticles';
 import { getAllCities } from '@/data/cities';
 import { getAllSpecies } from '@/data/species';
-import { getAllLocations, getAllCountySlugs } from '@/data/fishingLocations';
-import { annualSeoLandingPages, monthlySeoLandingPages } from '@/data/seoLandingPages';
+import { getAllLocations, isIndexableLocation } from '@/data/fishingLocations';
+import { annualSeoLandingPages, getAnnualCanonicalSlug, monthlySeoLandingPages } from '@/data/seoLandingPages';
 import { sunLocations } from '@/data/sunLocations';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -71,7 +71,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
                 priority,
             };
         }),
-        ...annualSeoLandingPages.map((page) => ({
+        ...annualSeoLandingPages.filter((page) => page.slug === getAnnualCanonicalSlug(page)).map((page) => ({
             url: `${baseUrl}/${page.slug}`,
             lastModified: today,
             changeFrequency: 'weekly' as const,
@@ -94,7 +94,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const locationIndexPage: MetadataRoute.Sitemap = [
         { url: `${baseUrl}/locuri-pescuit`, lastModified: evergreen, changeFrequency: 'weekly', priority: 0.9 },
     ];
-    const locationPages: MetadataRoute.Sitemap = locations.map((loc) => ({
+    // Locations without their own text are noindex, so they stay out of the sitemap.
+    const locationPages: MetadataRoute.Sitemap = locations.filter(isIndexableLocation).map((loc) => ({
         url: `${baseUrl}/locuri-pescuit/${loc.slug}`,
         lastModified: today,
         changeFrequency: 'daily' as const,
@@ -109,14 +110,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: l.kind === 'litoral' || l.kind === 'delta' ? 0.75 : 0.7,
     }));
 
-    // County index pages — target "balti pescuit [judet]" queries
-    const countyPages: MetadataRoute.Sitemap = getAllCountySlugs().map((c) => ({
-        url: `${baseUrl}/locuri-pescuit/judet/${c.slug}`,
-        lastModified: today,
-        changeFrequency: 'weekly' as const,
-        priority: 0.8,
-    }));
-
+    // County pages are noindex (templated, mostly 1-3 locations), so they are not listed.
     return [
         ...staticPages,
         ...seoLandingPages,
@@ -125,7 +119,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ...articlePages,
         ...locationIndexPage,
         ...locationPages,
-        ...countyPages,
         ...sunPages,
     ];
 }

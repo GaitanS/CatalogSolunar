@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getSolunarData, getMoonPhaseName, formatTime, getActiveFish, getMoonage } from '@/lib/solunar';
+import { getSolunarData, getMoonPhaseName, formatTime, getActiveFish, getMoonage, RATING_LABELS } from '@/lib/solunar';
 import { getFishingAdvice } from '@/lib/advice';
 import Moon3DWrapper from '@/components/Moon3DWrapper';
 import ActivityGraph from '@/components/ActivityGraph';
@@ -7,7 +7,7 @@ import Link from 'next/link';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import AdUnit from '@/components/AdUnit';
 import LazyAdUnit from '@/components/LazyAdUnit';
-import { getLocationBySlug, getAllLocations, getLocationsByCounty, countyToSlug } from '@/data/fishingLocations';
+import { getLocationBySlug, getAllLocations, getLocationsByCounty, countyToSlug, isIndexableLocation } from '@/data/fishingLocations';
 import type { Metadata } from 'next';
 
 export const dynamicParams = false;
@@ -38,6 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             ...loc.fish.slice(0, 3).map(f => `pescuit ${f}`),
         ],
         alternates: { canonical: `https://calendarsolunar.ro/locuri-pescuit/${loc.slug}` },
+        ...(isIndexableLocation(loc) ? {} : { robots: { index: false, follow: true } }),
         openGraph: {
             title: `Pescuit ${loc.name} - Calendar Solunar ${year}`,
             description: `${loc.name} (${loc.county}): ${fishStr}. Solunar pe ore exacte pentru locatia GPS.`,
@@ -51,10 +52,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 const typeLabels: Record<string, string> = {
     lac: 'Lac natural',
-    balta: 'Balta',
+    balta: 'Baltă',
     acumulare: 'Lac de acumulare',
     iaz: 'Iaz',
-    rau: 'Rau',
+    rau: 'Râu',
     canal: 'Canal',
     delta: 'Delta',
 };
@@ -87,18 +88,18 @@ function LocationJsonLd({ loc }: { loc: { name: string; slug: string; county: st
 function LocationFAQSchema({ loc }: { loc: { name: string; county: string; fish: string[]; paid: boolean } }) {
     const faqs = [
         {
-            question: `Ce pesti se prind la ${loc.name}?`,
-            answer: `La ${loc.name} (${loc.county}) se prind: ${loc.fish.join(', ')}. Verifica calendarul solunar pentru orele optime.`,
+            question: `Ce pești se prind la ${loc.name}?`,
+            answer: `La ${loc.name} (${loc.county}) se prind: ${loc.fish.join(', ')}. Verifică în calendarul solunar orele bune.`,
         },
         {
             question: `Este gratuit pescuitul la ${loc.name}?`,
             answer: loc.paid
-                ? `Pescuitul la ${loc.name} necesita taxa/permis. Verifica la administratorul apei conditiile de acces.`
-                : `Da, pescuitul la ${loc.name} este gratuit. Este necesara doar autorizatia ANPA valabila.`,
+                ? `Pescuitul la ${loc.name} se face cu taxă sau permis. Verifică la administratorul apei condițiile de acces.`
+                : `Da, pescuitul la ${loc.name} este gratuit. Ai nevoie doar de un permis de pescuit valabil.`,
         },
         {
-            question: `Cand este cel mai bun moment pentru pescuit la ${loc.name}?`,
-            answer: `Foloseste calendarul solunar de pe aceasta pagina, calculat pentru coordonatele GPS exacte ale ${loc.name}. Perioadele majore (2 ore) ofera activitate maxima.`,
+            question: `Când este cel mai bun moment pentru pescuit la ${loc.name}?`,
+            answer: `Folosește calendarul solunar de pe această pagină, calculat pentru coordonatele locului. Perioadele majore (aproximativ 2 ore) au cea mai mare activitate.`,
         },
     ];
     const jsonLd = {
@@ -126,7 +127,6 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
 
     const dateStr = today.toLocaleDateString('ro-RO', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
     const capitalizedDate = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
-    const ratingLabels = ['', 'Slaba', 'Moderata', 'Buna', 'Foarte Buna', 'Excelenta'];
     const ratingColors = ['', 'text-red-400', 'text-amber-400', 'text-yellow-400', 'text-amber-400', 'text-green-400'];
 
     const nearbyLocations = getLocationsByCounty(loc.county).filter(l => l.slug !== loc.slug).slice(0, 6);
@@ -138,7 +138,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
             <LocationJsonLd loc={loc} />
             <LocationFAQSchema loc={loc} />
             <Breadcrumbs items={[
-                { label: 'Acasa', href: '/' },
+                { label: 'Acasă', href: '/' },
                 { label: 'Locuri de Pescuit', href: '/locuri-pescuit' },
                 { label: `Județ ${loc.county}`, href: `/locuri-pescuit/judet/${countyToSlug(loc.county)}` },
                 { label: loc.name },
@@ -150,7 +150,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
                     </h1>
                     <p className="text-night-400 text-sm md:text-base mb-2">
                         {capitalizedDate} &bull; {loc.locality}, {loc.county} &bull; {typeLabels[loc.type] || loc.type}
-                        {loc.paid ? ' &bull; Cu taxa' : ' &bull; Acces gratuit'}
+                        {loc.paid ? ' • Cu taxă' : ' • Acces gratuit'}
                     </p>
                     <p className="text-night-300 text-sm md:text-lg max-w-2xl mx-auto">{loc.description}</p>
                 </div>
@@ -167,7 +167,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
                                 {data.overallRating}<span className="text-3xl md:text-4xl text-night-500">/5</span>
                             </div>
                             <div className={`text-lg md:text-xl font-bold ${ratingColors[data.overallRating]}`}>
-                                Activitate {ratingLabels[data.overallRating]}
+                                Activitate {RATING_LABELS[data.overallRating]}
                             </div>
                             <div className="flex justify-center gap-1 mt-2">
                                 {[1, 2, 3, 4, 5].map(s => (
@@ -188,7 +188,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
                 <div className="grid md:grid-cols-2 gap-6 mb-8">
                     <div className="card-panel p-6">
                         <h2 className="text-xl font-display font-bold text-amber-400 mb-4">Perioade Majore</h2>
-                        <p className="text-night-400 text-sm mb-4">Durata ~2 ore. Activitate maxima a pestilor la {loc.name}.</p>
+                        <p className="text-night-400 text-sm mb-4">Durează aproximativ 2 ore. Activitate maximă a peștilor la {loc.name}.</p>
                         <div className="space-y-3">
                             {data.majorPeriods.map((p, i) => (
                                 <div key={i} className="flex items-center justify-between p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg">
@@ -202,7 +202,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
                     </div>
                     <div className="card-panel p-6">
                         <h2 className="text-xl font-display font-bold text-amber-400 mb-4">Perioade Minore</h2>
-                        <p className="text-night-400 text-sm mb-4">Durata ~1 ora. Activitate moderata.</p>
+                        <p className="text-night-400 text-sm mb-4">Durează aproximativ o oră. Activitate moderată.</p>
                         <div className="space-y-3">
                             {data.minorPeriods.map((p, i) => (
                                 <div key={i} className="flex items-center justify-between p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg">
@@ -218,7 +218,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
 
                 {/* Activity Graph */}
                 <div className="card-panel p-6 mb-8">
-                    <h2 className="text-xl font-display font-bold text-white mb-4">Grafic Activitate - {loc.name}</h2>
+                    <h2 className="text-xl font-display font-bold text-white mb-4">Graficul activității - {loc.name}</h2>
                     <ActivityGraph majorPeriods={data.majorPeriods} minorPeriods={data.minorPeriods} />
                 </div>
 
@@ -243,7 +243,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
                                     );
                                 })}
                             </div>
-                        ) : <p className="text-night-400 text-sm">Informatii indisponibile.</p>}
+                        ) : <p className="text-night-400 text-sm">Informații indisponibile.</p>}
                     </div>
                     <div className="card-panel p-6">
                         <h2 className="text-xl font-display font-bold text-yellow-400 mb-4">Sfatul Zilei</h2>
@@ -253,14 +253,14 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
 
                 {/* Location Details */}
                 <div className="card-panel p-6 md:p-8 mb-8">
-                    <h2 className="text-xl font-display font-bold text-white mb-4">Detalii Locatie</h2>
+                    <h2 className="text-xl font-display font-bold text-white mb-4">Detalii despre loc</h2>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                         <div>
                             <span className="text-night-500 block">Tip</span>
                             <span className="text-white font-medium">{typeLabels[loc.type] || loc.type}</span>
                         </div>
                         <div>
-                            <span className="text-night-500 block">Judet</span>
+                            <span className="text-night-500 block">Județ</span>
                             <span className="text-white font-medium">{loc.county}</span>
                         </div>
                         <div>
@@ -270,29 +270,29 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
                         <div>
                             <span className="text-night-500 block">Acces</span>
                             <span className={`font-medium ${loc.paid ? 'text-yellow-300' : 'text-amber-300'}`}>
-                                {loc.paid ? 'Cu taxa / permis' : 'Gratuit (autorizatie ANPA)'}
+                                {loc.paid ? 'Cu taxă / permis' : 'Gratuit, cu permis de pescuit'}
                             </span>
                         </div>
                     </div>
                 </div>
 {/* FAQ */}
                 <div className="card-panel p-6 md:p-8 mb-8">
-                    <h2 className="text-2xl font-display font-bold text-white mb-6">Intrebari Frecvente - {loc.name}</h2>
+                    <h2 className="text-2xl font-display font-bold text-white mb-6">Întrebări frecvente - {loc.name}</h2>
                     <div className="space-y-4">
                         <div className="border-b border-night-800 pb-4">
-                            <h3 className="text-lg font-bold text-amber-400 mb-2">Ce pesti se prind la {loc.name}?</h3>
+                            <h3 className="text-lg font-bold text-amber-400 mb-2">Ce pești se prind la {loc.name}?</h3>
                             <p className="text-night-300 text-sm">La {loc.name} se prind: {loc.fish.join(', ')}.</p>
                         </div>
                         <div className="border-b border-night-800 pb-4">
-                            <h3 className="text-lg font-bold text-amber-400 mb-2">Cand este cel mai bun moment de pescuit?</h3>
-                            <p className="text-night-300 text-sm">Verifica perioadele solunar majore de pe aceasta pagina, calculate pentru coordonatele GPS exacte ({loc.lat.toFixed(4)}, {loc.lng.toFixed(4)}).</p>
+                            <h3 className="text-lg font-bold text-amber-400 mb-2">Când este cel mai bun moment de pescuit?</h3>
+                            <p className="text-night-300 text-sm">Verifică perioadele solunare majore de pe această pagină, calculate pentru coordonatele locului ({loc.lat.toFixed(4)}, {loc.lng.toFixed(4)}).</p>
                         </div>
                         <div className="border-b border-night-800 pb-4">
                             <h3 className="text-lg font-bold text-amber-400 mb-2">Este gratuit pescuitul?</h3>
                             <p className="text-night-300 text-sm">
                                 {loc.paid
-                                    ? 'Pescuitul la aceasta locatie necesita taxa sau permis de la administratorul apei.'
-                                    : 'Da, accesul este gratuit. Este necesara autorizatia ANPA valabila.'}
+                                    ? 'Pescuitul aici se face cu taxă sau permis de la administratorul apei.'
+                                    : 'Da, accesul este gratuit. Ai nevoie de un permis de pescuit valabil.'}
                             </p>
                         </div>
                     </div>
@@ -303,14 +303,14 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
 
                 {/* SEO Content — species links + fishing tips for this location */}
                 <div className="card-panel p-6 md:p-8 mb-8">
-                    <h2 className="text-xl font-display font-bold text-white mb-4">Ghid Pescuit {loc.name}</h2>
+                    <h2 className="text-xl font-display font-bold text-white mb-4">Ghid de pescuit - {loc.name}</h2>
                     <div className="text-night-300 text-sm leading-relaxed space-y-3">
                         {loc.longDescription && <p>{loc.longDescription}</p>}
                         <p>
-                            <strong className="text-white">{loc.name}</strong> ({typeLabels[loc.type] || loc.type}) este situat în {loc.locality}, județul {loc.county}.
+                            <strong className="text-white">{loc.name}</strong> ({(typeLabels[loc.type] || loc.type).toLowerCase()}) se află în {loc.locality}, județul {loc.county}.
                             {loc.paid
                                 ? ' Accesul este cu taxă — contactează administratorul pentru condiții și prețuri.'
-                                : ' Accesul este gratuit cu autorizație ANPA valabilă.'}
+                                : ' Accesul este gratuit, cu permis de pescuit valabil.'}
                         </p>
                         <p>
                             Speciile principale sunt: {loc.fish.slice(0, 5).map((fish, i) => {

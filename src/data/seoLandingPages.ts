@@ -460,6 +460,14 @@ export function getAnnualLandingSlug(prefix: 'solunar' | 'solunar-pescuit' | 'ca
     return annualSeoLandingPages.some((page) => page.slug === slug) ? slug : undefined;
 }
 
+/**
+ * The three hubs of a year share the same content, so /solunar-pescuit-YYYY and
+ * /calendar-pescuit-YYYY declare /solunar-YYYY as canonical.
+ */
+export function getAnnualCanonicalSlug(page: AnnualSeoLandingPage) {
+    return `solunar-${page.year}`;
+}
+
 export function getAllSeoLandingSlugs() {
     return [
         ...monthlySeoLandingPages.map((page) => page.slug),

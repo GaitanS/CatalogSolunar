@@ -17,6 +17,12 @@ export function generateStaticParams() {
     return getAllCountySlugs().map((c) => ({ slug: c.slug }));
 }
 
+/** "1 loc", "5 locuri", "20 de locuri". */
+function countPlaces(n: number): string {
+    if (n === 1) return '1 loc';
+    return `${n} ${n % 100 >= 20 || (n > 0 && n % 100 === 0) ? 'de ' : ''}locuri`;
+}
+
 const typeLabels: Record<string, string> = {
     lac: 'Lac',
     balta: 'Balta',
@@ -66,6 +72,8 @@ export async function generateMetadata({
         alternates: {
             canonical: `https://calendarsolunar.ro/locuri-pescuit/judet/${slug}`,
         },
+        // Templated and mostly 1-3 locations each: kept for visitors, not indexed.
+        robots: { index: false, follow: true },
         openGraph: {
             title: `Locuri Pescuit ${county} - ${n} bălți, lacuri și râuri`,
             description: `${n} locuri de pescuit din județul ${county} cu GPS, specii și calendar solunar.`,
@@ -107,9 +115,9 @@ export default async function CountyPage({
             />
             <Breadcrumbs
                 items={[
-                    { label: 'Acasa', href: '/' },
+                    { label: 'Acasă', href: '/' },
                     { label: 'Locuri de Pescuit', href: '/locuri-pescuit' },
-                    { label: `Judet ${county}` },
+                    { label: `Județul ${county}` },
                 ]}
             />
             <div className="container-custom relative z-10">
@@ -118,7 +126,7 @@ export default async function CountyPage({
                         Locuri Pescuit <span className="text-amber-400">{county}</span>
                     </h1>
                     <p className="text-night-300 text-sm md:text-lg max-w-2xl mx-auto">
-                        {locations.length} locuri de pescuit verificate în județul {county}:
+                        {countPlaces(locations.length)} de pescuit în județul {county}:
                         bălți amenajate, lacuri naturale, acumulări și râuri. Fiecare locație
                         are coordonate GPS, specii de pești și calendar solunar calculat
                         pentru locul exact.
@@ -281,7 +289,7 @@ export default async function CountyPage({
                     <div className="text-night-300 text-sm leading-relaxed space-y-3">
                         <p>
                             Județul <strong className="text-white">{county}</strong> oferă{' '}
-                            {locations.length} locuri de pescuit catalogate, de la bălți
+                            {countPlaces(locations.length)} de pescuit în catalog, de la bălți
                             amenajate cu taxă până la lacuri de acumulare și râuri cu acces
                             gratuit. Fiecare pescar găsește condiții potrivite nivelului său,
                             de la sesiuni relaxante de weekend până la pescuit de trofee.
@@ -315,9 +323,8 @@ export default async function CountyPage({
                                 Câte locuri de pescuit sunt în {county}?
                             </h3>
                             <p className="text-night-300 text-sm">
-                                În județul {county} sunt {locations.length} locuri de pescuit
-                                catalogate: {paidCount} cu taxă și {freeCount} cu acces
-                                gratuit.
+                                În județul {county} avem în catalog {countPlaces(locations.length)} de
+                                pescuit: {paidCount} cu taxă și {freeCount} cu acces gratuit.
                             </p>
                         </div>
                         <div className="border-b border-night-800 pb-4">

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { getMoonPhaseName, getSolunarData, formatTime } from '@/lib/solunar';
-import { annualSeoLandingPages, getAnnualLandingSlug, getMonthlyLandingsForYear, type AnnualSeoLandingPage } from '@/data/seoLandingPages';
+import { annualSeoLandingPages, getMonthlyLandingsForYear, type AnnualSeoLandingPage } from '@/data/seoLandingPages';
 import AdUnit from '@/components/AdUnit';
 import LazyAdUnit from '@/components/LazyAdUnit';
 
@@ -30,6 +30,12 @@ function getMonthSummary(monthIndex: number, year: number) {
     return { bestDays, excellentDays };
 }
 
+/** "1 zi", "5 zile", "20 de zile". */
+function countDays(n: number) {
+    if (n === 1) return '1 zi';
+    return `${n} ${n % 100 >= 20 || (n > 0 && n % 100 === 0) ? 'de ' : ''}zile`;
+}
+
 function shortDate(date: Date) {
     return date.toLocaleDateString('ro-RO', { day: 'numeric', month: 'short' });
 }
@@ -38,29 +44,29 @@ function AnnualJsonLd({ page }: { page: AnnualSeoLandingPage }) {
     const howToSteps = [
         {
             name: 'Alege luna de pescuit',
-            text: `Porneste de la calendarul ${page.year} pe luni si alege luna potrivita pentru specie si sezon.`,
+            text: `Pornește de la calendarul ${page.year} pe luni și alege luna potrivită pentru specie și sezon.`,
         },
         {
-            name: 'Verifica zilele recomandate',
-            text: 'Deschide pagina lunii si compara zilele cu rating mare, fazele lunii si perioadele majore.',
+            name: 'Verifică zilele recomandate',
+            text: 'Deschide pagina lunii și compară zilele cu rating mare, fazele lunii și perioadele majore.',
         },
         {
-            name: 'Planifica partida dupa vreme',
-            text: 'Confirma presiunea, vantul, temperatura apei si regulile locale inainte de plecare.',
+            name: 'Planifică partida după vreme',
+            text: 'Confirmă presiunea, vântul, temperatura apei și regulile locale înainte de plecare.',
         },
     ];
     const faqs = [
         {
-            question: `Ce inseamna ${page.primaryKeyword}?`,
-            answer: `${page.primaryKeyword} este un calendar care estimeaza zilele si orele bune de pescuit in functie de fazele lunii, perioadele majore, perioadele minore si sezon.`,
+            question: `Ce înseamnă ${page.primaryKeyword}?`,
+            answer: `Este un calendar care estimează zilele și orele bune de pescuit în funcție de fazele Lunii, perioadele majore, perioadele minore și sezon.`,
         },
         {
-            question: `Care sunt cele mai bune luni de pescuit in ${page.year}?`,
-            answer: `In general, lunile mai, iunie, septembrie si octombrie ofera multe ferestre bune, dar rezultatul depinde de specie, vreme si locul ales.`,
+            question: `Care sunt cele mai bune luni de pescuit în ${page.year}?`,
+            answer: `În general, lunile mai, iunie, septembrie și octombrie oferă multe ferestre bune, dar rezultatul depinde de specie, vreme și locul ales.`,
         },
         {
-            question: `Cum aleg o zi buna din calendarul de pescuit ${page.year}?`,
-            answer: `Alege o luna, verifica zilele cu rating mare, apoi programeaza partida in jurul perioadelor majore. Confirma si conditiile meteo inainte de plecare.`,
+            question: `Cum aleg o zi bună din calendarul de pescuit ${page.year}?`,
+            answer: `Alege o lună, verifică zilele cu rating mare, apoi programează partida în jurul perioadelor majore. Confirmă și condițiile meteo înainte de plecare.`,
         },
     ];
     const jsonLd = {
@@ -100,7 +106,7 @@ function AnnualJsonLd({ page }: { page: AnnualSeoLandingPage }) {
                 '@type': 'Dataset',
                 '@id': `${baseUrl}/${page.slug}#annual-solunar-dataset`,
                 name: `${page.primaryKeyword} pe luni`,
-                description: `Index anual cu pagini lunare, zile recomandate, faze lunare si perioade majore pentru pescuit in ${page.year}.`,
+                description: `Index anual cu pagini lunare, zile recomandate, faze lunare și perioade majore pentru pescuit în ${page.year}.`,
                 url: `${baseUrl}/${page.slug}`,
                 inLanguage: 'ro',
                 creator: datasetCreator,
@@ -110,8 +116,8 @@ function AnnualJsonLd({ page }: { page: AnnualSeoLandingPage }) {
             {
                 '@type': 'HowTo',
                 '@id': `${baseUrl}/${page.slug}#how-to-use`,
-                name: `Cum folosesti ${page.primaryKeyword}`,
-                description: `Metoda simpla pentru planificarea unei partide folosind calendarul solunar ${page.year}.`,
+                name: `Cum folosești ${page.primaryKeyword}`,
+                description: `Metodă simplă pentru planificarea unei partide folosind calendarul solunar ${page.year}.`,
                 step: howToSteps.map((step, index) => ({
                     '@type': 'HowToStep',
                     position: index + 1,
@@ -155,7 +161,6 @@ export default function AnnualSolunarLanding({ page }: { page: AnnualSeoLandingP
     const target = new Date(now.getFullYear(), curIdx + (now.getDate() >= 24 ? 1 : 0), 1);
     const priorityLanding = (isFutureYear ? undefined : yearMonths.find((m) => m.monthIndex === target.getMonth()))
         ?? yearMonths[0];
-    const fishingSlug = getAnnualLandingSlug('solunar-pescuit', page.year);
     const otherYearHub = annualSeoLandingPages.find((p) => p.year !== page.year && p.slug === page.slug.replace(String(page.year), String(p.year)));
 
     return (
@@ -171,13 +176,10 @@ export default function AnnualSolunarLanding({ page }: { page: AnnualSeoLandingP
                         {page.title}
                     </h1>
                     <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-300 md:text-lg">
-                        {page.description} Pagina este construita pentru cautarea <strong className="text-amber-200">{page.primaryKeyword}</strong> si trimite direct catre fiecare luna din {page.year}.
+                        {page.description} Alege luna de mai jos pentru tabelul zi cu zi.
                     </p>
                     <div className="mt-6 flex flex-wrap gap-2">
                         <Link href={`/${priorityLanding.slug}`} className="rounded-xl bg-amber-300 px-4 py-2 text-sm font-bold text-slate-950">Vezi luna {priorityLanding.monthName}</Link>
-                        {fishingSlug && page.slug !== fishingSlug && (
-                            <Link href={`/${fishingSlug}`} className="rounded-xl border border-white/10 bg-white/[0.045] px-4 py-2 text-sm font-bold text-slate-200 hover:text-white">Solunar pescuit {page.year}</Link>
-                        )}
                         {otherYearHub && (
                             <Link href={`/${otherYearHub.slug}`} className="rounded-xl border border-amber-200/20 bg-amber-300/10 px-4 py-2 text-sm font-bold text-amber-100 hover:text-white">{otherYearHub.primaryKeyword.charAt(0).toUpperCase() + otherYearHub.primaryKeyword.slice(1)} &rarr;</Link>
                         )}
@@ -192,14 +194,14 @@ export default function AnnualSolunarLanding({ page }: { page: AnnualSeoLandingP
                 <section className="card-panel taste-surface mb-6 grid gap-5 p-5 md:grid-cols-3 md:p-6">
                     <div>
                         <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-amber-200/80">Context solunar</p>
-                        <h2 className="mt-2 font-display text-2xl font-bold text-white">Ce arata calendarul solunar {page.year}</h2>
+                        <h2 className="mt-2 font-display text-2xl font-bold text-white">Ce arată calendarul solunar {page.year}</h2>
                     </div>
                     <div className="space-y-3 text-sm leading-relaxed text-slate-300 md:col-span-2">
                         <p>
-                            Calendarul solunar ordoneaza zilele dupa influenta Lunii si a Soarelui asupra activitatii pestilor. Perioadele majore marcheaza intervale de aproximativ doua ore in care sansele cresc, iar perioadele minore sunt ferestre mai scurte, utile cand se suprapun cu rasaritul sau apusul.
+                            Calendarul solunar notează zilele după poziția Lunii față de Soare. Cele mai bune zile cad în jurul lunii noi și al lunii pline, cele mai slabe în jurul pătrarelor. Perioadele majore sunt intervale de aproximativ două ore în jurul momentului în care Luna trece deasupra sau dedesubtul locului, iar perioadele minore sunt ferestre de aproximativ o oră la răsăritul și apusul Lunii, utile mai ales când se suprapun cu zorii sau amurgul.
                         </p>
                         <p>
-                            Pentru {page.year}, foloseste pagina anuala ca hub si intra pe luna dorita pentru tabelul complet. Solunarul este un instrument de planificare, nu o garantie; vremea, presiunea, temperatura apei si locul ales raman decisive.
+                            Orele de mai jos sunt calculate pentru București; în vestul țării perioadele vin cu până la o jumătate de oră mai târziu. Solunarul este un instrument de planificare, nu o garanție: vremea, presiunea, temperatura apei și locul ales rămân decisive.
                         </p>
                     </div>
                 </section>
@@ -207,9 +209,9 @@ export default function AnnualSolunarLanding({ page }: { page: AnnualSeoLandingP
                 <section className="mb-6 grid gap-4 md:grid-cols-4">
                     {heroMonths.map(({ month, summary }) => (
                         <Link key={month.slug} href={`/${month.slug}`} className="interactive-lift card-panel taste-surface p-5">
-                            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-amber-200/80">Luna recomandata</p>
+                            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-amber-200/80">Solunar {month.year}</p>
                             <h2 className="mt-2 font-display text-2xl font-bold text-white">{month.monthName}</h2>
-                            <p className="mt-2 text-sm text-slate-300">{summary.excellentDays} zile cu rating 4/5 sau 5/5</p>
+                            <p className="mt-2 text-sm text-slate-300">{countDays(summary.excellentDays)} cu rating 4/5 sau 5/5</p>
                             <p className="mt-4 text-xs text-amber-100">Top: {summary.bestDays.map(({ date }) => shortDate(date)).join(', ')}</p>
                         </Link>
                     ))}
@@ -231,7 +233,7 @@ export default function AnnualSolunarLanding({ page }: { page: AnnualSeoLandingP
                                             <p className="font-display text-xl font-bold text-white">Solunar {month.monthName}</p>
                                             <p className="mt-1 text-xs text-slate-400">{month.seasonContext}</p>
                                         </div>
-                                        <span className="rounded-full bg-amber-300/15 px-2 py-1 text-xs font-bold text-amber-100">{summary.excellentDays} bune</span>
+                                        <span className="rounded-full bg-amber-300/15 px-2 py-1 text-xs font-bold text-amber-100">{countDays(summary.excellentDays)} bune</span>
                                     </div>
                                     {firstBest && (
                                         <div className="mt-4 rounded-xl border border-amber-200/15 bg-amber-200/[0.06] p-3">
@@ -255,22 +257,19 @@ export default function AnnualSolunarLanding({ page }: { page: AnnualSeoLandingP
 
                 <section className="mb-6 grid gap-4 md:grid-cols-2">
                     <div className="card-panel taste-surface p-5 md:p-6">
-                        <h2 className="font-display text-2xl font-bold text-white">De ce conteaza solunarul in pescuit</h2>
+                        <h2 className="font-display text-2xl font-bold text-white">De ce contează solunarul în pescuit</h2>
                         <div className="mt-4 space-y-3 text-sm leading-relaxed text-slate-300">
                             <p>
-                                Calendarul solunar nu inlocuieste experienta de pe apa, dar iti arata ferestrele in care pestii tind sa fie mai activi. Pentru {page.year}, paginile pe luni iti dau o ruta clara: alegi luna, verifici zilele cu rating mare, apoi alegi ora majora.
+                                Calendarul solunar nu înlocuiește experiența de pe apă, dar îți arată ferestrele în care peștii tind să fie mai activi. Pentru {page.year}, paginile pe luni îți dau o rută clară: alegi luna, verifici zilele cu rating mare, apoi alegi ora majoră.
                             </p>
                             <p>
-                                Cele mai puternice partide apar cand solunarul bun se suprapune cu presiune stabila, apa potrivita pentru specie si un loc productiv.
+                                Cele mai bune partide apar când un solunar bun se suprapune cu presiune stabilă, apă potrivită pentru specie și un loc productiv.
                             </p>
                         </div>
                     </div>
                     <div className="card-panel taste-surface p-5 md:p-6">
                         <h2 className="font-display text-2xl font-bold text-white">Pagini utile pentru planificare</h2>
                         <div className="mt-4 grid gap-2 text-sm">
-                            {annualSeoLandingPages.filter((hub) => hub.year === page.year && hub.slug !== page.slug).map((hub) => (
-                                <Link key={hub.slug} href={`/${hub.slug}`} className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">{hub.primaryKeyword.charAt(0).toUpperCase() + hub.primaryKeyword.slice(1)}</Link>
-                            ))}
                             {otherYearHub && (
                                 <Link href={`/${otherYearHub.slug}`} className="rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2 text-slate-300 hover:text-white">{otherYearHub.primaryKeyword.charAt(0).toUpperCase() + otherYearHub.primaryKeyword.slice(1)}</Link>
                             )}

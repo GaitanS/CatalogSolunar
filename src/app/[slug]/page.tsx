@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getSolunarData, getMoonPhaseName, formatTime, getActiveFish, getMoonage } from '@/lib/solunar';
+import { getSolunarData, getMoonPhaseName, formatTime, getActiveFish, getMoonage, RATING_LABELS } from '@/lib/solunar';
 import { getWeatherData } from '@/lib/weather';
 import { getFishingAdvice } from '@/lib/advice';
 import Moon3DWrapper from '@/components/Moon3DWrapper';
@@ -15,7 +15,7 @@ import { getSunLocation } from '@/data/sunLocations';
 import { getSpeciesBySlug, getAllSpecies } from '@/data/species';
 import { getAllArticles } from '@/data/blogArticles';
 import { getAllLocations } from '@/data/fishingLocations';
-import { getAllSeoLandingSlugs, getAnnualLandingBySlug, getMonthlyLandingBySlug } from '@/data/seoLandingPages';
+import { getAllSeoLandingSlugs, getAnnualCanonicalSlug, getAnnualLandingBySlug, getMonthlyLandingBySlug } from '@/data/seoLandingPages';
 import type { Metadata } from 'next';
 
 export const dynamicParams = false;
@@ -64,11 +64,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             title: annualLanding.year === 2026 ? annualLanding.metaTitle : { absolute: annualLanding.metaTitle },
             description: annualLanding.description,
             keywords: annualLanding.keywords,
-            alternates: { canonical: `https://calendarsolunar.ro/${annualLanding.slug}` },
+            alternates: { canonical: `https://calendarsolunar.ro/${getAnnualCanonicalSlug(annualLanding)}` },
             openGraph: {
                 title: annualLanding.title,
                 description: annualLanding.description,
-                url: `https://calendarsolunar.ro/${annualLanding.slug}`,
+                url: `https://calendarsolunar.ro/${getAnnualCanonicalSlug(annualLanding)}`,
                 siteName: 'Calendar Solunar',
                 locale: 'ro_RO',
                 type: 'website',
@@ -146,7 +146,7 @@ function CityJsonLd({ city }: { city: { name: string; slug: string; county: stri
         '@context': 'https://schema.org',
         '@type': 'WebPage',
         name: `Calendar Solunar ${city.name}`,
-        description: `Calendar solunar pentru pescuit in ${city.name}, ${city.county}`,
+        description: `Calendar solunar pentru pescuit în ${city.name}, ${city.county}`,
         url: `https://calendarsolunar.ro/${city.slug}`,
         isPartOf: { '@type': 'WebSite', name: 'Calendar Solunar', url: 'https://calendarsolunar.ro' },
         about: {
@@ -162,9 +162,9 @@ function CityJsonLd({ city }: { city: { name: string; slug: string; county: stri
 // City FAQ Schema
 function CityFAQSchema({ city, nearbyWaters }: { city: { name: string; county: string }; nearbyWaters: string[] }) {
     const faqs = [
-        { question: `Cand trage pestele in ${city.name}?`, answer: `Pestele este cel mai activ in ${city.name} in perioadele solunar majore, care dureaza aproximativ 2 ore. Verifica calendarul solunar zilnic pentru orele exacte calculate pentru zona ${city.county}.` },
-        { question: `Care sunt cele mai bune locuri de pescuit in ${city.name}?`, answer: `Cele mai populare locuri de pescuit in zona ${city.name}, judetul ${city.county} sunt: ${nearbyWaters.slice(0, 4).join(', ')}.` },
-        { question: `Cum functioneaza calendarul solunar pentru ${city.name}?`, answer: `Calendarul solunar pentru ${city.name} calculeaza perioadele de activitate a pestilor pe baza pozitiei lunii fata de coordonatele exacte ale orasului.` },
+        { question: `Când trage peștele în ${city.name}?`, answer: `Peștele este cel mai activ în perioadele solunare majore, care durează aproximativ 2 ore. Orele de pe pagină sunt calculate pentru coordonatele orașului ${city.name} și se schimbă zilnic.` },
+        { question: `Care sunt cele mai bune locuri de pescuit în ${city.name}?`, answer: `Ape cunoscute în zona ${city.name}, județul ${city.county}: ${nearbyWaters.slice(0, 4).join(', ')}.` },
+        { question: `Cum funcționează calendarul solunar pentru ${city.name}?`, answer: `Calendarul solunar pentru ${city.name} calculează perioadele de activitate a peștilor după poziția Lunii față de coordonatele orașului.` },
     ];
     const jsonLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(faq => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } })) };
     return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />;
@@ -195,11 +195,11 @@ function SpeciesJsonLd({ species }: { species: { name: string; slug: string; sci
 // Species FAQ Schema
 function SpeciesFAQSchema({ species }: { species: { name: string; season: string; bestMoonPhase: string; bestTime: string; bait: string[]; techniques: string[]; habitat: string } }) {
     const faqs = [
-        { question: `Cand trage ${species.name.toLowerCase()}ul cel mai bine?`, answer: `${species.name} este cel mai activ in perioadele solunar majore, in special ${species.bestTime}. Sezonul optim este ${species.season}.` },
-        { question: `Care este cea mai buna faza lunara pentru ${species.name.toLowerCase()}?`, answer: `Pentru ${species.name.toLowerCase()}, cele mai bune faze lunare sunt: ${species.bestMoonPhase}.` },
+        { question: `Când trage ${species.name.toLowerCase()}ul cel mai bine?`, answer: `${species.name} este cel mai activ în perioadele solunare majore, în special ${species.bestTime}. Sezonul optim este ${species.season}.` },
+        { question: `Care este cea mai bună fază lunară pentru ${species.name.toLowerCase()}?`, answer: `Pentru ${species.name.toLowerCase()}, cele mai bune faze lunare sunt: ${species.bestMoonPhase}.` },
         { question: `Ce momeli folosesc pentru ${species.name.toLowerCase()}?`, answer: `Cele mai eficiente momeli pentru ${species.name.toLowerCase()} sunt: ${species.bait.slice(0, 4).join(', ')}.` },
-        { question: `Ce tehnici de pescuit sunt recomandate pentru ${species.name.toLowerCase()}?`, answer: `Tehnicile recomandate pentru ${species.name.toLowerCase()} sunt: ${species.techniques.slice(0, 4).join(', ')}. Alegerea tehnicii depinde de sezon, tipul apei si conditiile meteo.` },
-        { question: `Unde gasesc ${species.name.toLowerCase()} in Romania?`, answer: `${species.habitat} Verifica calendarul solunar pentru orele optime de pescuit calculate pe coordonatele exacte ale locatiei tale.` },
+        { question: `Ce tehnici de pescuit sunt recomandate pentru ${species.name.toLowerCase()}?`, answer: `Tehnicile recomandate pentru ${species.name.toLowerCase()} sunt: ${species.techniques.slice(0, 4).join(', ')}. Alegerea tehnicii depinde de sezon, tipul apei și condițiile meteo.` },
+        { question: `Unde găsesc ${species.name.toLowerCase()} în România?`, answer: `${species.habitat} Verifică în calendarul solunar orele bune de pescuit pentru locul tău.` },
     ];
     const jsonLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(faq => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } })) };
     return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />;
@@ -215,7 +215,6 @@ function CityPageContent({ city }: { city: ReturnType<typeof getCityBySlug> & {}
 
     const dateStr = today.toLocaleDateString('ro-RO', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
     const capitalizedDate = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
-    const ratingLabels = ['', 'Slaba', 'Moderata', 'Buna', 'Foarte Buna', 'Excelenta'];
     const ratingColors = ['', 'text-red-400', 'text-amber-400', 'text-yellow-400', 'text-amber-400', 'text-green-400'];
     const otherCities = getAllCities().filter(c => c.slug !== city.slug).slice(0, 6);
 
@@ -243,7 +242,7 @@ function CityPageContent({ city }: { city: ReturnType<typeof getCityBySlug> & {}
                                 {data.overallRating}<span className="text-3xl md:text-4xl text-night-500">/5</span>
                             </div>
                             <div className={`text-lg md:text-xl font-bold ${ratingColors[data.overallRating]}`}>
-                                Activitate {ratingLabels[data.overallRating]}
+                                Activitate {RATING_LABELS[data.overallRating]}
                             </div>
                             <div className="flex justify-center gap-1 mt-2">
                                 {[1, 2, 3, 4, 5].map(s => (
@@ -263,7 +262,7 @@ function CityPageContent({ city }: { city: ReturnType<typeof getCityBySlug> & {}
 <div className="grid md:grid-cols-2 gap-6 mb-8">
                     <div className="card-panel p-6">
                         <h2 className="text-xl font-display font-bold text-amber-400 mb-4">Perioade Majore {city.name}</h2>
-                        <p className="text-night-400 text-sm mb-4">Durata ~2 ore. Activitate maxima a pestilor.</p>
+                        <p className="text-night-400 text-sm mb-4">Durează aproximativ 2 ore. Activitate maximă a peștilor.</p>
                         <div className="space-y-3">
                             {data.majorPeriods.map((p, i) => (
                                 <div key={i} className="flex items-center justify-between p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg">
@@ -277,7 +276,7 @@ function CityPageContent({ city }: { city: ReturnType<typeof getCityBySlug> & {}
                     </div>
                     <div className="card-panel p-6">
                         <h2 className="text-xl font-display font-bold text-amber-400 mb-4">Perioade Minore {city.name}</h2>
-                        <p className="text-night-400 text-sm mb-4">Durata ~1 ora. Activitate moderata.</p>
+                        <p className="text-night-400 text-sm mb-4">Durează aproximativ o oră. Activitate moderată.</p>
                         <div className="space-y-3">
                             {data.minorPeriods.map((p, i) => (
                                 <div key={i} className="flex items-center justify-between p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg">
@@ -292,7 +291,7 @@ function CityPageContent({ city }: { city: ReturnType<typeof getCityBySlug> & {}
                 </div>
 
                 <div className="card-panel p-6 mb-8">
-                    <h2 className="text-xl font-display font-bold text-white mb-4">Grafic Activitate {city.name}</h2>
+                    <h2 className="text-xl font-display font-bold text-white mb-4">Graficul activității în {city.name}</h2>
                     <ActivityGraph majorPeriods={data.majorPeriods} minorPeriods={data.minorPeriods} />
                 </div>
 
@@ -308,14 +307,14 @@ function CityPageContent({ city }: { city: ReturnType<typeof getCityBySlug> & {}
 
                 <div className="grid md:grid-cols-2 gap-6 mb-8">
                     <div className="card-panel p-6">
-                        <h2 className="text-xl font-display font-bold text-amber-400 mb-4">Specii Active in {city.name}</h2>
+                        <h2 className="text-xl font-display font-bold text-amber-400 mb-4">Specii active în {city.name}</h2>
                         {activeFish.length > 0 ? (
                             <div className="flex flex-wrap gap-2">
                                 {activeFish.map((fish, i) => (
                                     <span key={i} className="px-3 py-1.5 bg-amber-500/10 border border-amber-500/20 rounded-full text-amber-300 text-sm">{fish}</span>
                                 ))}
                             </div>
-                        ) : <p className="text-night-400">Activitate generala redusa astazi.</p>}
+                        ) : <p className="text-night-400">Activitate generală redusă astăzi.</p>}
                     </div>
                     <div className="card-panel p-6">
                         <h2 className="text-xl font-display font-bold text-yellow-400 mb-4">Sfatul Zilei</h2>
@@ -328,7 +327,7 @@ function CityPageContent({ city }: { city: ReturnType<typeof getCityBySlug> & {}
                     return (
                         <div className="card-panel p-6 md:p-8 mb-8">
                             <h2 className="text-2xl font-display font-bold text-white mb-2">Locuri de Pescuit lângă {city.name}</h2>
-                            <p className="text-night-400 text-sm mb-4">{countyLocations.length > 0 ? `${countyLocations.length} locuri verificate în ${city.county} cu solunar GPS` : `Ape populare din zona ${city.name}`}</p>
+                            <p className="text-night-400 text-sm mb-4">{countyLocations.length > 0 ? `${countyLocations.length} locuri de pescuit în ${city.county}, cu solunar calculat pentru fiecare` : `Ape populare din zona ${city.name}`}</p>
                             {countyLocations.length > 0 ? (
                                 <>
                                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -362,21 +361,21 @@ function CityPageContent({ city }: { city: ReturnType<typeof getCityBySlug> & {}
                 <LazyAdUnit slotId="6301173988" format="rectangle" className="mb-8" />
 
                 <div className="card-panel p-6 md:p-8 mb-8">
-                    <h2 className="text-2xl font-display font-bold text-white mb-6">Intrebari Frecvente - {city.name}</h2>
+                    <h2 className="text-2xl font-display font-bold text-white mb-6">Întrebări frecvente - {city.name}</h2>
                     <div className="space-y-4">
                         <div className="border-b border-night-800 pb-4">
-                            <h3 className="text-lg font-bold text-amber-400 mb-2">Cand trage pestele in {city.name}?</h3>
-                            <p className="text-night-300 text-sm">Pestele este cel mai activ in {city.name} in perioadele solunar majore, care dureaza aproximativ 2 ore.</p>
+                            <h3 className="text-lg font-bold text-amber-400 mb-2">Când trage peștele în {city.name}?</h3>
+                            <p className="text-night-300 text-sm">Peștele este cel mai activ în perioadele solunare majore, care durează aproximativ 2 ore. Orele de mai sus sunt calculate pentru {city.name} și se schimbă zilnic.</p>
                         </div>
                         <div className="border-b border-night-800 pb-4">
                             <h3 className="text-lg font-bold text-amber-400 mb-2">Care sunt cele mai bune locuri de pescuit?</h3>
-                            <p className="text-night-300 text-sm">Cele mai populare locuri: {city.nearbyWaters.slice(0, 4).join(', ')}.</p>
+                            <p className="text-night-300 text-sm">Ape cunoscute în zonă: {city.nearbyWaters.slice(0, 4).join(', ')}.</p>
                         </div>
                     </div>
                 </div>
 
                 <div className="card-panel p-6 md:p-8 mb-8">
-                    <h2 className="text-xl font-display font-bold text-white mb-4">Solunar in Alte Orase</h2>
+                    <h2 className="text-xl font-display font-bold text-white mb-4">Solunar în alte orașe</h2>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                         {otherCities.map((c) => (
                             <Link key={c.slug} href={`/${c.slug}`} className="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition-colors">
@@ -398,7 +397,6 @@ function SpeciesPageContent({ species }: { species: ReturnType<typeof getSpecies
 
     const dateStr = today.toLocaleDateString('ro-RO', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
     const capitalizedDate = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
-    const ratingLabels = ['', 'Slaba', 'Moderata', 'Buna', 'Foarte Buna', 'Excelenta'];
     const ratingColors = ['', 'text-red-400', 'text-amber-400', 'text-yellow-400', 'text-amber-400', 'text-green-400'];
     const otherSpecies = getAllSpecies().filter(s => s.slug !== species.slug);
 
@@ -412,7 +410,7 @@ function SpeciesPageContent({ species }: { species: ReturnType<typeof getSpecies
         <div className="pb-20 pt-4 md:pt-8 relative">
             <SpeciesJsonLd species={species} />
             <SpeciesFAQSchema species={species} />
-            <Breadcrumbs items={[{ label: 'Acasa', href: '/' }, { label: `Pescuit ${species.name}` }]} />
+            <Breadcrumbs items={[{ label: 'Acasă', href: '/' }, { label: `Pescuit ${species.name}` }]} />
             <div className="container-custom relative z-10">
                 <div className="text-center mb-8 md:mb-12">
                     <div className="text-5xl mb-4">{species.icon}</div>
@@ -434,7 +432,7 @@ function SpeciesPageContent({ species }: { species: ReturnType<typeof getSpecies
                                 {data.overallRating}<span className="text-2xl text-night-500">/5</span>
                             </div>
                             <div className={`text-lg font-bold ${ratingColors[data.overallRating]}`}>
-                                Activitate {ratingLabels[data.overallRating]}
+                                Activitate {RATING_LABELS[data.overallRating]}
                             </div>
                             <p className="text-night-400 text-sm mt-1">{getMoonPhaseName(data.moonPhase)} - {data.moonIllumination}%</p>
                         </div>
@@ -449,7 +447,7 @@ function SpeciesPageContent({ species }: { species: ReturnType<typeof getSpecies
                 <AdUnit slotId="2812628769" format="horizontal" className="mb-8" />
 <div className="grid md:grid-cols-2 gap-6 mb-8">
                     <div className="card-panel p-6">
-                        <h2 className="text-xl font-display font-bold text-amber-400 mb-4">Sezon si Ora Optima</h2>
+                        <h2 className="text-xl font-display font-bold text-amber-400 mb-4">Sezon și ore optime</h2>
                         <div className="space-y-3 text-sm">
                             <div className="flex justify-between"><span className="text-night-400">Sezon:</span><span className="text-white font-medium">{species.season}</span></div>
                             <div className="flex justify-between"><span className="text-night-400">Faza lunara optima:</span><span className="text-white font-medium">{species.bestMoonPhase}</span></div>
@@ -482,7 +480,7 @@ function SpeciesPageContent({ species }: { species: ReturnType<typeof getSpecies
                 </div>
 
                 <div className="card-panel p-6 mb-8">
-                    <h2 className="text-xl font-display font-bold text-white mb-4">Grafic Activitate {species.name} Azi</h2>
+                    <h2 className="text-xl font-display font-bold text-white mb-4">Graficul activității azi - {species.name}</h2>
                     <ActivityGraph majorPeriods={data.majorPeriods} minorPeriods={data.minorPeriods} />
                 </div>
 <div className="card-panel p-6 md:p-8 mb-8">
@@ -493,27 +491,27 @@ function SpeciesPageContent({ species }: { species: ReturnType<typeof getSpecies
                 <LazyAdUnit slotId="6301173988" format="rectangle" className="mb-8" />
 
                 <div className="card-panel p-6 md:p-8 mb-8">
-                    <h2 className="text-2xl font-display font-bold text-white mb-6">Intrebari Frecvente — Pescuit {species.name}</h2>
+                    <h2 className="text-2xl font-display font-bold text-white mb-6">Întrebări frecvente - pescuit {species.name}</h2>
                     <div className="space-y-4">
                         <div className="border-b border-night-800 pb-4">
-                            <h3 className="text-lg font-bold text-amber-400 mb-2">Cand trage {species.name.toLowerCase()}ul cel mai bine?</h3>
-                            <p className="text-night-300 text-sm">{species.name} este cel mai activ in perioadele solunar majore, in special {species.bestTime}. Sezonul optim este {species.season}.</p>
+                            <h3 className="text-lg font-bold text-amber-400 mb-2">Când trage {species.name.toLowerCase()}ul cel mai bine?</h3>
+                            <p className="text-night-300 text-sm">{species.name} este cel mai activ în perioadele solunare majore, în special {species.bestTime}. Sezonul optim este {species.season}.</p>
                         </div>
                         <div className="border-b border-night-800 pb-4">
                             <h3 className="text-lg font-bold text-amber-400 mb-2">Ce momeli folosesc pentru {species.name.toLowerCase()}?</h3>
-                            <p className="text-night-300 text-sm">Cele mai eficiente momeli pentru {species.name.toLowerCase()}: {species.bait.join(', ')}. Alegerea momelii depinde de sezon si temperatura apei.</p>
+                            <p className="text-night-300 text-sm">Cele mai eficiente momeli pentru {species.name.toLowerCase()}: {species.bait.join(', ')}. Alegerea momelii depinde de sezon și de temperatura apei.</p>
                         </div>
                         <div className="border-b border-night-800 pb-4">
-                            <h3 className="text-lg font-bold text-amber-400 mb-2">Care este cea mai buna faza lunara?</h3>
-                            <p className="text-night-300 text-sm">Cele mai bune faze lunare pentru {species.name.toLowerCase()} sunt: {species.bestMoonPhase}. Consulta <Link href="/lunar" className="text-moon hover:underline">calendarul lunar</Link> pentru a vedea faza curenta.</p>
+                            <h3 className="text-lg font-bold text-amber-400 mb-2">Care este cea mai bună fază lunară?</h3>
+                            <p className="text-night-300 text-sm">Cele mai bune faze lunare pentru {species.name.toLowerCase()} sunt: {species.bestMoonPhase}. Consultă <Link href="/lunar" className="text-moon hover:underline">calendarul lunar</Link> pentru faza de azi.</p>
                         </div>
                         <div className="border-b border-night-800 pb-4">
-                            <h3 className="text-lg font-bold text-amber-400 mb-2">Ce tehnici de pescuit functioneaza?</h3>
-                            <p className="text-night-300 text-sm">Tehnicile recomandate: {species.techniques.join(', ')}. Adapteaza tehnica in functie de tipul apei si sezon.</p>
+                            <h3 className="text-lg font-bold text-amber-400 mb-2">Ce tehnici de pescuit funcționează?</h3>
+                            <p className="text-night-300 text-sm">Tehnicile recomandate: {species.techniques.join(', ')}. Adaptează tehnica în funcție de tipul apei și de sezon.</p>
                         </div>
                         <div className="pb-2">
-                            <h3 className="text-lg font-bold text-amber-400 mb-2">Unde gasesc {species.name.toLowerCase()} in Romania?</h3>
-                            <p className="text-night-300 text-sm">{species.habitat} Exploreaza <Link href="/locuri-pescuit" className="text-moon hover:underline">locurile de pescuit din Romania</Link> cu calendar solunar calculat pe GPS.</p>
+                            <h3 className="text-lg font-bold text-amber-400 mb-2">Unde găsesc {species.name.toLowerCase()} în România?</h3>
+                            <p className="text-night-300 text-sm">{species.habitat} Vezi <Link href="/locuri-pescuit" className="text-moon hover:underline">locurile de pescuit din România</Link>, fiecare cu calendar solunar propriu.</p>
                         </div>
                     </div>
                 </div>
@@ -542,7 +540,7 @@ function SpeciesPageContent({ species }: { species: ReturnType<typeof getSpecies
                     return (
                         <div className="card-panel p-6 md:p-8 mb-8">
                             <h2 className="text-xl font-display font-bold text-white mb-2">Locuri de Pescuit {species.name} în România</h2>
-                            <p className="text-night-400 text-sm mb-4">{locationsWithSpecies.length} locuri verificate cu {species.name.toLowerCase()} — fiecare cu solunar pe GPS</p>
+                            <p className="text-night-400 text-sm mb-4">{locationsWithSpecies.length} locuri de pescuit cu {species.name.toLowerCase()}, fiecare cu solunar propriu</p>
                             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                                 {locationsWithSpecies.slice(0, 6).map((loc) => (
                                     <Link key={loc.slug} href={`/locuri-pescuit/${loc.slug}`} className="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition-colors group">
