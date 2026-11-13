@@ -40,11 +40,10 @@ export interface SunDay {
 export const MONTHS_RO = ['ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie', 'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie'];
 const WEEKDAYS_RO = ['duminică', 'luni', 'marți', 'miercuri', 'joi', 'vineri', 'sâmbătă'];
 
+const DATE_PARTS_FORMAT = new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' });
+
 export function datePartsInRomania(date: Date): DateParts {
-    const [y, m, d] = new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' })
-        .format(date)
-        .split('-')
-        .map(Number);
+    const [y, m, d] = DATE_PARTS_FORMAT.format(date).split('-').map(Number);
     return { y, m, d };
 }
 
@@ -68,6 +67,13 @@ export function weekdayRo(p: DateParts): string {
 /** Pranzul aproximativ al zilei in Romania, folosit ca moment de referinta. */
 export function middayOf(p: DateParts): Date {
     return new Date(Date.UTC(p.y, p.m - 1, p.d, 10));
+}
+
+/** Miezul noptii (ora Romaniei) cu care incepe ziua `p`. */
+export function startOfDayInRomania(p: DateParts): Date {
+    // Romania e la UTC+3 vara si UTC+2 iarna. Ora se schimba la 03:00/04:00, deci 00:00 exista exact o data.
+    const summer = new Date(Date.UTC(p.y, p.m - 1, p.d) - 3 * 3600000);
+    return datePartsInRomania(summer).d === p.d ? summer : new Date(summer.getTime() + 3600000);
 }
 
 /** Declinatia soarelui (radiani) si ecuatia timpului (minute) la o data juliana. */

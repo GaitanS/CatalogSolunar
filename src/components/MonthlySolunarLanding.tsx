@@ -1,5 +1,7 @@
 import Link from 'next/link';
-import { getActiveFish, getMoonPhaseName, getSolunarData, formatTime } from '@/lib/solunar';
+import { getActiveFish, getMoonPhaseName, getSolunarData, formatTime, type SolunarPeriod } from '@/lib/solunar';
+import { formatDayList, formatPhaseMoment, getMonthHighlights, monthBestDaysAnswer, monthMetaDescription, type MonthHighlights } from '@/lib/monthHighlights';
+import { middayOf } from '@/lib/sunTimes';
 import { getAllCities } from '@/data/cities';
 import { monthlySeoLandingPages, getAnnualLandingSlug, type MonthlySeoLandingPage } from '@/data/seoLandingPages';
 import AdUnit from '@/components/AdUnit';
@@ -20,14 +22,29 @@ function roDate(date: Date) {
     return date.toLocaleDateString('ro-RO', { weekday: 'short', day: 'numeric', month: 'short' });
 }
 
+/** Shown where a day has no second (or no first) period of a kind. */
+const NO_PERIOD = '–';
+
+function formatPeriod(period?: SolunarPeriod) {
+    return period ? `${formatTime(period.start)} - ${formatTime(period.end)}` : NO_PERIOD;
+}
+
+/** "07:10 - 09:10 și 19:35 - 21:35", or just the one that exists. */
+function joinPeriods(...periods: string[]) {
+    return periods.filter((period) => period !== NO_PERIOD).join(' și ') || NO_PERIOD;
+}
+
 function getDaysInMonth(page: MonthlySeoLandingPage) {
     const daysCount = new Date(page.year, page.monthIndex + 1, 0).getDate();
 
     return Array.from({ length: daysCount }, (_, index) => {
-        const date = new Date(page.year, page.monthIndex, index + 1, 12, 0, 0);
+        // Romanian midday, so the page is the same whatever the server's timezone is.
+        const date = middayOf({ y: page.year, m: page.monthIndex + 1, d: index + 1 });
         const data = getSolunarData(date, defaultLat, defaultLng);
         const majorOne = data.majorPeriods[0];
         const majorTwo = data.majorPeriods[1];
+        // Moonrise comes first in the data; show the two in clock order.
+        const [minorOne, minorTwo] = [...data.minorPeriods].sort((a, b) => a.start.getTime() - b.start.getTime());
 
         return {
             date,
@@ -38,14 +55,16 @@ function getDaysInMonth(page: MonthlySeoLandingPage) {
             majorOneEnd: majorOne?.end,
             majorTwoStart: majorTwo?.start,
             majorTwoEnd: majorTwo?.end,
-            majorOne: majorOne ? `${formatTime(majorOne.start)} - ${formatTime(majorOne.end)}` : 'n/a',
-            majorTwo: majorTwo ? `${formatTime(majorTwo.start)} - ${formatTime(majorTwo.end)}` : 'n/a',
+            majorOne: formatPeriod(majorOne),
+            majorTwo: formatPeriod(majorTwo),
+            minorOne: formatPeriod(minorOne),
+            minorTwo: formatPeriod(minorTwo),
             activeFish: getActiveFish(date, data.moonPhase).slice(0, 4),
         };
     });
 }
 
-function MonthJsonLd({ page, topDays }: { page: MonthlySeoLandingPage; topDays: ReturnType<typeof getDaysInMonth> }) {
+function MonthJsonLd({ page, topDays, highlights }: { page: MonthlySeoLandingPage; topDays: ReturnType<typeof getDaysInMonth>; highlights: MonthHighlights }) {
     const howToSteps = [
         {
             name: 'Alege zilele cu rating mare',
@@ -63,7 +82,7 @@ function MonthJsonLd({ page, topDays }: { page: MonthlySeoLandingPage; topDays: 
     const faqs = [
         {
             question: `Care sunt cele mai bune zile de pescuit în ${page.monthName} ${page.year}?`,
-            answer: `Cele mai bune zile sunt cele cu rating 4/5 sau 5/5, în jurul lunii noi și al lunii pline, mai ales când perioadele majore se suprapun cu răsăritul, apusul sau o vreme stabilă. În tabelul de pe pagină vezi ratingul fiecărei zile din ${page.monthName} ${page.year}.`,
+            answer: monthBestDaysAnswer(page.monthName, page.year, highlights),
         },
         {
             question: `Cum folosesc solunarul pentru ${page.monthName} ${page.year}?`,
@@ -82,7 +101,7 @@ function MonthJsonLd({ page, topDays }: { page: MonthlySeoLandingPage; topDays: 
                 '@id': `${baseUrl}/${page.slug}#webpage`,
                 url: `${baseUrl}/${page.slug}`,
                 name: page.title,
-                description: page.description,
+                description: monthMetaDescription(page.monthName, page.year, highlights),
                 inLanguage: 'ro',
                 isPartOf: { '@id': `${baseUrl}/#website` },
                 about: page.keywords,
@@ -111,12 +130,12 @@ function MonthJsonLd({ page, topDays }: { page: MonthlySeoLandingPage; topDays: 
                 '@type': 'Dataset',
                 '@id': `${baseUrl}/${page.slug}#solunar-table`,
                 name: `Tabel solunar ${page.monthName} ${page.year}`,
-                description: `Date solunare zilnice pentru ${page.monthName} ${page.year}: rating, faza Lunii, iluminare și perioade majore de pescuit.`,
+                description: `Date solunare zilnice pentru ${page.monthName} ${page.year}: rating, faza Lunii, iluminare, perioade majore și minore de pescuit.`,
                 url: `${baseUrl}/${page.slug}`,
                 inLanguage: 'ro',
                 creator: datasetCreator,
                 license: datasetLicense,
-                variableMeasured: ['rating pescuit', 'faza lunii', 'iluminare luna', 'perioada majora', 'specii active'],
+                variableMeasured: ['rating pescuit', 'faza lunii', 'iluminare luna', 'perioada majora', 'perioada minora', 'specii active'],
             },
             {
                 '@type': 'ItemList',
@@ -181,6 +200,10 @@ function MonthJsonLd({ page, topDays }: { page: MonthlySeoLandingPage; topDays: 
 export default function MonthlySolunarLanding({ page }: { page: MonthlySeoLandingPage }) {
     const days = getDaysInMonth(page);
     const topDays = [...days].sort((a, b) => b.rating - a.rating || b.illumination - a.illumination);
+    // The six cards sit in a grid, so they read better in calendar order.
+    const topDayCards = topDays.slice(0, 6).sort((a, b) => a.date.getTime() - b.date.getTime());
+    const highlights = getMonthHighlights(page.year, page.monthIndex);
+    const monthLower = page.monthName.toLowerCase();
     const currentIndex = monthlySeoLandingPages.findIndex((item) => item.slug === page.slug);
     const previousPage = monthlySeoLandingPages[currentIndex - 1];
     const nextPage = monthlySeoLandingPages[currentIndex + 1];
@@ -192,7 +215,7 @@ export default function MonthlySolunarLanding({ page }: { page: MonthlySeoLandin
 
     return (
         <div className="relative overflow-hidden pb-20 pt-3 md:pt-8">
-            <MonthJsonLd page={page} topDays={topDays} />
+            <MonthJsonLd page={page} topDays={topDays} highlights={highlights} />
             <div className="container-custom relative z-10">
                 <section className="card-panel taste-surface mb-6 md:mb-8 p-5 md:p-8">
                     <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
@@ -212,7 +235,43 @@ export default function MonthlySolunarLanding({ page }: { page: MonthlySeoLandin
                         {page.description}
                     </p>
 
-                    <div className="mt-6 grid gap-3 md:grid-cols-3">
+                    <div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2">
+                        <div className="rounded-2xl border border-amber-200/15 bg-amber-200/[0.07] p-4">
+                            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">Cele mai bune zile din {monthLower} {page.year}</p>
+                            <dl className="mt-2 space-y-1.5 text-sm">
+                                {highlights.excellentDays.length > 0 && (
+                                    <div className="flex gap-3">
+                                        <dt className="shrink-0 font-mono font-bold text-amber-200">5/5</dt>
+                                        <dd className="font-bold text-white">{formatDayList(highlights.excellentDays)} {monthLower}</dd>
+                                    </div>
+                                )}
+                                {highlights.veryGoodDays.length > 0 && (
+                                    <div className="flex gap-3">
+                                        <dt className="shrink-0 font-mono font-bold text-amber-200">4/5</dt>
+                                        <dd className="text-slate-200">{formatDayList(highlights.veryGoodDays)} {monthLower}</dd>
+                                    </div>
+                                )}
+                            </dl>
+                        </div>
+                        <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-4">
+                            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">Fazele Lunii</p>
+                            <dl className="mt-2 space-y-1.5 text-sm">
+                                {highlights.moonPhases.map((row) => (
+                                    <div key={row.phase} className="flex gap-3">
+                                        <dt className="w-[5.5rem] shrink-0 font-bold text-amber-100">{row.label}</dt>
+                                        <dd className="text-slate-200">
+                                            {row.dates.map((date) => (
+                                                <span key={date.toISOString()} className="block">{formatPhaseMoment(date)}</span>
+                                            ))}
+                                        </dd>
+                                    </div>
+                                ))}
+                            </dl>
+                            <p className="mt-2 text-xs text-slate-400">Ora României.</p>
+                        </div>
+                    </div>
+
+                    <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-3">
                         <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-4">
                             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">Context sezon</p>
                             <p className="mt-2 text-sm leading-relaxed text-slate-200">{page.seasonContext}</p>
@@ -246,57 +305,61 @@ export default function MonthlySolunarLanding({ page }: { page: MonthlySeoLandin
                     </div>
                 </section>
 
-                <section className="mb-6 grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
-                    <div className="card-panel taste-surface p-5 md:p-6">
-                        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-amber-200/80">Top zile recomandate</p>
-                        <h2 className="mt-2 font-display text-2xl font-bold text-white">Cele mai bune zile din {page.monthName}</h2>
-                        <div className="mt-5 space-y-3">
-                            {topDays.slice(0, 6).map((day) => (
-                                <div key={day.date.toISOString()} className="rounded-2xl border border-amber-200/15 bg-amber-200/[0.07] p-4">
-                                    <div className="flex items-center justify-between gap-3">
-                                        <div>
-                                            <p className="font-bold text-white">{roDate(day.date)}</p>
-                                            <p className="text-xs text-slate-400">{day.moonPhase}, {day.illumination}% iluminare</p>
-                                        </div>
-                                        <div className="rounded-xl bg-amber-300 px-3 py-1 font-mono text-lg font-bold text-slate-950">{day.rating}/5</div>
+                <section className="card-panel taste-surface mb-6 p-5 md:p-6">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-amber-200/80">Top zile recomandate</p>
+                    <h2 className="mt-2 font-display text-2xl font-bold text-white">Cele mai bune zile din {page.monthName}</h2>
+                    <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                        {topDayCards.map((day) => (
+                            <div key={day.date.toISOString()} className="rounded-2xl border border-amber-200/15 bg-amber-200/[0.07] p-4">
+                                <div className="flex items-center justify-between gap-3">
+                                    <div>
+                                        <p className="font-bold text-white">{roDate(day.date)}</p>
+                                        <p className="text-xs text-slate-400">{day.moonPhase}, {day.illumination}% iluminare</p>
                                     </div>
-                                    <p className="mt-3 text-sm text-amber-100">Major: {day.majorOne}{day.majorTwo !== 'n/a' ? ` și ${day.majorTwo}` : ''}</p>
+                                    <div className="rounded-xl bg-amber-300 px-3 py-1 font-mono text-lg font-bold text-slate-950">{day.rating}/5</div>
                                 </div>
-                            ))}
-                        </div>
+                                <p className="mt-3 text-sm text-amber-100">Major: {joinPeriods(day.majorOne, day.majorTwo)}</p>
+                                <p className="mt-1 text-sm text-slate-300">Minor: {joinPeriods(day.minorOne, day.minorTwo)}</p>
+                            </div>
+                        ))}
                     </div>
+                </section>
 
-                    <div className="card-panel taste-surface overflow-hidden p-0">
-                        <div className="border-b border-white/10 p-5 md:p-6">
-                            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-amber-200/80">Tabel complet</p>
-                            <h2 className="mt-2 font-display text-2xl font-bold text-white">Solunar {page.monthName} {page.year} pe zile</h2>
-                        </div>
-                        <div className="overflow-x-auto">
-                            <table className="w-full min-w-[760px] text-left text-sm">
-                                <thead className="bg-white/[0.035] text-[11px] uppercase tracking-[0.16em] text-slate-400">
-                                    <tr>
-                                        <th className="px-4 py-3">Zi</th>
-                                        <th className="px-4 py-3">Rating</th>
-                                        <th className="px-4 py-3">Faza Lunii</th>
-                                        <th className="px-4 py-3">Majoră 1</th>
-                                        <th className="px-4 py-3">Majoră 2</th>
-                                        <th className="px-4 py-3">Specii</th>
+                <section className="card-panel taste-surface mb-6 overflow-hidden p-0">
+                    <div className="border-b border-white/10 p-5 md:p-6">
+                        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-amber-200/80">Tabel complet</p>
+                        <h2 className="mt-2 font-display text-2xl font-bold text-white">Solunar {page.monthName} {page.year} pe zile</h2>
+                        <p className="mt-2 text-sm text-slate-400">Perioadele majore țin aproximativ 2 ore, cele minore aproximativ 1 oră. Ora României, calculat pentru București.</p>
+                    </div>
+                    <div className="overflow-x-auto">
+                        <table className="w-full min-w-[1040px] text-left text-sm">
+                            <thead className="bg-white/[0.035] text-[11px] uppercase tracking-[0.16em] text-slate-400">
+                                <tr>
+                                    <th className="px-4 py-3">Zi</th>
+                                    <th className="px-4 py-3">Rating</th>
+                                    <th className="px-4 py-3">Faza Lunii</th>
+                                    <th className="px-4 py-3">Majoră 1</th>
+                                    <th className="px-4 py-3">Majoră 2</th>
+                                    <th className="px-4 py-3">Minoră 1</th>
+                                    <th className="px-4 py-3">Minoră 2</th>
+                                    <th className="px-4 py-3">Specii</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-white/10">
+                                {days.map((day) => (
+                                    <tr key={day.date.toISOString()} className={day.rating >= 4 ? 'bg-amber-300/[0.045]' : ''}>
+                                        <td className="whitespace-nowrap px-4 py-3 font-bold text-white">{roDate(day.date)}</td>
+                                        <td className="px-4 py-3 font-mono font-bold text-amber-200">{day.rating}/5</td>
+                                        <td className="px-4 py-3 text-slate-300">{day.moonPhase} ({day.illumination}%)</td>
+                                        <td className="whitespace-nowrap px-4 py-3 font-mono text-slate-200">{day.majorOne}</td>
+                                        <td className="whitespace-nowrap px-4 py-3 font-mono text-slate-200">{day.majorTwo}</td>
+                                        <td className="whitespace-nowrap px-4 py-3 font-mono text-slate-300">{day.minorOne}</td>
+                                        <td className="whitespace-nowrap px-4 py-3 font-mono text-slate-300">{day.minorTwo}</td>
+                                        <td className="px-4 py-3 text-slate-300">{day.activeFish.join(', ') || 'general'}</td>
                                     </tr>
-                                </thead>
-                                <tbody className="divide-y divide-white/10">
-                                    {days.map((day) => (
-                                        <tr key={day.date.toISOString()} className={day.rating >= 4 ? 'bg-amber-300/[0.045]' : ''}>
-                                            <td className="px-4 py-3 font-bold text-white">{roDate(day.date)}</td>
-                                            <td className="px-4 py-3 font-mono font-bold text-amber-200">{day.rating}/5</td>
-                                            <td className="px-4 py-3 text-slate-300">{day.moonPhase} ({day.illumination}%)</td>
-                                            <td className="px-4 py-3 font-mono text-slate-200">{day.majorOne}</td>
-                                            <td className="px-4 py-3 font-mono text-slate-200">{day.majorTwo}</td>
-                                            <td className="px-4 py-3 text-slate-300">{day.activeFish.join(', ') || 'general'}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
                 </section>
 

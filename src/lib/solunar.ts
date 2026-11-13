@@ -10,7 +10,7 @@
 
 import SunCalc from 'suncalc';
 import { moonPhasesBetween } from './moonPhases';
-import { datePartsInRomania, middayOf, sunriseSunsetFor } from './sunTimes';
+import { addDays, datePartsInRomania, middayOf, startOfDayInRomania, sunriseSunsetFor } from './sunTimes';
 
 // Moon phase constants
 export type MoonPhase = 'new' | 'waxing-crescent' | 'first-quarter' | 'waxing-gibbous' |
@@ -104,14 +104,76 @@ export function getMoonPhaseName(phase: MoonPhase): string {
 }
 
 /**
- * Get moon times using SunCalc
- * Returns actual moonrise/moonset for given location
+ * A Romanian calendar day as a half-open range of instants (ms).
+ * The server runs in UTC, so its own midnight is 02:00 or 03:00 in Romania.
  */
-function getMoonTimes(date: Date, lat: number, lng: number): { rise: Date | null; set: Date | null } {
-    const times = SunCalc.getMoonTimes(date, lat, lng);
+interface DayRange {
+    start: number;
+    end: number;
+}
+
+function romanianDayOf(date: Date): DayRange {
+    const p = datePartsInRomania(date);
+    return { start: startOfDayInRomania(p).getTime(), end: startOfDayInRomania(addDays(p, 1)).getTime() };
+}
+
+function isInDay(time: Date, day: DayRange): boolean {
+    return time.getTime() >= day.start && time.getTime() < day.end;
+}
+
+/**
+ * Moonrise/moonset in the 24 hours after `dayStart` for given location.
+ * Same quadratic search as SunCalc.getMoonTimes, which can only start
+ * from the server's local midnight or from UTC midnight.
+ */
+function getMoonTimes(dayStart: number, lat: number, lng: number): { rise: Date | null; set: Date | null } {
+    const hoursLater = (h: number) => new Date(dayStart + h * DAY_MS / 24);
+    const hc = 0.133 * Math.PI / 180;
+    const altitudeAt = (h: number) => SunCalc.getMoonPosition(hoursLater(h), lat, lng).altitude - hc;
+
+    let h0 = altitudeAt(0);
+    let rise: number | undefined;
+    let set: number | undefined;
+
+    // Go in 2-hour chunks, each time seeing if a 3-point quadratic curve crosses zero (which means rise or set)
+    for (let i = 1; i <= 24; i += 2) {
+        const h1 = altitudeAt(i);
+        const h2 = altitudeAt(i + 1);
+
+        const a = (h0 + h2) / 2 - h1;
+        const b = (h2 - h0) / 2;
+        const xe = -b / (2 * a);
+        const ye = (a * xe + b) * xe + h1;
+        const d = b * b - 4 * a * h1;
+        let roots = 0;
+        let x1 = 0;
+        let x2 = 0;
+
+        if (d >= 0) {
+            const dx = Math.sqrt(d) / (Math.abs(a) * 2);
+            x1 = xe - dx;
+            x2 = xe + dx;
+            if (Math.abs(x1) <= 1) roots++;
+            if (Math.abs(x2) <= 1) roots++;
+            if (x1 < -1) x1 = x2;
+        }
+
+        if (roots === 1) {
+            if (h0 < 0) rise = i + x1;
+            else set = i + x1;
+        } else if (roots === 2) {
+            rise = i + (ye < 0 ? x2 : x1);
+            set = i + (ye < 0 ? x1 : x2);
+        }
+
+        if (rise && set) break;
+
+        h0 = h2;
+    }
+
     return {
-        rise: times.rise || null,
-        set: times.set || null
+        rise: rise ? hoursLater(rise) : null,
+        set: set ? hoursLater(set) : null
     };
 }
 
@@ -130,9 +192,8 @@ function getSunTimes(date: Date, lat: number, lng: number): { sunrise: Date; sun
  *
  * Optimized: Uses coarse-to-fine search to reduce iterations from 96 to ~20
  */
-function getMoonTransitTimes(date: Date, lat: number, lng: number): { upper: Date | null; lower: Date | null } {
-    const startOfDay = new Date(date);
-    startOfDay.setHours(0, 0, 0, 0);
+function getMoonTransitTimes(day: DayRange, lat: number, lng: number): { upper: Date | null; lower: Date | null } {
+    const startOfDay = new Date(day.start);
 
     // Phase 1: Coarse search every 60 minutes to find rough maximum
     let coarseMax = -Infinity;
@@ -158,7 +219,7 @@ function getMoonTransitTimes(date: Date, lat: number, lng: number): { upper: Dat
 
     for (let time = searchStart; time <= searchEnd; time += 5 * 60000) {
         const checkTime = new Date(time);
-        if (checkTime.getDate() !== date.getDate()) continue;
+        if (!isInDay(checkTime, day)) continue;
 
         const moonPos = SunCalc.getMoonPosition(checkTime, lat, lng);
         const altitude = moonPos.altitude * (180 / Math.PI);
@@ -174,9 +235,9 @@ function getMoonTransitTimes(date: Date, lat: number, lng: number): { upper: Dat
     if (upperTransit) {
         const lowerTime = new Date(upperTransit.getTime() + 12 * 3600000);
         // Adjust to same day if needed
-        if (lowerTime.getDate() !== date.getDate()) {
+        if (!isInDay(lowerTime, day)) {
             const altLowerTime = new Date(upperTransit.getTime() - 12 * 3600000);
-            if (altLowerTime.getDate() === date.getDate()) {
+            if (isInDay(altLowerTime, day)) {
                 lowerTransit = altLowerTime;
             }
         } else {
@@ -195,9 +256,9 @@ const MINOR_PERIOD_DURATION_MS = 30 * 60 * 1000; // 30 minutes = 1800000ms
  * Calculate major periods (around moon transit - highest activity)
  * Major periods last approximately 2 hours centered on transit
  */
-function calculateMajorPeriods(date: Date, lat: number, lng: number, dayRating: number): SolunarPeriod[] {
+function calculateMajorPeriods(day: DayRange, lat: number, lng: number, dayRating: number): SolunarPeriod[] {
     const periods: SolunarPeriod[] = [];
-    const transits = getMoonTransitTimes(date, lat, lng);
+    const transits = getMoonTransitTimes(day, lat, lng);
     const baseRating = dayRating;
 
     // Upper transit (moon overhead) - strongest period
@@ -233,13 +294,12 @@ function calculateMajorPeriods(date: Date, lat: number, lng: number, dayRating: 
  * Calculate minor periods (around moonrise/moonset)
  * Minor periods last approximately 1 hour centered on rise/set
  */
-function calculateMinorPeriods(date: Date, lat: number, lng: number, dayRating: number): SolunarPeriod[] {
+function calculateMinorPeriods(day: DayRange, moonTimes: { rise: Date | null; set: Date | null }, dayRating: number): SolunarPeriod[] {
     const periods: SolunarPeriod[] = [];
-    const moonTimes = getMoonTimes(date, lat, lng);
     const rating = Math.max(1, dayRating - 1);
 
     // Moonrise period
-    if (moonTimes.rise && moonTimes.rise.getDate() === date.getDate()) {
+    if (moonTimes.rise && isInDay(moonTimes.rise, day)) {
         const start = new Date(moonTimes.rise.getTime() - MINOR_PERIOD_DURATION_MS);
         const end = new Date(moonTimes.rise.getTime() + MINOR_PERIOD_DURATION_MS);
 
@@ -252,7 +312,7 @@ function calculateMinorPeriods(date: Date, lat: number, lng: number, dayRating: 
     }
 
     // Moonset period
-    if (moonTimes.set && moonTimes.set.getDate() === date.getDate()) {
+    if (moonTimes.set && isInDay(moonTimes.set, day)) {
         const start = new Date(moonTimes.set.getTime() - MINOR_PERIOD_DURATION_MS);
         const end = new Date(moonTimes.set.getTime() + MINOR_PERIOD_DURATION_MS);
 
@@ -292,7 +352,7 @@ function daysFromNewOrFullMoon(date: Date): number {
  * Overall fishing rating for the day (1-5), from classic solunar theory:
  * activity peaks around the new and full moon and is lowest around the quarters.
  */
-function calculateOverallRating(date: Date): number {
+export function calculateOverallRating(date: Date): number {
     const days = daysFromNewOrFullMoon(date);
     const step = RATING_DAY_LIMITS.findIndex((limit) => days < limit);
     return step === -1 ? 1 : 5 - step;
@@ -328,12 +388,14 @@ function getBestTime(majorPeriods: SolunarPeriod[], minorPeriods: SolunarPeriod[
 export function getSolunarData(date: Date, lat: number = 44.4268, lng: number = 26.1025): DaySolunarData {
     const moonPhase = getMoonPhase(date);
     const moonIllumination = getMoonIllumination(date);
-    const moonTimes = getMoonTimes(date, lat, lng);
+    // Periods belong to the Romanian calendar day of `date`, whatever the server's timezone.
+    const day = romanianDayOf(date);
+    const moonTimes = getMoonTimes(day.start, lat, lng);
     const sunTimes = getSunTimes(date, lat, lng);
 
     const overallRating = calculateOverallRating(date);
-    const majorPeriods = calculateMajorPeriods(date, lat, lng, overallRating);
-    const minorPeriods = calculateMinorPeriods(date, lat, lng, overallRating);
+    const majorPeriods = calculateMajorPeriods(day, lat, lng, overallRating);
+    const minorPeriods = calculateMinorPeriods(day, moonTimes, overallRating);
 
     return {
         date,

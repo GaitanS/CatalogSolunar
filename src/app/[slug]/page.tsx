@@ -16,6 +16,7 @@ import { getSpeciesBySlug, getAllSpecies } from '@/data/species';
 import { getAllArticles } from '@/data/blogArticles';
 import { getAllLocations } from '@/data/fishingLocations';
 import { getAllSeoLandingSlugs, getAnnualCanonicalSlug, getAnnualLandingBySlug, getMonthlyLandingBySlug } from '@/data/seoLandingPages';
+import { getMonthHighlights, monthMetaDescription } from '@/lib/monthHighlights';
 import type { Metadata } from 'next';
 
 export const dynamicParams = false;
@@ -35,16 +36,22 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
     const monthlyLanding = getMonthlyLandingBySlug(slug);
     if (monthlyLanding) {
+        // The best days and moon phase dates, so they show in the search result itself.
+        const description = monthMetaDescription(
+            monthlyLanding.monthName,
+            monthlyLanding.year,
+            getMonthHighlights(monthlyLanding.year, monthlyLanding.monthIndex),
+        );
         return {
             // The 2026 pages keep the titles they rank with (the layout template appends
             // "| Calendar Solunar 2026 Pescuit"); other years must not get that suffix.
             title: monthlyLanding.year === 2026 ? monthlyLanding.metaTitle : { absolute: monthlyLanding.metaTitle },
-            description: monthlyLanding.description,
+            description,
             keywords: monthlyLanding.keywords,
             alternates: { canonical: `https://calendarsolunar.ro/${monthlyLanding.slug}` },
             openGraph: {
                 title: monthlyLanding.title,
-                description: monthlyLanding.description,
+                description,
                 url: `https://calendarsolunar.ro/${monthlyLanding.slug}`,
                 siteName: 'Calendar Solunar',
                 locale: 'ro_RO',
@@ -53,7 +60,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             twitter: {
                 card: 'summary_large_image',
                 title: monthlyLanding.title,
-                description: monthlyLanding.description,
+                description,
             },
         };
     }
