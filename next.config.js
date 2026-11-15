@@ -163,6 +163,14 @@ const nextConfig = {
                     { key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' },
                 ],
             },
+            // Markdown for agents is served at the HTML page's own URL (middleware),
+            // so the CDN must never keep it, or browsers could get Markdown.
+            ...[
+                { source: '/:path*', has: [{ type: 'header', key: 'accept', value: '.*text/markdown.*' }] },
+                { source: '/(.*)\\.md' },
+                { source: '/md/:path*' },
+                { source: '/mcp' },
+            ].map((rule) => ({ ...rule, headers: [{ key: 'Cache-Control', value: 'private, no-store' }] })),
         ];
     },
 };

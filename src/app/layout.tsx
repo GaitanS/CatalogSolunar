@@ -6,6 +6,8 @@ import SchemaMarkup from "@/components/SchemaMarkup";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import AdSenseScript from "@/components/AdSenseScript";
+import WebMcpTools from "@/components/WebMcpTools";
+import { AGENT_TOOLS } from "@/lib/agentApi";
 
 // Both fonts are preloaded with display "optional". The CSS is inlined
 // (experimental.inlineCss), so nothing holds back the first paint: with "swap"
@@ -103,6 +105,7 @@ export default function RootLayout({
                         {children}
                     </main>
                     <SiteFooter />
+                    <WebMcpTools tools={AGENT_TOOLS} />
                 </ClientProviders>
             </body>
         </html>

@@ -41,6 +41,21 @@ function yearlessTarget(pathname: string): string | undefined {
     return undefined;
 }
 
+/**
+ * The page whose Markdown version this request wants, if that page has one
+ * (see src/lib/pageMarkdown.ts): asked for with `Accept: text/markdown` or a `.md` address.
+ */
+function markdownPagePath(request: NextRequest, pathname: string): string | undefined {
+    if (request.method !== 'GET' && request.method !== 'HEAD') return undefined;
+    let path = pathname;
+    if (pathname.endsWith('.md')) {
+        path = pathname === '/index.md' ? '/' : pathname.slice(0, -3);
+    } else if (!request.headers.get('accept')?.includes('text/markdown')) {
+        return undefined;
+    }
+    return path === '/' || path === '/azi' || landingExists(path.slice(1)) ? path : undefined;
+}
+
 export function middleware(request: NextRequest) {
     const url = request.nextUrl.clone();
     const hostname = request.headers.get('host') || '';
@@ -81,6 +96,11 @@ export function middleware(request: NextRequest) {
     // http→https is enforced by the host (Hostinger SSL / nginx), not here: behind a
     // TLS-terminating proxy x-forwarded-proto can read "http" for HTTPS requests,
     // which would make a redirect here loop forever.
+
+    const markdownPath = markdownPagePath(request, pathname);
+    if (markdownPath) {
+        return NextResponse.rewrite(new URL(markdownPath === '/' ? '/md' : `/md${markdownPath}`, request.url));
+    }
 
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set('x-pathname', url.pathname);

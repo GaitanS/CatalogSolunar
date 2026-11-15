@@ -13,10 +13,13 @@ export default function SchemaMarkup() {
             "name": "Romania"
         },
         "knowsLanguage": "ro",
+        // An online-only project: no office address or phone line to list.
+        "email": "contact@calendarsolunar.ro",
         "contactPoint": {
             "@type": "ContactPoint",
             "contactType": "Customer Support",
             "url": "https://calendarsolunar.ro/contact",
+            "email": "contact@calendarsolunar.ro",
             "availableLanguage": "Romanian"
         }
     };

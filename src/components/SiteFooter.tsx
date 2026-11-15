@@ -1,6 +1,13 @@
 import Image from 'next/image';
 import logo from '@/assets/logo.webp';
 
+/** `rel` marks the about and legal pages for agents (link relations from RFC 6903). */
+interface FooterLink {
+    href: string;
+    label: string;
+    rel?: string;
+}
+
 const CALENDAR_LINKS = [
     { href: '/azi', label: 'Solunar Azi' },
     { href: '/prognoza', label: 'Prognoză 14 zile' },
@@ -10,11 +17,11 @@ const CALENDAR_LINKS = [
     { href: '/solunar-2027', label: 'Solunar 2027' },
 ];
 
-const EXPLORE_LINKS = [
+const EXPLORE_LINKS: FooterLink[] = [
     { href: '/locuri-pescuit', label: 'Locuri de Pescuit' },
     { href: '/specii', label: 'Specii de Pești' },
     { href: '/blog', label: 'Articole și Ghiduri' },
-    { href: '/despre', label: 'Despre Proiect' },
+    { href: '/despre', label: 'Despre Proiect', rel: 'about' },
     { href: '/contact', label: 'Contact' },
 ];
 
@@ -33,20 +40,20 @@ const CITY_LINKS = [
     { href: '/bacau', label: 'Bacău' },
 ];
 
-const LEGAL_LINKS = [
-    { href: '/confidentialitate', label: 'Confidențialitate' },
-    { href: '/termeni', label: 'Termeni și Condiții' },
+const LEGAL_LINKS: FooterLink[] = [
+    { href: '/confidentialitate', label: 'Confidențialitate', rel: 'privacy-policy' },
+    { href: '/termeni', label: 'Termeni și Condiții', rel: 'terms-of-service' },
     { href: '/cookies', label: 'Politica Cookies' },
 ];
 
-function FooterColumn({ title, links }: { title: string; links: { href: string; label: string }[] }) {
+function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) {
     return (
         <div>
             <h3 className="eyebrow mb-4">{title}</h3>
             <ul className="space-y-2.5 text-sm">
                 {links.map((l) => (
                     <li key={l.href}>
-                        <a href={l.href} className="text-slate-400 transition-colors hover:text-moon">
+                        <a href={l.href} rel={l.rel} className="text-slate-400 transition-colors hover:text-moon">
                             {l.label}
                         </a>
                     </li>
@@ -105,7 +112,7 @@ export default function SiteFooter() {
                         <ul className="flex flex-wrap gap-x-5 gap-y-2">
                             {LEGAL_LINKS.map((l) => (
                                 <li key={l.href}>
-                                    <a href={l.href} className="transition-colors hover:text-moon">
+                                    <a href={l.href} rel={l.rel} className="transition-colors hover:text-moon">
                                         {l.label}
                                     </a>
                                 </li>
