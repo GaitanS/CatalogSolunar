@@ -22,6 +22,7 @@ import { getAllCities } from '@/data/cities';
 import { getAllArticles } from '@/data/blogArticles';
 import { getAllLocations } from '@/data/fishingLocations';
 import { getAnnualLandingSlug, monthlySeoLandingPages } from '@/data/seoLandingPages';
+import { getMonthHighlights, homeMetaDescription } from '@/lib/monthHighlights';
 
 const monthSlugs = [
     'ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie',
@@ -83,16 +84,23 @@ export async function generateMetadata() {
     const nextMonth = getMonthTarget(date, 1);
     const priorityMonth = getPriorityMonth(currentMonth, nextMonth, date);
     const year = currentMonth.year;
+    // The best days of the title's month, so the search result itself shows them.
+    const description = homeMetaDescription(
+        priorityMonth.name,
+        priorityMonth.year,
+        year,
+        getMonthHighlights(priorityMonth.year, monthSlugs.indexOf(priorityMonth.slug)),
+    );
 
     return {
         title: `Solunar ${priorityMonth.name} ${priorityMonth.year} - Calendar Solunar ${year} Pescuit`,
-        description: `Solunar ${priorityMonth.slug} ${priorityMonth.year} și calendar solunar ${year} pentru pescuit: ore exacte, perioade majore și minore, faze lunare, prognoză 14 zile și solunar azi.`,
+        description,
         alternates: {
             canonical: 'https://calendarsolunar.ro/',
         },
         openGraph: {
             title: `Solunar ${priorityMonth.name} ${priorityMonth.year} — Calendar Solunar ${year}`,
-            description: `Calendar solunar pentru pescuit: ${currentMonth.name} ${year}, ${priorityMonth.name} ${priorityMonth.year}, perioade majore, faze lunare și prognoză.`,
+            description,
             url: 'https://calendarsolunar.ro/',
         },
     };

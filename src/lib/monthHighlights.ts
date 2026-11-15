@@ -111,6 +111,22 @@ export function monthMetaDescription(monthName: string, year: number, h: MonthHi
     return sentences.join(' ');
 }
 
+/**
+ * Descrierea meta a primei pagini: zilele de 5/5 si fazele lunii din titlu, apoi
+ * calendarul anului. Daca nu incape, renunta la faze, nu la calendar.
+ */
+export function homeMetaDescription(monthName: string, year: number, calendarYear: number, h: MonthHighlights): string {
+    const best = h.excellentDays.length ? `: zile de 5/5 pe ${formatDayRanges(h.excellentDays)}` : '';
+    const moon = h.moonPhases
+        .map((row) => `${row.label.toLowerCase()} pe ${formatDayList(row.dates.map((date) => datePartsInRomania(date).d))}`)
+        .join(', ');
+    const first = `Solunar ${monthName.toLowerCase()} ${year}${best}.`;
+    const last = `Calendar solunar ${calendarYear} pe zile, ore de pescuit și solunar azi.`;
+
+    const full = [first, moon ? `${capitalize(moon)}.` : '', last].filter(Boolean).join(' ');
+    return full.length <= DESCRIPTION_MAX_LENGTH ? full : `${first} ${last}`;
+}
+
 /** Raspunsul la „care sunt cele mai bune zile”, cu zilele si fazele numite. */
 export function monthBestDaysAnswer(monthName: string, year: number, h: MonthHighlights): string {
     const month = `${monthName.toLowerCase()} ${year}`;
