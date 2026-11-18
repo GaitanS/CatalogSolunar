@@ -81,7 +81,7 @@ export default async function Image() {
                                 fontSize: 24,
                             }}
                         >
-                            <span style={{ color: '#fbbf24' }}>✓</span> {text}
+                            <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#fbbf24' }} />{text}
                         </div>
                     ))}
                 </div>

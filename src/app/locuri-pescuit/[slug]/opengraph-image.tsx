@@ -69,7 +69,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
 
                 {/* Solunar GPS badge */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 30, color: '#fbbf24', fontSize: 18 }}>
-                    <div style={{ display: 'flex' }}>✓</div>
+                    <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#fbbf24' }} />
                     <div style={{ display: 'flex' }}>Solunar pe coordonate GPS exacte</div>
                 </div>
 

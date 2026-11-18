@@ -53,7 +53,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
                     <div style={{ display: 'flex', gap: 40, marginTop: 40 }}>
                         {['Predicții locale', 'Actualizat zilnic', '100% Gratuit'].map((text) => (
                             <div key={text} style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#94a3b8', fontSize: 22 }}>
-                                <span style={{ color: '#fbbf24' }}>✓</span> {text}
+                                <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#fbbf24' }} />{text}
                             </div>
                         ))}
                     </div>
@@ -109,7 +109,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
                     <div style={{ display: 'flex', gap: 40, marginTop: 40 }}>
                         {['Tehnici', 'Momeli', 'Sezon optim'].map((text) => (
                             <div key={text} style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#94a3b8', fontSize: 22 }}>
-                                <span style={{ color: '#fbbf24' }}>✓</span> {text}
+                                <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#fbbf24' }} />{text}
                             </div>
                         ))}
                     </div>
