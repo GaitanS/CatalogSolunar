@@ -5,6 +5,7 @@ export const metadata: Metadata = {
     description: 'Află cum sunt calculate datele Calendar Solunar: perioade majore și minore, faze lunare, limitele prognozei și modul de folosire în pescuit.',
     alternates: { canonical: 'https://calendarsolunar.ro/despre' },
     openGraph: {
+        type: 'website',
         title: 'Despre Calendar Solunar - Metodologie și Date Solunare',
         description: 'Cum sunt calculate perioadele solunare, fazele lunii și recomandările de pescuit pentru România.',
         url: 'https://calendarsolunar.ro/despre',

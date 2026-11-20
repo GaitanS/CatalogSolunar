@@ -99,9 +99,15 @@ export async function generateMetadata() {
             canonical: 'https://calendarsolunar.ro/',
         },
         openGraph: {
+            type: 'website',
             title: `Solunar ${priorityMonth.name} ${priorityMonth.year} — Calendar Solunar ${year}`,
             description,
             url: 'https://calendarsolunar.ro/',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: `Solunar ${priorityMonth.name} ${priorityMonth.year} — Calendar Solunar ${year}`,
+            description,
         },
     };
 }

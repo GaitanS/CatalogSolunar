@@ -54,6 +54,7 @@ export async function generateMetadata(): Promise<Metadata> {
         ],
         alternates: { canonical: 'https://calendarsolunar.ro/lunar' },
         openGraph: {
+            type: 'website',
             title: `Faza Lunii Azi, ${moon.today.d} ${Month} — Calendar Lunar ${moon.today.y}`,
             description: `${moon.summary} Următoarea lună plină: ${moon.nextFull}.`,
             url: 'https://calendarsolunar.ro/lunar',

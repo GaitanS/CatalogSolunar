@@ -23,6 +23,7 @@ export const metadata: Metadata = {
         canonical: 'https://calendarsolunar.ro/blog',
     },
     openGraph: {
+        type: 'website',
         title: 'Ghiduri Pescuit 2026 — Solunar pe Luni, Specii și Tehnici',
         description: 'Calendar solunar 2026 pe luni, ore bune de pescuit, faze lunare și ghiduri practice pentru pescari.',
         url: 'https://calendarsolunar.ro/blog',

@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     ],
     alternates: { canonical: 'https://calendarsolunar.ro/specii' },
     openGraph: {
+        type: 'website',
         title: 'Ghid Specii de Pești - Când Trage Fiecare Specie',
         description: 'Sezon, ore optime, fază lunară ideală, tehnici și momeli pentru fiecare specie.',
         url: 'https://calendarsolunar.ro/specii',

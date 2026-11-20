@@ -5,6 +5,7 @@ export const metadata: Metadata = {
     description: 'Contactează echipa Calendar Solunar pentru întrebări, sugestii sau parteneriate. Suntem aici să te ajutăm!',
     alternates: { canonical: 'https://calendarsolunar.ro/contact' },
     openGraph: {
+        type: 'website',
         title: 'Contactează Calendar Solunar',
         description: 'Ai întrebări sau sugestii? Contactează echipa Calendar Solunar.',
         url: 'https://calendarsolunar.ro/contact',

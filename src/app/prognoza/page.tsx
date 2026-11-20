@@ -18,6 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
         ],
         alternates: { canonical: 'https://calendarsolunar.ro/prognoza' },
         openGraph: {
+            type: 'website',
             title: 'Prognoză Pescuit 14 Zile - Solunar pe Ore',
             description: 'Cea mai bună fereastră de pescuit pentru fiecare din următoarele 14 zile.',
             url: 'https://calendarsolunar.ro/prognoza',
