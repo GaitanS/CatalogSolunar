@@ -108,8 +108,8 @@ export default function ConfidentialitatePage() {
                                 </p>
                                 <p className="mt-2">
                                     <strong className="text-white">Email:</strong>{' '}
-                                    <a href="mailto:privacy@calendarsolunar.ro" className="text-moon hover:underline">
-                                        privacy@calendarsolunar.ro
+                                    <a href="mailto:contact@calendarsolunar.ro" className="text-moon hover:underline">
+                                        contact@calendarsolunar.ro
                                     </a>
                                 </p>
                             </section>

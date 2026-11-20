@@ -1,15 +1,12 @@
 import { MetadataRoute } from 'next';
 import { getAllArticles } from '@/data/blogArticles';
-import { getAllCities } from '@/data/cities';
 import { getAllSpecies } from '@/data/species';
 import { getAllLocations, isIndexableLocation } from '@/data/fishingLocations';
 import { annualSeoLandingPages, getAnnualCanonicalSlug, monthlySeoLandingPages } from '@/data/seoLandingPages';
-import { sunLocations } from '@/data/sunLocations';
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://calendarsolunar.ro';
     const articles = getAllArticles();
-    const cities = getAllCities();
     const species = getAllSpecies();
 
     const now = new Date();
@@ -41,14 +38,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { url: `${baseUrl}/termeni`, lastModified: evergreen, changeFrequency: 'yearly', priority: 0.2 },
         { url: `${baseUrl}/cookies`, lastModified: evergreen, changeFrequency: 'yearly', priority: 0.2 },
     ];
-
-    // City pages — show today's solunar data
-    const cityPages: MetadataRoute.Sitemap = cities.map((city) => ({
-        url: `${baseUrl}/${city.slug}`,
-        lastModified: today,
-        changeFrequency: 'daily' as const,
-        priority: 0.9,
-    }));
 
     // Species pages
     const speciesPages: MetadataRoute.Sitemap = species.map((s) => ({
@@ -102,23 +91,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.85,
     }));
 
-    // Sunrise/sunset per locality — times change daily
-    const sunPages: MetadataRoute.Sitemap = sunLocations.map((l) => ({
-        url: `${baseUrl}/rasarit-apus-soare/${l.slug}`,
-        lastModified: today,
-        changeFrequency: 'daily' as const,
-        priority: l.kind === 'litoral' || l.kind === 'delta' ? 0.75 : 0.7,
-    }));
-
-    // County pages are noindex (templated, mostly 1-3 locations), so they are not listed.
+    // County, city and per-locality sunrise pages are noindex (templated), so they are not listed.
     return [
         ...staticPages,
         ...seoLandingPages,
-        ...cityPages,
         ...speciesPages,
         ...articlePages,
         ...locationIndexPage,
         ...locationPages,
-        ...sunPages,
     ];
 }

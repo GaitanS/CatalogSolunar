@@ -12,6 +12,14 @@ export const metadata: Metadata = {
     },
 };
 
+const CONTACT_EMAIL = 'contact@calendarsolunar.ro';
+
+const CONTACT_TOPICS = [
+    { label: 'Am găsit o eroare', subject: 'Eroare pe calendarsolunar.ro', hint: 'Scrie pagina, localitatea și ziua, ca să o putem verifica.' },
+    { label: 'Întrebare sau sugestie', subject: 'Întrebare despre Calendar Solunar', hint: 'Ce ți-ar fi util în calendar sau ce nu e clar.' },
+    { label: 'Parteneriat', subject: 'Parteneriat Calendar Solunar', hint: 'Magazine de pescuit, bălți și baze pescărești.' },
+];
+
 export default function ContactPage() {
     return (
         <div className="min-h-screen pb-12 pt-4 md:pt-6">
@@ -42,7 +50,7 @@ export default function ContactPage() {
                                         contact@calendarsolunar.ro
                                     </a>
                                     <p className="text-night-400 text-sm mt-1">
-                                        Răspundem în maxim 24 de ore.
+                                        De obicei răspundem în 1–2 zile lucrătoare.
                                     </p>
                                 </div>
                             </div>
@@ -87,70 +95,29 @@ export default function ContactPage() {
                         </div>
                     </div>
 
-                    {/* Contact Form */}
+                    {/* The page had a form with no handler; mail links actually reach us. */}
                     <div className="card-panel p-6 md:p-8">
-                        <h2 className="text-xl font-display font-bold text-white mb-6">Trimite-ne un mesaj</h2>
-                        <form className="space-y-5">
-                            <div>
-                                <label htmlFor="name" className="block text-sm font-medium text-night-300 mb-2">
-                                    Numele tău
-                                </label>
-                                <input
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    className="w-full px-4 py-3 bg-white/[0.05] border border-white/10 rounded-xl text-white placeholder-night-500 focus:outline-none focus:border-moon transition-colors"
-                                    placeholder="Ion Pescaru"
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-night-300 mb-2">
-                                    Email
-                                </label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    className="w-full px-4 py-3 bg-white/[0.05] border border-white/10 rounded-xl text-white placeholder-night-500 focus:outline-none focus:border-moon transition-colors"
-                                    placeholder="ion@email.com"
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="subject" className="block text-sm font-medium text-night-300 mb-2">
-                                    Subiect
-                                </label>
-                                <select
-                                    id="subject"
-                                    name="subject"
-                                    className="w-full px-4 py-3 bg-white/[0.05] border border-white/10 rounded-xl text-white focus:outline-none focus:border-moon transition-colors"
+                        <h2 className="text-xl font-display font-bold text-white mb-2">Scrie-ne un e-mail</h2>
+                        <p className="text-night-300 text-sm mb-6">
+                            Alege subiectul și se deschide aplicația ta de e-mail cu mesajul pregătit.
+                        </p>
+                        <div className="space-y-3">
+                            {CONTACT_TOPICS.map((topic) => (
+                                <a
+                                    key={topic.subject}
+                                    href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(topic.subject)}`}
+                                    className="flex items-center justify-between gap-4 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 hover:bg-white/[0.08] transition-colors"
                                 >
-                                    <option value="general">Întrebare generală</option>
-                                    <option value="bug">Raportare problemă</option>
-                                    <option value="feature">Sugestie funcționalitate</option>
-                                    <option value="partnership">Parteneriat</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label htmlFor="message" className="block text-sm font-medium text-night-300 mb-2">
-                                    Mesaj
-                                </label>
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    rows={5}
-                                    className="w-full px-4 py-3 bg-white/[0.05] border border-white/10 rounded-xl text-white placeholder-night-500 focus:outline-none focus:border-moon transition-colors resize-none"
-                                    placeholder="Scrie mesajul tău aici..."
-                                />
-                            </div>
-                            <button
-                                type="submit"
-                                className="w-full py-3 bg-moon text-night-950 font-bold rounded-xl hover:bg-moon/90 transition-colors"
-                            >
-                                Trimite Mesajul
-                            </button>
-                        </form>
-                        <p className="text-night-500 text-xs text-center mt-4">
-                            Prin trimiterea acestui formular, ești de acord cu <a href="/confidentialitate" className="text-moon hover:underline">Politica de Confidențialitate</a>.
+                                    <span>
+                                        <span className="block font-semibold text-white">{topic.label}</span>
+                                        <span className="block text-night-400 text-sm">{topic.hint}</span>
+                                    </span>
+                                    <span className="text-moon text-sm font-semibold whitespace-nowrap">Scrie →</span>
+                                </a>
+                            ))}
+                        </div>
+                        <p className="text-night-500 text-xs mt-6">
+                            Folosim adresa ta doar ca să-ți răspundem. Detalii în <a href="/confidentialitate" className="text-moon hover:underline">Politica de Confidențialitate</a>.
                         </p>
                     </div>
                 </div>

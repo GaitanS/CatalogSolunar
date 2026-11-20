@@ -63,6 +63,9 @@ export async function generateMetadata({ params }: { params: Promise<{ loc: stri
     const title = `Răsărit și Apus Soare ${place.name} Azi și Mâine, ${today.d} ${cap(month)}`;
     const description = `Azi, ${today.d} ${month}, în ${place.name} soarele răsare la ${formatClock(sun.sunrise)}, apune la ${formatClock(sun.sunset)} și se întunecă la ${formatClock(sun.dusk)}. Mâine răsare la ${formatClock(sunTomorrow.sunrise)}. Ora de aur, tabel pe ${month} și ore de pescuit.`;
     return {
+        // 70 near-identical pages (83% shared text, 9 clicks in 3 months): noindex; the
+        // /rasarit-apus-soare hub stays indexed and links to each one.
+        robots: { index: false, follow: true },
         title: { absolute: title },
         description,
         alternates: { canonical: url },

@@ -131,8 +131,8 @@ export default function CookiesPage() {
                             <h2 className="text-xl font-display font-bold text-white mb-3">Contact</h2>
                             <p>
                                 Pentru întrebări despre cookie-uri, contactați-ne la:{' '}
-                                <a href="mailto:privacy@calendarsolunar.ro" className="text-moon hover:underline">
-                                    privacy@calendarsolunar.ro
+                                <a href="mailto:contact@calendarsolunar.ro" className="text-moon hover:underline">
+                                    contact@calendarsolunar.ro
                                 </a>
                             </p>
                         </section>

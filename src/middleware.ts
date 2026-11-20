@@ -68,6 +68,17 @@ export function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL('/', canonicalOrigin), 301);
     }
 
+    if (pathname === '/solunar' || pathname === '/index') {
+        return NextResponse.redirect(new URL('/', canonicalOrigin), 301);
+    }
+
+    // The site never had 2025 month pages, but old links ask for them; send each
+    // to the same month of 2026 instead of a 404.
+    const month2025 = pathname.match(/^\/(?:blog\/)?solunar-(?:pescuit-)?([a-z]+)-2025(?:-ghid)?$/)?.[1];
+    if (month2025 && MONTH_SLUGS.includes(month2025) && landingExists(`solunar-${month2025}-2026`)) {
+        return NextResponse.redirect(new URL(`/solunar-${month2025}-2026`, canonicalOrigin), 301);
+    }
+
     if (pathname === '/blog/solunar-ianuarie-2026-ghid') {
         return NextResponse.redirect(new URL('/solunar-ianuarie-2026', canonicalOrigin), 301);
     }

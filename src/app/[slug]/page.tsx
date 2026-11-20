@@ -97,6 +97,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         const capitalizedMonth = monthName.charAt(0).toUpperCase() + monthName.slice(1);
 
         return {
+            // Templated (about 215 words, 4 clicks in 3 months): noindex, like the pond pages,
+            // so the site is judged on its month pages and articles. Users still reach them.
+            robots: { index: false, follow: true },
             title: { absolute: `Solunar ${city.name} ${capitalizedMonth} ${year} - Pescuit pe Ore` },
             description: `Calendar solunar ${city.name} ${year}. Perioade majore și minore de activitate a peștilor, faze lunare, vremea și locuri de pescuit în ${city.county}. Actualizat zilnic.`,
             keywords: [

@@ -72,7 +72,7 @@ export default function DesprePage() {
                                 <li>Perioade majore și minore de activitate zilnice</li>
                                 <li>Fazele lunii și procentul de iluminare</li>
                                 <li>Ore de răsărit/apus pentru soare și lună</li>
-                                <li>Prognoză pe 7 zile</li>
+                                <li>Prognoză pe 14 zile</li>
                                 <li>Calcule personalizate pe baza locației tale</li>
                             </ul>
                         </div>
