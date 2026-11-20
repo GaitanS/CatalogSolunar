@@ -13,6 +13,10 @@ export default function SchemaMarkup() {
             "name": "Romania"
         },
         "knowsLanguage": "ro",
+        "founder": {
+            "@type": "Person",
+            "name": "Gaitan Silviu"
+        },
         // An online-only project: no office address or phone line to list.
         "email": "contact@calendarsolunar.ro",
         "contactPoint": {

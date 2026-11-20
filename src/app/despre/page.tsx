@@ -141,6 +141,20 @@ export default function DesprePage() {
                     </div>
                 </div>
 
+                {/* Who runs the site: a named person, not just "noi". */}
+                <div className="card-panel p-6 md:p-8 mb-16">
+                    <h2 className="text-xl font-display font-bold text-white mb-4">Cine face Calendar Solunar</h2>
+                    <div className="space-y-4 text-night-300 leading-relaxed">
+                        <p>
+                            Calendar Solunar este un proiect independent, făcut și întreținut de <strong className="text-white">Gaitan Silviu</strong>. El se ocupă de calcule, de textele de pe site și de corecturi.
+                        </p>
+                        <p>
+                            Pentru întrebări, erori sau colaborări îi poți scrie direct la{' '}
+                            <a href="mailto:contact@calendarsolunar.ro" className="text-moon hover:underline">contact@calendarsolunar.ro</a>.
+                        </p>
+                    </div>
+                </div>
+
                 {/* CTA */}
                 <div className="text-center">
                     <a

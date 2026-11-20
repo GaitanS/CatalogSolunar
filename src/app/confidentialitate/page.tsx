@@ -19,13 +19,16 @@ export default function ConfidentialitatePage() {
                         <div className="card-panel p-6 md:p-8 space-y-6 text-night-300 leading-relaxed">
 
                             <p className="text-night-400 text-sm">
-                                Ultima actualizare: 7 ianuarie 2026
+                                Ultima actualizare: 20 noiembrie 2026
                             </p>
 
                             <section>
                                 <h2 className="text-xl font-display font-bold text-white mb-3">1. Introducere</h2>
                                 <p>
                                     Calendar Solunar ("noi", "site-ul") respectă confidențialitatea vizitatorilor săi. Această politică explică modul în care colectăm, utilizăm și protejăm informațiile dumneavoastră.
+                                </p>
+                                <p className="mt-3">
+                                    Site-ul calendarsolunar.ro este administrat de <strong className="text-white">Gaitan Silviu</strong>, persoană fizică, care este operatorul datelor descrise în această politică.
                                 </p>
                             </section>
 
@@ -35,7 +38,7 @@ export default function ConfidentialitatePage() {
                                 <ul className="list-disc list-inside space-y-2 mt-3 ml-2">
                                     <li><strong className="text-white">Date de localizare:</strong> Doar cu acordul dumneavoastră explicit, pentru a oferi calcule solunar personalizate.</li>
                                     <li><strong className="text-white">Date de utilizare:</strong> Pagini vizitate, timp petrecut pe site, dispozitiv utilizat (prin Google Analytics).</li>
-                                    <li><strong className="text-white">Date de contact:</strong> Nume și email, doar dacă ne contactați prin formularul de contact.</li>
+                                    <li><strong className="text-white">Date de contact:</strong> Nume și email, doar dacă ne scrieți pe e-mail.</li>
                                 </ul>
                             </section>
 
@@ -105,6 +108,9 @@ export default function ConfidentialitatePage() {
                                 <h2 className="text-xl font-display font-bold text-white mb-3">9. Contact</h2>
                                 <p>
                                     Pentru întrebări sau solicitări referitoare la această politică, ne puteți contacta la:
+                                </p>
+                                <p className="mt-2">
+                                    <strong className="text-white">Operator:</strong> Gaitan Silviu
                                 </p>
                                 <p className="mt-2">
                                     <strong className="text-white">Email:</strong>{' '}

@@ -128,9 +128,12 @@ export default function TermeniPage() {
                                 Pentru întrebări referitoare la acești termeni:
                             </p>
                             <p className="mt-2">
+                                <strong className="text-white">Administrator site:</strong> Gaitan Silviu
+                            </p>
+                            <p className="mt-2">
                                 <strong className="text-white">Email:</strong>{' '}
-                                <a href="mailto:legal@calendarsolunar.ro" className="text-moon hover:underline">
-                                    legal@calendarsolunar.ro
+                                <a href="mailto:contact@calendarsolunar.ro" className="text-moon hover:underline">
+                                    contact@calendarsolunar.ro
                                 </a>
                             </p>
                         </section>
