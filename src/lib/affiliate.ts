@@ -14,10 +14,10 @@ interface Merchant {
 }
 
 export const MERCHANTS: Record<MerchantId, Merchant> = {
-    // Applied 2026-10-28, waiting for approval.
-    pescarExpert: { name: 'Pescar Expert', origin: 'https://www.pescar-expert.ro', unique: null },
-    // Applied 2026-10-28, waiting for approval.
-    sportDepot: { name: 'SportDepot', origin: 'https://www.sportdepot.ro', unique: null },
+    // Approved by 2026-11-21.
+    pescarExpert: { name: 'Pescar Expert', origin: 'https://www.pescar-expert.ro', unique: '18ce948e3' },
+    // Approved by 2026-11-21.
+    sportDepot: { name: 'SportDepot', origin: 'https://www.sportdepot.ro', unique: 'd131c7dfb' },
     // Approved 2026-10-28.
     wargear: { name: 'WarGear', origin: 'https://wargear.ro', unique: '49271796e' },
 };
