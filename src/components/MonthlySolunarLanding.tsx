@@ -4,6 +4,8 @@ import { formatDayList, formatPhaseMoment, getMonthHighlights, monthBestDaysAnsw
 import { middayOf } from '@/lib/sunTimes';
 import { getAllCities } from '@/data/cities';
 import { monthlySeoLandingPages, getAnnualLandingSlug, type MonthlySeoLandingPage } from '@/data/seoLandingPages';
+import { getMonthGuide, MONTH_GUIDE_NOTE_LABEL, type MonthGuide } from '@/data/monthGuides';
+import { guideDaysSentence } from '@/lib/monthGuideDays';
 import AdUnit from '@/components/AdUnit';
 import LazyAdUnit from '@/components/LazyAdUnit';
 
@@ -64,7 +66,39 @@ function getDaysInMonth(page: MonthlySeoLandingPage) {
     });
 }
 
+function MonthGuideSection({ guide, monthName, daysSentence }: { guide: MonthGuide; monthName: string; daysSentence: string }) {
+    return (
+        <section className="card-panel taste-surface mb-6 p-5 md:p-6">
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-amber-200/80">Ghidul lunii {monthName.toLowerCase()}</p>
+            <h2 className="mt-2 font-display text-2xl font-bold text-white">{guide.heading}</h2>
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">{guide.intro}</p>
+
+            <h3 className="mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">Ce prinzi</h3>
+            <ul className="mt-2 grid grid-cols-1 gap-3 md:grid-cols-2">
+                {guide.species.map((species) => (
+                    <li key={species.name} className="rounded-2xl border border-white/10 bg-white/[0.045] p-4 text-sm leading-relaxed text-slate-300">
+                        <span className="font-bold text-amber-100">{species.name}</span>: {species.text}
+                    </li>
+                ))}
+            </ul>
+
+            <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">
+                <div className="rounded-2xl border border-amber-200/15 bg-amber-200/[0.07] p-4">
+                    <h3 className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">Când ieși la apă</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-200">{guide.timing}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-amber-100">{daysSentence}</p>
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-4">
+                    <h3 className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">{MONTH_GUIDE_NOTE_LABEL[guide.note.kind]}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-200">{guide.note.text}</p>
+                </div>
+            </div>
+        </section>
+    );
+}
+
 function MonthJsonLd({ page, topDays, highlights }: { page: MonthlySeoLandingPage; topDays: ReturnType<typeof getDaysInMonth>; highlights: MonthHighlights }) {
+    const guide = getMonthGuide(page.monthIndex);
     const howToSteps = [
         {
             name: 'Alege zilele cu rating mare',
@@ -83,6 +117,10 @@ function MonthJsonLd({ page, topDays, highlights }: { page: MonthlySeoLandingPag
         {
             question: `Care sunt cele mai bune zile de pescuit în ${page.monthName} ${page.year}?`,
             answer: monthBestDaysAnswer(page.monthName, page.year, highlights),
+        },
+        {
+            question: `Ce pești se prind în ${page.monthName.toLowerCase()}?`,
+            answer: guide.species.map((species) => `${species.name}: ${species.text}`).join(' '),
         },
         {
             question: `Cum folosesc solunarul pentru ${page.monthName} ${page.year}?`,
@@ -324,6 +362,12 @@ export default function MonthlySolunarLanding({ page }: { page: MonthlySeoLandin
                         ))}
                     </div>
                 </section>
+
+                <MonthGuideSection
+                    guide={getMonthGuide(page.monthIndex)}
+                    monthName={page.monthName}
+                    daysSentence={guideDaysSentence(page.year, page.monthIndex)}
+                />
 
                 <section className="card-panel taste-surface mb-6 overflow-hidden p-0">
                     <div className="border-b border-white/10 p-5 md:p-6">

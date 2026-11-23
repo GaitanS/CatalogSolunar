@@ -12,6 +12,8 @@ import {
     type AnnualSeoLandingPage,
     type MonthlySeoLandingPage,
 } from '@/data/seoLandingPages';
+import { getMonthGuide, MONTH_GUIDE_NOTE_LABEL, type MonthGuide } from '@/data/monthGuides';
+import { guideDaysSentence } from './monthGuideDays';
 import { SITE_URL, getDayReport, formatPeriods, monthPageUrl, type DayReport } from './agentApi';
 import { formatDayList, formatPhaseMoment, getMonthHighlights } from './monthHighlights';
 import { getMoonPhaseName, getSolunarData } from './solunar';
@@ -101,6 +103,23 @@ function todayMarkdown(): string {
     ].join('\n');
 }
 
+function guideLines(guide: MonthGuide, daysSentence: string): string[] {
+    return [
+        `## ${guide.heading}`,
+        '',
+        guide.intro,
+        '',
+        ...guide.species.map((species) => `- **${species.name}**: ${species.text}`),
+        '',
+        `Când ieși la apă: ${guide.timing}`,
+        '',
+        daysSentence,
+        '',
+        `${MONTH_GUIDE_NOTE_LABEL[guide.note.kind]}: ${guide.note.text}`,
+        '',
+    ];
+}
+
 function monthMarkdown(page: MonthlySeoLandingPage): string {
     const m = page.monthIndex + 1;
     const rows = Array.from({ length: daysInMonth(page.year, m) }, (_, index) => {
@@ -135,6 +154,7 @@ function monthMarkdown(page: MonthlySeoLandingPage): string {
         '',
         `Strategie: ${page.strategy}`,
         '',
+        ...guideLines(getMonthGuide(page.monthIndex), guideDaysSentence(page.year, page.monthIndex)),
         `Pagina: ${SITE_URL}/${page.slug}`,
         '',
     ].join('\n');
