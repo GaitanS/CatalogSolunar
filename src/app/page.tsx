@@ -598,9 +598,10 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                         <h2 className="mt-2 mb-4 font-editorial text-2xl text-white">Sezon Pescuit {today.getFullYear()} — Când se Deschide?</h2>
                         <div className="space-y-3 text-sm leading-relaxed text-slate-300">
                             <p>
-                                <strong className="text-white">Sezonul de pescuit {today.getFullYear()}</strong> este deschis tot anul pentru speciile comune (crap, caras, plătică, babușcă).
-                                Prohibiția generală pentru răpitori (șalău, știucă, somn) se aplică de obicei între 15 aprilie - 15 iunie,
-                                iar pentru păstrăv între 1 octombrie - 30 aprilie. Vezi calendarul complet în <Link href="/blog/prohibitie-pescuit-2026" className="text-amber-200 hover:underline">ghidul prohibiției la pescuit {today.getFullYear()}</Link>.
+                                Pe <strong className="text-white">apele naturale</strong> (râuri, lacuri naturale, Dunăre, Deltă), prohibiția generală de primăvară
+                                interzice pescuitul tuturor speciilor, inclusiv crapul și carasul, timp de 60 de zile: în 2026, între 9 aprilie și 7 iunie.
+                                Pe bălțile private se aplică regulamentul bălții, iar păstrăvul are un calendar separat (în ordinul pentru 2025, 1 octombrie - 31 martie).
+                                Vezi perioadele și excepțiile în <Link href="/blog/prohibitie-pescuit-2026" className="text-amber-200 hover:underline">ghidul prohibiției la pescuit</Link>.
                             </p>
                             <p>
                                 Pentru cele mai bune rezultate, combină informațiile despre <strong className="text-white">sezonul de pescuit</strong> cu

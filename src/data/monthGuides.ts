@@ -3,12 +3,14 @@
  * (/solunar-<luna>-<an>) si in versiunea lor Markdown. Textul e scris pentru
  * luna, nu pentru an, asa ca decembrie 2026 si decembrie 2027 il impart.
  *
- * Reguli verificate pe 2026-11-23 (presa, nu ordinul publicat):
+ * Reguli verificate pe 2026-11-23 (Capital 4 si 9 aprilie 2026, TVR 8 iunie 2026,
+ * despre Ordinul 23/297/2025 cu modificarile ulterioare; nu textul ordinului):
  * - prohibitia generala 2026: 9 aprilie - 7 iunie, 60 de zile, toate habitatele
- *   piscicole naturale; pe apele de granita a inceput pe 24 aprilie;
- * - stiuca a avut o prohibitie separata 1 februarie - 20 martie in 2024,
- *   neconfirmata pentru 2026;
+ *   piscicole naturale; pe apele de granita 24 aprilie - 7 iunie;
+ * - in Delta Dunarii: stiuca 1 februarie - 20 martie, salau si biban
+ *   20 martie - 7 iunie (presa le da doar pentru Delta);
  * - pastravul: 1 octombrie - 31 martie in ordinul pentru 2025.
+ * Articolul /blog/prohibitie-pescuit-2026 foloseste aceleasi date.
  * Cand apare ordinul pentru 2027, actualizeaza aprilie, iunie si martie.
  */
 
@@ -60,7 +62,7 @@ export const MONTH_GUIDES: MonthGuide[] = [
             'Ca în ianuarie, caută perioadele majore din mijlocul zilei. Prima zi însorită după un val de frig e de multe ori mai bună decât arată ratingul ei, mai ales pe apele mici și puțin adânci.',
         note: {
             kind: 'caution',
-            text: 'Știuca intră în reproducere la sfârșitul iernii. În unii ani, ordinul de prohibiție i-a interzis separat pescuitul (de exemplu, între 1 februarie și 20 martie în 2024), așa că verifică ordinul în vigoare înainte să pleci după știucă. La copcă, ai grijă la gheața care se topește: ce te-a ținut în ianuarie poate ceda acum.',
+            text: 'Știuca intră în reproducere la sfârșitul iernii. În Delta Dunării, pescuitul ei a fost interzis separat între 1 februarie și 20 martie în 2026; pe alte ape, verifică ordinul în vigoare înainte să pleci după știucă. La copcă, ai grijă la gheața care se topește: ce te-a ținut în ianuarie poate ceda acum.',
         },
     },
     {
@@ -77,7 +79,7 @@ export const MONTH_GUIDES: MonthGuide[] = [
             'Cele mai bune ferestre sunt perioadele majore de la prânz și din după-amiază, când apa mică s-a încălzit. Câteva zile calde și stabile fac mai mult decât o singură zi de 5/5 venită imediat după un front rece.',
         note: {
             kind: 'caution',
-            text: 'Pe apele naturale, prohibiția generală de primăvară începe de obicei în aprilie (în 2026: 9 aprilie – 7 iunie), iar știuca poate fi protejată separat până spre sfârșitul lui martie. Păstrăvul din apele de munte e protejat din toamnă până în primăvară: în ordinul pentru 2025, între 1 octombrie și 31 martie.',
+            text: 'Pe apele naturale, prohibiția generală de primăvară începe de obicei în aprilie (în 2026: 9 aprilie – 7 iunie). În Delta Dunării, în 2026 știuca a fost protejată până pe 20 martie, iar șalăul și bibanul de la 20 martie. Păstrăvul din apele de munte e protejat din toamnă până în primăvară: în ordinul pentru 2025, între 1 octombrie și 31 martie.',
         },
     },
     {
@@ -94,7 +96,7 @@ export const MONTH_GUIDES: MonthGuide[] = [
             'Folosește ratingul ca să alegi ziua de baltă și perioada majoră pentru ora de vârf. Ferestrele dinaintea unei schimbări de vreme sunt de multe ori foarte bune; după un front rece, peștii au nevoie de o zi sau două ca să-și revină.',
         note: {
             kind: 'caution',
-            text: 'Pe bălțile private (amenajări piscicole) prohibiția nu se aplică; acolo contează regulamentul bălții. Pentru 2027, verifică datele în noul ordin de prohibiție, care apare de obicei în primăvară, înainte de începerea perioadei.',
+            text: 'Prohibiția acoperă habitatele piscicole naturale; bălțile private (amenajări piscicole) nu intră aici, așa că acolo contează regulamentul bălții. Pentru 2027, verifică datele în ordinul de prohibiție în vigoare înainte de primele ieșiri din aprilie.',
         },
     },
     {

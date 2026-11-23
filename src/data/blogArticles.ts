@@ -86,7 +86,7 @@ Dar pe un lac decent, în condiții normale? Diferență clară.
         title: 'Cele Mai Bune Ore de Pescuit 2026 - Calendar Solunar',
         excerpt: 'Cele mai bune ore de pescuit 2026: dimineața, seara, perioade majore solunar, zile bune pe luni și linkuri către solunar mai/iunie 2026.',
         date: '2026-01-07',
-        updated: '2026-10-29',
+        updated: '2026-11-23',
         author: 'Echipa Calendar Solunar',
         category: 'Calendar',
         readTime: 5,
@@ -109,7 +109,7 @@ Pentru planificare rapidă, verifică [calendarul solunar pescuit 2026](/solunar
 
 ## Cele 3 Luni de Top în 2026
 
-**[Mai](/solunar-mai-2026)** - Peștii au ieșit din prohibiție, sunt flămânzi, apa s-a încălzit. Este luna cu cele mai multe căutări pentru solunar pescuit mai 2026 și merită planificată din timp.
+**[Mai](/solunar-mai-2026)** - Apa s-a încălzit și peștii sunt flămânzi. Pe apele naturale e încă prohibiție (în 2026, până pe 7 iunie), așa că mai e luna bălților private. Este luna cu cele mai multe căutări pentru solunar pescuit mai 2026 și merită planificată din timp.
 
 **Septembrie** - Crapii se îngrașă înainte de iarnă. Mușcă tot ce-arunci. Plus vremea e încă bună, dar lacurile nu mai sunt pline de turiști.
 
@@ -122,7 +122,7 @@ Marchează-ți astea în calendarul de la muncă:
 - 3 ianuarie (sâmbătă, chiar după sărbători)
 - 2 februarie (în noaptea de duminică spre luni)
 - 3 martie
-- 2 aprilie (atenție la perioada de prohibiție)
+- 2 aprilie (prohibiția generală a început pe 9 aprilie)
 - **1 mai** (vineri, zi liberă: weekend prelungit, zi de top)
 - 31 mai (duminică, a doua lună plină din mai)
 - 30 iunie
@@ -258,6 +258,7 @@ Dacă ziua are 4-5 stele? Du-te. Punct.
         title: '10 Lacuri unde Chiar Prinzi Pești în România',
         excerpt: 'Nu-s "cele mai frumoase". Sunt lacurile unde am prins efectiv, eu și prietenii mei pescari.',
         date: '2026-01-05',
+        updated: '2026-11-23',
         author: 'Echipa Calendar Solunar',
         category: 'Destinații',
         readTime: 8,
@@ -287,7 +288,7 @@ Nu merge să o faci singur prima dată. Angajează un local, merită fiecare leu
 **Acces:** 1 oră din București  
 **Cost permit:** 40-60 lei/zi
 
-Zonă protejată, deci peștii sunt sănătoși și mari. Stufărișul de vest pentru crap, zona adâncă centrală pentru știucă. Funcționează tot anul.
+Zonă protejată, deci peștii sunt sănătoși și mari. Stufărișul de vest pentru crap, zona adâncă centrală pentru știucă. Se pescuiește în afara prohibiției generale de primăvară.
 
 ## 4. Lacul Surduc (Timiș)
 
@@ -599,6 +600,7 @@ Stai acasă, pregătește echipamentul, și du-te mâine. Merită mai mult.
         title: 'Pescuit la Știucă - Ghid Practic',
         excerpt: 'Știuca e primul pește "serios" pe care l-am prins. Iată ce știu după 10 ani de prădător.',
         date: '2026-01-01',
+        updated: '2026-11-23',
         author: 'Echipa Calendar Solunar',
         category: 'Tehnici',
         readTime: 8,
@@ -654,7 +656,7 @@ Stai acasă, pregătește echipamentul, și du-te mâine. Merită mai mult.
 
 ## Când Să Pescuiești
 
-**Primăvara (post-prohibiție):** Excelent. Știuca flămândă după reproducere.
+**Primăvara:** Știuca e flămândă după reproducere (februarie-martie). Pe apele naturale, prohibiția generală a ținut în 2026 între 9 aprilie și 7 iunie, iar în Delta Dunării știuca a fost protejată și între 1 februarie și 20 martie.
 
 **Vara:** Dimineața devreme și seara. Evită căldura.
 
@@ -1251,7 +1253,7 @@ Aceleași principii se aplică pentru crap, dar la scară mai mare.
         title: 'Pescuit Primăvara - Ghid Pe Luni (Martie-Mai)',
         excerpt: 'Primăvara e renașterea pescuitului. Luna cu lună, ce specii, ce momeli, ce ore - totul aici.',
         date: '2026-01-12',
-        updated: '2026-10-29',
+        updated: '2026-11-23',
         author: 'Echipa Calendar Solunar',
         category: 'Sezon',
         readTime: 8,
@@ -1284,23 +1286,21 @@ Perioadele majore contează mai mult ca oricând. Peștii sunt selectivi - trebu
 
 **Temperatura apei:** 10-16°C. Zona magică.
 
-**Ce se întâmplă:** Majoritatea speciilor devin active. DAR: începe prohibiția pentru multe specii!
+**Ce se întâmplă:** Majoritatea speciilor devin active. DAR: pe apele naturale începe prohibiția generală, pentru toate speciile!
 
 **Prohibiția 2026 în România:**
-- **Crap:** 15 aprilie - 15 iunie (verifică local - poate varia)
-- **Știucă, șalău:** Deja în prohibiție din martie
-- **Somn:** Variabil
+- **Pe apele naturale** (râuri, lacuri naturale, Dunăre, Deltă), prohibiția generală a ținut între 9 aprilie și 7 iunie și a interzis pescuitul tuturor speciilor, inclusiv crapul, carasul și plătica.
+- **În Delta Dunării**, știuca a fost protejată și între 1 februarie și 20 martie, iar șalăul și bibanul de la 20 martie.
+- Detalii și excepții în [ghidul prohibiției la pescuit](/blog/prohibitie-pescuit-2026).
 
 **Ce POȚI pescui în aprilie:**
-- Caras (tot anul)
-- Clean
-- Babuș, obleț
-- Plătică (în unele zone)
+- Pe apele naturale, doar până la începutul prohibiției (în 2026, până pe 8 aprilie inclusiv).
+- Pe bălțile private, speciile permise de regulamentul bălții: caras, crap, plătică, lin.
 
 **Sfaturi pentru aprilie:**
-- Verifică reglementările locale înainte de ieșire!
-- Concentrează-te pe specii permise
-- E momentul perfect pentru pescuit la caras
+- Verifică ordinul de prohibiție al anului înainte de ieșire!
+- Mută-te pe bălțile private cât durează prohibiția
+- E momentul perfect pentru pescuit la caras pe bălți
 
 **Luna plină aprilie 2026:** 2 aprilie - zi excelentă pentru caras nocturn.
 
@@ -1308,10 +1308,10 @@ Perioadele majore contează mai mult ca oricând. Peștii sunt selectivi - trebu
 
 **Temperatura apei:** 16-22°C. Perfect pentru aproape orice.
 
-**Ce se întâmplă:** Post-prohibiție (pentru unele specii), peștii sunt flămânzi, condițiile sunt ideale.
+**Ce se întâmplă:** Pe apele naturale e încă prohibiție (în 2026, până pe 7 iunie). Pe bălțile private, peștii sunt flămânzi și condițiile sunt ideale.
 
 **Specii active:**
-- **Crap** - După 15 mai (sau după ridicarea prohibiției locale), mușcă tot
+- **Crap** - Pe bălțile private mușcă tot; pe apele naturale, abia după prohibiție (în 2026, din 8 iunie)
 - **Caras** - Vârf de sezon
 - **Lin** - Activ în bălți
 - **Clean, plătică** - Excelent
@@ -1779,6 +1779,7 @@ Verifică [calendarul](/) înainte de fiecare ieșire. E gratuit, durează 30 de
         title: 'Pescuit în Delta Dunării - Ghid Complet 2026',
         excerpt: 'Delta Dunării e paradisul pescarului român. Iată tot ce trebuie să știi înainte să mergi.',
         date: '2026-01-08',
+        updated: '2026-11-23',
         author: 'Echipa Calendar Solunar',
         category: 'Destinații',
         readTime: 10,
@@ -1798,17 +1799,17 @@ Dacă nu ai fost, nu ai pescuit cu adevărat în România.
 
 ## Când Să Mergi
 
-**Lunile ideale:** Mai - Octombrie
+**Lunile ideale:** Iunie - Octombrie
 
 | Lună | Rating | Note |
 |------|--------|------|
-| Mai | 5/5 | Post-prohibiție, pești flămânzi |
-| Iunie | 5/5 | Condiții perfecte, știucă excelentă |
+| Mai | - | Prohibiție generală (în 2026, până pe 7 iunie) |
+| Iunie | 5/5 | Se redeschide pescuitul (în 2026, din 8 iunie), pești flămânzi |
 | Iulie-August | 3/5 | Căldură, țânțari, dar somn nocturn |
 | Septembrie | 5/5 | Cel mai bun pentru crap și somn |
 | Octombrie | 4/5 | Ultimele zile bune |
 
-**De evitat:** Aprilie (prohibiție), Noiembrie-Martie (frig, acces dificil), Iulie-August la prânz (țânțari, căldură)
+**De evitat:** Aprilie - începutul lui iunie (prohibiție), Noiembrie-Martie (frig, acces dificil), Iulie-August la prânz (țânțari, căldură)
 
 **Calendarul solunar în Delta:**
 Efectul e amplificat în Delta. Apele sunt conectate cu marea, simt mareele. Perioadele majore sunt vizibil mai productive.
@@ -1854,7 +1855,7 @@ Pensiunile bune oferă:
 **Somn (Silurus glanis)**
 - Gigantul Deltei. 50+ kg posibil.
 - Canale adânci, noapte, pește viu sau mort
-- Perioadă: Mai-Septembrie
+- Perioadă: Iunie-Septembrie
 
 **Știucă (Esox lucius)**
 - Abundentă și agresivă
@@ -1864,16 +1865,16 @@ Pensiunile bune oferă:
 **Șalău (Sander lucioperca)**
 - Bancuri mari în canale
 - Jigging, twistere, răsărit/apus
-- Perioadă: Mai-Octombrie
+- Perioadă: Iunie-Octombrie
 
 **Crap sălbatic**
 - Crap "deltaic" - mai lung, mai puternic
 - Fund, porumb, boilies
-- Perioadă: Mai-Octombrie
+- Perioadă: Iunie-Octombrie
 
 **Biban (Perca fluviatilis)**
 - Perfect pentru spinning ușor
-- Tot anul
+- În afara prohibiției (în Deltă, în 2026: protejat între 20 martie și 7 iunie)
 
 **Lin, caras, plătică**
 - Abundenți, ușor de prins
@@ -1910,10 +1911,15 @@ Pensiunile bune oferă:
 2. Autorizație Delta (de la ARBDD)
 3. Respectarea zonelor interzise
 
-**Prohibiții 2026 (verifică oficial):**
-- Știucă, șalău: Martie-Aprilie
-- Crap: 15 Aprilie - 15 Iunie
+**Prohibiții 2026 în Deltă:**
+- Toate speciile: 9 aprilie - 7 iunie (prohibiția generală)
+- Știucă: și între 1 februarie și 20 martie
+- Șalău și biban: 20 martie - 7 iunie
+- Lin: până pe 6 iulie
+- După prohibiție, știuca, șalăul, somnul și crapul s-au pescuit doar „prinde și eliberează”; maximum 10 kg de pește de pescar
 - Zone strict protejate: INTERZIS total
+
+Detalii în [ghidul prohibiției la pescuit](/blog/prohibitie-pescuit-2026).
 
 **Sancțiuni:** Amenzi de mii de lei + confiscarea echipamentului.
 
@@ -2937,6 +2943,7 @@ Unii dintre cei mai frumoși crapi i-am prins la 20 km de București, nu în Del
         title: 'De Ce Nu Mușcă Peștii? 12 Cauze și Soluții',
         excerpt: 'Zile cu zero? Le avem toți. Iată cele mai comune cauze și cum le rezolvi.',
         date: '2026-01-01',
+        updated: '2026-11-23',
         author: 'Echipa Calendar Solunar',
         category: 'Ghiduri',
         readTime: 7,
@@ -3053,9 +3060,9 @@ De atunci am învățat să analizez DE CE nu mușcă, nu doar să mă plâng c�
 
 **Problema:** Peștii nu se hrănesc în perioada de reproducere.
 
-**Când:** Primăvara, date diferite pentru fiecare specie.
+**Când:** Primăvara. Pe apele naturale, prohibiția generală (în 2026, 9 aprilie - 7 iunie) interzice pescuitul tuturor speciilor.
 
-**Soluția:** Respectă prohibiția (e și lege). Pescuiește alte specii permise.
+**Soluția:** Respectă prohibiția (e și lege). Cât durează, mergi pe bălți private.
 
 ## Cauza 12: Pur și Simplu, Ghinion
 
@@ -4559,6 +4566,7 @@ Calitatea contează. Nada rânced alungă crapul.
         title: 'Pescuit pe Dunăre - Ghid Complet pe Zone',
         excerpt: 'Dunărea e coloana vertebrală a pescuitului în România. Iată cum să o abordezi.',
         date: '2026-01-25',
+        updated: '2026-11-23',
         author: 'Echipa Calendar Solunar',
         category: 'Destinații',
         readTime: 9,
@@ -4687,12 +4695,12 @@ Merită articol separat - vezi [ghidul pentru Delta Dunării](/blog/pescuit-delt
 
 ## Când Să Pescuiești pe Dunăre
 
-**Sezonul optim:** Mai - Octombrie
+**Sezonul optim:** Iunie - Octombrie
 
 | Lună | Ce merge | Rating |
 |------|----------|--------|
-| Mai | Crap post-prohibiție, șalău | 5/5 |
-| Iunie | Tot | 5/5 |
+| Mai | Prohibiție pe cea mai mare parte a Dunării (în 2026, până pe 7 iunie) | - |
+| Iunie | Tot, după prohibiție | 5/5 |
 | Iulie-August | Somn (noapte!), șalău | 4/5 |
 | Septembrie | Crap, somn | 5/5 |
 | Octombrie | Ultimele zile bune | 4/5 |
@@ -5953,17 +5961,16 @@ Unele filiale oferă plata online, dar carnetul se ridică fizic. Verifică site
 
 ### Prohibiție 2026 (Perioade de Reproducere)
 
-| Specie | Perioadă interzisă |
+| Ce și unde | Perioadă interzisă |
 |--------|-------------------|
-| Crap | 15 Aprilie - 15 Iunie |
-| Știucă | 1 Februarie - 31 Martie |
-| Șalău | 1 Aprilie - 31 Mai |
-| Somn | 1 Mai - 15 Iunie |
-| Păstrăv | 1 Octombrie - 30 Aprilie |
-| Clean | 1 Aprilie - 31 Mai |
-| Avat | Tot anul (specie protejată) |
+| Toate speciile, ape naturale | 9 aprilie - 7 iunie |
+| Toate speciile, ape de graniță | 24 aprilie - 7 iunie (unele sectoare: 16 aprilie - 30 mai) |
+| Știucă, Delta Dunării | 1 februarie - 20 martie |
+| Șalău și biban, Delta Dunării | 20 martie - 7 iunie |
+| Păstrăv, ape de munte | 1 octombrie - 31 martie (ordinul pentru 2025) |
+| Sturioni, lostriță, coregon | Interzis permanent |
 
-**Atenție**: Datele pot varia pe județ. Verifică regulamentul local!
+**Atenție**: Datele se schimbă în fiecare an prin ordin de prohibiție. Bălțile private au regulamentul lor. Detalii în [ghidul prohibiției la pescuit](/blog/prohibitie-pescuit-2026).
 
 ## Amenzi și Sancțiuni
 
@@ -6025,6 +6032,7 @@ Te protejează legal, contribuie la popularea apelor, și îți dă acces la cel
 Obține-ți permisul, verifică [calendarul solunar](/) pentru zilele optime, și pescuiește legal și responsabil.
         `,
         date: '2026-01-19',
+        updated: '2026-11-23',
         author: 'Echipa CalendarSolunar.ro',
         category: 'Ghiduri',
         readTime: 8,
@@ -6868,7 +6876,7 @@ Iunie este luna de aur a pescuitului. Zilele sunt lungi, apa e caldă, peștii s
 ## Specii Active în Iunie
 
 ### Crap ★★★★★
-- **Status**: Sezon de vârf! Post-prohibiție (15 iunie)
+- **Status**: Sezon de vârf! Pe apele naturale, pescuitul s-a redeschis pe 8 iunie
 - **Ore optime**: 05:00-09:00 și 19:00-23:00
 - **Momeală**: Boilies, porumb, pelete
 - **Sfat**: Prima săptămână după prohibiție = crapul e flămând
@@ -6939,10 +6947,10 @@ Cea mai lungă zi din an:
 - Tranziție spre lună nouă
 - Pescuit de zi devine mai productiv
 - Dimineți devreme pentru crap și caras
-- Ultimele zile înainte de 15 iunie — pregătire post-prohibiție crap
+- 8 iunie: se redeschide pescuitul pe apele naturale, crapul e flămând
 
 ### Săptămâna 3 (15-21 Iunie)
-- **15 Iunie**: Se deschide sezonul de crap!
+- **15 Iunie**: Lună nouă, zi de top pentru crap
 - Lună nouă pe 15 → pescuit de zi excelent
 - Solstițiu pe 21 → ziua cea mai lungă
 - Cea mai productivă săptămână din iunie
@@ -6962,7 +6970,7 @@ Nu rata momentele cheie — verifică [calendarul solunar](/) zilnic și planifi
 Este luna în care se fac capturile anului.
         `,
         date: '2026-01-13',
-        updated: '2026-10-29',
+        updated: '2026-11-23',
         author: 'Echipa CalendarSolunar.ro',
         category: 'Calendar',
         readTime: 8,
@@ -7770,7 +7778,7 @@ Pregătește echipamentul acum și verifică [calendarul solunar](/) pentru orel
         title: 'Solunar Martie 2026 - Când Trage Peștele în Martie',
         excerpt: 'Martie 2026: trezirea apelor. Temperatura crește, peștii se activează, iar oportunitățile explodează.',
         date: '2026-02-01',
-        updated: '2026-10-29',
+        updated: '2026-11-23',
         author: 'Echipa Calendar Solunar',
         category: 'Calendar',
         readTime: 6,
@@ -7852,7 +7860,7 @@ Martie e luna tranziției. Iarna se retrage, apele se încălzesc, iar peștii s
 ## Specii de Vizat în Martie
 
 **Știucă** 5/5
-- Ultimele săptămâni înainte de prohibiție
+- Ultimele săptămâni înainte de prohibiția generală din aprilie (în Delta Dunării, protejată până pe 20 martie în 2026)
 - Agresivă, se hrănește intens
 - Spinning clasic, momeli medii
 
@@ -7879,9 +7887,9 @@ Martie e luna tranziției. Iarna se retrage, apele se încălzesc, iar peștii s
 
 **Verifică prohibiția locală!**
 
-- Știuca intră în prohibiție de obicei de la 15 martie
-- Crapul — verifică regulamentul zonei
-- Unele lacuri au reguli proprii
+- În Delta Dunării, în 2026, știuca a fost protejată între 1 februarie și 20 martie, iar șalăul și bibanul de la 20 martie
+- Pe toate apele naturale, prohibiția generală a început pe 9 aprilie
+- Bălțile private au reguli proprii
 
 Nu risca amendă. Pescuiește responsabil și verifică regulamentele ANPA pentru zona ta.
 
@@ -7911,7 +7919,7 @@ După 15 martie, concentrează-te pe crap și caras — ei iau locul prădători
         title: 'Solunar Aprilie 2026 - Cele Mai Bune Zile de Pescuit în Aprilie',
         excerpt: 'Solunar aprilie 2026: vezi zilele cu activitate maximă, fazele lunii, perioade majore și minore. Calendar solunar pescuit aprilie 2026 actualizat.',
         date: '2026-02-01',
-        updated: '2026-10-29',
+        updated: '2026-11-23',
         author: 'Echipa Calendar Solunar',
         category: 'Calendar',
         readTime: 6,
@@ -8028,9 +8036,9 @@ Solunar aprilie 2026 complet: calendarul pescarului pentru aprilie cu toate peri
 
 **Verifică înainte să pleci:**
 
-- Știuca rămâne în prohibiție (de obicei până în mai)
-- Crapul poate fi în prohibiție parțială pe unele ape
-- Verifică regulamentele ANPA și ale administratorului lacului
+- Din 9 aprilie, pe apele naturale e prohibiție generală pentru toate speciile, inclusiv crapul (până pe 7 iunie)
+- Până pe 8 aprilie inclusiv se poate pescui și pe apele naturale
+- Pe bălțile private se aplică regulamentul administratorului
 
 Pescuiește responsabil. Sezonul e lung, nu risca pentru o sesiune.
 
@@ -8339,7 +8347,7 @@ Planifică o sesiune de 48h și pregătește echipament pentru crap + somn.
         title: 'Solunar Noiembrie 2026 - Ore și Zile Optime Pescuit',
         excerpt: 'Noiembrie 2026: ultimele șanse înainte de iarnă. Peștii se hrănesc agresiv — profită.',
         date: '2026-02-01',
-        updated: '2026-10-29',
+        updated: '2026-11-23',
         author: 'Echipa Calendar Solunar',
         category: 'Calendar',
         readTime: 6,
@@ -8355,7 +8363,7 @@ Noiembrie e ultima mare fereastră de pescuit înainte de iarnă. Peștii știu 
 
 **3. Crapi mari** — Crapii de toamnă târzie sunt cei mai mari din an.
 
-**4. Știuca revine** — Post-prohibiție, agresivă, foame de iarnă.
+**4. Știuca revine** — Apa rece o face agresivă, foame de iarnă.
 
 ## Fazele Lunii în Noiembrie 2026
 
@@ -8428,7 +8436,7 @@ Noiembrie e ultima mare fereastră de pescuit înainte de iarnă. Peștii știu 
 - Mânâncă agresiv pentru iarnă
 
 **Știucă** 5/5
-- Post-prohibiție, foame
+- Agresivă, se hrănește pentru iarnă
 - Spinning cu shad-uri mari
 - Jerkbait în mișcări lente
 
@@ -8606,74 +8614,90 @@ Luna nouă, zi de mijloc de săptămână (liniște pe lac), perioadele majore d
     {
         slug: 'prohibitie-pescuit-2026',
         title: 'Prohibiție Pescuit 2026 - Când Se Deschide Sezonul',
-        excerpt: 'Calendarul prohibiției la pescuit în România 2026: perioadele de prohibiție pe specii, când se deschide și se închide sezonul, excepții și amenzi.',
+        excerpt: 'Prohibiția la pescuit în 2026: 9 aprilie – 7 iunie pe toate apele naturale, excepțiile de pe apele de frontieră și din Delta, bălțile private, amenzile și ce urmează în 2027.',
         date: '2026-01-15',
-        updated: '2026-06-13',
+        updated: '2026-11-23',
         author: 'Echipa Calendar Solunar',
         category: 'Ghiduri',
-        readTime: 7,
-        keywords: ['prohibitie pescuit 2026', 'cand se deschide sezonul de pescuit', 'cand incepe sezonul de pescuit', 'sezon pescuit 2026', 'prohibitie 2026', 'perioada prohibitie pescuit'],
+        readTime: 6,
+        keywords: ['prohibitie pescuit 2026', 'cand se deschide sezonul de pescuit', 'cand incepe sezonul de pescuit', 'sezon pescuit 2026', 'prohibitie 2026', 'perioada prohibitie pescuit', 'prohibitie pescuit 2027'],
         content: `
-# Prohibiție Pescuit 2026: Când Se Deschide și Se Închide Sezonul
+# Prohibiție pescuit 2026: perioade, excepții și ce urmează în 2027
 
-Prohibiția la pescuit protejează peștii în perioada de reproducere. Înainte de orice ieșire, verifică dacă specia pe care o vizezi este în perioadă de prohibiție — amenzile sunt mari, iar reglementările se aplică pe tot teritoriul României. Mai jos găsești calendarul complet pe specii pentru 2026.
+Prohibiția protejează peștii în perioada de reproducere. În 2026, prohibiția generală a durat 60 de zile, între 9 aprilie și 7 iunie inclusiv, iar pescuitul pe apele naturale s-a redeschis luni, 8 iunie. Mai jos găsești ce a interzis, unde au fost reguli diferite și cum te pregătești pentru 2027.
 
-## Răspuns Rapid: Când Se Deschide Pescuitul în 2026?
+**Sursa datelor:** ordinul comun al Ministerului Agriculturii și al Ministerului Mediului (Ordinul 23/297/2025, cu modificările ulterioare), așa cum a fost prezentat în presă în aprilie și iunie 2026. Textul oficial, publicat în Monitorul Oficial, are întotdeauna prioritate.
 
-Pentru speciile comune de ciprinide (crap, caras, plătică, babușcă) pescuitul recreativ este permis tot anul în majoritatea apelor, cu respectarea autorizației. Prohibiția generală pentru reproducere se aplică în special răpitorilor și speciilor migratoare. Datele exacte sunt stabilite anual prin ordinul ANPA (Agenția Națională pentru Pescuit și Acvacultură) — verifică ordinul oficial pentru anul în curs.
+## Pe scurt
 
-## Perioadele de Prohibiție 2026 pe Specii
+- **Perioada generală 2026:** 9 aprilie – 7 iunie, 60 de zile.
+- **Unde:** în toate habitatele piscicole naturale: râuri, lacuri naturale, Dunăre, Delta Dunării, lacurile litorale și complexul Razim-Sinoe.
+- **Ce interzice:** pescuitul comercial, recreativ/sportiv și familial, pentru toate speciile. Crapul, carasul și plătica nu sunt excepții pe apele naturale.
+- **Apele de frontieră:** au avut perioade proprii, mai scurte (în general 24 aprilie – 7 iunie, 45 de zile).
+- **Bălțile private:** nu sunt habitate naturale, așa că acolo se aplică regulamentul bălții.
+- **2027:** perioada pentru anul viitor nu era publicată la 23 noiembrie 2026.
 
-| Specie | Perioadă de prohibiție (orientativ) | Observații |
-|--------|--------------------------------------|------------|
-| Știucă | 1 februarie - 15 martie | Reproducere timpurie |
-| Șalău, biban | 1 aprilie - 10 iunie | Protejat în sezonul de cuib |
-| Somn | 15 aprilie - 15 iunie | Reproducere de primăvară |
-| Crap, caras, plătică | Prohibiție generală ~6 săptămâni primăvara | Variază pe bazine |
-| Păstrăv | 1 octombrie - 30 aprilie | Salmonide de munte |
-| Lipan, lostriță | Reglementări speciale | Specii protejate |
-| Scrumbie de Dunăre | Ferestre specifice primăvara | Specie migratoare |
+## Calendarul prohibiției în 2026
 
-**Important:** Datele de mai sus sunt orientative și se actualizează anual. Perioada exactă de prohibiție 2026 este cea publicată în ordinul ANPA / Ministerul Mediului. Consultă întotdeauna sursa oficială înainte de ieșire.
+| Ce | Perioada în 2026 | Unde |
+|----|------------------|------|
+| Prohibiția generală | 9 aprilie – 7 iunie | Toate habitatele piscicole naturale |
+| Ape de frontieră | 24 aprilie – 7 iunie; unele sectoare 16 aprilie – 30 mai | Apele care formează granița de stat |
+| Știucă | 1 februarie – 20 martie, apoi prohibiția generală | Delta Dunării |
+| Șalău și biban | 20 martie – 7 iunie | Delta Dunării |
+| Lin | după prohibiția generală, până la 6 iulie | Delta Dunării |
+| Sturioni (morun, nisetru, păstrugă, cegă), lostriță, coregon | Interzise permanent | Peste tot |
 
-## Prohibiția Generală — Cum Funcționează
+## Păstrăvul și apele de munte
 
-Prohibiția generală pe ape naturale (râuri, fluvii, lacuri naturale, Dunăre, Delta) durează de obicei aproximativ 60 de zile în primăvară, acoperind vârful reproducerii pentru majoritatea speciilor. În acest interval, pescuitul recreativ este restricționat sau interzis pe apele vizate.
+Salmonidele au un calendar separat, care s-a schimbat de la un an la altul. În ordinul pentru 2025, păstrăvul indigen, păstrăvul curcubeu și fântânelul au fost protejați între 1 octombrie și 31 martie. Verifică ordinul în vigoare și regulile administratorului apei înainte de o ieșire la munte.
 
-## Excepție Importantă: Bălțile Private
+## Delta Dunării: reguli în plus
 
-În bălțile și lacurile private cu administrator, pescuitul se poate practica și în perioada de prohibiție, deoarece nu sunt ape în regim natural. Acolo se aplică regulamentul administratorului, nu prohibiția națională. Vezi [locurile de pescuit din România](/locuri-pescuit) pentru bălți cu acces în orice sezon.
+În Rezervația Biosferei Delta Dunării, pe lângă prohibiția generală, în 2026 au existat perioade separate pentru știucă (1 februarie – 20 martie), șalău și biban (20 martie – 7 iunie) și lin (până la 6 iulie). După prohibiție, pentru știucă, șalău, somn și crap s-a aplicat regimul „prinde și eliberează”, cu limite stricte de reținere, iar captura reținută a fost limitată la 10 kg pe pescar sau 15 kg pe familie. Regulile Administrației Rezervației se pot schimba de la un an la altul, așa că verifică-le înainte de plecare.
 
-## Amenzi pentru Pescuit în Prohibiție
+## Bălțile private
 
-Pescuitul în perioada de prohibiție sau al speciilor protejate se sancționează cu amenzi substanțiale și confiscarea echipamentului și capturii. Pescuitul cu unelte interzise (plase, curent electric) constituie infracțiune. Respectă reglementările — protejezi resursa pentru sezoanele viitoare.
+Prohibiția se aplică habitatelor piscicole naturale. Bălțile private sunt amenajări piscicole, nu habitate naturale, așa că acolo contează regulamentul administratorului: unele permit pescuitul tot anul, altele au propriile pauze. Întreabă administratorul înainte să mergi. Vezi [locurile de pescuit din România](/locuri-pescuit).
 
-## Cum Te Pregătești pentru Deschiderea Sezonului
+## Amenzi și sancțiuni
 
-Când se ridică prohibiția, peștii sunt flămânzi după reproducere — primele zile sunt printre cele mai productive din an. Pentru a profita la maximum:
+Potrivit presei, pescuitul în prohibiție se sancționează cu amendă între 500 și 10.000 de lei și cu confiscarea echipamentului, iar în cazurile grave de braconaj se deschide dosar penal. La pescuitul recreativ sunt interzise oricând plasele, setca și vintirul, folosirea mai multor undițe decât sunt permise, curentul electric și explozivii.
 
-1. **Verifică data exactă de deschidere** în ordinul ANPA pentru apa ta.
-2. **Pregătește echipamentul** din timp.
-3. **Planifică prima ieșire pe o zi cu solunar bun** — folosește [calendarul solunar](/) și [solunar azi](/azi) pentru orele cu activitate maximă.
-4. **Alege perioadele majore** care coincid cu răsăritul sau apusul.
+## Prohibiția 2027
 
-## Întrebări Frecvente
+La 23 noiembrie 2026, perioada de prohibiție pentru 2027 nu era publicată. În 2026 ea a fost stabilită prin Ordinul 23/297/2025, cu modificările ulterioare, iar datele se pot schimba de la un an la altul. Înainte de primele ieșiri din primăvara lui 2027, verifică ordinul în vigoare.
 
-## Când se deschide sezonul de pescuit în 2026?
+## Cum te pregătești pentru deschiderea sezonului
 
-Pentru speciile comune, pescuitul recreativ este permis tot anul în multe ape, cu autorizație. Prohibiția generală de primăvară (aproximativ 60 de zile) se ridică de regulă la mijlocul lunii iunie. Data exactă pentru 2026 este cea din ordinul ANPA.
+După prohibiție, majoritatea peștilor au terminat reproducerea și se hrănesc intens, așa că primele zile sunt de multe ori printre cele mai productive din an.
 
-## Când începe prohibiția la pescuit 2026?
+1. **Verifică data exactă** de redeschidere pentru apa pe care mergi.
+2. **Ia-ți permisul de pescuit recreativ**, obligatoriu pe apele naturale.
+3. **Alege o zi cu solunar bun:** folosește [calendarul solunar](/) și [calendarul pe iunie 2027](/solunar-iunie-2027).
+4. **Pune partida pe perioadele majore de seară și de noapte**, care dau de obicei cele mai bune rezultate la început de vară.
 
-Prohibiția generală începe de obicei primăvara devreme (februarie-aprilie, în funcție de specie și bazin) și acoperă vârful reproducerii. Răpitorii precum știuca au prohibiție mai timpurie.
+## Întrebări frecvente
+
+## Când s-a redeschis pescuitul în 2026?
+
+Pe apele naturale, pescuitul s-a redeschis luni, 8 iunie 2026, după prohibiția generală de 60 de zile (9 aprilie – 7 iunie). Pe apele de frontieră, perioada a fost mai scurtă.
+
+## Pot pescui crap în prohibiție?
+
+Pe apele naturale, nu: prohibiția generală se aplică tuturor speciilor, inclusiv crapului, carasului și plăticii. Pe bălțile private se aplică regulamentul bălții.
 
 ## Pot pescui în prohibiție pe baltă privată?
 
-Da. În bălțile private cu administrator, prohibiția națională nu se aplică — se respectă regulamentul bălții. Este cea mai bună opțiune pentru pescuit în perioada de prohibiție.
+Da, dacă regulamentul bălții permite. Bălțile private sunt amenajări piscicole, nu habitate naturale, așa că prohibiția generală nu le acoperă.
 
 ## Ce amendă primesc dacă pescuiesc în prohibiție?
 
-Amenzile sunt mari și includ confiscarea echipamentului și a capturii. Pescuitul cu unelte interzise este infracțiune. Respectarea prohibiției este obligatorie.
+Potrivit presei, amenda este între 500 și 10.000 de lei, cu confiscarea echipamentului. În cazurile grave de braconaj se deschide dosar penal.
+
+## Când începe prohibiția în 2027?
+
+Perioada pentru 2027 nu era publicată la 23 noiembrie 2026. În 2026, prohibiția generală a început pe 9 aprilie, așa că verifică ordinul în vigoare înainte de primele ieșiri din primăvară.
 
 [Verifică solunarul pentru următoarea ieșire →](/)
         `

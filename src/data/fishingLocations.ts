@@ -1002,7 +1002,7 @@ export const fishingLocations: FishingLocation[] = [
         type: 'lac',
         fish: ['crap', 'caras', 'biban', 'stiuca', 'platica', 'babusca'],
         paid: false,
-        description: 'Lac de apa dulce lipit de statiunea Mamaia, 1900 hectare. Pescuit accesibil tot anul, popular pentru crap, biban si stiuca.',
+        description: 'Lac de apa dulce lipit de statiunea Mamaia, 1900 hectare. Pescuit permis in afara prohibitiei generale de primavara, popular pentru crap, biban si stiuca.',
     },
     {
         slug: 'lacul-vidraru',
